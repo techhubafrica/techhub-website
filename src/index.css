@@ -4,102 +4,86 @@
 
 @layer base {
   :root {
-    --background: 30 8% 94%;
-    --foreground: 20 10% 12%;
+    /* Tech Hub Africa — editorial premium theme
+       Palette: deep forest #0f3d2e, forest #1a5c3f, amber #d97706, cream #f5f1e8 */
 
-    --card: 30 10% 90%;
-    --card-foreground: 20 10% 12%;
+    --background: 40 33% 94%;           /* cream #f5f1e8 */
+    --foreground: 155 61% 15%;          /* deep forest #0f3d2e */
 
-    --popover: 30 10% 90%;
-    --popover-foreground: 20 10% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 155 61% 15%;
 
-    --primary: 20 12% 16%;
-    --primary-foreground: 35 30% 88%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 155 61% 15%;
 
-    --secondary: 30 25% 70%;
-    --secondary-foreground: 20 12% 12%;
+    --primary: 155 61% 15%;             /* deep forest */
+    --primary-foreground: 40 33% 94%;
 
-    --muted: 30 8% 84%;
-    --muted-foreground: 20 6% 45%;
+    --secondary: 151 57% 23%;           /* forest #1a5c3f */
+    --secondary-foreground: 40 33% 94%;
 
-    --accent: 28 20% 76%;
-    --accent-foreground: 20 12% 12%;
+    --muted: 40 20% 88%;
+    --muted-foreground: 155 20% 30%;
 
-    --destructive: 0 84% 60%;
+    --accent: 28 92% 44%;               /* amber #d97706 */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 12% 78%;
-    --input: 30 12% 78%;
-    --ring: 25 60% 45%;
+    --border: 155 30% 15% / 0.1;
+    --input: 155 30% 15% / 0.15;
+    --ring: 28 92% 44%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
 
-    --sidebar-background: 20 12% 10%;
-    --sidebar-foreground: 35 30% 88%;
-    --sidebar-primary: 25 60% 50%;
+    /* Brand tokens */
+    --forest-deep: 155 61% 15%;
+    --forest: 151 57% 23%;
+    --amber: 28 92% 44%;
+    --cream: 40 33% 94%;
+    --cream-warm: 40 25% 88%;
+
+    --sidebar-background: 155 61% 15%;
+    --sidebar-foreground: 40 33% 94%;
+    --sidebar-primary: 28 92% 44%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 20 10% 16%;
-    --sidebar-accent-foreground: 35 30% 88%;
-    --sidebar-border: 20 8% 22%;
-    --sidebar-ring: 25 60% 50%;
-
-    /* Ember custom tokens */
-    --olive-950: 20 15% 7%;
-    --olive-900: 20 12% 12%;
-    --olive-800: 20 10% 20%;
-    --olive-700: 20 8% 28%;
-    --olive-600: 20 6% 36%;
-    --olive-500: 20 5% 46%;
-    --olive-400: 25 6% 56%;
-    --olive-300: 28 8% 68%;
-    --olive-200: 30 10% 80%;
-    --olive-100: 32 12% 88%;
-    --olive-50: 34 15% 94%;
-    --cream: 35 35% 90%;
-    --cream-dark: 30 20% 76%;
-    --tan: 25 30% 62%;
-    --khaki: 28 25% 52%;
+    --sidebar-accent: 151 57% 23%;
+    --sidebar-accent-foreground: 40 33% 94%;
+    --sidebar-border: 40 33% 94% / 0.1;
+    --sidebar-ring: 28 92% 44%;
   }
 
   .dark {
-    --background: 20 12% 7%;
-    --foreground: 35 30% 88%;
-    --card: 20 12% 10%;
-    --card-foreground: 35 30% 88%;
-    --popover: 20 12% 10%;
-    --popover-foreground: 35 30% 88%;
-    --primary: 35 30% 88%;
-    --primary-foreground: 20 12% 12%;
-    --secondary: 20 10% 18%;
-    --secondary-foreground: 35 30% 88%;
-    --muted: 20 10% 16%;
-    --muted-foreground: 25 8% 55%;
-    --accent: 20 10% 18%;
-    --accent-foreground: 35 30% 88%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 20 10% 20%;
-    --input: 20 10% 20%;
-    --ring: 25 60% 50%;
-    --sidebar-background: 20 12% 5%;
-    --sidebar-foreground: 35 30% 88%;
-    --sidebar-primary: 25 60% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 20 10% 10%;
-    --sidebar-accent-foreground: 35 30% 88%;
-    --sidebar-border: 20 8% 16%;
-    --sidebar-ring: 25 60% 50%;
+    --background: 155 61% 8%;
+    --foreground: 40 33% 94%;
+    --card: 155 61% 10%;
+    --card-foreground: 40 33% 94%;
+    --popover: 155 61% 10%;
+    --popover-foreground: 40 33% 94%;
+    --primary: 40 33% 94%;
+    --primary-foreground: 155 61% 15%;
+    --secondary: 151 57% 20%;
+    --secondary-foreground: 40 33% 94%;
+    --muted: 155 30% 14%;
+    --muted-foreground: 40 15% 70%;
+    --accent: 28 92% 50%;
+    --accent-foreground: 0 0% 100%;
+    --border: 40 33% 94% / 0.1;
+    --input: 40 33% 94% / 0.15;
+    --ring: 28 92% 50%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(155 30% 15% / 0.1);
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Epilogue', system-ui, sans-serif;
+    font-weight: 400;
   }
 
   html {
@@ -107,21 +91,40 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'DM Serif Display', Georgia, serif;
+    font-family: 'Urbanist', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
   }
 }
 
 @layer utilities {
+  .font-display {
+    font-family: 'Urbanist', system-ui, sans-serif;
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.3em];
+  }
+
   @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
   .animate-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 40s linear infinite;
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 }

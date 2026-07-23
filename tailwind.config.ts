@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ['"DM Serif Display"', "Georgia", "serif"],
-        sans: ['"Inter"', "system-ui", "sans-serif"],
+        display: ['"Urbanist"', "system-ui", "sans-serif"],
+        sans: ['"Epilogue"', "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -61,25 +61,17 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        olive: {
-          50: "hsl(var(--olive-50))",
-          100: "hsl(var(--olive-100))",
-          200: "hsl(var(--olive-200))",
-          300: "hsl(var(--olive-300))",
-          400: "hsl(var(--olive-400))",
-          500: "hsl(var(--olive-500))",
-          600: "hsl(var(--olive-600))",
-          700: "hsl(var(--olive-700))",
-          800: "hsl(var(--olive-800))",
-          900: "hsl(var(--olive-900))",
-          950: "hsl(var(--olive-950))",
+        forest: {
+          DEFAULT: "hsl(var(--forest))",
+          deep: "hsl(var(--forest-deep))",
+        },
+        amber: {
+          DEFAULT: "hsl(var(--amber))",
         },
         cream: {
           DEFAULT: "hsl(var(--cream))",
-          dark: "hsl(var(--cream-dark))",
+          warm: "hsl(var(--cream-warm))",
         },
-        tan: "hsl(var(--tan))",
-        khaki: "hsl(var(--khaki))",
       },
       borderRadius: {
         lg: "var(--radius)",
