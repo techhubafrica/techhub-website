@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   ArrowUpRight, Code2, Smartphone, Layout, Building2, ShoppingBag, Sprout,
-  ShieldCheck, Star, Quote, Play, Sparkles, Users, Rocket, Globe2,
+  ShieldCheck, Star, Quote, Play, Users, Rocket, Globe2, Sparkles,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
+import Logo from "@/components/Logo";
 
 /* ============================================================
    HERO — Netflix-style rotating showcase
@@ -49,133 +50,415 @@ const heroSlides = [
   },
 ];
 
-const Hero = () => {
-  const [active, setActive] = useState(0);
-
+/* -- Counting stat sub-component -- */
+const CountStat = ({
+  target, suffix, label, delay, divider,
+}: { target: number; suffix: string; label: string; delay: number; divider: boolean }) => {
+  const [count, setCount] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => setActive((a) => (a + 1) % heroSlides.length), 6000);
+    const timeout = setTimeout(() => {
+      let start = 0;
+      const duration = 1600;
+      const step = target / (duration / 16);
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) { setCount(target); clearInterval(timer); }
+        else setCount(Math.floor(start));
+      }, 16);
+      return () => clearInterval(timer);
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [target, delay]);
+  return (
+    <div className={`flex-1 ${divider ? "pl-5 border-l border-primary/10" : "pr-5"}`}>
+      <p className="font-display font-black text-primary leading-none tracking-[-0.03em]" style={{ fontSize: "clamp(2rem,4vw,2.8rem)" }}>
+        {count}{suffix}
+      </p>
+      <p className="text-[9.5px] font-bold uppercase tracking-[0.3em] text-primary/30 mt-1.5">{label}</p>
+    </div>
+  );
+};
+
+/* -- Morphing words -- */
+const cyclicWords = ["Tech", "Digital", "Future", "Hub"];
+
+const Hero = () => {
+  const [active, setActive]   = useState(0);
+  const [wordIdx, setWordIdx] = useState(0);
+  const [wordOut, setWordOut] = useState(false);
+  const [mouse, setMouse]     = useState({ x: 0.5, y: 0.5 });
+  const [progress, setProgress] = useState(0);
+
+  /* slide auto-advance */
+  useEffect(() => {
+    const INTERVAL = 5500;
+    let elapsed = 0;
+    const tick = setInterval(() => {
+      elapsed += 50;
+      setProgress(Math.min(100, (elapsed / INTERVAL) * 100));
+      if (elapsed >= INTERVAL) {
+        elapsed = 0;
+        setActive((a) => (a + 1) % heroSlides.length);
+      }
+    }, 50);
+    return () => clearInterval(tick);
+  }, []);
+
+  /* morphing word cycle */
+  useEffect(() => {
+    const t = setInterval(() => {
+      setWordOut(true);
+      setTimeout(() => { setWordIdx((i) => (i + 1) % cyclicWords.length); setWordOut(false); }, 380);
+    }, 2800);
     return () => clearInterval(t);
   }, []);
 
+  /* mouse tracking */
+  useEffect(() => {
+    const h = (e: MouseEvent) =>
+      setMouse({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
+    window.addEventListener("mousemove", h, { passive: true });
+    return () => window.removeEventListener("mousemove", h);
+  }, []);
+
   const slide = heroSlides[active];
+  const px = (mouse.x - 0.5) * 28;
+  const py = (mouse.y - 0.5) * 12;
 
   return (
-    <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 px-6 overflow-hidden bg-grad-charcoal text-primary-foreground grain grain-strong">
-      {/* Ambient glows */}
-      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full opacity-40 pointer-events-none blur-3xl bg-[radial-gradient(circle,hsl(151_57%_25%),transparent_70%)]" />
-      <div className="absolute -bottom-40 -right-40 w-[700px] h-[700px] rounded-full opacity-40 pointer-events-none blur-3xl bg-[radial-gradient(circle,hsl(28_92%_44%/0.6),transparent_65%)] animate-pulse-glow" />
+    <section className="relative min-h-screen bg-background overflow-hidden flex flex-col select-none">
 
-      <div className="relative max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_1fr] gap-14 lg:gap-20 items-center">
-        {/* LEFT — Story text */}
-        <div className="relative z-10">
-          <div className="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 glass rounded-full text-[10px] font-bold tracking-[0.3em] uppercase mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            Tech Hub Africa · Est. 2020
-          </div>
+      {/* ══ CURSOR SPOTLIGHT ══ */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0 transition-[background] duration-200"
+        style={{
+          background: `radial-gradient(700px circle at ${mouse.x * 100}% ${mouse.y * 100}%,
+            hsl(28 92% 44% / 0.065), transparent 55%)`,
+        }}
+      />
 
-          <h1 className="font-display font-extrabold leading-[0.86] tracking-tight mb-8 animate-fade-up stagger-1">
-            <span className="block text-[3.5rem] md:text-[5.5rem] lg:text-[7rem]">African</span>
-            <span className="block text-[3.5rem] md:text-[5.5rem] lg:text-[7rem]">
-              <span className="italic font-light text-accent">Tech</span> Excellence.
-            </span>
-          </h1>
+      {/* ══ GHOST MEGA TEXT (parallax) ══ */}
+      <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none">
+        <span
+          className="font-display font-black uppercase leading-none tracking-tighter"
+          style={{
+            fontSize: "31vw",
+            opacity: 0.026,
+            color: "hsl(155,61%,15%)",
+            transform: `translate(${px * -1.6}px, ${py * -1.1}px)`,
+            transition: "transform 1.6s cubic-bezier(0.16,1,0.3,1)",
+          }}
+        >
+          THA
+        </span>
+      </div>
 
-          <p className="text-lg md:text-xl text-primary-foreground/70 max-w-xl leading-relaxed mb-10 animate-fade-up stagger-2">
-            Bridging talent and opportunity through world-class infrastructure, elite mentorship,
-            and high-impact digital solutions across the continent.
-          </p>
+      {/* ══ CONCENTRIC RINGS (parallax) ══ */}
+      <div
+        className="absolute -top-48 -right-48 pointer-events-none"
+        style={{
+          transform: `translate(${px * 0.45}px, ${py * 0.45}px)`,
+          transition: "transform 0.9s cubic-bezier(0.16,1,0.3,1)",
+        }}
+      >
+        <div className="w-[680px] h-[680px] rounded-full border border-accent/[0.13]" />
+        <div className="absolute top-[90px] left-[90px] w-[500px] h-[500px] rounded-full border border-accent/[0.09]" />
+        <div className="absolute top-[175px] left-[175px] w-[330px] h-[330px] rounded-full border border-accent/[0.06]" />
+        <div className="absolute top-[250px] left-[250px] w-[180px] h-[180px] rounded-full border border-accent/[0.06]" />
+      </div>
 
-          <div className="flex flex-wrap gap-4 mb-14 animate-fade-up stagger-3">
-            <a
-              href="#vision"
-              className="btn-magnetic inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.25em] rounded-full hover:shadow-[var(--shadow-glow-amber)] transition-all duration-500"
-            >
-              Our Vision
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-            <a
-              href="#campus"
-              className="inline-flex items-center gap-2 px-8 py-4 border border-primary-foreground/25 text-primary-foreground text-xs font-bold uppercase tracking-[0.25em] rounded-full hover:bg-primary-foreground/10 hover:border-primary-foreground/50 transition-all"
-            >
-              <Play className="w-3.5 h-3.5 fill-current" />
-              Campus Tours 2026
-            </a>
-          </div>
+      {/* ══ DOT MATRIX (8×8, parallax) ══ */}
+      <div
+        className="absolute top-36 right-[42%] grid grid-cols-8 gap-[9px] pointer-events-none hidden lg:grid"
+        style={{
+          opacity: 0.2,
+          transform: `translate(${px * 0.25}px, ${py * 0.25}px)`,
+          transition: "transform 1.1s cubic-bezier(0.16,1,0.3,1)",
+        }}
+      >
+        {Array.from({ length: 64 }).map((_, i) => (
+          <div
+            key={i}
+            className="w-[2.5px] h-[2.5px] rounded-full bg-accent"
+            style={{ opacity: i % 4 === 0 ? 1 : i % 3 === 0 ? 0.55 : 0.2 }}
+          />
+        ))}
+      </div>
 
-          {/* Floating stat row */}
-          <div className="grid grid-cols-3 gap-4 max-w-lg animate-fade-up stagger-4">
-            {[
-              { k: "5+", v: "Years Building" },
-              { k: "20+", v: "Programs Run" },
-              { k: "4", v: "Portfolio Cos." },
-            ].map((s, i) => (
-              <div
-                key={s.v}
-                className={`glass rounded-lg p-4 ${i === 1 ? "animate-float" : ""}`}
-                style={{ animationDelay: `${i * 0.6}s` }}
-              >
-                <p className="font-display font-extrabold text-2xl md:text-3xl text-primary-foreground">{s.k}</p>
-                <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-primary-foreground/60 mt-1">{s.v}</p>
+      <div className="absolute top-[19%] inset-x-0 pointer-events-none hidden lg:block">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="h-px bg-gradient-to-r from-transparent via-primary/6 to-transparent" />
+        </div>
+      </div>
+
+      {/* ══ MAIN CONTENT ══ */}
+      <div className="relative flex-1 max-w-7xl mx-auto w-full px-6 pt-32 pb-8 flex flex-col z-10">
+        <div className="flex-1 grid lg:grid-cols-[1.15fr_0.95fr] gap-12 lg:gap-16 items-center">
+
+          {/* ─── LEFT COLUMN ─── */}
+          <div className="relative z-10 flex flex-col justify-center">
+
+            {/* Eyebrow Pill */}
+            <div className="animate-fade-up flex items-center gap-4 mb-9">
+              <div className="inline-flex items-center gap-3 px-4 py-1.5 border border-primary/14 rounded-full bg-background/80 backdrop-blur-sm">
+                <span className="relative flex w-2 h-2">
+                  <span className="animate-ping absolute h-full w-full rounded-full bg-accent opacity-60" />
+                  <span className="relative w-2 h-2 rounded-full bg-accent" />
+                </span>
+                <span className="text-[10.5px] font-bold tracking-[0.28em] uppercase text-primary/60">
+                  Tech Hub Africa · Est. 2020
+                </span>
               </div>
-            ))}
+              <div className="h-px flex-1 max-w-16 bg-gradient-to-r from-primary/20 to-transparent" />
+              <span className="text-[9.5px] font-bold uppercase tracking-[0.35em] text-primary/30 hidden md:block">Accra, Ghana</span>
+            </div>
+
+            {/* ── GIANT TYPOGRAPHY HEADLINE ── */}
+            <h1
+              className="font-display font-black tracking-[-0.04em] text-primary mb-9"
+              style={{ lineHeight: 0.83 }}
+            >
+              {/* Line 1: African */}
+              <span className="block overflow-hidden">
+                <span
+                  className="block animate-fade-up"
+                  style={{ fontSize: "clamp(3.4rem,9vw,7.4rem)" }}
+                >
+                  African
+                </span>
+              </span>
+
+              {/* Line 2: morphing word */}
+              <span
+                className="block overflow-hidden"
+                style={{ fontSize: "clamp(3.4rem,9vw,7.4rem)" }}
+              >
+                <span
+                  className="inline-block italic font-light text-accent"
+                  style={{
+                    transform: wordOut ? "translateY(-115%)" : "translateY(0)",
+                    opacity: wordOut ? 0 : 1,
+                    transition: wordOut
+                      ? "transform 0.3s cubic-bezier(0.4,0,1,1), opacity 0.2s ease"
+                      : "transform 0.42s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease",
+                  }}
+                >
+                  {cyclicWords[wordIdx]}
+                </span>
+              </span>
+
+              {/* Line 3: Excellence + animated underline */}
+              <span className="block overflow-hidden relative">
+                <span
+                  className="block animate-fade-up stagger-2 relative"
+                  style={{ fontSize: "clamp(3.4rem,9vw,7.4rem)" }}
+                >
+                  Excellence
+                  <svg
+                    className="absolute left-0 -bottom-1 w-[105%]"
+                    viewBox="0 0 640 13"
+                    fill="none"
+                    preserveAspectRatio="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M3 8 C90 1, 210 12, 320 6 C430 0, 558 12, 637 7"
+                      stroke="hsl(28,92%,44%)"
+                      strokeWidth="3.5"
+                      strokeLinecap="round"
+                      strokeDasharray="720"
+                      strokeDashoffset="720"
+                      style={{ animation: "draw 1.8s cubic-bezier(0.16,1,0.3,1) 0.9s both" }}
+                    />
+                  </svg>
+                </span>
+              </span>
+            </h1>
+
+            {/* Description */}
+            <p className="animate-fade-up stagger-2 text-primary/65 max-w-xl text-base md:text-lg leading-[1.85] mb-9 font-light">
+              Bridging talent and opportunity through world-class infrastructure, elite mentorship,
+              and high-impact digital solutions <span className="text-primary font-medium">across the continent.</span>
+            </p>
+
+            {/* CTAs */}
+            <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-4 mb-12">
+              <a
+                href="#vision"
+                className="group inline-flex items-center gap-2.5 px-8 py-4 bg-primary text-primary-foreground text-[11px] font-bold uppercase tracking-[0.28em] rounded-full hover:bg-secondary transition-all duration-300 shadow-md hover:shadow-lg"
+              >
+                Our Vision
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+              <a
+                href="#campus"
+                className="group inline-flex items-center gap-3 text-[11px] font-bold text-primary/70 hover:text-accent transition-colors uppercase tracking-[0.25em] px-4 py-2"
+              >
+                <div className="w-10 h-10 rounded-full border border-primary/20 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/5 transition-all">
+                  <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
+                </div>
+                Campus Tours 2026
+              </a>
+            </div>
+
+            {/* COUNTING STATS */}
+            <div className="animate-fade-up stagger-4 grid grid-cols-3 max-w-sm border-t border-primary/10 pt-7">
+              <CountStat target={5}  suffix="+" label="Years"     delay={200} divider={false} />
+              <CountStat target={20} suffix="+" label="Programs"  delay={400} divider={true}  />
+              <CountStat target={4}  suffix=""  label="Companies" delay={600} divider={true}  />
+            </div>
+          </div>
+
+          {/* ─── RIGHT COLUMN — Showcase panel ─── */}
+          <div className="relative animate-fade-up stagger-1 self-stretch flex items-center py-8 lg:py-0">
+
+            {/* Rotated sidebar label */}
+            <div className="hidden xl:block absolute -left-11 top-1/2 -translate-y-1/2 -rotate-90 origin-center whitespace-nowrap">
+              <p className="text-[8px] font-bold uppercase tracking-[0.65em] text-primary/14">
+                Africa · Innovation · Excellence · 2020
+              </p>
+            </div>
+
+            {/* Offset decorative frame */}
+            <div className="absolute -top-3 -right-3 bottom-[-12px] left-[-12px] border border-accent/16 rounded-[24px] pointer-events-none" />
+
+            {/* ── IMAGE PANEL ── */}
+            <div
+              className="relative w-full rounded-[22px] overflow-hidden"
+              style={{
+                aspectRatio: "3/4",
+                maxHeight: "min(680px, 74vh)",
+                boxShadow:
+                  "0 32px 72px -16px hsl(155 61% 15% / 0.24), 0 8px 24px -8px hsl(155 61% 15% / 0.12)",
+              }}
+            >
+              {/* Slides */}
+              {heroSlides.map((s, i) => (
+                <div
+                  key={s.title}
+                  className={`absolute inset-0 transition-opacity duration-[900ms] ease-in-out ${
+                    i === active ? "opacity-100 z-10" : "opacity-0 z-0"
+                  }`}
+                >
+                  <ImagePlaceholder tone={s.tone} label={s.kicker} />
+
+                  {/* Subtle top gradient */}
+                  <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/15 to-transparent pointer-events-none z-[3]" />
+
+                  {/* Slide number — top-left */}
+                  <div className="absolute top-4 left-4 z-[4]">
+                    <span className="text-[9px] font-black uppercase tracking-[0.4em] text-white/50">
+                      {String(i + 1).padStart(2, "0")} / {String(heroSlides.length).padStart(2, "0")}
+                    </span>
+                  </div>
+
+                  {/* Bottom glass info card */}
+                  <div className="absolute inset-x-3 bottom-3 z-[4]">
+                    <div
+                      className="rounded-2xl px-4 py-3.5 border border-white/25"
+                      style={{
+                        background: "hsl(40 33% 94% / 0.88)",
+                        backdropFilter: "blur(20px) saturate(160%)",
+                        WebkitBackdropFilter: "blur(20px) saturate(160%)",
+                      }}
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="text-[8.5px] font-bold uppercase tracking-[0.35em] text-accent mb-0.5">{s.tag}</p>
+                          <h3 className="font-display font-extrabold text-[0.95rem] text-primary leading-tight truncate">
+                            {s.title}
+                          </h3>
+                        </div>
+                        <a
+                          href="#"
+                          className="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-secondary transition-colors"
+                        >
+                          <ArrowUpRight className="w-3.5 h-3.5 text-primary-foreground" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {/* Vertical slide pills — right inside panel */}
+              <div className="absolute top-1/2 -translate-y-1/2 right-3.5 z-20 flex flex-col gap-1.5">
+                {heroSlides.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActive(i)}
+                    aria-label={`Slide ${i + 1}`}
+                    className={`w-[2.5px] rounded-full transition-all duration-500 ${
+                      i === active ? "h-9 bg-accent" : "h-3 bg-white/35 hover:bg-white/65"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Slide progress bar — bottom of panel */}
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary/10 z-20">
+                <div
+                  className="h-full bg-accent transition-none"
+                  style={{ width: `${progress}%`, transition: "width 50ms linear" }}
+                />
+              </div>
+            </div>
+
+            {/* Floating Est. badge */}
+            <div
+              className="hidden md:flex absolute -top-6 -left-6 z-20 w-[72px] h-[72px] rounded-full bg-accent flex-col items-center justify-center animate-float"
+              style={{ boxShadow: "0 6px 22px -4px hsl(28 92% 44% / 0.55)" }}
+            >
+              <p className="text-[7.5px] font-bold uppercase tracking-[0.22em] text-white/65">Est.</p>
+              <p className="font-display font-black text-[1.45rem] text-white leading-none">2020</p>
+            </div>
+
+            {/* Live stat card */}
+            <div
+              className="hidden md:block absolute -bottom-10 -left-10 z-20 bg-background rounded-[18px] px-5 py-4 animate-float"
+              style={{
+                animationDelay: "1.2s",
+                minWidth: "160px",
+                border: "1px solid hsl(155 61% 15% / 0.08)",
+                boxShadow: "0 14px 40px -8px hsl(155 61% 15% / 0.14)",
+              }}
+            >
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                <span className="text-[8.5px] font-bold uppercase tracking-[0.32em] text-accent">
+                  {slide.stat.v}
+                </span>
+              </div>
+              <p
+                className="font-display font-black text-primary leading-none tracking-[-0.04em]"
+                style={{ fontSize: "2.85rem" }}
+              >
+                {slide.stat.k}
+              </p>
+            </div>
+
+            {/* Corner accent bracket */}
+            <div className="hidden lg:block absolute -bottom-2 -right-2 z-20">
+              <div className="w-6 h-6 border-r border-b border-accent/30" />
+            </div>
           </div>
         </div>
 
-        {/* RIGHT — Netflix showcase */}
-        <div className="relative animate-fade-up stagger-2">
-          <div className="relative aspect-[4/5] max-h-[640px]">
-            {heroSlides.map((s, i) => (
-              <div
-                key={s.title}
-                className={`absolute inset-0 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                  i === active ? "opacity-100 scale-100 z-10" : "opacity-0 scale-[1.03] z-0"
-                }`}
-              >
-                <div className="relative w-full h-full">
-                  <ImagePlaceholder tone={s.tone} label={`${s.kicker} — imagery slot`} />
-                  {/* Slide meta overlay */}
-                  <div className="absolute inset-x-0 bottom-0 p-7 z-[4] text-primary-foreground">
-                    <span className="inline-flex items-center gap-2 px-3 py-1 glass rounded-full text-[9px] font-bold uppercase tracking-[0.3em] mb-4">
-                      <Sparkles className="w-3 h-3 text-accent" /> {s.tag}
-                    </span>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-1">{s.kicker}</p>
-                    <h3 className="font-display font-extrabold text-2xl md:text-3xl leading-tight mb-3">{s.title}</h3>
-                    <p className="text-sm text-primary-foreground/75 leading-relaxed max-w-sm mb-4">{s.body}</p>
-                    <a href="#" className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-accent group">
-                      {s.cta}
-                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
+        {/* ── BOTTOM BAR ── */}
+        <div className="mt-7 pt-5 border-t border-primary/7 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+            <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-primary/20">
+              Accra, Ghana · West Africa
+            </span>
           </div>
-
-          {/* Floating stat card — bottom-left break-out */}
-          <div className="hidden md:block absolute -bottom-8 -left-8 z-20 glass rounded-lg p-5 min-w-[180px] animate-float shadow-[var(--shadow-cinema)]">
-            <p className="font-display font-extrabold text-4xl text-primary-foreground leading-none">{slide.stat.k}</p>
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mt-2">{slide.stat.v}</p>
+          <div className="flex flex-col items-center gap-1.5">
+            <span className="text-[8.5px] font-bold uppercase tracking-[0.38em] text-primary/18">Scroll</span>
+            <div className="w-px h-7 bg-gradient-to-b from-primary/16 to-transparent" />
           </div>
-
-          {/* Est. badge — top right */}
-          <div className="hidden md:flex absolute -top-6 -right-4 flex-col items-end gap-1 z-20">
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary-foreground/50">Est.</span>
-            <span className="font-display font-extrabold text-5xl text-accent leading-none">2020</span>
-          </div>
-
-          {/* Slide indicators */}
-          <div className="absolute -bottom-14 right-0 flex items-center gap-2 z-20">
-            {heroSlides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                aria-label={`Slide ${i + 1}`}
-                className={`h-1 rounded-full transition-all duration-500 ${
-                  i === active ? "w-10 bg-accent" : "w-4 bg-primary-foreground/25 hover:bg-primary-foreground/50"
-                }`}
-              />
-            ))}
-          </div>
+          <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-primary/20 hidden md:block">
+            Since 2020 · Building Africa
+          </span>
         </div>
       </div>
     </section>
@@ -185,10 +468,11 @@ const Hero = () => {
 /* ============================================================
    MARQUEE
    ============================================================ */
+
 const Marquee = () => {
   const text = "Connecting Innovators · Fostering Talent · Showcasing Excellence";
   return (
-    <div className="relative bg-charcoal text-primary-foreground py-4 overflow-hidden border-y border-primary-foreground/10">
+    <div className="relative bg-primary text-primary-foreground py-4 overflow-hidden border-y border-primary-foreground/10">
       <div className="animate-marquee whitespace-nowrap flex">
         {Array.from({ length: 8 }).map((_, i) => (
           <span key={i} className="text-xs md:text-sm font-bold tracking-[0.35em] uppercase mx-10 text-primary-foreground/60">
@@ -249,8 +533,8 @@ const VisionMission = () => (
    CAMPUS TOURS — asymmetric break-out
    ============================================================ */
 const CampusTours = () => (
-  <section id="campus" className="relative py-28 md:py-36 px-6 bg-grad-charcoal text-primary-foreground grain overflow-hidden">
-    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-40 pointer-events-none bg-[radial-gradient(circle,hsl(151_57%_30%),transparent_70%)]" />
+  <section id="campus" className="relative py-28 md:py-36 px-6 bg-secondary text-primary-foreground overflow-hidden">
+    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
       <div className="lg:col-span-6 relative">
@@ -384,8 +668,8 @@ const services = [
 ];
 
 const Services = () => (
-  <section id="services" className="relative py-28 md:py-36 px-6 bg-grad-forest text-primary-foreground grain overflow-hidden">
-    <div className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full blur-3xl opacity-30 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_50%/0.5),transparent_70%)]" />
+  <section id="services" className="relative py-28 md:py-36 px-6 bg-secondary text-primary-foreground overflow-hidden">
+    <div className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_44%/0.4),transparent_70%)]" />
     <div className="relative max-w-7xl mx-auto">
       <div className="flex items-baseline gap-6 mb-16">
         <span className="eyebrow text-accent">04 — Services</span>
@@ -400,7 +684,7 @@ const Services = () => (
         {services.map((s, i) => (
           <div
             key={s.title}
-            className="card-lift group relative p-10 lg:p-12 rounded-lg glass overflow-hidden"
+            className="card-lift group relative p-10 lg:p-12 rounded-lg bg-primary/80 overflow-hidden border border-primary-foreground/10"
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_top,hsl(28_92%_55%/0.25),transparent_60%)]" />
             <div className="relative flex items-center justify-between mb-10">
@@ -458,8 +742,8 @@ const ProgramsBand = () => (
         </a>
       </div>
 
-      <div className="p-12 lg:p-20 bg-grad-charcoal text-primary-foreground relative overflow-hidden grain">
-        <div className="absolute -top-10 -right-10 w-[400px] h-[400px] rounded-full blur-3xl opacity-40 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_50%/0.5),transparent_70%)]" />
+      <div className="p-12 lg:p-20 bg-primary text-primary-foreground relative overflow-hidden">
+        <div className="absolute -top-10 -right-10 w-[400px] h-[400px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_44%/0.35),transparent_70%)]" />
         <div className="relative">
           <span className="eyebrow text-accent">06 — Mentorship</span>
           <h3 className="font-display font-extrabold mt-6 mb-6 leading-[0.9] text-[2.5rem] md:text-[3.5rem] tracking-tight">
@@ -473,7 +757,7 @@ const ProgramsBand = () => (
           </p>
           <a
             href="#"
-            className="btn-magnetic inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.25em] rounded-full hover:shadow-[var(--shadow-glow-amber)] transition-all duration-500"
+            className="btn-magnetic inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.25em] rounded-full hover:bg-primary transition-colors duration-300"
           >
             Read More <ArrowUpRight className="w-4 h-4" />
           </a>
@@ -497,8 +781,8 @@ const portfolio = [
 ];
 
 const Portfolio = () => (
-  <section id="portfolio" className="relative py-28 md:py-36 px-6 bg-grad-charcoal text-primary-foreground grain overflow-hidden">
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-3xl opacity-25 pointer-events-none bg-[radial-gradient(circle,hsl(151_57%_35%),transparent_70%)]" />
+  <section id="portfolio" className="relative py-28 md:py-36 px-6 bg-primary text-primary-foreground overflow-hidden">
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(151_57%_35%),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
@@ -517,7 +801,7 @@ const Portfolio = () => (
           <a
             key={p.name}
             href="#"
-            className="card-lift group relative rounded-lg glass p-8 overflow-hidden"
+            className="card-lift group relative rounded-lg bg-primary-foreground/5 border border-primary-foreground/10 p-8 overflow-hidden"
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_100%_0%,hsl(28_92%_55%/0.3),transparent_60%)]" />
             <div className="relative flex items-start justify-between mb-10">
@@ -565,7 +849,7 @@ const Testimonials = () => (
             key={t.name}
             className={`card-lift relative p-8 rounded-lg bg-background border border-primary/10 flex flex-col ${i === 1 ? "md:translate-y-6" : ""}`}
           >
-            <div className="absolute -top-4 left-8 w-10 h-10 rounded-full bg-accent flex items-center justify-center shadow-[var(--shadow-glow-amber)]">
+            <div className="absolute -top-4 left-8 w-10 h-10 rounded-full bg-accent flex items-center justify-center shadow-lg">
               <Quote className="w-4 h-4 text-accent-foreground" strokeWidth={2} />
             </div>
             <blockquote className="font-display text-xl text-primary leading-snug flex-1 mb-8 mt-4">
@@ -602,10 +886,10 @@ const Testimonials = () => (
    HUB CTA — cinematic close
    ============================================================ */
 const HubCTA = () => (
-  <section id="hub" className="relative py-32 md:py-40 px-6 bg-grad-charcoal text-primary-foreground grain overflow-hidden">
+  <section id="hub" className="relative py-32 md:py-40 px-6 bg-primary text-primary-foreground overflow-hidden">
     <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-40 bg-[radial-gradient(circle,hsl(151_57%_30%),transparent_70%)]" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-40 bg-[radial-gradient(circle,hsl(28_92%_50%/0.5),transparent_70%)] animate-pulse-glow" />
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 bg-[radial-gradient(circle,hsl(151_57%_40%),transparent_70%)]" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 bg-[radial-gradient(circle,hsl(28_92%_44%/0.4),transparent_70%)]" />
     </div>
 
     <div className="relative max-w-5xl mx-auto text-center">
@@ -621,7 +905,7 @@ const HubCTA = () => (
       </p>
       <a
         href="#"
-        className="btn-magnetic inline-flex items-center gap-2 px-10 py-5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.3em] rounded-full hover:shadow-[var(--shadow-glow-amber)] transition-all duration-500"
+        className="btn-magnetic inline-flex items-center gap-2 px-10 py-5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.3em] rounded-full hover:bg-background hover:text-primary transition-all duration-500"
       >
         Visit The Hub <ArrowUpRight className="w-4 h-4" />
       </a>

@@ -9,11 +9,11 @@ interface Props {
 }
 
 const toneClasses: Record<NonNullable<Props["tone"]>, string> = {
-  forest: "bg-grad-forest text-primary-foreground/60",
-  deep: "bg-grad-charcoal text-primary-foreground/50",
+  forest: "bg-secondary text-secondary-foreground/60",
+  deep: "bg-primary text-primary-foreground/50",
   cream: "bg-cream-warm text-primary/50",
-  amber: "bg-gradient-to-br from-accent to-[hsl(var(--amber-glow))] text-accent-foreground/80",
-  charcoal: "bg-grad-charcoal text-primary-foreground/50",
+  amber: "bg-accent/90 text-accent-foreground/70",
+  charcoal: "bg-primary text-primary-foreground/50",
 };
 
 /**
@@ -28,7 +28,7 @@ const ImagePlaceholder = ({
   showReflection = true,
 }: Props) => (
   <div
-    className={`media-frame grain relative w-full h-full flex flex-col items-center justify-center gap-3 ${toneClasses[tone]} ${aspect ?? ""} ${className}`}
+    className={`media-frame relative w-full h-full flex flex-col items-center justify-center gap-3 ${toneClasses[tone]} ${aspect ?? ""} ${className}`}
   >
     {/* Radial glow */}
     <div className="absolute -inset-24 opacity-40 pointer-events-none" aria-hidden>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ArrowUpRight } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -30,19 +31,13 @@ const Header = () => {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/70 backdrop-blur-xl border-b border-primary/10 shadow-[0_10px_40px_-20px_hsl(155_40%_8%/0.25)]"
-          : "bg-transparent"
+          ? "bg-background/90 backdrop-blur-md border-b border-primary/10"
+          : "bg-background/60 backdrop-blur-sm"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="relative w-10 h-10 bg-primary flex items-center justify-center rounded-sm overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-transparent" />
-            <span className="relative text-accent font-display font-extrabold text-lg tracking-tight">TH</span>
-          </div>
-          <span className={`font-display font-extrabold text-lg tracking-tight uppercase hidden sm:inline transition-colors ${scrolled ? "text-primary" : "text-primary"}`}>
-            Tech Hub Africa
-          </span>
+      <div className="max-w-7xl mx-auto px-6 h-16 sm:h-20 flex items-center justify-between">
+        <Link to="/" className="flex items-center h-full py-1">
+          <Logo size="md" className="h-full py-1" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-10 text-[11px] font-bold uppercase tracking-[0.25em] text-primary/75">
@@ -60,7 +55,7 @@ const Header = () => {
         <div className="flex items-center gap-3">
           <a
             href="#hub"
-            className="btn-magnetic hidden sm:inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground rounded-full text-[11px] font-bold uppercase tracking-[0.25em] hover:shadow-[var(--shadow-glow-amber)] transition-all duration-500"
+            className="btn-magnetic hidden sm:inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground rounded-full text-[11px] font-bold uppercase tracking-[0.25em] hover:bg-primary transition-colors duration-300"
           >
             Visit The Hub <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
@@ -78,7 +73,7 @@ const Header = () => {
       <div className="absolute bottom-0 left-0 h-px bg-accent transition-[width] duration-150" style={{ width: `${progress}%` }} />
 
       {open && (
-        <div className="lg:hidden glass-light border-t border-primary/10 px-6 py-6 flex flex-col gap-4">
+        <div className="lg:hidden bg-background border-t border-primary/10 px-6 py-6 flex flex-col gap-4">
           {navLinks.map((l) => (
             <a
               key={l.href}

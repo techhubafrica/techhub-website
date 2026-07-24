@@ -1,4 +1,5 @@
 import { Linkedin, Instagram, Twitter, Youtube, Facebook } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const columns = [
   {
@@ -16,7 +17,12 @@ const columns = [
 ];
 
 const Footer = () => (
-  <footer className="bg-primary text-primary-foreground pt-24">
+  <footer className="bg-primary text-primary-foreground pt-20">
+    <div className="max-w-7xl mx-auto px-6 mb-12">
+      <div className="p-6 rounded-2xl bg-white/5 border border-white/10 inline-block backdrop-blur-md">
+        <Logo size="lg" dark={true} />
+      </div>
+    </div>
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 pb-20">
       {columns.map((col) => (
         <div key={col.title}>
