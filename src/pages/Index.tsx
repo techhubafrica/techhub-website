@@ -206,7 +206,7 @@ const Hero = () => {
                   <span className="relative w-2 h-2 rounded-full bg-accent" />
                 </span>
                 <span className="text-[10.5px] font-bold tracking-[0.28em] uppercase text-primary/60">
-                  Tech Hub Africa · Est. 2020
+                  Tech Hub Africa · Est. 2024
                 </span>
               </div>
               <div className="h-px flex-1 max-w-16 bg-gradient-to-r from-primary/20 to-transparent" />
@@ -315,7 +315,7 @@ const Hero = () => {
             {/* Rotated sidebar label */}
             <div className="hidden xl:block absolute -left-11 top-1/2 -translate-y-1/2 -rotate-90 origin-center whitespace-nowrap">
               <p className="text-[8px] font-bold uppercase tracking-[0.65em] text-primary/14">
-                Africa · Innovation · Excellence · 2020
+                Africa · Innovation · Excellence · 2024
               </p>
             </div>
 
@@ -410,7 +410,7 @@ const Hero = () => {
               style={{ boxShadow: "0 6px 22px -4px hsl(28 92% 44% / 0.55)" }}
             >
               <p className="text-[7.5px] font-bold uppercase tracking-[0.22em] text-white/65">Est.</p>
-              <p className="font-display font-black text-[1.45rem] text-white leading-none">2020</p>
+              <p className="font-display font-black text-[1.45rem] text-white leading-none">2024</p>
             </div>
 
             {/* Live stat card */}
@@ -456,8 +456,8 @@ const Hero = () => {
             <span className="text-[8.5px] font-bold uppercase tracking-[0.38em] text-primary/18">Scroll</span>
             <div className="w-px h-7 bg-gradient-to-b from-primary/16 to-transparent" />
           </div>
-          <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-primary/20 hidden md:block">
-            Since 2020 · Building Africa
+          <span className="text-[9.9px] font-bold uppercase tracking-[0.45em] text-primary/20 hidden md:block">
+            Since 2024 · Building Africa
           </span>
         </div>
       </div>
