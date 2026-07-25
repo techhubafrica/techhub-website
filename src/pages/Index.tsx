@@ -83,77 +83,45 @@ const CountStat = ({
 const cyclicWords = ["Tech", "Digital", "Future", "Hub"];
 
 /* ============================================================
-   SIGNATURE ELEMENT — "The Constellation"
-   A subtle network of connected nodes representing the
-   mentorship / knowledge-exchange fabric of Tech Hub Africa.
-   Nodes gently pulse; connecting arcs draw softly. Unique to THA.
+   HERO — Netflix-style cinematic stage
+   Full-bleed rotating backdrop, overlay title/synopsis,
+   thumbnail rail at the bottom (like Netflix "Up Next").
    ============================================================ */
-const Constellation = ({ className = "" }: { className?: string }) => (
-  <svg
-    viewBox="0 0 400 400"
-    className={className}
-    fill="none"
-    aria-hidden
-  >
-    <defs>
-      <radialGradient id="cx-node" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stopColor="hsl(28,92%,50%)" stopOpacity="1" />
-        <stop offset="100%" stopColor="hsl(28,92%,44%)" stopOpacity="0" />
-      </radialGradient>
-      <linearGradient id="cx-line" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="hsl(155,61%,15%)" stopOpacity="0.05" />
-        <stop offset="50%" stopColor="hsl(28,92%,44%)" stopOpacity="0.35" />
-        <stop offset="100%" stopColor="hsl(155,61%,15%)" stopOpacity="0.05" />
-      </linearGradient>
-    </defs>
-    {/* Arcs — knowledge-exchange lines */}
-    {[
-      "M60 120 Q 200 40 340 140",
-      "M40 240 Q 200 180 360 260",
-      "M80 340 Q 200 300 320 350",
-      "M60 120 Q 140 260 80 340",
-      "M340 140 Q 300 250 360 260",
-      "M200 40 Q 220 200 200 300",
-    ].map((d, i) => (
-      <path
-        key={i}
-        d={d}
-        stroke="url(#cx-line)"
-        strokeWidth="1"
-        strokeDasharray="600"
-        strokeDashoffset="600"
-        style={{ animation: `draw 2.4s cubic-bezier(0.16,1,0.3,1) ${0.6 + i * 0.15}s both` }}
-      />
-    ))}
-    {/* Nodes */}
-    {[
-      [60, 120], [340, 140], [200, 40], [40, 240],
-      [360, 260], [80, 340], [320, 350], [200, 300],
-      [200, 180],
-    ].map(([cx, cy], i) => (
-      <g key={i} style={{ animation: `fade-in 1s ease-out ${1 + i * 0.08}s both` }}>
-        <circle cx={cx} cy={cy} r="14" fill="url(#cx-node)" opacity="0.35" />
-        <circle cx={cx} cy={cy} r="3.2" fill="hsl(28,92%,44%)" />
-        <circle cx={cx} cy={cy} r="6" fill="none" stroke="hsl(28,92%,44%)" strokeOpacity="0.4">
-          <animate attributeName="r" values="4;10;4" dur="4s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
-          <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="4s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
-        </circle>
-      </g>
-    ))}
-  </svg>
-);
+
+/* Tone → cinematic gradient backdrop.
+   These will sit under future photography; the same gradient
+   remains as a mood tint on top of images via mix-blend. */
+const toneBackdrop: Record<string, { bg: string; accent: string }> = {
+  deep: {
+    bg:
+      "radial-gradient(ellipse at 25% 30%, hsl(155 61% 22%) 0%, hsl(155 61% 10%) 55%, hsl(155 61% 6%) 100%)",
+    accent: "hsl(28 92% 44%)",
+  },
+  forest: {
+    bg:
+      "radial-gradient(ellipse at 70% 40%, hsl(151 57% 32%) 0%, hsl(151 57% 18%) 55%, hsl(155 61% 10%) 100%)",
+    accent: "hsl(28 92% 50%)",
+  },
+  charcoal: {
+    bg:
+      "radial-gradient(ellipse at 30% 70%, hsl(155 30% 18%) 0%, hsl(155 40% 10%) 60%, hsl(155 50% 5%) 100%)",
+    accent: "hsl(28 92% 48%)",
+  },
+  amber: {
+    bg:
+      "radial-gradient(ellipse at 65% 35%, hsl(28 60% 28%) 0%, hsl(155 61% 14%) 55%, hsl(155 61% 8%) 100%)",
+    accent: "hsl(40 90% 60%)",
+  },
+};
 
 const Hero = () => {
-  const [active, setActive]   = useState(0);
-  const [wordIdx, setWordIdx] = useState(0);
-  const [wordOut, setWordOut] = useState(false);
-  const [mouse, setMouse]     = useState({ x: 0.5, y: 0.5 });
+  const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
   const [scrollY, setScrollY] = useState(0);
 
-  /* slide auto-advance */
+  /* Auto-advance */
   useEffect(() => {
-    const INTERVAL = 6000;
+    const INTERVAL = 7000;
     let elapsed = 0;
     const tick = setInterval(() => {
       elapsed += 50;
@@ -168,431 +136,279 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    const t = setInterval(() => {
-      setWordOut(true);
-      setTimeout(() => { setWordIdx((i) => (i + 1) % cyclicWords.length); setWordOut(false); }, 380);
-    }, 3000);
-    return () => clearInterval(t);
-  }, []);
-
-  useEffect(() => {
-    const h = (e: MouseEvent) =>
-      setMouse({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
     const s = () => setScrollY(window.scrollY);
-    window.addEventListener("mousemove", h, { passive: true });
     window.addEventListener("scroll", s, { passive: true });
-    return () => {
-      window.removeEventListener("mousemove", h);
-      window.removeEventListener("scroll", s);
-    };
+    return () => window.removeEventListener("scroll", s);
   }, []);
 
-  const slide = heroSlides[active];
-  const px = (mouse.x - 0.5) * 20;
-  const py = (mouse.y - 0.5) * 10;
+  const goto = (i: number) => { if (i !== active) { setActive(i); setProgress(0); } };
   const parY = Math.min(scrollY, 400);
 
-  const goto = (i: number) => { setActive(i); setProgress(0); };
-
   return (
-    <section className="relative min-h-screen bg-background overflow-hidden select-none">
+    <section className="relative h-[100svh] min-h-[720px] w-full overflow-hidden bg-primary text-primary-foreground select-none">
 
-      {/* ══ LAYERED AMBIENT LIGHTING ══ */}
-      {/* Warm cream base gradient */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background:
-            "radial-gradient(1200px 700px at 15% 10%, hsl(40 45% 97%) 0%, transparent 55%)," +
-            "radial-gradient(900px 600px at 90% 30%, hsl(28 60% 92% / 0.6) 0%, transparent 55%)," +
-            "radial-gradient(700px 500px at 60% 100%, hsl(155 45% 88% / 0.5) 0%, transparent 60%)",
-        }}
-      />
-      {/* Subtle noise texture */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0 opacity-[0.035] mix-blend-multiply"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
-        }}
-      />
-      {/* Cursor spotlight */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background: `radial-gradient(560px circle at ${mouse.x * 100}% ${mouse.y * 100}%, hsl(28 92% 44% / 0.08), transparent 60%)`,
-        }}
-      />
+      {/* ══ CINEMATIC BACKDROP — cross-fading full-bleed slides ══ */}
+      <div className="absolute inset-0 z-0">
+        {heroSlides.map((s, i) => {
+          const t = toneBackdrop[s.tone] ?? toneBackdrop.deep;
+          const isActive = i === active;
+          return (
+            <div
+              key={s.title}
+              className="absolute inset-0 transition-opacity duration-[1400ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+              style={{ opacity: isActive ? 1 : 0, zIndex: isActive ? 2 : 1 }}
+            >
+              {/* Backdrop + slow Ken Burns zoom */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: t.bg,
+                  transform: `scale(${isActive ? 1.08 : 1}) translateY(${parY * 0.15}px)`,
+                  transition: "transform 8s ease-out",
+                }}
+              />
+              {/* Subtle grain */}
+              <div
+                className="absolute inset-0 opacity-[0.08] mix-blend-overlay pointer-events-none"
+                style={{
+                  backgroundImage:
+                    "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+                }}
+              />
+              {/* Accent glow */}
+              <div
+                className="absolute pointer-events-none"
+                style={{
+                  top: "10%", right: "-10%",
+                  width: "60vw", height: "60vw",
+                  background: `radial-gradient(circle, ${t.accent} 0%, transparent 60%)`,
+                  opacity: 0.22,
+                  filter: "blur(40px)",
+                }}
+              />
+            </div>
+          );
+        })}
 
-      {/* ══ SIGNATURE CONSTELLATION — top-right, breathing ══ */}
-      <div
-        className="absolute -top-16 -right-10 md:top-8 md:right-10 w-[380px] md:w-[520px] h-[380px] md:h-[520px] pointer-events-none z-[1]"
-        style={{
-          transform: `translate(${px * 0.4}px, ${py * 0.4 - parY * 0.15}px)`,
-          transition: "transform 1s cubic-bezier(0.16,1,0.3,1)",
-          opacity: 0.85,
-        }}
-      >
-        <Constellation className="w-full h-full" />
-      </div>
-
-      {/* Ghost mega mark — very subtle */}
-      <div className="absolute inset-0 flex items-end justify-start overflow-hidden pointer-events-none z-0">
-        <span
-          className="font-display font-black uppercase leading-none tracking-tighter select-none"
+        {/* Netflix-style cinematic gradient overlays — LOCKED on top */}
+        {/* Left → right dark-to-transparent (for text legibility) */}
+        <div
+          className="absolute inset-0 z-[5] pointer-events-none"
           style={{
-            fontSize: "34vw",
-            opacity: 0.028,
-            color: "hsl(155,61%,15%)",
-            transform: `translate(${-px * 1.2}px, ${40 - py * 0.8 + parY * 0.1}px)`,
-            transition: "transform 1.4s cubic-bezier(0.16,1,0.3,1)",
-            marginLeft: "-3vw",
-            marginBottom: "-8vw",
+            background:
+              "linear-gradient(90deg, hsl(155 61% 6% / 0.92) 0%, hsl(155 61% 6% / 0.75) 30%, hsl(155 61% 6% / 0.35) 55%, transparent 80%)",
           }}
-        >
-          THA
-        </span>
+        />
+        {/* Bottom → transparent (fade into thumbnail rail) */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-[55%] z-[5] pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, transparent 0%, hsl(155 61% 6% / 0.6) 55%, hsl(155 61% 5%) 100%)",
+          }}
+        />
+        {/* Top subtle vignette */}
+        <div className="absolute inset-x-0 top-0 h-32 z-[5] pointer-events-none bg-gradient-to-b from-black/50 to-transparent" />
       </div>
 
-      {/* Vertical brand rail — left edge */}
-      <div className="hidden xl:flex absolute left-6 top-0 bottom-0 flex-col items-center justify-between py-32 z-10 pointer-events-none">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-px h-16 bg-gradient-to-b from-transparent to-primary/25" />
-          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary/35 [writing-mode:vertical-rl] rotate-180">
-            Est · MMXXIV
-          </span>
-        </div>
-        <div className="flex flex-col items-center gap-4">
-          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary/35 [writing-mode:vertical-rl] rotate-180">
-            Accra · Ghana
-          </span>
-          <div className="w-px h-16 bg-gradient-to-t from-transparent to-primary/25" />
-        </div>
-      </div>
+      {/* ══ CONTENT LAYER ══ */}
+      <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 md:px-12 xl:px-20 flex flex-col">
 
-      {/* ══ MAIN COMPOSITION — asymmetric editorial grid ══ */}
-      <div className="relative max-w-[1360px] mx-auto w-full px-6 xl:px-20 pt-28 md:pt-32 pb-16 z-10">
-
-        {/* Chapter label — sits outside the main column */}
-        <div className="flex items-center gap-5 mb-10 md:mb-14 md:-ml-2">
-          <div className="inline-flex items-center gap-3 px-4 py-1.5 border border-primary/15 rounded-full bg-background/70 backdrop-blur-sm">
+        {/* Top meta row */}
+        <div className="pt-28 md:pt-32 flex items-center gap-5">
+          <div className="inline-flex items-center gap-3 px-3.5 py-1.5 border border-primary-foreground/20 rounded-full bg-primary-foreground/5 backdrop-blur-sm">
             <span className="relative flex w-2 h-2">
-              <span className="animate-ping absolute h-full w-full rounded-full bg-accent opacity-60" />
+              <span className="animate-ping absolute h-full w-full rounded-full bg-accent opacity-70" />
               <span className="relative w-2 h-2 rounded-full bg-accent" />
             </span>
-            <span className="text-[10px] font-bold tracking-[0.32em] uppercase text-primary/60">
-              Chapter 01 · The Ecosystem
+            <span className="text-[10px] font-bold tracking-[0.32em] uppercase text-primary-foreground/75">
+              Featured · Now Playing
             </span>
           </div>
-          <div className="h-px flex-1 max-w-24 bg-gradient-to-r from-primary/25 to-transparent" />
-          <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-primary/30 hidden md:block">
-            {String(active + 1).padStart(2, "0")} / {String(heroSlides.length).padStart(2, "0")}
+          <div className="h-px flex-1 max-w-24 bg-gradient-to-r from-primary-foreground/25 to-transparent" />
+          <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-primary-foreground/45 hidden md:block">
+            Tech Hub Africa · Accra
           </span>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-y-16 lg:gap-x-8 items-start">
+        {/* ── SPACER pushes hero copy into lower-middle third (Netflix layout) ── */}
+        <div className="flex-1" />
 
-          {/* ─── LEFT — EDITORIAL HEADLINE COLUMN ─── */}
-          <div className="lg:col-span-7 relative lg:pt-6 lg:z-20">
-
-            {/* Headline — intentional line breaks, oversized */}
-            <h1
-              className="font-display font-black tracking-[-0.045em] text-primary"
-              style={{ lineHeight: 0.82 }}
+        {/* ══ HERO SYNOPSIS BLOCK ══ */}
+        <div className="max-w-[720px] pb-10 md:pb-14">
+          {heroSlides.map((s, i) => (
+            <div
+              key={s.title}
+              className={`transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                i === active
+                  ? "opacity-100 translate-y-0 relative"
+                  : "opacity-0 translate-y-4 pointer-events-none absolute"
+              }`}
+              aria-hidden={i !== active}
             >
-              <span className="block overflow-hidden">
-                <span
-                  className="block animate-fade-up"
-                  style={{ fontSize: "clamp(3rem,8.4vw,7rem)" }}
-                >
-                  Where
+              {/* Tag pill */}
+              <div className="flex items-center gap-3 mb-5">
+                <span className="w-8 h-px bg-accent" />
+                <span className="text-[10.5px] font-black uppercase tracking-[0.42em] text-accent">
+                  {s.tag}
                 </span>
-              </span>
-              <span className="block overflow-hidden pl-[0.12em]">
-                <span
-                  className="block animate-fade-up stagger-1"
-                  style={{ fontSize: "clamp(3rem,8.4vw,7rem)" }}
-                >
-                  Africa's
-                </span>
-              </span>
-              <span
-                className="block overflow-hidden"
-                style={{ fontSize: "clamp(3rem,8.4vw,7rem)" }}
-              >
-                <span
-                  className="inline-block italic font-light text-accent"
-                  style={{
-                    transform: wordOut ? "translateY(-115%)" : "translateY(0)",
-                    opacity: wordOut ? 0 : 1,
-                    transition: wordOut
-                      ? "transform 0.3s cubic-bezier(0.4,0,1,1), opacity 0.2s ease"
-                      : "transform 0.44s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease",
-                  }}
-                >
-                  {cyclicWords[wordIdx]}
-                </span>
-              </span>
-              <span className="block overflow-hidden relative pl-[0.24em]">
-                <span
-                  className="block animate-fade-up stagger-2 relative"
-                  style={{ fontSize: "clamp(3rem,8.4vw,7rem)" }}
-                >
-                  future lives.
-                  <svg
-                    className="absolute left-[0.24em] -bottom-1 w-[90%]"
-                    viewBox="0 0 640 13" fill="none" preserveAspectRatio="none" aria-hidden
-                  >
-                    <path
-                      d="M3 8 C90 1, 210 12, 320 6 C430 0, 558 12, 637 7"
-                      stroke="hsl(28,92%,44%)" strokeWidth="3.5" strokeLinecap="round"
-                      strokeDasharray="720" strokeDashoffset="720"
-                      style={{ animation: "draw 1.8s cubic-bezier(0.16,1,0.3,1) 1s both" }}
-                    />
-                  </svg>
-                </span>
-              </span>
-            </h1>
+              </div>
 
-            {/* Editorial description */}
-            <div className="animate-fade-up stagger-3 mt-10 md:mt-12 max-w-[520px] flex gap-5">
-              <div className="w-px bg-gradient-to-b from-accent/60 via-primary/20 to-transparent flex-shrink-0" />
-              <p className="text-primary/70 text-[15px] md:text-[17px] leading-[1.9] font-light">
-                A home for builders, mentors and investors — connecting talent
-                to opportunity through world-class infrastructure, elite mentorship
-                and high-impact digital work
-                <span className="text-primary font-medium"> across the continent.</span>
+              {/* Kicker */}
+              <p className="font-display font-bold text-primary-foreground/60 text-sm md:text-base uppercase tracking-[0.35em] mb-4">
+                {s.kicker}
               </p>
-            </div>
 
-            {/* CTAs */}
-            <div className="animate-fade-up stagger-4 flex flex-wrap items-center gap-5 mt-10">
-              <a
-                href="#vision"
-                className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-primary text-primary-foreground text-[11px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-secondary transition-all duration-500"
-                style={{ boxShadow: "0 10px 30px -10px hsl(155 61% 15% / 0.4)" }}
+              {/* Massive Netflix title */}
+              <h1
+                className="font-display font-black text-primary-foreground tracking-[-0.035em] leading-[0.9] mb-6"
+                style={{
+                  fontSize: "clamp(2.8rem, 7vw, 6rem)",
+                  textShadow: "0 4px 24px hsl(155 61% 6% / 0.6)",
+                }}
               >
-                Enter the Hub
-                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
-              <a
-                href="#campus"
-                className="group inline-flex items-center gap-3 text-[11px] font-bold text-primary/70 hover:text-accent transition-colors uppercase tracking-[0.28em]"
-              >
-                <div className="w-11 h-11 rounded-full border border-primary/25 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/5 transition-all">
-                  <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
+                {s.title}
+              </h1>
+
+              {/* Synopsis */}
+              <p className="text-primary-foreground/80 text-base md:text-[17px] leading-[1.7] font-light max-w-[620px] mb-8">
+                {s.body}
+              </p>
+
+              {/* CTAs — Netflix play + more info */}
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href="#"
+                  className="btn-magnetic group inline-flex items-center gap-3 pl-6 pr-8 py-4 bg-accent text-accent-foreground rounded-full text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-primary-foreground hover:text-primary transition-all duration-500"
+                  style={{ boxShadow: "0 14px 40px -10px hsl(28 92% 44% / 0.55)" }}
+                >
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary-foreground/20">
+                    <Play className="w-3 h-3 fill-current ml-0.5" />
+                  </span>
+                  {s.cta}
+                </a>
+                <a
+                  href="#vision"
+                  className="group inline-flex items-center gap-3 px-6 py-4 bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/20 text-primary-foreground rounded-full text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-primary-foreground/20 transition-all"
+                >
+                  More Info
+                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+
+                {/* Inline live stat — editorial */}
+                <div className="hidden md:flex items-center gap-3 ml-2 pl-6 border-l border-primary-foreground/20">
+                  <span
+                    className="font-display font-black text-primary-foreground leading-none tracking-[-0.03em]"
+                    style={{ fontSize: "2rem" }}
+                  >
+                    {s.stat.k}
+                  </span>
+                  <span className="text-[9px] font-bold uppercase tracking-[0.35em] text-primary-foreground/50 max-w-[80px] leading-tight">
+                    {s.stat.v}
+                  </span>
                 </div>
-                Watch the film
-              </a>
+              </div>
             </div>
+          ))}
+        </div>
 
-            {/* Stats — inline editorial */}
-            <div className="animate-fade-up stagger-4 mt-14 grid grid-cols-3 max-w-[420px] border-t border-primary/12 pt-7">
-              <CountStat target={5}  suffix="+" label="Years"     delay={200} divider={false} />
-              <CountStat target={20} suffix="+" label="Programs"  delay={400} divider={true}  />
-              <CountStat target={4}  suffix=""  label="Ventures"  delay={600} divider={true}  />
+        {/* ══ NETFLIX-STYLE THUMBNAIL RAIL — "Up Next" ══ */}
+        <div className="pb-8 md:pb-10">
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.42em] text-primary-foreground/55">
+              Up Next · Explore the Ecosystem
+            </p>
+            <div className="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.35em] text-primary-foreground/40">
+              <span className="text-primary-foreground/75">{String(active + 1).padStart(2, "0")}</span>
+              <span className="w-8 h-px bg-primary-foreground/20" />
+              <span>{String(heroSlides.length).padStart(2, "0")}</span>
             </div>
           </div>
 
-          {/* ─── RIGHT — MEDIA STAGE ─── */}
-          <div
-            className="lg:col-span-5 relative animate-fade-up stagger-2 lg:-mt-4 lg:-mr-6 xl:-mr-10"
-            style={{ transform: `translateY(${parY * -0.04}px)` }}
-          >
-            {/* Offset editorial frame — breaks grid */}
-            <div className="absolute -top-5 -right-5 -bottom-8 -left-3 border border-accent/25 rounded-[28px] pointer-events-none" />
-            <div className="absolute -top-2 -right-2 -bottom-4 -left-1 border border-primary/8 rounded-[24px] pointer-events-none" />
-
-            {/* THE MEDIA STAGE */}
-            <div
-              className="relative w-full rounded-[22px] overflow-hidden isolate"
-              style={{
-                aspectRatio: "4/5",
-                maxHeight: "min(720px, 78vh)",
-                boxShadow:
-                  "0 40px 90px -20px hsl(155 61% 15% / 0.28)," +
-                  "0 12px 32px -10px hsl(155 61% 15% / 0.16)," +
-                  "0 2px 6px -2px hsl(155 61% 15% / 0.08)",
-              }}
-            >
-              {/* Rotating slides */}
-              {heroSlides.map((s, i) => (
-                <div
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            {heroSlides.map((s, i) => {
+              const isActive = i === active;
+              const t = toneBackdrop[s.tone] ?? toneBackdrop.deep;
+              return (
+                <button
                   key={s.title}
-                  className={`absolute inset-0 transition-all duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    i === active ? "opacity-100 z-10 scale-100" : "opacity-0 z-0 scale-[1.04]"
+                  onClick={() => goto(i)}
+                  className={`group relative text-left rounded-xl overflow-hidden transition-all duration-500 ${
+                    isActive
+                      ? "ring-2 ring-accent ring-offset-2 ring-offset-primary scale-[1.015]"
+                      : "opacity-70 hover:opacity-100 hover:scale-[1.015]"
                   }`}
+                  style={{
+                    aspectRatio: "16/9",
+                    background: t.bg,
+                    boxShadow: isActive
+                      ? "0 20px 40px -12px hsl(28 92% 44% / 0.35)"
+                      : "0 10px 24px -10px hsl(155 61% 4% / 0.6)",
+                  }}
                 >
-                  <ImagePlaceholder tone={s.tone} label={s.kicker} />
+                  {/* Grain */}
+                  <div
+                    className="absolute inset-0 opacity-[0.12] mix-blend-overlay pointer-events-none"
+                    style={{
+                      backgroundImage:
+                        "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+                    }}
+                  />
+                  {/* Bottom gradient for legibility */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                  {/* Cinematic top vignette */}
-                  <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/25 via-black/5 to-transparent pointer-events-none z-[3]" />
-                  {/* Bottom vignette for caption legibility */}
-                  <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/45 to-transparent pointer-events-none z-[3]" />
-
-                  {/* Slide index — top-left */}
-                  <div className="absolute top-5 left-5 z-[4] flex items-center gap-2">
-                    <span className="w-6 h-px bg-white/60" />
-                    <span className="text-[9.5px] font-black uppercase tracking-[0.42em] text-white/85">
+                  {/* Slide index */}
+                  <div className="absolute top-2.5 left-3 flex items-center gap-1.5">
+                    <span className={`w-4 h-px transition-colors ${isActive ? "bg-accent" : "bg-primary-foreground/50"}`} />
+                    <span className={`text-[8.5px] font-black uppercase tracking-[0.4em] ${isActive ? "text-accent" : "text-primary-foreground/70"}`}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
 
-                  {/* Tag — top-right */}
-                  <div className="absolute top-5 right-6 z-[4]">
-                    <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/70">
+                  {/* Tag */}
+                  <div className="absolute top-2.5 right-3">
+                    <span className="text-[8px] font-bold uppercase tracking-[0.35em] text-primary-foreground/60">
                       {s.tag}
                     </span>
                   </div>
 
-                  {/* Editorial caption */}
-                  <div className="absolute inset-x-6 bottom-16 z-[4]">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.42em] text-accent mb-3">
+                  {/* Title */}
+                  <div className="absolute inset-x-3 bottom-2.5">
+                    <p className="text-[9px] font-bold uppercase tracking-[0.32em] text-accent mb-1 opacity-90">
                       {s.kicker}
                     </p>
-                    <h3 className="font-display font-black text-white text-[1.9rem] md:text-[2.2rem] leading-[0.95] tracking-[-0.02em] mb-3 max-w-[85%]">
+                    <h3 className="font-display font-extrabold text-primary-foreground text-[13px] md:text-[15px] leading-tight tracking-[-0.01em] line-clamp-2">
                       {s.title}
                     </h3>
-                    <p className="text-white/70 text-[13px] leading-relaxed font-light max-w-[92%] line-clamp-2">
-                      {s.body}
-                    </p>
                   </div>
-                </div>
-              ))}
 
-              {/* Bottom-right chapter action */}
-              <a
-                href="#"
-                className="absolute bottom-5 right-5 z-20 group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-white/12 backdrop-blur-md border border-white/20 hover:bg-accent hover:border-accent transition-all duration-500"
-              >
-                <span className="text-[9.5px] font-bold uppercase tracking-[0.32em] text-white">
-                  {slide.cta}
-                </span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
+                  {/* Active progress */}
+                  {isActive && (
+                    <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-primary-foreground/10">
+                      <div
+                        className="h-full bg-accent"
+                        style={{ width: `${progress}%`, transition: "width 50ms linear" }}
+                      />
+                    </div>
+                  )}
 
-              {/* Vertical slide indicators */}
-              <div className="absolute top-1/2 -translate-y-1/2 right-4 z-20 flex flex-col gap-2">
-                {heroSlides.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => goto(i)}
-                    aria-label={`Slide ${i + 1}`}
-                    className="group relative flex items-center justify-end"
-                  >
-                    <span className={`transition-all duration-500 rounded-full ${
-                      i === active
-                        ? "w-[3px] h-10 bg-accent"
-                        : "w-[3px] h-3 bg-white/40 group-hover:bg-white/80"
-                    }`} />
-                  </button>
-                ))}
-              </div>
-
-              {/* Progress bar */}
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/15 z-20">
-                <div
-                  className="h-full bg-accent"
-                  style={{ width: `${progress}%`, transition: "width 50ms linear" }}
-                />
-              </div>
-            </div>
-
-            {/* ── FLOATING ECOSYSTEM CARDS ── */}
-
-            {/* Est. seal — top-left, breaks frame */}
-            <div
-              className="hidden md:flex absolute -top-8 -left-8 z-30 w-[92px] h-[92px] rounded-full bg-accent flex-col items-center justify-center animate-float"
-              style={{ boxShadow: "0 14px 34px -6px hsl(28 92% 44% / 0.55), inset 0 0 0 1px hsl(0 0% 100% / 0.15)" }}
-            >
-              <p className="text-[8px] font-bold uppercase tracking-[0.28em] text-white/70">Est.</p>
-              <p className="font-display font-black text-[1.65rem] text-white leading-none">2024</p>
-              <div className="mt-1 w-6 h-px bg-white/40" />
-            </div>
-
-            {/* Live metric card — bottom-left, extends beyond frame */}
-            <div
-              className="hidden md:block absolute -bottom-12 -left-14 z-30 bg-background rounded-2xl px-5 py-4 animate-float"
-              style={{
-                animationDelay: "1.2s",
-                minWidth: "180px",
-                border: "1px solid hsl(155 61% 15% / 0.08)",
-                boxShadow:
-                  "0 20px 50px -12px hsl(155 61% 15% / 0.22)," +
-                  "0 4px 12px -4px hsl(155 61% 15% / 0.08)",
-              }}
-            >
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                <span className="text-[8.5px] font-bold uppercase tracking-[0.34em] text-accent">
-                  {slide.stat.v}
-                </span>
-              </div>
-              <p
-                className="font-display font-black text-primary leading-none tracking-[-0.04em]"
-                style={{ fontSize: "2.7rem" }}
-              >
-                {slide.stat.k}
-              </p>
-              <div className="mt-3 pt-3 border-t border-primary/8 flex items-center justify-between">
-                <span className="text-[8.5px] font-bold uppercase tracking-[0.3em] text-primary/40">
-                  {slide.kicker}
-                </span>
-                <ArrowUpRight className="w-3 h-3 text-primary/40" />
-              </div>
-            </div>
-
-            {/* Ecosystem theme card — top-right, floats over frame */}
-            <div
-              className="hidden lg:flex absolute -top-4 -right-10 z-30 items-center gap-3 px-4 py-3 rounded-full bg-background/85 backdrop-blur-md animate-float"
-              style={{
-                animationDelay: "0.6s",
-                border: "1px solid hsl(155 61% 15% / 0.1)",
-                boxShadow: "0 12px 30px -8px hsl(155 61% 15% / 0.18)",
-              }}
-            >
-              <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
-                <Sparkles className="w-3.5 h-3.5 text-accent" />
-              </div>
-              <div className="pr-2">
-                <p className="text-[8px] font-bold uppercase tracking-[0.32em] text-primary/40 leading-none mb-1">Now</p>
-                <p className="font-display font-extrabold text-[12px] text-primary leading-none">Cohort 03 · Open</p>
-              </div>
-            </div>
-
-            {/* Corner brackets */}
-            <div className="hidden md:block absolute -bottom-5 -right-5 z-20">
-              <div className="w-8 h-8 border-r-2 border-b-2 border-accent/50 rounded-br-[10px]" />
-            </div>
-            <div className="hidden md:block absolute -top-5 -right-5 z-20">
-              <div className="w-8 h-8 border-r-2 border-t-2 border-primary/20 rounded-tr-[10px]" />
-            </div>
+                  {/* Hover play icon */}
+                  <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isActive ? "opacity-0" : "opacity-0 group-hover:opacity-100"}`}>
+                    <div className="w-11 h-11 rounded-full bg-accent flex items-center justify-center shadow-lg">
+                      <Play className="w-4 h-4 fill-current text-accent-foreground ml-0.5" />
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
+      </div>
 
-        {/* ══ BOTTOM META BAR ══ */}
-        <div className="mt-24 md:mt-28 pt-6 border-t border-primary/10 flex items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-primary/35">
-              Accra · West Africa
-            </span>
-          </div>
-
-          {/* Chapter dots — narrative anchor */}
-          <div className="hidden md:flex items-center gap-4 text-[9px] font-bold uppercase tracking-[0.4em] text-primary/30">
-            <span className="text-primary/60">01 · Ecosystem</span>
-            <span className="w-6 h-px bg-primary/15" />
-            <span>02 · Programs</span>
-            <span className="w-6 h-px bg-primary/15" />
-            <span>03 · Portfolio</span>
-          </div>
-
-          <div className="flex flex-col items-center gap-1.5">
-            <span className="text-[8.5px] font-bold uppercase tracking-[0.4em] text-primary/25">Scroll</span>
-            <div className="w-px h-8 bg-gradient-to-b from-primary/25 to-transparent" />
-          </div>
-        </div>
+      {/* ══ SCROLL HINT ══ */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5">
+        <span className="text-[8.5px] font-bold uppercase tracking-[0.42em] text-primary-foreground/40">Scroll</span>
+        <div className="w-px h-6 bg-gradient-to-b from-primary-foreground/40 to-transparent" />
       </div>
     </section>
   );
