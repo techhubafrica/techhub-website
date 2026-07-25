@@ -82,156 +82,243 @@ const CountStat = ({
 /* -- Morphing words -- */
 const cyclicWords = ["Tech", "Digital", "Future", "Hub"];
 
+/* ============================================================
+   SIGNATURE ELEMENT — "The Constellation"
+   A subtle network of connected nodes representing the
+   mentorship / knowledge-exchange fabric of Tech Hub Africa.
+   Nodes gently pulse; connecting arcs draw softly. Unique to THA.
+   ============================================================ */
+const Constellation = ({ className = "" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 400 400"
+    className={className}
+    fill="none"
+    aria-hidden
+  >
+    <defs>
+      <radialGradient id="cx-node" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stopColor="hsl(28,92%,50%)" stopOpacity="1" />
+        <stop offset="100%" stopColor="hsl(28,92%,44%)" stopOpacity="0" />
+      </radialGradient>
+      <linearGradient id="cx-line" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="hsl(155,61%,15%)" stopOpacity="0.05" />
+        <stop offset="50%" stopColor="hsl(28,92%,44%)" stopOpacity="0.35" />
+        <stop offset="100%" stopColor="hsl(155,61%,15%)" stopOpacity="0.05" />
+      </linearGradient>
+    </defs>
+    {/* Arcs — knowledge-exchange lines */}
+    {[
+      "M60 120 Q 200 40 340 140",
+      "M40 240 Q 200 180 360 260",
+      "M80 340 Q 200 300 320 350",
+      "M60 120 Q 140 260 80 340",
+      "M340 140 Q 300 250 360 260",
+      "M200 40 Q 220 200 200 300",
+    ].map((d, i) => (
+      <path
+        key={i}
+        d={d}
+        stroke="url(#cx-line)"
+        strokeWidth="1"
+        strokeDasharray="600"
+        strokeDashoffset="600"
+        style={{ animation: `draw 2.4s cubic-bezier(0.16,1,0.3,1) ${0.6 + i * 0.15}s both` }}
+      />
+    ))}
+    {/* Nodes */}
+    {[
+      [60, 120], [340, 140], [200, 40], [40, 240],
+      [360, 260], [80, 340], [320, 350], [200, 300],
+      [200, 180],
+    ].map(([cx, cy], i) => (
+      <g key={i} style={{ animation: `fade-in 1s ease-out ${1 + i * 0.08}s both` }}>
+        <circle cx={cx} cy={cy} r="14" fill="url(#cx-node)" opacity="0.35" />
+        <circle cx={cx} cy={cy} r="3.2" fill="hsl(28,92%,44%)" />
+        <circle cx={cx} cy={cy} r="6" fill="none" stroke="hsl(28,92%,44%)" strokeOpacity="0.4">
+          <animate attributeName="r" values="4;10;4" dur="4s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
+          <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="4s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
+        </circle>
+      </g>
+    ))}
+  </svg>
+);
+
 const Hero = () => {
   const [active, setActive]   = useState(0);
   const [wordIdx, setWordIdx] = useState(0);
   const [wordOut, setWordOut] = useState(false);
   const [mouse, setMouse]     = useState({ x: 0.5, y: 0.5 });
   const [progress, setProgress] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
 
   /* slide auto-advance */
   useEffect(() => {
-    const INTERVAL = 5500;
+    const INTERVAL = 6000;
     let elapsed = 0;
     const tick = setInterval(() => {
       elapsed += 50;
       setProgress(Math.min(100, (elapsed / INTERVAL) * 100));
       if (elapsed >= INTERVAL) {
         elapsed = 0;
+        setProgress(0);
         setActive((a) => (a + 1) % heroSlides.length);
       }
     }, 50);
     return () => clearInterval(tick);
   }, []);
 
-  /* morphing word cycle */
   useEffect(() => {
     const t = setInterval(() => {
       setWordOut(true);
       setTimeout(() => { setWordIdx((i) => (i + 1) % cyclicWords.length); setWordOut(false); }, 380);
-    }, 2800);
+    }, 3000);
     return () => clearInterval(t);
   }, []);
 
-  /* mouse tracking */
   useEffect(() => {
     const h = (e: MouseEvent) =>
       setMouse({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
+    const s = () => setScrollY(window.scrollY);
     window.addEventListener("mousemove", h, { passive: true });
-    return () => window.removeEventListener("mousemove", h);
+    window.addEventListener("scroll", s, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", h);
+      window.removeEventListener("scroll", s);
+    };
   }, []);
 
   const slide = heroSlides[active];
-  const px = (mouse.x - 0.5) * 28;
-  const py = (mouse.y - 0.5) * 12;
+  const px = (mouse.x - 0.5) * 20;
+  const py = (mouse.y - 0.5) * 10;
+  const parY = Math.min(scrollY, 400);
+
+  const goto = (i: number) => { setActive(i); setProgress(0); };
 
   return (
-    <section className="relative min-h-screen bg-background overflow-hidden flex flex-col select-none">
+    <section className="relative min-h-screen bg-background overflow-hidden select-none">
 
-      {/* ══ CURSOR SPOTLIGHT ══ */}
+      {/* ══ LAYERED AMBIENT LIGHTING ══ */}
+      {/* Warm cream base gradient */}
       <div
-        className="absolute inset-0 pointer-events-none z-0 transition-[background] duration-200"
+        className="absolute inset-0 pointer-events-none z-0"
         style={{
-          background: `radial-gradient(700px circle at ${mouse.x * 100}% ${mouse.y * 100}%,
-            hsl(28 92% 44% / 0.065), transparent 55%)`,
+          background:
+            "radial-gradient(1200px 700px at 15% 10%, hsl(40 45% 97%) 0%, transparent 55%)," +
+            "radial-gradient(900px 600px at 90% 30%, hsl(28 60% 92% / 0.6) 0%, transparent 55%)," +
+            "radial-gradient(700px 500px at 60% 100%, hsl(155 45% 88% / 0.5) 0%, transparent 60%)",
+        }}
+      />
+      {/* Subtle noise texture */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0 opacity-[0.035] mix-blend-multiply"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+        }}
+      />
+      {/* Cursor spotlight */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background: `radial-gradient(560px circle at ${mouse.x * 100}% ${mouse.y * 100}%, hsl(28 92% 44% / 0.08), transparent 60%)`,
         }}
       />
 
-      {/* ══ GHOST MEGA TEXT (parallax) ══ */}
-      <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none">
+      {/* ══ SIGNATURE CONSTELLATION — top-right, breathing ══ */}
+      <div
+        className="absolute -top-16 -right-10 md:top-8 md:right-10 w-[380px] md:w-[520px] h-[380px] md:h-[520px] pointer-events-none z-[1]"
+        style={{
+          transform: `translate(${px * 0.4}px, ${py * 0.4 - parY * 0.15}px)`,
+          transition: "transform 1s cubic-bezier(0.16,1,0.3,1)",
+          opacity: 0.85,
+        }}
+      >
+        <Constellation className="w-full h-full" />
+      </div>
+
+      {/* Ghost mega mark — very subtle */}
+      <div className="absolute inset-0 flex items-end justify-start overflow-hidden pointer-events-none z-0">
         <span
-          className="font-display font-black uppercase leading-none tracking-tighter"
+          className="font-display font-black uppercase leading-none tracking-tighter select-none"
           style={{
-            fontSize: "31vw",
-            opacity: 0.026,
+            fontSize: "34vw",
+            opacity: 0.028,
             color: "hsl(155,61%,15%)",
-            transform: `translate(${px * -1.6}px, ${py * -1.1}px)`,
-            transition: "transform 1.6s cubic-bezier(0.16,1,0.3,1)",
+            transform: `translate(${-px * 1.2}px, ${40 - py * 0.8 + parY * 0.1}px)`,
+            transition: "transform 1.4s cubic-bezier(0.16,1,0.3,1)",
+            marginLeft: "-3vw",
+            marginBottom: "-8vw",
           }}
         >
           THA
         </span>
       </div>
 
-      {/* ══ CONCENTRIC RINGS (parallax) ══ */}
-      <div
-        className="absolute -top-48 -right-48 pointer-events-none"
-        style={{
-          transform: `translate(${px * 0.45}px, ${py * 0.45}px)`,
-          transition: "transform 0.9s cubic-bezier(0.16,1,0.3,1)",
-        }}
-      >
-        <div className="w-[680px] h-[680px] rounded-full border border-accent/[0.13]" />
-        <div className="absolute top-[90px] left-[90px] w-[500px] h-[500px] rounded-full border border-accent/[0.09]" />
-        <div className="absolute top-[175px] left-[175px] w-[330px] h-[330px] rounded-full border border-accent/[0.06]" />
-        <div className="absolute top-[250px] left-[250px] w-[180px] h-[180px] rounded-full border border-accent/[0.06]" />
-      </div>
-
-      {/* ══ DOT MATRIX (8×8, parallax) ══ */}
-      <div
-        className="absolute top-36 right-[42%] grid grid-cols-8 gap-[9px] pointer-events-none hidden lg:grid"
-        style={{
-          opacity: 0.2,
-          transform: `translate(${px * 0.25}px, ${py * 0.25}px)`,
-          transition: "transform 1.1s cubic-bezier(0.16,1,0.3,1)",
-        }}
-      >
-        {Array.from({ length: 64 }).map((_, i) => (
-          <div
-            key={i}
-            className="w-[2.5px] h-[2.5px] rounded-full bg-accent"
-            style={{ opacity: i % 4 === 0 ? 1 : i % 3 === 0 ? 0.55 : 0.2 }}
-          />
-        ))}
-      </div>
-
-      <div className="absolute top-[19%] inset-x-0 pointer-events-none hidden lg:block">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="h-px bg-gradient-to-r from-transparent via-primary/6 to-transparent" />
+      {/* Vertical brand rail — left edge */}
+      <div className="hidden xl:flex absolute left-6 top-0 bottom-0 flex-col items-center justify-between py-32 z-10 pointer-events-none">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-px h-16 bg-gradient-to-b from-transparent to-primary/25" />
+          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary/35 [writing-mode:vertical-rl] rotate-180">
+            Est · MMXXIV
+          </span>
+        </div>
+        <div className="flex flex-col items-center gap-4">
+          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary/35 [writing-mode:vertical-rl] rotate-180">
+            Accra · Ghana
+          </span>
+          <div className="w-px h-16 bg-gradient-to-t from-transparent to-primary/25" />
         </div>
       </div>
 
-      {/* ══ MAIN CONTENT ══ */}
-      <div className="relative flex-1 max-w-7xl mx-auto w-full px-6 pt-32 pb-8 flex flex-col z-10">
-        <div className="flex-1 grid lg:grid-cols-[1.15fr_0.95fr] gap-12 lg:gap-16 items-center">
+      {/* ══ MAIN COMPOSITION — asymmetric editorial grid ══ */}
+      <div className="relative max-w-[1360px] mx-auto w-full px-6 xl:px-20 pt-28 md:pt-32 pb-16 z-10">
 
-          {/* ─── LEFT COLUMN ─── */}
-          <div className="relative z-10 flex flex-col justify-center">
+        {/* Chapter label — sits outside the main column */}
+        <div className="flex items-center gap-5 mb-10 md:mb-14 md:-ml-2">
+          <div className="inline-flex items-center gap-3 px-4 py-1.5 border border-primary/15 rounded-full bg-background/70 backdrop-blur-sm">
+            <span className="relative flex w-2 h-2">
+              <span className="animate-ping absolute h-full w-full rounded-full bg-accent opacity-60" />
+              <span className="relative w-2 h-2 rounded-full bg-accent" />
+            </span>
+            <span className="text-[10px] font-bold tracking-[0.32em] uppercase text-primary/60">
+              Chapter 01 · The Ecosystem
+            </span>
+          </div>
+          <div className="h-px flex-1 max-w-24 bg-gradient-to-r from-primary/25 to-transparent" />
+          <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-primary/30 hidden md:block">
+            {String(active + 1).padStart(2, "0")} / {String(heroSlides.length).padStart(2, "0")}
+          </span>
+        </div>
 
-            {/* Eyebrow Pill */}
-            <div className="animate-fade-up flex items-center gap-4 mb-9">
-              <div className="inline-flex items-center gap-3 px-4 py-1.5 border border-primary/14 rounded-full bg-background/80 backdrop-blur-sm">
-                <span className="relative flex w-2 h-2">
-                  <span className="animate-ping absolute h-full w-full rounded-full bg-accent opacity-60" />
-                  <span className="relative w-2 h-2 rounded-full bg-accent" />
-                </span>
-                <span className="text-[10.5px] font-bold tracking-[0.28em] uppercase text-primary/60">
-                  Tech Hub Africa · Est. 2024
-                </span>
-              </div>
-              <div className="h-px flex-1 max-w-16 bg-gradient-to-r from-primary/20 to-transparent" />
-              <span className="text-[9.5px] font-bold uppercase tracking-[0.35em] text-primary/30 hidden md:block">Accra, Ghana</span>
-            </div>
+        <div className="grid lg:grid-cols-12 gap-y-16 lg:gap-x-8 items-start">
 
-            {/* ── GIANT TYPOGRAPHY HEADLINE ── */}
+          {/* ─── LEFT — EDITORIAL HEADLINE COLUMN ─── */}
+          <div className="lg:col-span-7 relative lg:pt-6 lg:z-20">
+
+            {/* Headline — intentional line breaks, oversized */}
             <h1
-              className="font-display font-black tracking-[-0.04em] text-primary mb-9"
-              style={{ lineHeight: 0.83 }}
+              className="font-display font-black tracking-[-0.045em] text-primary"
+              style={{ lineHeight: 0.82 }}
             >
-              {/* Line 1: African */}
               <span className="block overflow-hidden">
                 <span
                   className="block animate-fade-up"
-                  style={{ fontSize: "clamp(3.4rem,9vw,7.4rem)" }}
+                  style={{ fontSize: "clamp(3rem,8.4vw,7rem)" }}
                 >
-                  African
+                  Where
                 </span>
               </span>
-
-              {/* Line 2: morphing word */}
+              <span className="block overflow-hidden pl-[0.12em]">
+                <span
+                  className="block animate-fade-up stagger-1"
+                  style={{ fontSize: "clamp(3rem,8.4vw,7rem)" }}
+                >
+                  Africa's
+                </span>
+              </span>
               <span
                 className="block overflow-hidden"
-                style={{ fontSize: "clamp(3.4rem,9vw,7.4rem)" }}
+                style={{ fontSize: "clamp(3rem,8.4vw,7rem)" }}
               >
                 <span
                   className="inline-block italic font-light text-accent"
@@ -240,225 +327,271 @@ const Hero = () => {
                     opacity: wordOut ? 0 : 1,
                     transition: wordOut
                       ? "transform 0.3s cubic-bezier(0.4,0,1,1), opacity 0.2s ease"
-                      : "transform 0.42s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease",
+                      : "transform 0.44s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease",
                   }}
                 >
                   {cyclicWords[wordIdx]}
                 </span>
               </span>
-
-              {/* Line 3: Excellence + animated underline */}
-              <span className="block overflow-hidden relative">
+              <span className="block overflow-hidden relative pl-[0.24em]">
                 <span
                   className="block animate-fade-up stagger-2 relative"
-                  style={{ fontSize: "clamp(3.4rem,9vw,7.4rem)" }}
+                  style={{ fontSize: "clamp(3rem,8.4vw,7rem)" }}
                 >
-                  Excellence
+                  future lives.
                   <svg
-                    className="absolute left-0 -bottom-1 w-[105%]"
-                    viewBox="0 0 640 13"
-                    fill="none"
-                    preserveAspectRatio="none"
-                    aria-hidden
+                    className="absolute left-[0.24em] -bottom-1 w-[90%]"
+                    viewBox="0 0 640 13" fill="none" preserveAspectRatio="none" aria-hidden
                   >
                     <path
                       d="M3 8 C90 1, 210 12, 320 6 C430 0, 558 12, 637 7"
-                      stroke="hsl(28,92%,44%)"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                      strokeDasharray="720"
-                      strokeDashoffset="720"
-                      style={{ animation: "draw 1.8s cubic-bezier(0.16,1,0.3,1) 0.9s both" }}
+                      stroke="hsl(28,92%,44%)" strokeWidth="3.5" strokeLinecap="round"
+                      strokeDasharray="720" strokeDashoffset="720"
+                      style={{ animation: "draw 1.8s cubic-bezier(0.16,1,0.3,1) 1s both" }}
                     />
                   </svg>
                 </span>
               </span>
             </h1>
 
-            {/* Description */}
-            <p className="animate-fade-up stagger-2 text-primary/65 max-w-xl text-base md:text-lg leading-[1.85] mb-9 font-light">
-              Bridging talent and opportunity through world-class infrastructure, elite mentorship,
-              and high-impact digital solutions <span className="text-primary font-medium">across the continent.</span>
-            </p>
+            {/* Editorial description */}
+            <div className="animate-fade-up stagger-3 mt-10 md:mt-12 max-w-[520px] flex gap-5">
+              <div className="w-px bg-gradient-to-b from-accent/60 via-primary/20 to-transparent flex-shrink-0" />
+              <p className="text-primary/70 text-[15px] md:text-[17px] leading-[1.9] font-light">
+                A home for builders, mentors and investors — connecting talent
+                to opportunity through world-class infrastructure, elite mentorship
+                and high-impact digital work
+                <span className="text-primary font-medium"> across the continent.</span>
+              </p>
+            </div>
 
             {/* CTAs */}
-            <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-4 mb-12">
+            <div className="animate-fade-up stagger-4 flex flex-wrap items-center gap-5 mt-10">
               <a
                 href="#vision"
-                className="group inline-flex items-center gap-2.5 px-8 py-4 bg-primary text-primary-foreground text-[11px] font-bold uppercase tracking-[0.28em] rounded-full hover:bg-secondary transition-all duration-300 shadow-md hover:shadow-lg"
+                className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-primary text-primary-foreground text-[11px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-secondary transition-all duration-500"
+                style={{ boxShadow: "0 10px 30px -10px hsl(155 61% 15% / 0.4)" }}
               >
-                Our Vision
+                Enter the Hub
                 <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
               <a
                 href="#campus"
-                className="group inline-flex items-center gap-3 text-[11px] font-bold text-primary/70 hover:text-accent transition-colors uppercase tracking-[0.25em] px-4 py-2"
+                className="group inline-flex items-center gap-3 text-[11px] font-bold text-primary/70 hover:text-accent transition-colors uppercase tracking-[0.28em]"
               >
-                <div className="w-10 h-10 rounded-full border border-primary/20 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/5 transition-all">
+                <div className="w-11 h-11 rounded-full border border-primary/25 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/5 transition-all">
                   <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
                 </div>
-                Campus Tours 2026
+                Watch the film
               </a>
             </div>
 
-            {/* COUNTING STATS */}
-            <div className="animate-fade-up stagger-4 grid grid-cols-3 max-w-sm border-t border-primary/10 pt-7">
+            {/* Stats — inline editorial */}
+            <div className="animate-fade-up stagger-4 mt-14 grid grid-cols-3 max-w-[420px] border-t border-primary/12 pt-7">
               <CountStat target={5}  suffix="+" label="Years"     delay={200} divider={false} />
               <CountStat target={20} suffix="+" label="Programs"  delay={400} divider={true}  />
-              <CountStat target={4}  suffix=""  label="Companies" delay={600} divider={true}  />
+              <CountStat target={4}  suffix=""  label="Ventures"  delay={600} divider={true}  />
             </div>
           </div>
 
-          {/* ─── RIGHT COLUMN — Showcase panel ─── */}
-          <div className="relative animate-fade-up stagger-1 self-stretch flex items-center py-8 lg:py-0">
+          {/* ─── RIGHT — MEDIA STAGE ─── */}
+          <div
+            className="lg:col-span-5 relative animate-fade-up stagger-2 lg:-mt-4 lg:-mr-6 xl:-mr-10"
+            style={{ transform: `translateY(${parY * -0.04}px)` }}
+          >
+            {/* Offset editorial frame — breaks grid */}
+            <div className="absolute -top-5 -right-5 -bottom-8 -left-3 border border-accent/25 rounded-[28px] pointer-events-none" />
+            <div className="absolute -top-2 -right-2 -bottom-4 -left-1 border border-primary/8 rounded-[24px] pointer-events-none" />
 
-            {/* Rotated sidebar label */}
-            <div className="hidden xl:block absolute -left-11 top-1/2 -translate-y-1/2 -rotate-90 origin-center whitespace-nowrap">
-              <p className="text-[8px] font-bold uppercase tracking-[0.65em] text-primary/14">
-                Africa · Innovation · Excellence · 2024
-              </p>
-            </div>
-
-            {/* Offset decorative frame */}
-            <div className="absolute -top-3 -right-3 bottom-[-12px] left-[-12px] border border-accent/16 rounded-[24px] pointer-events-none" />
-
-            {/* ── IMAGE PANEL ── */}
+            {/* THE MEDIA STAGE */}
             <div
-              className="relative w-full rounded-[22px] overflow-hidden"
+              className="relative w-full rounded-[22px] overflow-hidden isolate"
               style={{
-                aspectRatio: "3/4",
-                maxHeight: "min(680px, 74vh)",
+                aspectRatio: "4/5",
+                maxHeight: "min(720px, 78vh)",
                 boxShadow:
-                  "0 32px 72px -16px hsl(155 61% 15% / 0.24), 0 8px 24px -8px hsl(155 61% 15% / 0.12)",
+                  "0 40px 90px -20px hsl(155 61% 15% / 0.28)," +
+                  "0 12px 32px -10px hsl(155 61% 15% / 0.16)," +
+                  "0 2px 6px -2px hsl(155 61% 15% / 0.08)",
               }}
             >
-              {/* Slides */}
+              {/* Rotating slides */}
               {heroSlides.map((s, i) => (
                 <div
                   key={s.title}
-                  className={`absolute inset-0 transition-opacity duration-[900ms] ease-in-out ${
-                    i === active ? "opacity-100 z-10" : "opacity-0 z-0"
+                  className={`absolute inset-0 transition-all duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    i === active ? "opacity-100 z-10 scale-100" : "opacity-0 z-0 scale-[1.04]"
                   }`}
                 >
                   <ImagePlaceholder tone={s.tone} label={s.kicker} />
 
-                  {/* Subtle top gradient */}
-                  <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/15 to-transparent pointer-events-none z-[3]" />
+                  {/* Cinematic top vignette */}
+                  <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/25 via-black/5 to-transparent pointer-events-none z-[3]" />
+                  {/* Bottom vignette for caption legibility */}
+                  <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/45 to-transparent pointer-events-none z-[3]" />
 
-                  {/* Slide number — top-left */}
-                  <div className="absolute top-4 left-4 z-[4]">
-                    <span className="text-[9px] font-black uppercase tracking-[0.4em] text-white/50">
-                      {String(i + 1).padStart(2, "0")} / {String(heroSlides.length).padStart(2, "0")}
+                  {/* Slide index — top-left */}
+                  <div className="absolute top-5 left-5 z-[4] flex items-center gap-2">
+                    <span className="w-6 h-px bg-white/60" />
+                    <span className="text-[9.5px] font-black uppercase tracking-[0.42em] text-white/85">
+                      {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
 
-                  {/* Bottom glass info card */}
-                  <div className="absolute inset-x-3 bottom-3 z-[4]">
-                    <div
-                      className="rounded-2xl px-4 py-3.5 border border-white/25"
-                      style={{
-                        background: "hsl(40 33% 94% / 0.88)",
-                        backdropFilter: "blur(20px) saturate(160%)",
-                        WebkitBackdropFilter: "blur(20px) saturate(160%)",
-                      }}
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="min-w-0">
-                          <p className="text-[8.5px] font-bold uppercase tracking-[0.35em] text-accent mb-0.5">{s.tag}</p>
-                          <h3 className="font-display font-extrabold text-[0.95rem] text-primary leading-tight truncate">
-                            {s.title}
-                          </h3>
-                        </div>
-                        <a
-                          href="#"
-                          className="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-secondary transition-colors"
-                        >
-                          <ArrowUpRight className="w-3.5 h-3.5 text-primary-foreground" />
-                        </a>
-                      </div>
-                    </div>
+                  {/* Tag — top-right */}
+                  <div className="absolute top-5 right-6 z-[4]">
+                    <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/70">
+                      {s.tag}
+                    </span>
+                  </div>
+
+                  {/* Editorial caption */}
+                  <div className="absolute inset-x-6 bottom-16 z-[4]">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.42em] text-accent mb-3">
+                      {s.kicker}
+                    </p>
+                    <h3 className="font-display font-black text-white text-[1.9rem] md:text-[2.2rem] leading-[0.95] tracking-[-0.02em] mb-3 max-w-[85%]">
+                      {s.title}
+                    </h3>
+                    <p className="text-white/70 text-[13px] leading-relaxed font-light max-w-[92%] line-clamp-2">
+                      {s.body}
+                    </p>
                   </div>
                 </div>
               ))}
 
-              {/* Vertical slide pills — right inside panel */}
-              <div className="absolute top-1/2 -translate-y-1/2 right-3.5 z-20 flex flex-col gap-1.5">
+              {/* Bottom-right chapter action */}
+              <a
+                href="#"
+                className="absolute bottom-5 right-5 z-20 group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-white/12 backdrop-blur-md border border-white/20 hover:bg-accent hover:border-accent transition-all duration-500"
+              >
+                <span className="text-[9.5px] font-bold uppercase tracking-[0.32em] text-white">
+                  {slide.cta}
+                </span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+
+              {/* Vertical slide indicators */}
+              <div className="absolute top-1/2 -translate-y-1/2 right-4 z-20 flex flex-col gap-2">
                 {heroSlides.map((_, i) => (
                   <button
                     key={i}
-                    onClick={() => setActive(i)}
+                    onClick={() => goto(i)}
                     aria-label={`Slide ${i + 1}`}
-                    className={`w-[2.5px] rounded-full transition-all duration-500 ${
-                      i === active ? "h-9 bg-accent" : "h-3 bg-white/35 hover:bg-white/65"
-                    }`}
-                  />
+                    className="group relative flex items-center justify-end"
+                  >
+                    <span className={`transition-all duration-500 rounded-full ${
+                      i === active
+                        ? "w-[3px] h-10 bg-accent"
+                        : "w-[3px] h-3 bg-white/40 group-hover:bg-white/80"
+                    }`} />
+                  </button>
                 ))}
               </div>
 
-              {/* Slide progress bar — bottom of panel */}
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary/10 z-20">
+              {/* Progress bar */}
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/15 z-20">
                 <div
-                  className="h-full bg-accent transition-none"
+                  className="h-full bg-accent"
                   style={{ width: `${progress}%`, transition: "width 50ms linear" }}
                 />
               </div>
             </div>
 
-            {/* Floating Est. badge */}
+            {/* ── FLOATING ECOSYSTEM CARDS ── */}
+
+            {/* Est. seal — top-left, breaks frame */}
             <div
-              className="hidden md:flex absolute -top-6 -left-6 z-20 w-[72px] h-[72px] rounded-full bg-accent flex-col items-center justify-center animate-float"
-              style={{ boxShadow: "0 6px 22px -4px hsl(28 92% 44% / 0.55)" }}
+              className="hidden md:flex absolute -top-8 -left-8 z-30 w-[92px] h-[92px] rounded-full bg-accent flex-col items-center justify-center animate-float"
+              style={{ boxShadow: "0 14px 34px -6px hsl(28 92% 44% / 0.55), inset 0 0 0 1px hsl(0 0% 100% / 0.15)" }}
             >
-              <p className="text-[7.5px] font-bold uppercase tracking-[0.22em] text-white/65">Est.</p>
-              <p className="font-display font-black text-[1.45rem] text-white leading-none">2024</p>
+              <p className="text-[8px] font-bold uppercase tracking-[0.28em] text-white/70">Est.</p>
+              <p className="font-display font-black text-[1.65rem] text-white leading-none">2024</p>
+              <div className="mt-1 w-6 h-px bg-white/40" />
             </div>
 
-            {/* Live stat card */}
+            {/* Live metric card — bottom-left, extends beyond frame */}
             <div
-              className="hidden md:block absolute -bottom-10 -left-10 z-20 bg-background rounded-[18px] px-5 py-4 animate-float"
+              className="hidden md:block absolute -bottom-12 -left-14 z-30 bg-background rounded-2xl px-5 py-4 animate-float"
               style={{
                 animationDelay: "1.2s",
-                minWidth: "160px",
+                minWidth: "180px",
                 border: "1px solid hsl(155 61% 15% / 0.08)",
-                boxShadow: "0 14px 40px -8px hsl(155 61% 15% / 0.14)",
+                boxShadow:
+                  "0 20px 50px -12px hsl(155 61% 15% / 0.22)," +
+                  "0 4px 12px -4px hsl(155 61% 15% / 0.08)",
               }}
             >
-              <div className="flex items-center gap-2 mb-1.5">
+              <div className="flex items-center gap-2 mb-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                <span className="text-[8.5px] font-bold uppercase tracking-[0.32em] text-accent">
+                <span className="text-[8.5px] font-bold uppercase tracking-[0.34em] text-accent">
                   {slide.stat.v}
                 </span>
               </div>
               <p
                 className="font-display font-black text-primary leading-none tracking-[-0.04em]"
-                style={{ fontSize: "2.85rem" }}
+                style={{ fontSize: "2.7rem" }}
               >
                 {slide.stat.k}
               </p>
+              <div className="mt-3 pt-3 border-t border-primary/8 flex items-center justify-between">
+                <span className="text-[8.5px] font-bold uppercase tracking-[0.3em] text-primary/40">
+                  {slide.kicker}
+                </span>
+                <ArrowUpRight className="w-3 h-3 text-primary/40" />
+              </div>
             </div>
 
-            {/* Corner accent bracket */}
-            <div className="hidden lg:block absolute -bottom-2 -right-2 z-20">
-              <div className="w-6 h-6 border-r border-b border-accent/30" />
+            {/* Ecosystem theme card — top-right, floats over frame */}
+            <div
+              className="hidden lg:flex absolute -top-4 -right-10 z-30 items-center gap-3 px-4 py-3 rounded-full bg-background/85 backdrop-blur-md animate-float"
+              style={{
+                animationDelay: "0.6s",
+                border: "1px solid hsl(155 61% 15% / 0.1)",
+                boxShadow: "0 12px 30px -8px hsl(155 61% 15% / 0.18)",
+              }}
+            >
+              <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                <Sparkles className="w-3.5 h-3.5 text-accent" />
+              </div>
+              <div className="pr-2">
+                <p className="text-[8px] font-bold uppercase tracking-[0.32em] text-primary/40 leading-none mb-1">Now</p>
+                <p className="font-display font-extrabold text-[12px] text-primary leading-none">Cohort 03 · Open</p>
+              </div>
+            </div>
+
+            {/* Corner brackets */}
+            <div className="hidden md:block absolute -bottom-5 -right-5 z-20">
+              <div className="w-8 h-8 border-r-2 border-b-2 border-accent/50 rounded-br-[10px]" />
+            </div>
+            <div className="hidden md:block absolute -top-5 -right-5 z-20">
+              <div className="w-8 h-8 border-r-2 border-t-2 border-primary/20 rounded-tr-[10px]" />
             </div>
           </div>
         </div>
 
-        {/* ── BOTTOM BAR ── */}
-        <div className="mt-7 pt-5 border-t border-primary/7 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
+        {/* ══ BOTTOM META BAR ══ */}
+        <div className="mt-24 md:mt-28 pt-6 border-t border-primary/10 flex items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
             <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-primary/20">
-              Accra, Ghana · West Africa
+            <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-primary/35">
+              Accra · West Africa
             </span>
           </div>
-          <div className="flex flex-col items-center gap-1.5">
-            <span className="text-[8.5px] font-bold uppercase tracking-[0.38em] text-primary/18">Scroll</span>
-            <div className="w-px h-7 bg-gradient-to-b from-primary/16 to-transparent" />
+
+          {/* Chapter dots — narrative anchor */}
+          <div className="hidden md:flex items-center gap-4 text-[9px] font-bold uppercase tracking-[0.4em] text-primary/30">
+            <span className="text-primary/60">01 · Ecosystem</span>
+            <span className="w-6 h-px bg-primary/15" />
+            <span>02 · Programs</span>
+            <span className="w-6 h-px bg-primary/15" />
+            <span>03 · Portfolio</span>
           </div>
-          <span className="text-[9.9px] font-bold uppercase tracking-[0.45em] text-primary/20 hidden md:block">
-            Since 2024 · Building Africa
-          </span>
+
+          <div className="flex flex-col items-center gap-1.5">
+            <span className="text-[8.5px] font-bold uppercase tracking-[0.4em] text-primary/25">Scroll</span>
+            <div className="w-px h-8 bg-gradient-to-b from-primary/25 to-transparent" />
+          </div>
         </div>
       </div>
     </section>
