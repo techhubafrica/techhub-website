@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import Logo from "@/components/Logo";
-import MeetTheTeam from "@/components/MeetTheTeam";
 
 
 /* ============================================================
@@ -1063,7 +1062,6 @@ const Index = () => (
       <Services />
       <ProgramsBand />
       <Portfolio />
-      <MeetTheTeam />
       <Testimonials />
 
       <HubCTA />
