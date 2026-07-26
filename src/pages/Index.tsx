@@ -1061,7 +1061,9 @@ const Index = () => (
       <Services />
       <ProgramsBand />
       <Portfolio />
+      <MeetTheTeam />
       <Testimonials />
+
       <HubCTA />
     </main>
     <Footer />
