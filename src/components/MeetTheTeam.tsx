@@ -54,7 +54,7 @@ const MeetTheTeam = () => (
     <div className="relative mt-14 md:mt-16">
       <div
         className="flex justify-center items-start gap-2 sm:gap-3 md:gap-4 -mx-6"
-        style={{ perspective: "1400px" }}
+        style={{ perspective: "1100px", perspectiveOrigin: "50% 40%" }}
       >
         {team.map((m, i) => (
           <div
@@ -83,7 +83,7 @@ const MeetTheTeam = () => (
     </div>
 
     {/* Caption columns — sit under the arc, like the reference */}
-    <div className="relative max-w-4xl mx-auto px-6 -mt-6 md:-mt-10 z-20">
+    <div className="relative max-w-4xl mx-auto px-6 mt-16 md:mt-20 z-20">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
         {captions.map((c) => (
           <div key={c.title}>
