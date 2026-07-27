@@ -323,7 +323,7 @@ const Hero = () => {
         </div>
 
         {/* ══ BOTTOM BAR — slide switcher + stats ══ */}
-        <div className="mt-16 md:mt-20 pt-6 border-t border-primary-foreground/15 flex flex-col lg:flex-row lg:items-end gap-10 justify-between">
+        <div className="mt-16 md:mt-20 glass-panel rounded-[22px] px-6 md:px-8 py-6 flex flex-col lg:flex-row lg:items-end gap-10 justify-between">
 
           {/* Slide switcher */}
           <div className="flex flex-wrap gap-x-8 gap-y-4">
@@ -353,7 +353,15 @@ const Hero = () => {
 
           {/* Floating glass stat */}
           <div className="flex items-end gap-6">
-            <div className="glass rounded-xl px-6 py-5 backdrop-blur-xl border border-primary-foreground/15 bg-primary-foreground/5 animate-float">
+            <div className="glass-panel sheen rounded-2xl px-6 py-5 animate-float">
+              <p className="font-display font-black text-4xl leading-none text-primary-foreground">
+                {slide.stat.k}
+              </p>
+              <p className="text-[9px] font-bold uppercase tracking-[0.35em] text-accent mt-2">
+                {slide.stat.v}
+              </p>
+            </div>
+
               <p className="font-display font-black text-4xl leading-none text-primary-foreground">
                 {slide.stat.k}
               </p>
