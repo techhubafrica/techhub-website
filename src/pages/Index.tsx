@@ -269,24 +269,37 @@ const Hero = () => {
         </div>
 
         {/* Headline block — keyed for per-slide reveal */}
-        <div key={slide.title} className="max-w-[820px] mt-16 md:mt-20">
+        <div
+          key={slide.title}
+          className="glass-panel noise-soft relative max-w-[880px] mt-16 md:mt-20 rounded-[26px] p-8 md:p-12 animate-fade-up"
+          style={{ transform: `translate(${px * 0.25}px, ${py * 0.25}px)` }}
+        >
+          {/* corner light */}
+          <div className="pointer-events-none absolute -top-px left-10 right-10 h-px bg-gradient-to-r from-transparent via-primary-foreground/60 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 rounded-[26px] bg-[radial-gradient(120%_90%_at_0%_0%,hsl(28_92%_55%/0.14),transparent_60%)]" />
+
           <p className="animate-fade-up text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] text-accent mb-6">
             {slide.kicker}
           </p>
 
           <h1
             className="animate-fade-up stagger-1 font-display font-black tracking-[-0.045em] text-primary-foreground"
-            style={{ lineHeight: 0.88, fontSize: "clamp(2.6rem,7vw,6rem)" }}
+            style={{
+              lineHeight: 0.88,
+              fontSize: "clamp(2.4rem,6.4vw,5.6rem)",
+              textShadow: "0 18px 50px hsl(155 61% 6% / 0.55)",
+            }}
           >
             {slide.title}
           </h1>
 
           <div className="animate-fade-up stagger-2 mt-8 flex gap-5 max-w-[560px]">
             <div className="w-px bg-gradient-to-b from-accent/70 via-primary-foreground/25 to-transparent flex-shrink-0" />
-            <p className="text-primary-foreground/80 text-[15px] md:text-[17px] leading-[1.85] font-light">
+            <p className="text-primary-foreground/85 text-[15px] md:text-[17px] leading-[1.85] font-light">
               {slide.body}
             </p>
           </div>
+
 
           <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-5 mt-10">
             <a
@@ -310,7 +323,7 @@ const Hero = () => {
         </div>
 
         {/* ══ BOTTOM BAR — slide switcher + stats ══ */}
-        <div className="mt-16 md:mt-20 pt-6 border-t border-primary-foreground/15 flex flex-col lg:flex-row lg:items-end gap-10 justify-between">
+        <div className="mt-16 md:mt-20 glass-panel rounded-[22px] px-6 md:px-8 py-6 flex flex-col lg:flex-row lg:items-end gap-10 justify-between">
 
           {/* Slide switcher */}
           <div className="flex flex-wrap gap-x-8 gap-y-4">
@@ -340,7 +353,7 @@ const Hero = () => {
 
           {/* Floating glass stat */}
           <div className="flex items-end gap-6">
-            <div className="glass rounded-xl px-6 py-5 backdrop-blur-xl border border-primary-foreground/15 bg-primary-foreground/5 animate-float">
+            <div className="glass-panel sheen rounded-2xl px-6 py-5 animate-float">
               <p className="font-display font-black text-4xl leading-none text-primary-foreground">
                 {slide.stat.k}
               </p>
@@ -505,7 +518,7 @@ const Initiatives = () => (
           <a
             key={it.title}
             href="#"
-            className="card-lift group relative rounded-lg overflow-hidden bg-background border border-primary/10"
+            className="card-lift sheen group relative rounded-2xl overflow-hidden glass-cream"
           >
             <div className="relative aspect-[4/5] overflow-hidden">
               <ImagePlaceholder tone={it.tone} label={it.title} showReflection={false} />
@@ -579,7 +592,7 @@ const Services = () => (
         {services.map((s, i) => (
           <div
             key={s.title}
-            className="card-lift group relative p-10 lg:p-12 rounded-lg bg-primary/80 overflow-hidden border border-primary-foreground/10"
+            className="card-lift sheen noise-soft group relative p-10 lg:p-12 rounded-2xl glass-panel overflow-hidden"
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_top,hsl(28_92%_55%/0.25),transparent_60%)]" />
             <div className="relative flex items-center justify-between mb-10">
@@ -696,7 +709,7 @@ const Portfolio = () => (
           <a
             key={p.name}
             href="#"
-            className="card-lift group relative rounded-lg bg-primary-foreground/5 border border-primary-foreground/10 p-8 overflow-hidden"
+            className="card-lift sheen group relative rounded-2xl glass-panel p-8 overflow-hidden"
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_100%_0%,hsl(28_92%_55%/0.3),transparent_60%)]" />
             <div className="relative flex items-start justify-between mb-10">
@@ -742,7 +755,7 @@ const Testimonials = () => (
         {testimonials.map((t, i) => (
           <figure
             key={t.name}
-            className={`card-lift relative p-8 rounded-lg bg-background border border-primary/10 flex flex-col ${i === 1 ? "md:translate-y-6" : ""}`}
+            className={`card-lift sheen relative p-8 rounded-2xl glass-cream flex flex-col ${i === 1 ? "md:translate-y-6" : ""}`}
           >
             <div className="absolute -top-4 left-8 w-10 h-10 rounded-full bg-accent flex items-center justify-center shadow-lg">
               <Quote className="w-4 h-4 text-accent-foreground" strokeWidth={2} />
