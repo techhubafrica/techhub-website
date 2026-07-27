@@ -592,7 +592,7 @@ const Services = () => (
         {services.map((s, i) => (
           <div
             key={s.title}
-            className="card-lift group relative p-10 lg:p-12 rounded-lg bg-primary/80 overflow-hidden border border-primary-foreground/10"
+            className="card-lift sheen noise-soft group relative p-10 lg:p-12 rounded-2xl glass-panel overflow-hidden"
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_top,hsl(28_92%_55%/0.25),transparent_60%)]" />
             <div className="relative flex items-center justify-between mb-10">
