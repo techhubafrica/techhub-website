@@ -29,71 +29,100 @@ const Header = () => {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-background/90 backdrop-blur-md border-b border-primary/10"
-          : "bg-background/60 backdrop-blur-sm"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 h-16 sm:h-20 flex items-center justify-between">
-        <Link to="/" className="flex items-center h-full py-1">
-          <Logo size="md" className="h-full py-1" />
-        </Link>
+    <header className="fixed top-0 inset-x-0 z-50 pointer-events-none">
+      <div
+        className={`mx-auto w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          scrolled ? "max-w-6xl px-4 pt-3" : "max-w-[1500px] px-6 pt-5"
+        }`}
+      >
+        <div
+          className={`pointer-events-auto relative overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            scrolled
+              ? "glass-nav rounded-full px-4 sm:px-6 py-2"
+              : "rounded-full px-4 sm:px-6 py-2 border border-primary-foreground/10 bg-primary-foreground/[0.04] backdrop-blur-[6px]"
+          }`}
+        >
+          {/* top light edge */}
+          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-primary-foreground/40 to-transparent opacity-60 pointer-events-none" />
 
-        <nav className="hidden lg:flex items-center gap-10 text-[11px] font-bold uppercase tracking-[0.25em] text-primary/75">
-          {navLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="relative hover:text-accent transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full"
+          <div className="flex items-center justify-between gap-4">
+            <Link to="/" className="flex items-center shrink-0 group">
+              <Logo
+                size="sm"
+                onDark={!scrolled}
+                className={`transition-all duration-500 ${
+                  scrolled ? "h-9 sm:h-10" : "h-10 sm:h-11"
+                } group-hover:scale-[1.03]`}
+              />
+            </Link>
+
+            <nav
+              className={`hidden lg:flex items-center gap-1 text-[10.5px] font-bold uppercase tracking-[0.22em] transition-colors duration-500 ${
+                scrolled ? "text-primary/70" : "text-primary-foreground/75"
+              }`}
             >
-              {l.label}
-            </a>
-          ))}
-        </nav>
+              {navLinks.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className={`relative px-4 py-2 rounded-full transition-all duration-300 hover:text-accent ${
+                    scrolled ? "hover:bg-primary/[0.06]" : "hover:bg-primary-foreground/10"
+                  }`}
+                >
+                  {l.label}
+                </a>
+              ))}
+            </nav>
 
-        <div className="flex items-center gap-3">
-          <a
-            href="#hub"
-            className="btn-magnetic hidden sm:inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground rounded-full text-[11px] font-bold uppercase tracking-[0.25em] hover:bg-primary transition-colors duration-300"
-          >
-            Visit The Hub <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
-          <button
-            className="lg:hidden w-10 h-10 flex items-center justify-center text-primary"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-          >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            <div className="flex items-center gap-2">
+              <a
+                href="#hub"
+                className="btn-magnetic hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-accent-foreground rounded-full text-[10px] font-bold uppercase tracking-[0.22em] hover:brightness-110 transition-all duration-300"
+                style={{ boxShadow: "0 10px 26px -12px hsl(28 92% 44% / 0.7)" }}
+              >
+                Visit The Hub <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+              <button
+                className={`lg:hidden w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
+                  scrolled ? "text-primary hover:bg-primary/[0.06]" : "text-primary-foreground hover:bg-primary-foreground/10"
+                }`}
+                onClick={() => setOpen(!open)}
+                aria-label="Toggle menu"
+              >
+                {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
+          </div>
+
+          {/* Scroll progress */}
+          <div
+            className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-accent/50 to-accent transition-[width] duration-150 rounded-full"
+            style={{ width: `${progress}%` }}
+          />
         </div>
-      </div>
 
-      {/* Scroll progress */}
-      <div className="absolute bottom-0 left-0 h-px bg-accent transition-[width] duration-150" style={{ width: `${progress}%` }} />
-
-      {open && (
-        <div className="lg:hidden bg-background border-t border-primary/10 px-6 py-6 flex flex-col gap-4">
-          {navLinks.map((l) => (
+        {open && (
+          <div className="pointer-events-auto lg:hidden mt-2 glass-nav rounded-3xl px-6 py-6 flex flex-col gap-3 animate-fade-up">
+            {navLinks.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="text-sm font-bold uppercase tracking-[0.2em] text-primary/80 hover:text-accent transition-colors"
+              >
+                {l.label}
+              </a>
+            ))}
             <a
-              key={l.href}
-              href={l.href}
+              href="#hub"
               onClick={() => setOpen(false)}
-              className="text-base font-medium uppercase tracking-widest text-primary/80"
+              className="mt-2 inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-accent-foreground rounded-full text-[10px] font-bold uppercase tracking-[0.22em]"
             >
-              {l.label}
+              Visit The Hub <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
-          ))}
-          <a
-            href="#hub"
-            onClick={() => setOpen(false)}
-            className="mt-2 inline-flex items-center justify-center px-6 py-3 bg-accent text-accent-foreground rounded-full text-xs font-bold uppercase tracking-widest"
-          >
-            Visit The Hub
-          </a>
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </header>
   );
 };
