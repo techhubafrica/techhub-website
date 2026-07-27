@@ -1,10 +1,11 @@
 import React from "react";
-import userLogo from "@/assets/th-logo-transparent.png";
+import logoDark from "@/assets/th-logo-transparent.png";
+import logoLight from "@/assets/th-logo-light.png";
 
 interface LogoProps {
   className?: string;
   size?: "sm" | "md" | "lg" | "xl" | "hero";
-  /** Renders the mark for use on dark surfaces (adds a soft light halo). */
+  /** Renders the light monogram variant for dark / photographic surfaces. */
   onDark?: boolean;
 }
 
@@ -19,13 +20,13 @@ export const Logo: React.FC<LogoProps> = ({ size = "md", className = "", onDark 
 
   return (
     <img
-      src={userLogo}
+      src={onDark ? logoLight : logoDark}
       alt="Tech Hub Africa"
       draggable={false}
       className={`w-auto object-contain max-h-full select-none ${sizeClasses} ${className}`}
       style={{
         filter: onDark
-          ? "drop-shadow(0 0 10px hsl(0 0% 100% / 0.35)) drop-shadow(0 2px 6px hsl(155 61% 6% / 0.5))"
+          ? "drop-shadow(0 2px 10px hsl(155 61% 6% / 0.55))"
           : "drop-shadow(0 1px 1px hsl(155 61% 15% / 0.12))",
       }}
     />
