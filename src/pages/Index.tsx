@@ -518,7 +518,7 @@ const Initiatives = () => (
           <a
             key={it.title}
             href="#"
-            className="card-lift group relative rounded-lg overflow-hidden bg-background border border-primary/10"
+            className="card-lift sheen group relative rounded-2xl overflow-hidden glass-cream"
           >
             <div className="relative aspect-[4/5] overflow-hidden">
               <ImagePlaceholder tone={it.tone} label={it.title} showReflection={false} />
