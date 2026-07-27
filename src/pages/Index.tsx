@@ -61,38 +61,6 @@ const heroSlides = [
 ];
 
 
-/* -- Counting stat sub-component -- */
-const CountStat = ({
-  target, suffix, label, delay, divider,
-}: { target: number; suffix: string; label: string; delay: number; divider: boolean }) => {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      let start = 0;
-      const duration = 1600;
-      const step = target / (duration / 16);
-      const timer = setInterval(() => {
-        start += step;
-        if (start >= target) { setCount(target); clearInterval(timer); }
-        else setCount(Math.floor(start));
-      }, 16);
-      return () => clearInterval(timer);
-    }, delay);
-    return () => clearTimeout(timeout);
-  }, [target, delay]);
-  return (
-    <div className={`flex-1 ${divider ? "pl-5 border-l border-primary/10" : "pr-5"}`}>
-      <p className="font-display font-black text-primary leading-none tracking-[-0.03em]" style={{ fontSize: "clamp(2rem,4vw,2.8rem)" }}>
-        {count}{suffix}
-      </p>
-      <p className="text-[9.5px] font-bold uppercase tracking-[0.3em] text-primary/30 mt-1.5">{label}</p>
-    </div>
-  );
-};
-
-/* -- Morphing words -- */
-const cyclicWords = ["Tech", "Digital", "Future", "Hub"];
-
 /* ============================================================
    SIGNATURE ELEMENT — "The Constellation"
    A subtle network of connected nodes representing the
