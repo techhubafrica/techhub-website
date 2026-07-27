@@ -361,14 +361,6 @@ const Hero = () => {
                 {slide.stat.v}
               </p>
             </div>
-
-              <p className="font-display font-black text-4xl leading-none text-primary-foreground">
-                {slide.stat.k}
-              </p>
-              <p className="text-[9px] font-bold uppercase tracking-[0.35em] text-accent mt-2">
-                {slide.stat.v}
-              </p>
-            </div>
             <div className="hidden sm:flex flex-col items-center gap-1.5 pb-2">
               <span className="text-[8.5px] font-bold uppercase tracking-[0.4em] text-primary-foreground/40">Scroll</span>
               <div className="w-px h-8 bg-gradient-to-b from-primary-foreground/40 to-transparent" />
