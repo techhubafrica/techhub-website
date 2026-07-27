@@ -7,10 +7,15 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import Logo from "@/components/Logo";
+import heroImg1 from "@/assets/community-gathering.jpg";
+import heroImg2 from "@/assets/impact-hero-bg.jpg";
+import heroImg3 from "@/assets/our-story-bg.jpg";
+import heroImg4 from "@/assets/hands-planting.jpg";
 
 
 /* ============================================================
-   HERO — Netflix-style rotating showcase
+   HERO — full-bleed cinematic slideshow
+   Swap the `image` fields below with your own photography.
    ============================================================ */
 const heroSlides = [
   {
@@ -19,16 +24,18 @@ const heroSlides = [
     title: "Campus Tours 2026",
     body: "A continent-wide movement bringing hackathons, AI workshops, and founder circles into every major university in Ghana.",
     cta: "Explore the Tour",
-    tone: "deep" as const,
+    href: "#campus",
+    image: heroImg1,
     stat: { k: "12", v: "Cities" },
   },
   {
     tag: "Now Building",
-    kicker: "THE HUB",
+    kicker: "The Hub",
     title: "Africa's Innovation Home",
     body: "A physical and digital home for builders, mentors and investors shaping the continent's next decade of technology.",
     cta: "Step Inside",
-    tone: "forest" as const,
+    href: "#vision",
+    image: heroImg2,
     stat: { k: "300+", v: "Innovators" },
   },
   {
@@ -37,7 +44,8 @@ const heroSlides = [
     title: "Seventy-Two Hours of Impact",
     body: "Elite teams from across Africa converge to build production-grade solutions in three sleepless days.",
     cta: "See the Build",
-    tone: "charcoal" as const,
+    href: "#events",
+    image: heroImg3,
     stat: { k: "72h", v: "Non-stop" },
   },
   {
@@ -46,10 +54,12 @@ const heroSlides = [
     title: "Innovators & Entrepreneurs",
     body: "The definitive annual list of the founders, engineers, and creators redefining African technology.",
     cta: "Read the Issue",
-    tone: "amber" as const,
+    href: "#portfolio",
+    image: heroImg4,
     stat: { k: "100", v: "Leaders" },
   },
 ];
+
 
 /* -- Counting stat sub-component -- */
 const CountStat = ({
