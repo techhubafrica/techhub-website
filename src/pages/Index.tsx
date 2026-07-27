@@ -755,7 +755,7 @@ const Testimonials = () => (
         {testimonials.map((t, i) => (
           <figure
             key={t.name}
-            className={`card-lift relative p-8 rounded-lg bg-background border border-primary/10 flex flex-col ${i === 1 ? "md:translate-y-6" : ""}`}
+            className={`card-lift sheen relative p-8 rounded-2xl glass-cream flex flex-col ${i === 1 ? "md:translate-y-6" : ""}`}
           >
             <div className="absolute -top-4 left-8 w-10 h-10 rounded-full bg-accent flex items-center justify-center shadow-lg">
               <Quote className="w-4 h-4 text-accent-foreground" strokeWidth={2} />
