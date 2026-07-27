@@ -269,24 +269,37 @@ const Hero = () => {
         </div>
 
         {/* Headline block — keyed for per-slide reveal */}
-        <div key={slide.title} className="max-w-[820px] mt-16 md:mt-20">
+        <div
+          key={slide.title}
+          className="glass-panel noise-soft relative max-w-[880px] mt-16 md:mt-20 rounded-[26px] p-8 md:p-12 animate-fade-up"
+          style={{ transform: `translate(${px * 0.25}px, ${py * 0.25}px)` }}
+        >
+          {/* corner light */}
+          <div className="pointer-events-none absolute -top-px left-10 right-10 h-px bg-gradient-to-r from-transparent via-primary-foreground/60 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 rounded-[26px] bg-[radial-gradient(120%_90%_at_0%_0%,hsl(28_92%_55%/0.14),transparent_60%)]" />
+
           <p className="animate-fade-up text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] text-accent mb-6">
             {slide.kicker}
           </p>
 
           <h1
             className="animate-fade-up stagger-1 font-display font-black tracking-[-0.045em] text-primary-foreground"
-            style={{ lineHeight: 0.88, fontSize: "clamp(2.6rem,7vw,6rem)" }}
+            style={{
+              lineHeight: 0.88,
+              fontSize: "clamp(2.4rem,6.4vw,5.6rem)",
+              textShadow: "0 18px 50px hsl(155 61% 6% / 0.55)",
+            }}
           >
             {slide.title}
           </h1>
 
           <div className="animate-fade-up stagger-2 mt-8 flex gap-5 max-w-[560px]">
             <div className="w-px bg-gradient-to-b from-accent/70 via-primary-foreground/25 to-transparent flex-shrink-0" />
-            <p className="text-primary-foreground/80 text-[15px] md:text-[17px] leading-[1.85] font-light">
+            <p className="text-primary-foreground/85 text-[15px] md:text-[17px] leading-[1.85] font-light">
               {slide.body}
             </p>
           </div>
+
 
           <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-5 mt-10">
             <a
