@@ -709,7 +709,7 @@ const Portfolio = () => (
           <a
             key={p.name}
             href="#"
-            className="card-lift group relative rounded-lg bg-primary-foreground/5 border border-primary-foreground/10 p-8 overflow-hidden"
+            className="card-lift sheen group relative rounded-2xl glass-panel p-8 overflow-hidden"
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_100%_0%,hsl(28_92%_55%/0.3),transparent_60%)]" />
             <div className="relative flex items-start justify-between mb-10">
