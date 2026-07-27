@@ -1,12 +1,14 @@
 import React from "react";
-import userLogo from "@/assets/th-user-logo.png";
+import userLogo from "@/assets/th-logo-transparent.png";
 
 interface LogoProps {
   className?: string;
   size?: "sm" | "md" | "lg" | "xl" | "hero";
+  /** Renders the mark for use on dark surfaces (adds a soft light halo). */
+  onDark?: boolean;
 }
 
-export const Logo: React.FC<LogoProps> = ({ size = "md", className = "" }) => {
+export const Logo: React.FC<LogoProps> = ({ size = "md", className = "", onDark = false }) => {
   const sizeClasses = {
     sm: "h-8",
     md: "h-12 sm:h-14 md:h-16",
@@ -19,7 +21,13 @@ export const Logo: React.FC<LogoProps> = ({ size = "md", className = "" }) => {
     <img
       src={userLogo}
       alt="Tech Hub Africa"
-      className={`w-auto object-contain max-h-full ${sizeClasses} ${className}`}
+      draggable={false}
+      className={`w-auto object-contain max-h-full select-none ${sizeClasses} ${className}`}
+      style={{
+        filter: onDark
+          ? "drop-shadow(0 0 10px hsl(0 0% 100% / 0.35)) drop-shadow(0 2px 6px hsl(155 61% 6% / 0.5))"
+          : "drop-shadow(0 1px 1px hsl(155 61% 15% / 0.12))",
+      }}
     />
   );
 };
