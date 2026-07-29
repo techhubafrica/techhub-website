@@ -119,43 +119,33 @@
 
   /* Glass surface — using original forest/cream palette */
   .glass {
-    background: hsl(155 61% 15% / 0.08);
-    backdrop-filter: blur(20px) saturate(140%);
-    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    background: hsl(155 61% 15% / 0.85);
     border: 1px solid hsl(155 61% 15% / 0.12);
   }
   .glass-light {
-    background: hsl(0 0% 100% / 0.75);
-    backdrop-filter: blur(18px) saturate(160%);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    background: hsl(0 0% 100% / 0.95);
     border: 1px solid hsl(155 30% 15% / 0.1);
   }
 
   /* Frosted panel on dark imagery */
   .glass-panel {
-    background: linear-gradient(140deg, hsl(0 0% 100% / 0.10), hsl(0 0% 100% / 0.03));
-    backdrop-filter: blur(22px) saturate(150%);
-    -webkit-backdrop-filter: blur(22px) saturate(150%);
-    border: 1px solid hsl(0 0% 100% / 0.14);
-    box-shadow: 0 24px 70px -28px hsl(155 61% 6% / 0.75), inset 0 1px 0 hsl(0 0% 100% / 0.16);
+    background: hsl(155 61% 10% / 0.85);
+    border: 1px solid hsl(0 0% 100% / 0.10);
+    box-shadow: 0 24px 70px -28px hsl(155 61% 6% / 0.5);
   }
 
   /* Frosted panel on cream surfaces */
   .glass-cream {
-    background: linear-gradient(140deg, hsl(0 0% 100% / 0.82), hsl(40 33% 94% / 0.5));
-    backdrop-filter: blur(20px) saturate(150%);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    background: hsl(0 0% 100% / 0.95);
     border: 1px solid hsl(0 0% 100% / 0.7);
-    box-shadow: 0 20px 50px -26px hsl(155 61% 15% / 0.35), inset 0 1px 0 hsl(0 0% 100% / 0.9);
+    box-shadow: 0 20px 50px -26px hsl(155 61% 15% / 0.2);
   }
 
   /* Floating navigation shell */
   .glass-nav {
-    background: linear-gradient(180deg, hsl(40 33% 96% / 0.72), hsl(40 33% 92% / 0.55));
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    background: hsl(40 33% 96% / 0.98);
     border: 1px solid hsl(0 0% 100% / 0.6);
-    box-shadow: 0 18px 50px -22px hsl(155 61% 12% / 0.45), inset 0 1px 0 hsl(0 0% 100% / 0.85);
+    box-shadow: 0 18px 50px -22px hsl(155 61% 12% / 0.3);
   }
 
   /* Hairline top-light edge used on premium cards */
@@ -284,6 +274,11 @@
     to   { stroke-dashoffset: 0; }
   }
 
+  @keyframes draw-arc {
+    from { stroke-dashoffset: 4800; }
+    to   { stroke-dashoffset: 0; }
+  }
+
   @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
@@ -337,6 +332,11 @@
     to { opacity: 1; transform: scale(1); }
   }
   .animate-cross-fade { animation: cross-fade-in 1.2s cubic-bezier(0.16,1,0.3,1) both; }
+
+  @keyframes scale-in-modal {
+    from { opacity: 0; transform: scale(0.92) translateY(12px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
 
   /* Staggered reveal helpers */
   .stagger-1 { animation-delay: 0.08s; }

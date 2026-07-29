@@ -1,29 +1,55 @@
+import { Link } from "react-router-dom";
 import { Linkedin, Instagram, Twitter, Youtube, Facebook } from "lucide-react";
 import Logo from "@/components/Logo";
 
 const columns = [
   {
     title: "Who We Are",
-    links: ["About Us", "Team", "Services", "FAQs", "Testimonials"],
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Meet The Team", href: "/about#team" },
+      { label: "Services", href: "/services" },
+      { label: "Venture Portfolio", href: "/portfolio" },
+      { label: "The Hub Campus", href: "/thehub" },
+    ],
   },
   {
     title: "Quick Links",
-    links: ["Tech Hub Academy", "Threat Lock", "Gallery", "Privacy Policy", "Terms & Conditions"],
+    links: [
+      { label: "Events & Meetups", href: "/events" },
+      { label: "Careers & Jobs", href: "/careers" },
+      { label: "Mentorship Program", href: "/mentorship" },
+      { label: "CSR & Sponsorships", href: "/csr" },
+      { label: "Media & TechTalks", href: "/media" },
+    ],
   },
   {
-    title: "Programs",
-    links: ["Upcoming Events", "Sponsorships", "Career Services", "The Hub", "Speaking Engagements"],
+    title: "Ecosystem Programs",
+    links: [
+      { label: "Tech Guru Meetup 2026", href: "/events" },
+      { label: "Tech4All Campus Tour", href: "/services" },
+      { label: "72-Hour Hackathon", href: "/events" },
+      { label: "Threat Lock Auditing", href: "/services" },
+      { label: "Speaking Engagements", href: "/media" },
+    ],
   },
 ];
 
 const Footer = () => (
   <footer className="bg-primary text-primary-foreground pt-20">
     <div className="max-w-7xl mx-auto px-6 mb-12">
-      <div className="inline-block">
-        <Logo size="lg" onDark />
+      <div className="inline-block mb-2">
+        <div
+          className="inline-flex items-center justify-center px-6 py-4 rounded-2xl border border-white/30 backdrop-blur-md"
+          style={{ background: "rgba(255,255,255,0.18)" }}
+        >
+          <Link to="/">
+            <Logo size="lg" onDark={false} />
+          </Link>
+        </div>
       </div>
-
     </div>
+
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 pb-20">
       {columns.map((col) => (
         <div key={col.title}>
@@ -32,10 +58,10 @@ const Footer = () => (
           </h4>
           <ul className="space-y-4 text-sm font-medium text-primary-foreground/70">
             {col.links.map((link) => (
-              <li key={link}>
-                <a href="#" className="hover:text-accent transition-colors">
-                  {link}
-                </a>
+              <li key={link.label}>
+                <Link to={link.href} className="hover:text-accent transition-colors">
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>

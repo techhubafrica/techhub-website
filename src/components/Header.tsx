@@ -5,10 +5,13 @@ import Logo from "@/components/Logo";
 
 const navLinks = [
   { label: "About", href: "/about" },
-  { label: "Services", href: "#services" },
-  { label: "Programs", href: "#programs" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Events", href: "#events" },
+  { label: "Services", href: "/services" },
+  { label: "Events", href: "/events" },
+  { label: "Careers", href: "/careers" },
+  { label: "Mentorship", href: "/mentorship" },
+  { label: "CSR", href: "/csr" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Media", href: "/media" },
 ];
 
 const Header = () => {
@@ -38,8 +41,8 @@ const Header = () => {
         <div
           className={`pointer-events-auto relative overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             scrolled
-              ? "glass-nav rounded-full px-4 sm:px-6 py-2"
-              : "rounded-full px-4 sm:px-6 py-2 border border-primary-foreground/10 bg-primary-foreground/[0.04] backdrop-blur-[6px]"
+              ? "bg-white/80 backdrop-blur-md border border-white/60 shadow-md rounded-full px-4 sm:px-6 py-2"
+              : "rounded-full px-4 sm:px-6 py-2 border border-white/20 bg-white/10 backdrop-blur-md"
           }`}
         >
           {/* top light edge */}
@@ -49,7 +52,7 @@ const Header = () => {
             <Link to="/" className="flex items-center shrink-0 group">
               <Logo
                 size="sm"
-                onDark={!scrolled}
+                onDark={false}
                 className={`transition-all duration-500 ${
                   scrolled ? "h-9 sm:h-10" : "h-10 sm:h-11"
                 } group-hover:scale-[1.03]`}
@@ -58,33 +61,33 @@ const Header = () => {
 
             <nav
               className={`hidden lg:flex items-center gap-1 text-[10.5px] font-bold uppercase tracking-[0.22em] transition-colors duration-500 ${
-                scrolled ? "text-primary/70" : "text-primary-foreground/75"
+                scrolled ? "text-primary/70" : "text-white/80"
               }`}
             >
               {navLinks.map((l) => (
-                <a
+                <Link
                   key={l.href}
-                  href={l.href}
-                  className={`relative px-4 py-2 rounded-full transition-all duration-300 hover:text-accent ${
-                    scrolled ? "hover:bg-primary/[0.06]" : "hover:bg-primary-foreground/10"
+                  to={l.href}
+                  className={`relative px-3.5 py-2 rounded-full transition-all duration-300 hover:text-accent ${
+                    scrolled ? "hover:bg-primary/[0.06]" : "hover:bg-white/15"
                   }`}
                 >
                   {l.label}
-                </a>
+                </Link>
               ))}
             </nav>
 
             <div className="flex items-center gap-2">
-              <a
-                href="#hub"
+              <Link
+                to="/thehub"
                 className="btn-magnetic hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-accent-foreground rounded-full text-[10px] font-bold uppercase tracking-[0.22em] hover:brightness-110 transition-all duration-300"
                 style={{ boxShadow: "0 10px 26px -12px hsl(28 92% 44% / 0.7)" }}
               >
                 Visit The Hub <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
+              </Link>
               <button
                 className={`lg:hidden w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
-                  scrolled ? "text-primary hover:bg-primary/[0.06]" : "text-primary-foreground hover:bg-primary-foreground/10"
+                  scrolled ? "text-primary/70 hover:bg-primary/[0.06]" : "text-white/80 hover:bg-white/15"
                 }`}
                 onClick={() => setOpen(!open)}
                 aria-label="Toggle menu"
@@ -102,24 +105,24 @@ const Header = () => {
         </div>
 
         {open && (
-          <div className="pointer-events-auto lg:hidden mt-2 glass-nav rounded-3xl px-6 py-6 flex flex-col gap-3 animate-fade-up">
+          <div className="pointer-events-auto lg:hidden mt-2 bg-white/80 backdrop-blur-md border border-white/40 shadow-lg rounded-3xl px-6 py-6 flex flex-col gap-3 animate-fade-up">
             {navLinks.map((l) => (
-              <a
+              <Link
                 key={l.href}
-                href={l.href}
+                to={l.href}
                 onClick={() => setOpen(false)}
                 className="text-sm font-bold uppercase tracking-[0.2em] text-primary/80 hover:text-accent transition-colors"
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#hub"
+            <Link
+              to="/thehub"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-accent-foreground rounded-full text-[10px] font-bold uppercase tracking-[0.22em]"
+              className="mt-2 text-center py-3 rounded-full bg-accent text-accent-foreground font-bold text-xs uppercase tracking-[0.2em]"
             >
-              Visit The Hub <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
+              Visit The Hub
+            </Link>
           </div>
         )}
       </div>

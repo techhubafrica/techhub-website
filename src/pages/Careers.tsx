@@ -1,0 +1,146 @@
+import { useState } from "react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import PageHero from "@/components/PageHero";
+import { MapPin, ArrowRight, CheckCircle2, X } from "lucide-react";
+
+const jobs = [
+  { id: "swe", num: "01", title: "Senior Full-Stack Engineer", dept: "Engineering", location: "Accra / Hybrid", type: "Full-Time" },
+  { id: "devops", num: "02", title: "Cloud & Security Engineer", dept: "Infrastructure", location: "Accra / Remote", type: "Full-Time" },
+  { id: "community", num: "03", title: "Campus Programs Coordinator", dept: "Community", location: "Accra / Regional", type: "Full-Time" },
+  { id: "intern-swe", num: "04", title: "Software Engineering Intern — 2026 Cohort", dept: "Engineering", location: "Accra", type: "Internship" },
+  { id: "intern-design", num: "05", title: "Product Design Intern", dept: "Design", location: "Accra", type: "Internship" },
+];
+
+const perks = [
+  { label: "Flexible Work", val: "Remote-first culture with optional East Legon desk." },
+  { label: "Mentorship", val: "1-on-1 coaching with senior engineers and industry leaders." },
+  { label: "Growth", val: "Fast-track promotions based on impact, not tenure." },
+  { label: "Community", val: "Access to THA events, meetups, and alumni network." },
+];
+
+const Careers = () => {
+  const [filter, setFilter] = useState<"all" | "Full-Time" | "Internship">("all");
+  const [applyOpen, setApplyOpen] = useState(false);
+  const [selectedRole, setSelectedRole] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const filteredJobs = filter === "all" ? jobs : jobs.filter((j) => j.type === filter);
+
+  const handleApply = (t: string) => { setSelectedRole(t); setApplyOpen(true); setSubmitted(false); };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); setSubmitted(true);
+    setTimeout(() => { setApplyOpen(false); setSubmitted(false); }, 2500);
+  };
+
+  return (
+    <>
+      <Header />
+      <PageHero
+        tag="Join Our Team"
+        title={<>Build the future of<br />African <span className="italic font-light text-accent">technology.</span></>}
+        body="We're looking for engineers, designers, community leaders, and operators who are committed to transforming Africa's digital landscape."
+        ghost="CAREERS"
+        stats={[
+          { val: "5+", label: "Open Roles" },
+          { val: "100%", label: "Mission Driven" },
+          { val: "Accra", label: "Headquarters" },
+          { val: "2026", label: "Hiring Now" },
+        ]}
+      />
+
+      <main className="bg-background">
+        {/* ══ PERKS STRIP ══ */}
+        <section className="relative bg-primary px-6 py-14 overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }} />
+          <div className="relative max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+            {perks.map((p) => (
+              <div key={p.label} className="border-l-2 border-accent/30 pl-5">
+                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-accent mb-1.5">{p.label}</p>
+                <p className="text-primary-foreground/55 text-xs leading-relaxed">{p.val}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ══ JOB LISTINGS ══ */}
+        <section className="px-6 py-24 md:py-32 max-w-7xl mx-auto">
+          {/* Filters */}
+          <div className="flex items-center gap-8 mb-12 border-b border-primary/8 pb-0">
+            {(["all", "Full-Time", "Internship"] as const).map((f) => (
+              <button key={f} onClick={() => setFilter(f)}
+                className={`pb-4 text-xs font-black uppercase tracking-[0.22em] border-b-2 -mb-px transition-all duration-300 ${filter === f ? "border-accent text-accent" : "border-transparent text-primary/40 hover:text-primary/70"}`}
+              >
+                {f === "all" ? `All Openings (${jobs.length})` : f === "Full-Time" ? "Full-Time Roles" : "Internship Cohort"}
+              </button>
+            ))}
+          </div>
+
+          <div className="space-y-4">
+            {filteredJobs.map((j) => (
+              <div key={j.id} className="group relative rounded-2xl border border-primary/8 bg-secondary/30 hover:border-primary/20 transition-all duration-400 overflow-hidden grid grid-cols-1 md:grid-cols-12">
+                <div className="md:col-span-1 flex items-center justify-center px-6 py-6 md:py-10 border-b md:border-b-0 md:border-r border-primary/8">
+                  <span className="font-display font-black text-3xl leading-none text-primary/8 select-none">{j.num}</span>
+                </div>
+                <div className="md:col-span-8 p-6 md:p-8">
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${j.type === "Full-Time" ? "text-accent bg-accent/10 border-accent/20" : "text-primary/60 bg-primary/5 border-primary/12"}`}>{j.dept}</span>
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-primary/40">• {j.type}</span>
+                  </div>
+                  <h3 className="font-display font-extrabold text-primary text-xl md:text-2xl tracking-tight">{j.title}</h3>
+                  <p className="text-xs font-semibold text-primary/50 flex items-center gap-1.5 mt-2">
+                    <MapPin className="w-3 h-3 text-accent" />{j.location}
+                  </p>
+                </div>
+                <div className="md:col-span-3 flex items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-primary/8">
+                  <button onClick={() => handleApply(j.title)}
+                    className="w-full py-3 px-5 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-all text-center"
+                  >Apply Now</button>
+                </div>
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      {/* Modal */}
+      {applyOpen && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-primary/85" style={{ backdropFilter: "blur(12px)" }} onClick={() => setApplyOpen(false)} />
+          <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl" style={{ animation: "scale-in-modal 0.4s cubic-bezier(0.16,1,0.3,1) forwards" }}>
+            <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
+              <button onClick={() => setApplyOpen(false)} className="absolute top-5 right-5 w-8 h-8 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground transition-all"><X className="w-3.5 h-3.5" /></button>
+              <p className="text-[9px] font-black uppercase tracking-[0.35em] text-accent mb-2">Application</p>
+              <h3 className="font-display font-extrabold text-primary-foreground text-2xl leading-tight">{selectedRole}</h3>
+            </div>
+            <div className="bg-background px-8 py-8">
+              {submitted ? (
+                <div className="text-center py-8">
+                  <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent"><CheckCircle2 className="w-7 h-7" /></div>
+                  <h4 className="font-display font-extrabold text-xl text-primary">Application Submitted!</h4>
+                  <p className="mt-2 text-sm text-primary/55">Our talent team will review and respond within 5 business days.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {["Full Name", "Email Address", "LinkedIn / Portfolio URL"].map((label) => (
+                    <div key={label}>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">{label}</label>
+                      <input required type={label.includes("Email") ? "email" : label.includes("URL") ? "url" : "text"} className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors" />
+                    </div>
+                  ))}
+                  <button type="submit" className="w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all">Submit Application</button>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <Footer />
+    </>
+  );
+};
+
+export default Careers;
