@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { Calendar, MapPin, Users, ArrowRight, CheckCircle2, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { heroAudience, heroCelebration, meetup2026Flyer, hackathonFlyer, campusTourFlyer, networking } from "@/assets/photos";
 
 const eventsList = [
   {
@@ -17,6 +18,7 @@ const eventsList = [
     capacity: "2,500+ Attendees",
     status: "Registration Open",
     featured: true,
+    image: meetup2026Flyer,
   },
   {
     num: "02",
@@ -30,6 +32,7 @@ const eventsList = [
     capacity: "5,000+ Students",
     status: "Active Tour",
     featured: false,
+    image: campusTourFlyer,
   },
   {
     num: "03",
@@ -43,6 +46,7 @@ const eventsList = [
     capacity: "50 Teams",
     status: "Applications Open",
     featured: false,
+    image: hackathonFlyer,
   },
 ];
 
@@ -87,6 +91,12 @@ const Events = () => {
         <section className="relative overflow-hidden bg-primary">
           {/* Photo-ready stage backdrop */}
           <div className="absolute inset-0">
+            <img
+              src={heroAudience}
+              alt="Attendees at the Tech Guru Meetup in Accra"
+              className="absolute inset-0 w-full h-full object-cover opacity-40"
+            />
+            <div className="absolute inset-0 bg-primary/70" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,hsl(155_61%_30%/0.55),transparent_65%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_90%,hsl(28_92%_50%/0.22),transparent_60%)]" />
             <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }} />
@@ -188,12 +198,19 @@ const Events = () => {
               {eventsList.map((e) => (
                 <div key={e.id} className="group relative rounded-2xl border border-primary/8 bg-secondary/30 hover:border-primary/20 overflow-hidden transition-all duration-400 grid grid-cols-1 lg:grid-cols-12">
                   {/* Number */}
-                  <div className="lg:col-span-1 flex lg:flex-col items-center justify-center lg:justify-start gap-4 lg:gap-0 px-6 py-6 lg:py-10 border-b lg:border-b-0 lg:border-r border-primary/8">
-                    <span className="font-display font-black text-4xl leading-none select-none" style={{ color: e.tagColor, opacity: 0.25 }}>{e.num}</span>
+                  <div className="lg:col-span-3 relative overflow-hidden border-b lg:border-b-0 lg:border-r border-primary/8">
+                    <img
+                      src={e.image}
+                      alt={`${e.title} — Tech Hub Africa`}
+                      loading="lazy"
+                      className="w-full h-48 lg:h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
+                    <span className="absolute bottom-3 left-4 font-display font-black text-3xl leading-none text-primary-foreground/80 select-none">{e.num}</span>
                   </div>
 
                   {/* Content */}
-                  <div className="lg:col-span-8 p-6 lg:p-10">
+                  <div className="lg:col-span-6 p-6 lg:p-10">
                     <div className="flex flex-wrap gap-2 mb-4">
                       <span className="text-[9px] font-black uppercase tracking-[0.25em] px-2.5 py-1 rounded-full border" style={{ color: e.tagColor, background: `${e.tagColor}15`, borderColor: `${e.tagColor}30` }}>{e.tag}</span>
                       <span className="text-xs font-semibold text-primary/50 flex items-center gap-1.5"><Calendar className="w-3 h-3 text-accent" />{e.date}</span>
@@ -222,7 +239,12 @@ const Events = () => {
               ))}
             </div>
           ) : (
-            <div className="rounded-2xl border border-primary/8 bg-secondary/30 p-10 md:p-16 text-center">
+            <div className="rounded-2xl border border-primary/8 bg-secondary/30 overflow-hidden">
+              <div className="grid md:grid-cols-2 gap-0">
+                <img src={heroCelebration} alt="Tech Guru Meetup 2025 celebration in Accra" loading="lazy" className="w-full h-64 md:h-full object-cover" />
+                <img src={networking} alt="Networking at the Tech Guru Meetup 2025" loading="lazy" className="hidden md:block w-full h-full object-cover" />
+              </div>
+              <div className="p-10 md:p-16 text-center">
               <span className="font-display font-black text-[5rem] leading-none select-none text-primary/8">2025</span>
               <h3 className="font-display font-extrabold text-2xl text-primary mb-3 -mt-4">Tech Guru Meetup 2025 Highlights</h3>
               <p className="text-primary/55 text-sm max-w-xl mx-auto mb-6 leading-relaxed">
@@ -231,6 +253,7 @@ const Events = () => {
               <a href="/media" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent hover:text-accent/70 transition-colors">
                 View Media Gallery <ArrowRight className="w-3.5 h-3.5" />
               </a>
+              </div>
             </div>
           )}
         </section>
