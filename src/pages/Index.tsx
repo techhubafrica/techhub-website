@@ -7,10 +7,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import Logo from "@/components/Logo";
-import heroImg1 from "@/assets/community-gathering.jpg";
-import heroImg2 from "@/assets/impact-hero-bg.jpg";
-import heroImg3 from "@/assets/our-story-bg.jpg";
-import heroImg4 from "@/assets/hands-planting.jpg";
+import {
+  heroAudience, heroCelebration, heroPanel, heroKeynote,
+  campusTourFlyer, hackathonFlyer, meetup2026Flyer, awardTop100, awardWhosWho,
+  serviceProgramming, serviceSoftware, serviceWebDesign,
+  portfolioGmo, portfolioOfie, portfolioThreatLock,
+} from "@/assets/photos";
+
 
 
 /* ============================================================
