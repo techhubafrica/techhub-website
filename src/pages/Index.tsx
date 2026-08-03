@@ -5,7 +5,6 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ImagePlaceholder from "@/components/ImagePlaceholder";
 import Logo from "@/components/Logo";
 import {
   heroAudience, heroCelebration, heroPanel, heroKeynote,
