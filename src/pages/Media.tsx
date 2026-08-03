@@ -3,6 +3,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { Mic, ArrowRight, CheckCircle2, X } from "lucide-react";
+import { heroAudience, heroCelebration, heroPanel, heroKeynote, networking } from "@/assets/photos";
+
 
 const articles = [
   { id: 1, num: "01", title: "AI Infrastructure Trends Across West Africa", category: "TechNews Tuesday", date: "July 2026", excerpt: "How African cloud providers and developer communities are deploying low-latency LLMs locally — breaking the dependency on foreign infrastructure." },
@@ -91,7 +93,41 @@ const Media = () => {
             ))}
           </div>
         </section>
+
+        {/* ══ PHOTO GALLERY ══ */}
+        <section className="px-6 pb-28 max-w-7xl mx-auto">
+          <div className="flex items-baseline gap-6 mb-10">
+            <span className="text-[9px] font-black uppercase tracking-[0.35em] text-accent">From the Archive</span>
+            <div className="flex-1 h-px bg-primary/10" />
+          </div>
+          <h2 className="font-display font-extrabold text-primary text-[2.5rem] md:text-[3.5rem] leading-[0.92] tracking-tight mb-10">
+            Moments from the <span className="italic font-light text-accent">ecosystem.</span>
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { src: heroCelebration, alt: "Tech Hub Africa team cutting the anniversary cake", span: "md:col-span-2 md:row-span-2" },
+              { src: networking, alt: "Founders networking at the Tech Guru Meetup", span: "" },
+              { src: heroPanel, alt: "Panel discussion audience at the Tech Guru Meetup", span: "" },
+              { src: heroKeynote, alt: "Keynote speaker addressing the Tech Guru Meetup", span: "" },
+              { src: heroAudience, alt: "Full conference hall at the Tech Guru Meetup in Accra", span: "" },
+            ].map((img) => (
+              <figure
+                key={img.alt}
+                className={`group relative overflow-hidden rounded-2xl border border-primary/8 ${img.span}`}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading="lazy"
+                  className="w-full h-full min-h-[180px] object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </figure>
+            ))}
+          </div>
+        </section>
       </main>
+
 
       {/* Speaker Modal */}
       {modalOpen && (

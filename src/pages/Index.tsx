@@ -5,12 +5,14 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ImagePlaceholder from "@/components/ImagePlaceholder";
 import Logo from "@/components/Logo";
-import heroImg1 from "@/assets/community-gathering.jpg";
-import heroImg2 from "@/assets/impact-hero-bg.jpg";
-import heroImg3 from "@/assets/our-story-bg.jpg";
-import heroImg4 from "@/assets/hands-planting.jpg";
+import {
+  heroAudience, heroCelebration, heroPanel, heroKeynote,
+  campusTourFlyer, hackathonFlyer, meetup2026Flyer, awardTop100, awardWhosWho,
+  serviceProgramming, serviceSoftware, serviceWebDesign,
+  portfolioGmo, portfolioOfie, portfolioThreatLock,
+} from "@/assets/photos";
+
 
 
 /* ============================================================
@@ -25,7 +27,7 @@ const heroSlides = [
     body: "A continent-wide movement bringing hackathons, AI workshops, and founder circles into every major university in Ghana.",
     cta: "Explore the Tour",
     href: "#campus",
-    image: heroImg1,
+    image: heroAudience,
     stat: { k: "12", v: "Cities" },
   },
   {
@@ -35,7 +37,7 @@ const heroSlides = [
     body: "A physical and digital home for builders, mentors and investors shaping the continent's next decade of technology.",
     cta: "Step Inside",
     href: "#vision",
-    image: heroImg2,
+    image: heroCelebration,
     stat: { k: "300+", v: "Innovators" },
   },
   {
@@ -45,7 +47,7 @@ const heroSlides = [
     body: "Elite teams from across Africa converge to build production-grade solutions in three sleepless days.",
     cta: "See the Build",
     href: "#events",
-    image: heroImg3,
+    image: heroPanel,
     stat: { k: "72h", v: "Non-stop" },
   },
   {
@@ -55,7 +57,7 @@ const heroSlides = [
     body: "The definitive annual list of the founders, engineers, and creators redefining African technology.",
     cta: "Read the Issue",
     href: "#portfolio",
-    image: heroImg4,
+    image: heroKeynote,
     stat: { k: "100", v: "Leaders" },
   },
 ];
@@ -442,7 +444,12 @@ const CampusTours = () => (
     <div className="relative max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
       <div className="lg:col-span-6 relative">
         <div className="aspect-[4/5] shadow-[var(--shadow-cinema)]">
-          <ImagePlaceholder tone="forest" label="Campus Tour 2026 poster" />
+          <img
+            src={campusTourFlyer}
+            alt="Tech Hub Africa Tech For All Campus Tour 2026 flyer"
+            loading="lazy"
+            className="w-full h-full object-cover rounded-lg"
+          />
         </div>
         {/* Floating stat card */}
         <div className="hidden md:block absolute -bottom-10 -right-10 bg-secondary border border-primary-foreground/10 rounded-lg p-6 min-w-[200px] animate-float">
@@ -483,10 +490,10 @@ const CampusTours = () => (
    INITIATIVES — premium product-showcase cards
    ============================================================ */
 const initiatives = [
-  { title: "Tech Guru Meetup", meta: "18 Dec 2026", tone: "forest" as const, Icon: Users },
-  { title: "Hackathon Challenge", meta: "72 Hours · Live", tone: "amber" as const, Icon: Rocket },
-  { title: "Top 100 Magazine", meta: "Innovators & Founders", tone: "deep" as const, Icon: Sparkles },
-  { title: "Marquis Who's Who", meta: "Honored Listee 2025", tone: "charcoal" as const, Icon: Globe2 },
+  { title: "Tech Guru Meetup", meta: "18 Dec 2026", tone: "forest" as const, Icon: Users, image: meetup2026Flyer, fit: "cover" as const },
+  { title: "Hackathon Challenge", meta: "72 Hours · Live", tone: "amber" as const, Icon: Rocket, image: hackathonFlyer, fit: "cover" as const },
+  { title: "Top 100 Magazine", meta: "Innovators & Founders", tone: "deep" as const, Icon: Sparkles, image: awardTop100, fit: "contain" as const },
+  { title: "Marquis Who's Who", meta: "Honored Listee 2025", tone: "charcoal" as const, Icon: Globe2, image: awardWhosWho, fit: "contain" as const },
 ];
 
 const Initiatives = () => (
@@ -516,7 +523,14 @@ const Initiatives = () => (
             className="card-lift sheen group relative rounded-2xl overflow-hidden bg-background border border-primary/10"
           >
             <div className="relative aspect-[4/5] overflow-hidden">
-              <ImagePlaceholder tone={it.tone} label={it.title} showReflection={false} />
+              <div className="absolute inset-0 bg-primary" />
+              <img
+                src={it.image}
+                alt={`${it.title} — Tech Hub Africa`}
+                loading="lazy"
+                className={`absolute inset-0 w-full h-full ${it.fit === "contain" ? "object-contain p-8" : "object-cover"} transition-transform duration-[1200ms] group-hover:scale-[1.06]`}
+              />
+              <div className="absolute inset-0 z-[2] bg-gradient-to-t from-primary/85 via-primary/10 to-primary/30" />
               {/* Icon chip */}
               <div className="absolute top-4 left-4 z-[4] w-10 h-10 rounded-full bg-primary/70 border border-primary-foreground/20 flex items-center justify-center">
                 <it.Icon className="w-4 h-4 text-accent" strokeWidth={1.6} />
@@ -557,16 +571,19 @@ const services = [
     Icon: Code2,
     title: "Computer Programming",
     desc: "Expert programmers craft custom software solutions tailored to your business — from algorithm development to code optimization.",
+    image: serviceProgramming,
   },
   {
     Icon: Smartphone,
     title: "Software & App Development",
     desc: "Cutting-edge software for mobile, web and desktop. From concept to deployment, we handle every stage.",
+    image: serviceSoftware,
   },
   {
     Icon: Layout,
     title: "Web Design & Management",
     desc: "Visually stunning, responsive, user-centric websites — plus ongoing management, updates and security.",
+    image: serviceWebDesign,
   },
 ];
 
@@ -589,6 +606,14 @@ const Services = () => (
             key={s.title}
             className="card-lift sheen noise-soft group relative p-10 lg:p-12 rounded-2xl bg-primary/80 border border-primary-foreground/10 overflow-hidden"
           >
+            <img
+              src={s.image}
+              alt=""
+              aria-hidden
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover opacity-[0.18] group-hover:opacity-30 group-hover:scale-105 transition-all duration-[1200ms]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/85 to-primary" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_top,hsl(28_92%_55%/0.25),transparent_60%)]" />
             <div className="relative flex items-center justify-between mb-10">
               <div className="w-14 h-14 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
@@ -677,10 +702,10 @@ const ProgramsBand = () => (
    PORTFOLIO — glass cards on charcoal
    ============================================================ */
 const portfolio = [
-  { Icon: Building2, name: "GH Accommodation", sector: "Real Estate Tech", desc: "Your gateway to affordable, reliable housing." },
-  { Icon: ShoppingBag, name: "GMO Marketplace", sector: "E-Commerce", desc: "Ghana Mall — your one-stop shop for everything." },
-  { Icon: Sprout, name: "Ofie Agro Ltd", sector: "Agri-Tech", desc: "Taste of tradition, fresh from Ofie." },
-  { Icon: ShieldCheck, name: "Threat Lock Agency", sector: "Cybersecurity", desc: "Protect your website. Setup in five minutes." },
+  { Icon: Building2, name: "GH Accommodation", sector: "Real Estate Tech", desc: "Your gateway to affordable, reliable housing.", logo: null },
+  { Icon: ShoppingBag, name: "GMO Marketplace", sector: "E-Commerce", desc: "Ghana Mall — your one-stop shop for everything.", logo: portfolioGmo },
+  { Icon: Sprout, name: "Ofie Agro Ltd", sector: "Agri-Tech", desc: "Taste of tradition, fresh from Ofie.", logo: portfolioOfie },
+  { Icon: ShieldCheck, name: "Threat Lock Agency", sector: "Cybersecurity", desc: "Protect your website. Setup in five minutes.", logo: portfolioThreatLock },
 ];
 
 const Portfolio = () => (
@@ -708,8 +733,12 @@ const Portfolio = () => (
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_100%_0%,hsl(28_92%_55%/0.3),transparent_60%)]" />
             <div className="relative flex items-start justify-between mb-10">
-              <div className="w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center">
-                <p.Icon className="w-5 h-5 text-accent" strokeWidth={1.5} />
+              <div className="w-14 h-14 rounded-full bg-background/95 border border-primary-foreground/10 flex items-center justify-center overflow-hidden">
+                {p.logo ? (
+                  <img src={p.logo} alt={`${p.name} logo`} loading="lazy" className="w-full h-full object-contain p-1.5" />
+                ) : (
+                  <p.Icon className="w-5 h-5 text-accent" strokeWidth={1.5} />
+                )}
               </div>
               <ArrowUpRight className="w-5 h-5 text-primary-foreground/30 group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
             </div>

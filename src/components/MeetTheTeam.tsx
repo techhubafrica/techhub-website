@@ -1,16 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import ImagePlaceholder from "@/components/ImagePlaceholder";
+import {
+  teamDoreen, teamJemima, teamSpeaker1, teamSpeaker2,
+  teamMember3, teamMember4, teamMember5,
+} from "@/assets/photos";
 
 /* ── Team data ───────────────────────────────────────────────── */
 const team = [
-  { name: "Kwame A.",  role: "Operations",    tone: "forest"   as const, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Ama D.",    role: "Programs Lead",  tone: "deep"     as const, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Yaw M.",    role: "Engineering",    tone: "charcoal" as const, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Efua B.",   role: "Founder",        tone: "forest"   as const, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Nana K.",   role: "Design",         tone: "amber"    as const, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Kojo T.",   role: "Research",       tone: "deep"     as const, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Abena S.",  role: "Community",      tone: "charcoal" as const, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { name: "Kwame A.",  role: "Operations",    tone: "forest"   as const, photo: teamSpeaker1, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { name: "Ama D.",    role: "Programs Lead",  tone: "deep"     as const, photo: teamJemima,   bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { name: "Yaw M.",    role: "Engineering",    tone: "charcoal" as const, photo: teamSpeaker2, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { name: "Efua B.",   role: "Founder",        tone: "forest"   as const, photo: teamDoreen,   bio: "Founder of Tech Hub Africa — driving a continent-wide movement to connect innovators, nurture talent and showcase African technological excellence." },
+  { name: "Nana K.",   role: "Design",         tone: "amber"    as const, photo: teamMember3,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { name: "Kojo T.",   role: "Research",       tone: "deep"     as const, photo: teamMember4,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { name: "Abena S.",  role: "Community",      tone: "charcoal" as const, photo: teamMember5,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
 ];
 
 const captions = [
@@ -106,7 +109,11 @@ const TeamModal = ({
 
         {/* ── Left: Portrait ─────────────────────────────────── */}
         <div className="relative md:w-[240px] shrink-0 aspect-[3/4] md:aspect-auto">
-          <ImagePlaceholder tone={member.tone} showReflection={false} />
+          <img
+            src={member.photo}
+            alt={`${member.name}, ${member.role} at Tech Hub Africa`}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
 
           {/* Bottom gradient + name */}
           <div className="absolute inset-x-0 bottom-0 p-5
@@ -398,7 +405,13 @@ const MeetTheTeam = () => {
                         filter: isHovered ? "drop-shadow(0 0 22px hsl(28 92% 44% / 0.45))" : "none",
                       }}
                     >
-                      <ImagePlaceholder tone={m.tone} showReflection={false} />
+                      <img
+                        src={m.photo}
+                        alt={`${m.name}, ${m.role} at Tech Hub Africa`}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent" />
 
                       {/* "Click to view" hint on hover */}
                       <div className="absolute inset-0 z-[6] flex items-center justify-center pointer-events-none"
