@@ -3,6 +3,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { Mic, ArrowRight, CheckCircle2, X } from "lucide-react";
+import { heroAudience, heroCelebration, heroPanel, heroKeynote, networking } from "@/assets/photos";
+
 
 const articles = [
   { id: 1, num: "01", title: "AI Infrastructure Trends Across West Africa", category: "TechNews Tuesday", date: "July 2026", excerpt: "How African cloud providers and developer communities are deploying low-latency LLMs locally — breaking the dependency on foreign infrastructure." },
