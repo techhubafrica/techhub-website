@@ -7,13 +7,13 @@ import {
 
 /* ── Team data ───────────────────────────────────────────────── */
 const team = [
-  { name: "Team Member",          role: "Operations",         tone: "charcoal" as const, photo: teamSpeaker1, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Team Member",          role: "Engineering",        tone: "forest"   as const, photo: teamSpeaker2, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Team Member",          role: "Design",             tone: "amber"    as const, photo: teamMember3,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Doreen Awuku-Agyeman", role: "Founder & CEO",     tone: "forest"   as const, photo: teamDoreen,   bio: "Transformational leader and visionary entrepreneur driving innovation at the intersection of technology, business, and social impact. Founder of Tech Hub Africa LLC — empowering Africa's tech ecosystem and fostering a vibrant, inclusive digital future." },
-  { name: "Jemima Prempeh",       role: "Co-Founder & COO",  tone: "deep"     as const, photo: teamJemima,   bio: "Visionary leader and innovation driver, spearheading Innovation and marketing communications at Tech Hub Africa, fueling business growth through creative storytelling and cutting-edge strategies." },
-  { name: "Team Member",          role: "Research",           tone: "deep"     as const, photo: teamMember4,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Team Member",          role: "Community",          tone: "charcoal" as const, photo: teamMember5,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { displayOrder: "03", name: "Team Member",          role: "Operations",         tone: "charcoal" as const, photo: teamSpeaker1, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { displayOrder: "04", name: "Team Member",          role: "Engineering",        tone: "forest"   as const, photo: teamSpeaker2, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { displayOrder: "05", name: "Team Member",          role: "Design",             tone: "amber"    as const, photo: teamMember3,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { displayOrder: "01", name: "Doreen Awuku-Agyeman", role: "Founder & CEO",     tone: "forest"   as const, photo: teamDoreen,   bio: "Transformational leader and visionary entrepreneur driving innovation at the intersection of technology, business, and social impact. Founder of Tech Hub Africa LLC — empowering Africa's tech ecosystem and fostering a vibrant, inclusive digital future." },
+  { displayOrder: "02", name: "Jemima Prempeh",       role: "Co-Founder & COO",  tone: "deep"     as const, photo: teamJemima,   bio: "Visionary leader and innovation driver, spearheading Innovation and marketing communications at Tech Hub Africa, fueling business growth through creative storytelling and cutting-edge strategies." },
+  { displayOrder: "06", name: "Team Member",          role: "Research",           tone: "deep"     as const, photo: teamMember4,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { displayOrder: "07", name: "Team Member",          role: "Community",          tone: "charcoal" as const, photo: teamMember5,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
 ];
 
 const captions = [
@@ -152,7 +152,7 @@ const TeamModal = ({
 
           {/* Counter */}
           <p className="text-[9px] font-black uppercase tracking-[0.35em] text-accent/50 mb-6">
-            {String(index + 1).padStart(2, "0")} &nbsp;/&nbsp; {String(N).padStart(2, "0")}
+            {member.displayOrder} &nbsp;/&nbsp; {String(N).padStart(2, "0")}
           </p>
 
           {/* Role eyebrow */}
@@ -430,7 +430,7 @@ const MeetTheTeam = () => {
                       <div className="absolute top-2.5 left-2.5 z-[5]">
                         <span className="font-black text-accent leading-none"
                           style={{ fontSize: "8px", letterSpacing: "0.2em", background: "hsl(155 61% 8% / 0.75)", padding: "2px 6px", borderRadius: "99px", border: "1px solid hsl(28 92% 44% / 0.4)" }}>
-                          {String(i + 1).padStart(2, "0")}
+                          {m.displayOrder}
                         </span>
                       </div>
 
