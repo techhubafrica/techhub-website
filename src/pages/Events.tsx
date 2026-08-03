@@ -83,64 +83,88 @@ const Events = () => {
       />
 
       <main className="bg-background">
-        {/* ══ FEATURED EVENT — FULL-BLEED DARK CARD ══ */}
-        <section className="px-6 py-16 max-w-7xl mx-auto">
-          <div className="relative rounded-[2rem] overflow-hidden bg-primary">
+        {/* ══ FEATURED EVENT — CINEMATIC SUMMIT STAGE ══ */}
+        <section className="relative overflow-hidden bg-primary">
+          {/* Photo-ready stage backdrop */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,hsl(155_61%_30%/0.55),transparent_65%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_90%,hsl(28_92%_50%/0.22),transparent_60%)]" />
             <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }} />
-            <div className="absolute top-0 right-0 w-[500px] h-[400px] rounded-full blur-3xl opacity-20" style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent)" }} />
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-primary to-transparent" />
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+          </div>
 
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-0">
-              {/* Left: Info */}
-              <div className="p-10 md:p-14">
-                <div className="flex items-center gap-3 mb-8">
-                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">Flagship 2026 Event</span>
-                </div>
-                <h2 className="font-display font-black text-primary-foreground text-4xl md:text-5xl tracking-tight leading-[0.92] mb-5">
-                  Tech Guru<br /><span className="italic font-light text-accent">Meetup 2026</span>
-                </h2>
-                <p className="text-primary-foreground/60 text-base leading-relaxed mb-8 max-w-md">
-                  The ultimate gathering of tech leaders, founders, engineers, and investors. 3 days of keynotes, live demos, investor matchmaking.
-                </p>
-                <div className="space-y-3 mb-10 text-sm font-semibold text-primary-foreground/60">
-                  <div className="flex items-center gap-2.5"><Calendar className="w-4 h-4 text-accent shrink-0" /> October 14–16, 2026</div>
-                  <div className="flex items-center gap-2.5"><MapPin className="w-4 h-4 text-accent shrink-0" /> Accra International Conference Centre</div>
-                  <div className="flex items-center gap-2.5"><Users className="w-4 h-4 text-accent shrink-0" /> 2,500+ Expected Attendees</div>
-                </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32">
+            {/* Floating glass info card, left-weighted */}
+            <div className="max-w-2xl rounded-3xl border border-primary-foreground/12 bg-primary/55 p-8 md:p-12 shadow-2xl" style={{ backdropFilter: "blur(20px)" }}>
+              <div className="flex items-center gap-3 mb-7">
+                <span className="h-px w-8 bg-accent" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">Accra, Ghana · 2026</span>
+              </div>
+
+              <h2 className="font-display font-black text-primary-foreground text-[2.75rem] md:text-[4.25rem] leading-[0.92] tracking-tight">
+                Tech Guru<br />Meetup 2026
+              </h2>
+              <p className="mt-5 font-display font-extrabold text-accent text-xl md:text-2xl tracking-tight">
+                Where Africa meets what&rsquo;s next.
+              </p>
+
+              <p className="mt-8 font-display font-extrabold text-primary-foreground text-lg md:text-xl">
+                Wednesday, October 14, 2026 <span className="text-primary-foreground/25 mx-2">|</span> 8:30 AM – 5:00 PM
+              </p>
+              <p className="mt-3 text-primary-foreground/60 leading-relaxed">
+                Accra International Conference Centre<br />
+                Independence Avenue, Accra
+              </p>
+
+              <div className="mt-9 flex flex-wrap gap-3">
                 <button
                   onClick={() => openRsvp("Tech Guru Meetup 2026")}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] rounded-full hover:bg-primary-foreground hover:text-primary transition-all"
-                  style={{ boxShadow: "0 14px 40px -12px hsl(28 92% 44% / 0.6)" }}
+                  className="px-8 py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:brightness-110 transition-all"
+                  style={{ boxShadow: "0 14px 40px -12px hsl(28 92% 44% / 0.65)" }}
                 >
-                  Reserve Your Spot <ArrowRight className="w-4 h-4" />
+                  Reserve Your Seat
+                </button>
+                <button
+                  onClick={() => openRsvp("Tech Guru Meetup 2026 — Sponsorship")}
+                  className="px-8 py-4 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary-foreground hover:text-primary transition-all"
+                  style={{ backdropFilter: "blur(12px)" }}
+                >
+                  Become a Sponsor
                 </button>
               </div>
 
-              {/* Right: Countdown */}
-              <div className="flex flex-col items-center justify-center p-10 md:p-14 border-t lg:border-t-0 lg:border-l border-primary-foreground/10">
-                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-primary-foreground/40 mb-8">Countdown to the event</p>
-                <div className="grid grid-cols-4 gap-4 w-full">
-                  {[
-                    { label: "Days", val: timeLeft.days },
-                    { label: "Hours", val: timeLeft.hours },
-                    { label: "Mins", val: timeLeft.mins },
-                    { label: "Secs", val: timeLeft.secs },
-                  ].map((u) => (
-                    <div key={u.label} className="flex flex-col items-center">
-                      <div className="w-full aspect-square rounded-2xl border border-primary-foreground/10 bg-primary-foreground/5 flex items-center justify-center mb-2">
-                        <span className="font-display font-black text-primary-foreground text-2xl md:text-3xl leading-none">
-                          {String(u.val).padStart(2, "0")}
-                        </span>
-                      </div>
-                      <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-primary-foreground/35">{u.label}</span>
-                    </div>
-                  ))}
-                </div>
+              <p className="mt-6 text-sm">
+                <span className="font-bold text-accent">General admission is free.</span>{" "}
+                <span className="text-primary-foreground/55">Space is limited.</span>
+              </p>
+            </div>
+
+            {/* Slim countdown strip */}
+            <div className="mt-12 flex flex-wrap items-center gap-8">
+              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary-foreground/40">Countdown</span>
+              <div className="flex items-center gap-6">
+                {[
+                  { label: "Days", val: timeLeft.days },
+                  { label: "Hours", val: timeLeft.hours },
+                  { label: "Mins", val: timeLeft.mins },
+                  { label: "Secs", val: timeLeft.secs },
+                ].map((u) => (
+                  <div key={u.label} className="flex items-baseline gap-2">
+                    <span className="font-display font-black text-primary-foreground text-3xl leading-none">{String(u.val).padStart(2, "0")}</span>
+                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-primary-foreground/35">{u.label}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="hidden md:flex items-center gap-5 ml-auto text-xs font-semibold text-primary-foreground/55">
+                <span className="flex items-center gap-2"><Users className="w-4 h-4 text-accent" />2,500+ attendees</span>
+                <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-accent" />AICC, Accra</span>
+                <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-accent" />Oct 14–16</span>
               </div>
             </div>
           </div>
         </section>
+
 
         {/* ══ ALL EVENTS ══ */}
         <section className="px-6 pb-28 max-w-7xl mx-auto">
