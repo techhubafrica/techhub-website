@@ -2,17 +2,8 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { MapPin, CheckCircle2, X } from "lucide-react";
+import { MapPin, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
-
-function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
-  const [ref, visible] = useReveal();
-  return (
-    <div ref={ref} className={`reveal ${visible ? "is-visible" : ""} ${className}`} style={{ transitionDelay: `${delay}s` }}>
-      {children}
-    </div>
-  );
-}
 
 const jobs = [
   { id: "swe", num: "01", title: "Senior Full-Stack Engineer", dept: "Engineering", location: "Accra / Hybrid", type: "Full-Time" },
@@ -28,6 +19,30 @@ const perks = [
   { label: "Growth", val: "Fast-track promotions based on impact, not tenure." },
   { label: "Community", val: "Access to THA events, meetups, and alumni network." },
 ];
+
+function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const [ref, visible] = useReveal();
+  return (
+    <div ref={ref} className={`reveal ${visible ? "is-visible" : ""} ${className}`} style={{ transitionDelay: `${delay}s` }}>
+      {children}
+    </div>
+  );
+}
+
+const Marquee = () => {
+  const text = "Engineering Roles · Product Design · Campus Operations · 2026 Cohort";
+  return (
+    <div className="relative bg-primary text-primary-foreground py-4 overflow-hidden border-y border-primary-foreground/10">
+      <div className="animate-marquee whitespace-nowrap flex">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <span key={i} className="text-xs md:text-sm font-bold tracking-[0.35em] uppercase mx-10 text-primary-foreground/60">
+            {text} <span className="text-accent">✦</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const Careers = () => {
   const [filter, setFilter] = useState<"all" | "Full-Time" | "Internship">("all");
@@ -59,54 +74,67 @@ const Careers = () => {
         ]}
       />
 
-      <main className="page-entry bg-background">
+      <Marquee />
+
+      <main className="page-entry bg-background overflow-hidden">
         {/* ══ PERKS STRIP ══ */}
-        <section className="relative bg-primary px-6 py-14 overflow-hidden">
+        <section className="relative bg-primary text-primary-foreground px-6 py-16 overflow-hidden">
           <div className="noise-bg" />
           <div className="relative max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
             {perks.map((p) => (
-              <div key={p.label} className="border-l-2 border-accent/30 pl-5">
-                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-accent mb-1.5">{p.label}</p>
-                <p className="text-primary-foreground/55 text-xs leading-relaxed">{p.val}</p>
+              <div key={p.label} className="border-l-2 border-accent/40 pl-5">
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-1.5">{p.label}</p>
+                <p className="text-primary-foreground/65 text-xs leading-relaxed">{p.val}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* ══ JOB LISTINGS ══ */}
-        <section className="px-6 py-24 md:py-32 max-w-7xl mx-auto">
+        <section className="relative px-6 py-28 md:py-36 max-w-7xl mx-auto">
+          <div className="absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
+
+          <Reveal className="mb-10">
+            <div className="flex items-baseline gap-6 mb-6">
+              <span className="eyebrow text-accent">01 — Open Roles</span>
+              <div className="flex-1 divider-elegant" />
+            </div>
+            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[3rem] md:text-[4.5rem] tracking-tight">
+              Current <span className="italic font-light text-accent">Opportunities.</span>
+            </h2>
+          </Reveal>
+
           {/* Filters */}
-          <div className="flex items-center gap-8 mb-12 border-b border-primary/8 pb-0">
+          <div className="flex items-center gap-8 mb-12 border-b border-primary/10">
             {(["all", "Full-Time", "Internship"] as const).map((f) => (
               <button key={f} onClick={() => setFilter(f)}
-                className={`pb-4 text-xs font-black uppercase tracking-[0.22em] border-b-2 -mb-px transition-all duration-300 ${filter === f ? "border-accent text-accent" : "border-transparent text-primary/40 hover:text-primary/70"}`}
-              >
+                className={`pb-4 text-xs font-black uppercase tracking-[0.22em] border-b-2 -mb-px transition-all duration-250 ${filter === f ? "border-accent text-accent" : "border-transparent text-primary/40 hover:text-primary/70"}`}>
                 {f === "all" ? `All Openings (${jobs.length})` : f === "Full-Time" ? "Full-Time Roles" : "Internship Cohort"}
               </button>
             ))}
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             {filteredJobs.map((j, i) => (
-              <Reveal key={j.id} delay={i * 0.06}>
-                <div className="group relative rounded-2xl border border-primary/8 bg-secondary/30 hover:border-primary/22 transition-colors duration-300 overflow-hidden grid grid-cols-1 md:grid-cols-12">
-                  <div className="md:col-span-1 flex items-center justify-center px-6 py-6 md:py-10 border-b md:border-b-0 md:border-r border-primary/8">
-                    <span className="font-display font-black text-3xl leading-none text-primary/8 select-none">{j.num}</span>
+              <Reveal key={j.id} delay={i * 0.08}>
+                <div className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-background hover:border-primary/25 transition-all duration-500 overflow-hidden grid grid-cols-1 md:grid-cols-12">
+                  <div className="md:col-span-1 flex items-center justify-center px-6 py-6 md:py-10 border-b md:border-b-0 md:border-r border-primary/10">
+                    <span className="font-display font-black text-3xl leading-none text-primary/20 select-none">{j.num}</span>
                   </div>
                   <div className="md:col-span-8 p-6 md:p-8">
                     <div className="flex flex-wrap gap-2 mb-3">
                       <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${j.type === "Full-Time" ? "text-accent bg-accent/10 border-accent/20" : "text-primary/60 bg-primary/5 border-primary/12"}`}>{j.dept}</span>
                       <span className="text-[9px] font-bold uppercase tracking-widest text-primary/40">• {j.type}</span>
                     </div>
-                    <h3 className="font-display font-extrabold text-primary text-xl md:text-2xl tracking-tight">{j.title}</h3>
-                    <p className="text-xs font-semibold text-primary/50 flex items-center gap-1.5 mt-2">
+                    <h3 className="font-display font-extrabold text-primary text-xl md:text-2xl tracking-tight group-hover:text-accent transition-colors">{j.title}</h3>
+                    <p className="text-xs font-semibold text-primary/60 flex items-center gap-1.5 mt-2">
                       <MapPin className="w-3 h-3 text-accent" />{j.location}
                     </p>
                   </div>
-                  <div className="md:col-span-3 flex items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-primary/8">
+                  <div className="md:col-span-3 flex items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-primary/10">
                     <button onClick={() => handleApply(j.title)}
-                      className="w-full py-3 px-5 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-colors duration-250 text-center">
-                      Apply Now
+                      className="btn-magnetic w-full py-3.5 px-5 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-all duration-250 text-center flex items-center justify-center gap-2">
+                      Apply Now <ArrowUpRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-350" />
@@ -122,7 +150,7 @@ const Careers = () => {
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-primary/88" style={{ backdropFilter: "blur(12px)" }} onClick={() => setApplyOpen(false)} />
           <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl" style={{ animation: "scale-in-modal 0.35s cubic-bezier(0.16,1,0.3,1) forwards" }}>
-            <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative">
+            <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative text-primary-foreground">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
               <button onClick={() => setApplyOpen(false)} className="absolute top-5 right-5 w-8 h-8 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground transition-all"><X className="w-3.5 h-3.5" /></button>
               <p className="text-[9px] font-black uppercase tracking-[0.35em] text-accent mb-2">Application</p>
@@ -140,10 +168,10 @@ const Careers = () => {
                   {["Full Name", "Email Address", "LinkedIn / Portfolio URL"].map((label) => (
                     <div key={label}>
                       <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">{label}</label>
-                      <input required type={label.includes("Email") ? "email" : label.includes("URL") ? "url" : "text"} className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors" />
+                      <input required type={label.includes("Email") ? "email" : label.includes("URL") ? "url" : "text"} className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                     </div>
                   ))}
-                  <button type="submit" className="w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all">Submit Application</button>
+                  <button type="submit" className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">Submit Application</button>
                 </form>
               )}
             </div>

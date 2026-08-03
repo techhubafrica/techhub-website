@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { ShieldCheck, Code, Rocket, GraduationCap, ArrowRight, CheckCircle2, X } from "lucide-react";
+import { ShieldCheck, Code, Rocket, GraduationCap, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 
 const servicesList = [
@@ -49,6 +49,21 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
   );
 }
 
+const Marquee = () => {
+  const text = "Engineering Solutions · Enterprise Software · Cybersecurity · Incubating Ventures";
+  return (
+    <div className="relative bg-primary text-primary-foreground py-4 overflow-hidden border-y border-primary-foreground/10">
+      <div className="animate-marquee whitespace-nowrap flex">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <span key={i} className="text-xs md:text-sm font-bold tracking-[0.35em] uppercase mx-10 text-primary-foreground/60">
+            {text} <span className="text-accent">✦</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const FormModal = ({ open, onClose, title, submitted, onSubmit }: {
   open: boolean; onClose: () => void; title: string; submitted: boolean; onSubmit: (e: React.FormEvent) => void;
 }) => {
@@ -56,9 +71,9 @@ const FormModal = ({ open, onClose, title, submitted, onSubmit }: {
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-primary/88" style={{ backdropFilter: "blur(12px)" }} onClick={onClose} />
-      <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-[0_40px_120px_-20px_hsl(155_61%_4%/0.9)]"
+      <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl"
         style={{ animation: "scale-in-modal 0.35s cubic-bezier(0.16,1,0.3,1) forwards" }}>
-        <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative">
+        <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative text-primary-foreground">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
           <button onClick={onClose}
             className="absolute top-5 right-5 w-8 h-8 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground hover:border-primary-foreground/50 transition-all duration-200">
@@ -91,7 +106,7 @@ const FormModal = ({ open, onClose, title, submitted, onSubmit }: {
                   className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
               </div>
               <button type="submit"
-                className="w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">
+                className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-300">
                 Submit Inquiry
               </button>
             </form>
@@ -129,14 +144,28 @@ const Services = () => {
         ]}
       />
 
-      <main className="page-entry bg-background">
+      <Marquee />
+
+      <main className="page-entry bg-background overflow-hidden">
         {/* ══ SERVICE LIST ══ */}
-        <section className="px-6 py-20 md:py-28 max-w-7xl mx-auto space-y-5">
+        <section className="relative px-6 py-28 md:py-36 max-w-7xl mx-auto space-y-6">
+          <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
+          
+          <Reveal className="mb-12">
+            <div className="flex items-baseline gap-6 mb-6">
+              <span className="eyebrow text-accent">01 — Service Pillars</span>
+              <div className="flex-1 divider-elegant" />
+            </div>
+            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[3rem] md:text-[4.5rem] tracking-tight">
+              Precision solutions <span className="italic font-light text-accent">built to scale.</span>
+            </h2>
+          </Reveal>
+
           {servicesList.map((s, idx) => (
-            <Reveal key={s.id} delay={idx * 0.06}>
-              <div className="group relative grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-3xl overflow-hidden border border-primary/8 bg-secondary/40 hover:border-primary/22 transition-colors duration-300">
+            <Reveal key={s.id} delay={idx * 0.08}>
+              <div className="card-lift sheen group relative grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-3xl overflow-hidden border border-primary/10 bg-background hover:border-primary/25 transition-all duration-500">
                 {/* Left number */}
-                <div className="lg:col-span-2 flex items-start justify-between lg:flex-col lg:items-start gap-4 p-8 pb-0 lg:pb-8 border-b lg:border-b-0 lg:border-r border-primary/8">
+                <div className="lg:col-span-2 flex items-start justify-between lg:flex-col lg:items-start gap-4 p-8 pb-0 lg:pb-8 border-b lg:border-b-0 lg:border-r border-primary/10">
                   <span className="font-display font-black text-5xl md:text-6xl leading-none select-none"
                     style={{ color: s.accent, opacity: 0.35 }}>
                     {s.num}
@@ -153,10 +182,10 @@ const Services = () => {
                       style={{ background: `${s.accent}18`, border: `1px solid ${s.accent}30` }}>
                       <s.icon className="w-4 h-4" />
                     </div>
-                    <span className="text-primary/40 text-xs font-semibold tracking-wider">{s.subtitle}</span>
+                    <span className="text-primary/50 text-xs font-semibold tracking-wider">{s.subtitle}</span>
                   </div>
-                  <h3 className="font-display font-extrabold text-primary text-2xl md:text-3xl tracking-tight leading-snug mb-4">{s.title}</h3>
-                  <p className="text-primary/60 text-sm md:text-base leading-relaxed mb-6">{s.desc}</p>
+                  <h3 className="font-display font-extrabold text-primary text-2xl md:text-3xl tracking-tight leading-snug mb-4 group-hover:text-accent transition-colors">{s.title}</h3>
+                  <p className="text-primary/65 text-sm md:text-base leading-relaxed mb-6">{s.desc}</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6">
                     {s.features.map((f) => (
                       <div key={f} className="flex items-center gap-2.5 text-xs font-semibold text-primary/75">
@@ -167,11 +196,11 @@ const Services = () => {
                 </div>
 
                 {/* CTA */}
-                <div className="lg:col-span-3 flex items-center justify-center p-8 border-t lg:border-t-0 lg:border-l border-primary/8">
+                <div className="lg:col-span-3 flex items-center justify-center p-8 border-t lg:border-t-0 lg:border-l border-primary/10">
                   <button onClick={() => openQuoteModal(s.title)}
-                    className="group/btn w-full lg:w-auto flex flex-col items-center gap-4 py-6 px-8 rounded-2xl border border-primary/12 hover:border-accent/50 hover:bg-accent/5 transition-all duration-300">
+                    className="btn-magnetic group/btn w-full lg:w-auto flex flex-col items-center gap-4 py-6 px-8 rounded-2xl border border-primary/12 hover:border-accent/50 hover:bg-accent/5 transition-all duration-300">
                     <div className="w-10 h-10 rounded-full border border-accent/30 flex items-center justify-center text-accent group-hover/btn:bg-accent group-hover/btn:text-accent-foreground group-hover/btn:border-accent transition-all duration-250">
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowUpRight className="w-4 h-4" />
                     </div>
                     <span className="text-[10px] font-black uppercase tracking-[0.25em] text-primary/60 group-hover/btn:text-accent transition-colors duration-250 text-center">
                       Request<br />Service
@@ -179,29 +208,29 @@ const Services = () => {
                   </button>
                 </div>
 
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 group-hover:opacity-35 transition-opacity duration-400" />
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
               </div>
             </Reveal>
           ))}
         </section>
 
         {/* ══ BOTTOM CTA ══ */}
-        <section className="relative overflow-hidden bg-primary px-6 py-20 cv-auto">
+        <section className="relative overflow-hidden bg-primary px-6 py-28 cv-auto text-primary-foreground">
           <div className="noise-bg" />
           <div className="absolute -top-32 right-10 w-[500px] h-[400px] rounded-full blur-3xl opacity-20 pointer-events-none"
             style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent)" }} />
-          <div className="relative max-w-4xl mx-auto text-center text-primary-foreground">
+          <div className="relative max-w-4xl mx-auto text-center">
             <p className="text-[10px] font-black uppercase tracking-[0.4em] text-accent mb-4">Ready to start?</p>
             <h2 className="font-display font-black text-4xl md:text-6xl tracking-tight leading-[0.9] mb-6">
-              Let's build<br /><span className="italic font-light">something great.</span>
+              Let's build<br /><span className="italic font-light text-accent">something great.</span>
             </h2>
-            <p className="text-primary-foreground/55 text-base mb-10 max-w-md mx-auto leading-relaxed">
+            <p className="text-primary-foreground/65 text-base mb-10 max-w-md mx-auto leading-relaxed">
               Tell us about your project and our engineering team will get back to you within 24 hours.
             </p>
             <button onClick={() => openQuoteModal("General Inquiry")}
-              className="inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.3em] rounded-full hover:bg-primary-foreground hover:text-primary transition-all duration-250"
+              className="btn-magnetic inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.3em] rounded-full hover:bg-primary-foreground hover:text-primary transition-all duration-300"
               style={{ boxShadow: "0 14px 40px -12px hsl(28 92% 44% / 0.6)" }}>
-              Start a Conversation <ArrowRight className="w-4 h-4" />
+              Start a Conversation <ArrowUpRight className="w-4 h-4" />
             </button>
           </div>
         </section>
