@@ -7,13 +7,13 @@ import {
 
 /* ── Team data ───────────────────────────────────────────────── */
 const team = [
-  { name: "Kwame A.",  role: "Operations",    tone: "forest"   as const, photo: teamSpeaker1, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Ama D.",    role: "Programs Lead",  tone: "deep"     as const, photo: teamJemima,   bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Yaw M.",    role: "Engineering",    tone: "charcoal" as const, photo: teamSpeaker2, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Efua B.",   role: "Founder",        tone: "forest"   as const, photo: teamDoreen,   bio: "Founder of Tech Hub Africa — driving a continent-wide movement to connect innovators, nurture talent and showcase African technological excellence." },
-  { name: "Nana K.",   role: "Design",         tone: "amber"    as const, photo: teamMember3,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Kojo T.",   role: "Research",       tone: "deep"     as const, photo: teamMember4,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { name: "Abena S.",  role: "Community",      tone: "charcoal" as const, photo: teamMember5,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { name: "Doreen Awuku-Agyeman", role: "Founder & CEO",     tone: "forest"   as const, photo: teamDoreen,   bio: "Transformational leader and visionary entrepreneur driving innovation at the intersection of technology, business, and social impact. Founder of Tech Hub Africa LLC — empowering Africa's tech ecosystem and fostering a vibrant, inclusive digital future." },
+  { name: "Jemima Prempeh",       role: "Co-Founder & COO",  tone: "deep"     as const, photo: teamJemima,   bio: "Visionary leader and innovation driver, spearheading Innovation and marketing communications at Tech Hub Africa, fueling business growth through creative storytelling and cutting-edge strategies." },
+  { name: "Team Member",          role: "Operations",         tone: "charcoal" as const, photo: teamSpeaker1, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { name: "Team Member",          role: "Engineering",        tone: "forest"   as const, photo: teamSpeaker2, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { name: "Team Member",          role: "Design",             tone: "amber"    as const, photo: teamMember3,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { name: "Team Member",          role: "Research",           tone: "deep"     as const, photo: teamMember4,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  { name: "Team Member",          role: "Community",          tone: "charcoal" as const, photo: teamMember5,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
 ];
 
 const captions = [

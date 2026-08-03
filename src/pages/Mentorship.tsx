@@ -52,10 +52,10 @@ const Mentorship = () => {
         ]}
       />
 
-      <main className="bg-background">
+      <main className="page-entry bg-background">
         {/* ══ OBJECTIVES — dark section ══ */}
         <section className="relative bg-primary overflow-hidden px-6 py-20">
-          <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }} />
+          <div className="noise-bg" />
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
           <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-5">
@@ -69,7 +69,7 @@ const Mentorship = () => {
             </div>
             <div className="lg:col-span-7 space-y-4">
               {objectives.map((o, i) => (
-                <div key={i} className="flex items-start gap-4 p-5 rounded-2xl border border-primary-foreground/8 bg-primary-foreground/3 hover:border-accent/20 transition-all">
+                <div key={i} className="flex items-start gap-4 p-5 rounded-2xl border border-primary-foreground/8 bg-primary-foreground/3 hover:border-accent/20 transition-colors duration-250">
                   <span className="font-display font-black text-2xl leading-none text-accent/20 shrink-0">0{i + 1}</span>
                   <p className="text-primary-foreground/60 text-sm leading-relaxed">{o}</p>
                 </div>
@@ -108,7 +108,7 @@ const Mentorship = () => {
 
           {/* Mentor */}
           <div className="relative rounded-3xl overflow-hidden bg-primary p-10 md:p-12 flex flex-col justify-between">
-            <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }} />
+            <div className="noise-bg" />
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-8">
@@ -139,8 +139,8 @@ const Mentorship = () => {
       {/* Modal */}
       {modalOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-primary/85" style={{ backdropFilter: "blur(12px)" }} onClick={() => setModalOpen(false)} />
-          <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl" style={{ animation: "scale-in-modal 0.4s cubic-bezier(0.16,1,0.3,1) forwards" }}>
+          <div className="absolute inset-0 bg-primary/88" style={{ backdropFilter: "blur(12px)" }} onClick={() => setModalOpen(false)} />
+          <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl" style={{ animation: "scale-in-modal 0.35s cubic-bezier(0.16,1,0.3,1) forwards" }}>
             <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
               <button onClick={() => setModalOpen(false)} className="absolute top-5 right-5 w-8 h-8 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground transition-all"><X className="w-3.5 h-3.5" /></button>

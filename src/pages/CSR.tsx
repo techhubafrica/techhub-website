@@ -2,7 +2,17 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { ArrowRight, CheckCircle2, X } from "lucide-react";
+import { CheckCircle2, X } from "lucide-react";
+import { useReveal } from "@/hooks/use-reveal";
+
+function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const [ref, visible] = useReveal();
+  return (
+    <div ref={ref} className={`reveal ${visible ? "is-visible" : ""} ${className}`} style={{ transitionDelay: `${delay}s` }}>
+      {children}
+    </div>
+  );
+}
 
 const tiers = [
   {
@@ -49,7 +59,7 @@ const CSR = () => {
         ]}
       />
 
-      <main className="bg-background">
+      <main className="page-entry bg-background">
         {/* ══ SPONSOR TIERS ══ */}
         <section className="px-6 py-24 md:py-32 max-w-7xl mx-auto">
           <div className="mb-16">
@@ -59,13 +69,15 @@ const CSR = () => {
             </h2>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-5">
             {tiers.map((t, idx) => (
-              <div key={t.num} className={`group relative rounded-3xl overflow-hidden transition-all duration-500 ${idx === 1 ? "bg-primary text-primary-foreground" : "border border-primary/8 bg-secondary/30 hover:border-primary/20"}`}>
+              <Reveal key={t.num} delay={idx * 0.07}>
+                <div className={`group relative rounded-3xl overflow-hidden transition-colors duration-300 ${idx === 1 ? "bg-primary text-primary-foreground" : "border border-primary/8 bg-secondary/30 hover:border-primary/22"}`}>
                 {idx === 1 && (
                   <>
-                    <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }} />
-                    <div className="absolute -top-20 right-10 w-[400px] h-[300px] rounded-full blur-3xl opacity-20" style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent)" }} />
+                    <div className="noise-bg" />
+                    <div className="absolute -top-20 right-10 w-[400px] h-[300px] rounded-full blur-3xl opacity-20 pointer-events-none"
+                      style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent)" }} />
                     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
                   </>
                 )}
@@ -101,7 +113,8 @@ const CSR = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+                </div>
+              </Reveal>
             ))}
           </div>
         </section>

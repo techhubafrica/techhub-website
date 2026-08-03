@@ -1,21 +1,28 @@
+import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-
 import ScrollToTop from "./components/ScrollToTop";
-import Index from "./pages/Index";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Events from "./pages/Events";
-import Careers from "./pages/Careers";
-import Mentorship from "./pages/Mentorship";
-import CSR from "./pages/CSR";
-import Portfolio from "./pages/Portfolio";
-import Media from "./pages/Media";
-import TheHub from "./pages/TheHub";
-import NotFound from "./pages/NotFound";
+
+/* ── Code-split every route ───────────────────────────────────── */
+import Index from "./pages/Index"; // keep homepage eager (first paint)
+const About      = lazy(() => import("./pages/About"));
+const Services   = lazy(() => import("./pages/Services"));
+const Events     = lazy(() => import("./pages/Events"));
+const Careers    = lazy(() => import("./pages/Careers"));
+const Mentorship = lazy(() => import("./pages/Mentorship"));
+const CSR        = lazy(() => import("./pages/CSR"));
+const Portfolio  = lazy(() => import("./pages/Portfolio"));
+const Media      = lazy(() => import("./pages/Media"));
+const TheHub     = lazy(() => import("./pages/TheHub"));
+const NotFound   = lazy(() => import("./pages/NotFound"));
+
+/* Minimal page-transition shell while lazy chunk loads */
+const PageShell = () => (
+  <div className="page-entry min-h-screen bg-background" aria-busy="true" />
+);
 
 const queryClient = new QueryClient();
 
@@ -26,19 +33,21 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/mentorship" element={<Mentorship />} />
-          <Route path="/csr" element={<CSR />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/media" element={<Media />} />
-          <Route path="/thehub" element={<TheHub />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<PageShell />}>
+          <Routes>
+            <Route path="/"           element={<Index />} />
+            <Route path="/about"      element={<About />} />
+            <Route path="/services"   element={<Services />} />
+            <Route path="/events"     element={<Events />} />
+            <Route path="/careers"    element={<Careers />} />
+            <Route path="/mentorship" element={<Mentorship />} />
+            <Route path="/csr"        element={<CSR />} />
+            <Route path="/portfolio"  element={<Portfolio />} />
+            <Route path="/media"      element={<Media />} />
+            <Route path="/thehub"     element={<TheHub />} />
+            <Route path="*"           element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

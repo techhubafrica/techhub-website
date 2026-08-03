@@ -2,7 +2,17 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { MapPin, ArrowRight, CheckCircle2, X } from "lucide-react";
+import { MapPin, CheckCircle2, X } from "lucide-react";
+import { useReveal } from "@/hooks/use-reveal";
+
+function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const [ref, visible] = useReveal();
+  return (
+    <div ref={ref} className={`reveal ${visible ? "is-visible" : ""} ${className}`} style={{ transitionDelay: `${delay}s` }}>
+      {children}
+    </div>
+  );
+}
 
 const jobs = [
   { id: "swe", num: "01", title: "Senior Full-Stack Engineer", dept: "Engineering", location: "Accra / Hybrid", type: "Full-Time" },
@@ -49,10 +59,10 @@ const Careers = () => {
         ]}
       />
 
-      <main className="bg-background">
+      <main className="page-entry bg-background">
         {/* ══ PERKS STRIP ══ */}
         <section className="relative bg-primary px-6 py-14 overflow-hidden">
-          <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }} />
+          <div className="noise-bg" />
           <div className="relative max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
             {perks.map((p) => (
               <div key={p.label} className="border-l-2 border-accent/30 pl-5">
@@ -77,28 +87,31 @@ const Careers = () => {
           </div>
 
           <div className="space-y-4">
-            {filteredJobs.map((j) => (
-              <div key={j.id} className="group relative rounded-2xl border border-primary/8 bg-secondary/30 hover:border-primary/20 transition-all duration-400 overflow-hidden grid grid-cols-1 md:grid-cols-12">
-                <div className="md:col-span-1 flex items-center justify-center px-6 py-6 md:py-10 border-b md:border-b-0 md:border-r border-primary/8">
-                  <span className="font-display font-black text-3xl leading-none text-primary/8 select-none">{j.num}</span>
-                </div>
-                <div className="md:col-span-8 p-6 md:p-8">
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${j.type === "Full-Time" ? "text-accent bg-accent/10 border-accent/20" : "text-primary/60 bg-primary/5 border-primary/12"}`}>{j.dept}</span>
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-primary/40">• {j.type}</span>
+            {filteredJobs.map((j, i) => (
+              <Reveal key={j.id} delay={i * 0.06}>
+                <div className="group relative rounded-2xl border border-primary/8 bg-secondary/30 hover:border-primary/22 transition-colors duration-300 overflow-hidden grid grid-cols-1 md:grid-cols-12">
+                  <div className="md:col-span-1 flex items-center justify-center px-6 py-6 md:py-10 border-b md:border-b-0 md:border-r border-primary/8">
+                    <span className="font-display font-black text-3xl leading-none text-primary/8 select-none">{j.num}</span>
                   </div>
-                  <h3 className="font-display font-extrabold text-primary text-xl md:text-2xl tracking-tight">{j.title}</h3>
-                  <p className="text-xs font-semibold text-primary/50 flex items-center gap-1.5 mt-2">
-                    <MapPin className="w-3 h-3 text-accent" />{j.location}
-                  </p>
+                  <div className="md:col-span-8 p-6 md:p-8">
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${j.type === "Full-Time" ? "text-accent bg-accent/10 border-accent/20" : "text-primary/60 bg-primary/5 border-primary/12"}`}>{j.dept}</span>
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-primary/40">• {j.type}</span>
+                    </div>
+                    <h3 className="font-display font-extrabold text-primary text-xl md:text-2xl tracking-tight">{j.title}</h3>
+                    <p className="text-xs font-semibold text-primary/50 flex items-center gap-1.5 mt-2">
+                      <MapPin className="w-3 h-3 text-accent" />{j.location}
+                    </p>
+                  </div>
+                  <div className="md:col-span-3 flex items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-primary/8">
+                    <button onClick={() => handleApply(j.title)}
+                      className="w-full py-3 px-5 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-colors duration-250 text-center">
+                      Apply Now
+                    </button>
+                  </div>
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-350" />
                 </div>
-                <div className="md:col-span-3 flex items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-primary/8">
-                  <button onClick={() => handleApply(j.title)}
-                    className="w-full py-3 px-5 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-all text-center"
-                  >Apply Now</button>
-                </div>
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -107,8 +120,8 @@ const Careers = () => {
       {/* Modal */}
       {applyOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-primary/85" style={{ backdropFilter: "blur(12px)" }} onClick={() => setApplyOpen(false)} />
-          <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl" style={{ animation: "scale-in-modal 0.4s cubic-bezier(0.16,1,0.3,1) forwards" }}>
+          <div className="absolute inset-0 bg-primary/88" style={{ backdropFilter: "blur(12px)" }} onClick={() => setApplyOpen(false)} />
+          <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl" style={{ animation: "scale-in-modal 0.35s cubic-bezier(0.16,1,0.3,1) forwards" }}>
             <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
               <button onClick={() => setApplyOpen(false)} className="absolute top-5 right-5 w-8 h-8 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground transition-all"><X className="w-3.5 h-3.5" /></button>

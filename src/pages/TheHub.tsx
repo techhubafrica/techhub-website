@@ -36,7 +36,7 @@ const TheHub = () => {
         ]}
       />
 
-      <main className="bg-background">
+      <main className="page-entry bg-background">
         {/* ══ AMENITIES ══ */}
         <section className="px-6 py-24 md:py-32 max-w-7xl mx-auto">
           <div className="mb-16">
@@ -51,7 +51,7 @@ const TheHub = () => {
               <div key={a.num} className={`group relative rounded-3xl overflow-hidden p-10 md:p-12 transition-all duration-500 ${idx === 0 || idx === 3 ? "bg-primary" : "border border-primary/8 bg-secondary/30 hover:border-primary/20"}`}>
                 {(idx === 0 || idx === 3) && (
                   <>
-                    <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }} />
+                    <div className="noise-bg" />
                     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
                   </>
                 )}
@@ -72,7 +72,7 @@ const TheHub = () => {
 
         {/* ══ LOCATION + BOOKING ══ */}
         <section className="relative bg-primary overflow-hidden px-6 py-20">
-          <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }} />
+          <div className="noise-bg" />
           <div className="absolute -top-32 right-10 w-[500px] h-[400px] rounded-full blur-3xl opacity-15" style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent)" }} />
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
           <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-primary-foreground">
@@ -114,8 +114,8 @@ const TheHub = () => {
       {/* Booking Modal */}
       {bookingOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-primary/85" style={{ backdropFilter: "blur(12px)" }} onClick={() => setBookingOpen(false)} />
-          <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl" style={{ animation: "scale-in-modal 0.4s cubic-bezier(0.16,1,0.3,1) forwards" }}>
+          <div className="absolute inset-0 bg-primary/88" style={{ backdropFilter: "blur(12px)" }} onClick={() => setBookingOpen(false)} />
+          <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl" style={{ animation: "scale-in-modal 0.35s cubic-bezier(0.16,1,0.3,1) forwards" }}>
             <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
               <button onClick={() => setBookingOpen(false)} className="absolute top-5 right-5 w-8 h-8 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground transition-all"><X className="w-3.5 h-3.5" /></button>
