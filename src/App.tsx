@@ -16,6 +16,7 @@ const Mentorship = lazy(() => import("./pages/Mentorship"));
 const CSR        = lazy(() => import("./pages/CSR"));
 const Portfolio  = lazy(() => import("./pages/Portfolio"));
 const Media      = lazy(() => import("./pages/Media"));
+const Gallery    = lazy(() => import("./pages/Gallery"));
 const TheHub     = lazy(() => import("./pages/TheHub"));
 const NotFound   = lazy(() => import("./pages/NotFound"));
 
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/csr"        element={<CSR />} />
             <Route path="/portfolio"  element={<Portfolio />} />
             <Route path="/media"      element={<Media />} />
+            <Route path="/gallery"    element={<Gallery />} />
             <Route path="/thehub"     element={<TheHub />} />
             <Route path="*"           element={<NotFound />} />
           </Routes>
