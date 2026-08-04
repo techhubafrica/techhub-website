@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { Mic, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { heroAudience, heroCelebration, heroPanel, heroKeynote, networking } from "@/assets/photos";
+import { ktuGallery } from "@/assets/ktu";
 import { useReveal } from "@/hooks/use-reveal";
 
 const articles = [
@@ -156,6 +158,9 @@ const Media = () => {
               { src: heroPanel, alt: "Panel discussion at the Tech Guru Meetup", span: "" },
               { src: heroKeynote, alt: "Keynote speaker addressing the Tech Guru Meetup", span: "" },
               { src: heroAudience, alt: "Full conference hall at the Tech Guru Meetup in Accra", span: "" },
+              { src: ktuGallery[6], alt: "Students in a tablet training session at KTU", span: "md:col-span-2" },
+              { src: ktuGallery[20], alt: "Computer lab session during the KTU campus tour", span: "" },
+              { src: ktuGallery[33], alt: "Mentor guiding students at the KTU campus tour", span: "" },
             ].map((img, i) => (
               <Reveal key={img.alt} delay={i * 0.06} className={img.span}>
                 <figure className="card-lift sheen group relative overflow-hidden rounded-3xl border border-primary/10 w-full h-full min-h-[220px]">
@@ -165,6 +170,13 @@ const Media = () => {
                 </figure>
               </Reveal>
             ))}
+          </div>
+
+          <div className="mt-12 flex justify-center">
+            <Link to="/gallery" className="group inline-flex items-center gap-3 rounded-full bg-primary px-8 py-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent">
+              Open the KTU 2026 archive
+              <span className="text-primary-foreground/60 group-hover:text-primary-foreground">88 photos</span>
+            </Link>
           </div>
         </section>
       </main>

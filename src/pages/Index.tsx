@@ -12,6 +12,7 @@ import {
   serviceProgramming, serviceSoftware, serviceWebDesign,
   portfolioGmo, portfolioOfie, portfolioThreatLock,
 } from "@/assets/photos";
+import { ktuHero } from "@/assets/ktu";
 
 
 
@@ -59,6 +60,46 @@ const heroSlides = [
     href: "#portfolio",
     image: heroKeynote,
     stat: { k: "100", v: "Leaders" },
+  },
+  {
+    tag: "Campus Tour",
+    kicker: "KTU 2026",
+    title: "Where Curiosity Meets Code",
+    body: "Thousands of students at Koforidua Technical University met their first tablet lab, first VR headset, and first mentor in one single day.",
+    cta: "View the Archive",
+    href: "/gallery",
+    image: ktuHero[0],
+    stat: { k: "2,400", v: "Students" },
+  },
+  {
+    tag: "Immersive Tech",
+    kicker: "XR Lab",
+    title: "First Contact With the Future",
+    body: "Virtual reality, robotics and AI demos placed directly in the hands of students who had never touched them before.",
+    cta: "See the Moment",
+    href: "/gallery",
+    image: ktuHero[1],
+    stat: { k: "18", v: "Live demos" },
+  },
+  {
+    tag: "Digital Skills",
+    kicker: "Tech For All",
+    title: "A Lab in Every Lecture Hall",
+    body: "Hands-on training sessions turning ordinary classrooms into fully equipped digital skills laboratories.",
+    cta: "Explore the Program",
+    href: "/gallery",
+    image: ktuHero[2],
+    stat: { k: "40+", v: "Sessions" },
+  },
+  {
+    tag: "Community",
+    kicker: "The Movement",
+    title: "Built On People, Not Slides",
+    body: "Mentors, volunteers and student leaders forming the human network that carries the ecosystem forward.",
+    cta: "Meet the Team",
+    href: "/about",
+    image: ktuHero[3],
+    stat: { k: "120", v: "Volunteers" },
   },
 ];
 

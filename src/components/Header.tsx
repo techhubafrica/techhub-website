@@ -12,6 +12,7 @@ const navLinks = [
   { label: "CSR", href: "/csr" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Media", href: "/media" },
+  { label: "Gallery", href: "/gallery" },
 ];
 
 const Header = () => {
