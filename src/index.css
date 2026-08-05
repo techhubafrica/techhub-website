@@ -106,7 +106,28 @@
 @layer utilities {
   .font-display { font-family: 'Urbanist', system-ui, sans-serif; }
 
-  .eyebrow { @apply text-xs font-bold uppercase tracking-[0.3em]; }
+  .eyebrow { @apply text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em]; }
+
+  /* Shared page gutter + measure */
+  .shell { @apply w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-10; }
+
+  /* Ticker rail edge fade */
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  /* Horizontal scroll rail for mobile tab rows */
+  .rail {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x proximity;
+  }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail > * { scroll-snap-align: start; flex: none; }
+
 
   /* ---------- Surfaces ---------- */
   .bg-charcoal { background: hsl(var(--primary)); }
