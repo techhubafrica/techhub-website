@@ -13,7 +13,7 @@ const Marquee = ({ text, tone = "primary" }: MarqueeProps) => (
   <div
     className={`relative overflow-hidden border-y border-primary-foreground/10 py-3 sm:py-4 ${
       tone === "primary" ? "bg-primary" : "bg-secondary"
-    } text-primary-foreground marquee-mask`}
+    } text-primary-foreground`}
     aria-hidden="true"
   >
     <div className="animate-marquee whitespace-nowrap flex w-max">
