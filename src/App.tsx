@@ -22,9 +22,8 @@ const TheHub     = lazy(() => import("./pages/TheHub"));
 const NotFound   = lazy(() => import("./pages/NotFound"));
 
 /* Minimal page-transition shell while lazy chunk loads */
-const PageShell = () => (
-  <div className="page-entry min-h-screen bg-background" aria-busy="true" />
-);
+/* Cinematic page-transition shell while lazy chunk loads */
+const PageShell = () => <Loader />;
 
 const queryClient = new QueryClient();
 
