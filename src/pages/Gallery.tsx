@@ -44,7 +44,7 @@ const Gallery = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/85 to-primary/60" />
         <div className="absolute -top-24 right-[-10%] h-[420px] w-[420px] rounded-full bg-accent/20 blur-[120px]" />
-        <div className="relative container mx-auto px-6">
+        <div className="relative container mx-auto px-5 sm:px-6 lg:px-10">
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.25em] backdrop-blur">
               <Camera className="h-3.5 w-3.5 text-accent" /> Event Archive
@@ -73,8 +73,8 @@ const Gallery = () => {
       </section>
 
       {/* ---------- Masonry archive ---------- */}
-      <section className="py-20 md:py-28">
-        <div className="container mx-auto px-6">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-28">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-10">
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
             {ktuAll.slice(0, visible).map((src, i) => (
               <button

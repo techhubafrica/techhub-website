@@ -13,6 +13,7 @@ import {
   portfolioGmo, portfolioOfie, portfolioThreatLock,
 } from "@/assets/photos";
 import { ktuHero } from "@/assets/ktu";
+import Marquee from "@/components/Marquee";
 
 
 
@@ -276,7 +277,7 @@ const Hero = () => {
       </div>
 
       {/* Vertical brand rail */}
-      <div className="hidden xl:flex absolute left-6 top-0 bottom-0 flex-col items-center justify-between py-32 z-10 pointer-events-none">
+      <div className="hidden xl:flex absolute left-6 top-0 bottom-0 flex-col items-center justify-between py-20 sm:py-24 md:py-32 z-10 pointer-events-none">
         <div className="flex flex-col items-center gap-4">
           <div className="w-px h-16 bg-gradient-to-b from-transparent to-primary-foreground/30" />
           <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary-foreground/45 [writing-mode:vertical-rl] rotate-180">
@@ -391,7 +392,7 @@ const Hero = () => {
 
           {/* Floating stat */}
           <div className="flex items-end gap-6">
-            <div className="px-6 py-4 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 backdrop-blur-sm animate-float">
+            <div className="px-5 sm:px-6 lg:px-10 py-4 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 backdrop-blur-sm animate-float">
               <p className="font-display font-black text-4xl leading-none text-primary-foreground">
                 {slide.stat.k}
               </p>
@@ -415,26 +416,11 @@ const Hero = () => {
    MARQUEE
    ============================================================ */
 
-const Marquee = () => {
-  const text = "Connecting Innovators · Fostering Talent · Showcasing Excellence";
-  return (
-    <div className="relative bg-primary text-primary-foreground py-4 overflow-hidden border-y border-primary-foreground/10">
-      <div className="animate-marquee whitespace-nowrap flex">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <span key={i} className="text-xs md:text-sm font-bold tracking-[0.35em] uppercase mx-10 text-primary-foreground/60">
-            {text} <span className="text-accent">✦</span>
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 /* ============================================================
    VISION & MISSION — cream chapter with overlapping accent
    ============================================================ */
 const VisionMission = () => (
-  <section id="vision" className="relative py-28 md:py-36 px-6 overflow-hidden">
+  <section id="vision" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 overflow-hidden">
     <div className="absolute -top-24 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-30 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
     <div className="relative max-w-7xl mx-auto">
       <div className="flex items-baseline gap-6 mb-16">
@@ -445,7 +431,7 @@ const VisionMission = () => (
 
       <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
         <div className="lg:col-span-7">
-          <h2 className="font-display font-extrabold text-primary leading-[0.9] mb-12 text-[3.5rem] md:text-[5rem] tracking-tight">
+          <h2 className="font-display font-extrabold text-primary leading-[0.9] mb-12 text-[2.2rem] sm:text-[3.5rem] md:text-[5rem] tracking-tight">
             A future where
             <br />
             Africa <span className="italic font-light text-accent">leads.</span>
@@ -479,7 +465,7 @@ const VisionMission = () => (
    CAMPUS TOURS — asymmetric break-out
    ============================================================ */
 const CampusTours = () => (
-  <section id="campus" className="relative py-28 md:py-36 px-6 bg-secondary text-primary-foreground overflow-hidden">
+  <section id="campus" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-secondary text-primary-foreground overflow-hidden">
     <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
@@ -505,7 +491,7 @@ const CampusTours = () => (
 
       <div className="lg:col-span-6 lg:pl-8">
         <span className="eyebrow text-accent">02 — Flagship Program</span>
-        <h2 className="font-display font-extrabold leading-[0.9] mt-6 mb-8 text-[3rem] md:text-[4.5rem] tracking-tight">
+        <h2 className="font-display font-extrabold leading-[0.9] mt-6 mb-8 text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
           Tech For All
           <br />
           <span className="italic font-light text-accent">Campus Tours</span> 2026
@@ -538,14 +524,14 @@ const initiatives = [
 ];
 
 const Initiatives = () => (
-  <section id="events" className="relative py-28 md:py-36 px-6 bg-cream overflow-hidden">
+  <section id="events" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-cream overflow-hidden">
     <div className="absolute top-40 -left-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-30 pointer-events-none bg-[radial-gradient(circle,hsl(151_57%_35%/0.4),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16">
         <div>
           <span className="eyebrow text-accent">03 — Core Initiatives</span>
-          <h2 className="font-display font-extrabold text-primary mt-4 leading-[0.9] text-[3rem] md:text-[4.5rem] tracking-tight">
+          <h2 className="font-display font-extrabold text-primary mt-4 leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
             Where the <span className="italic font-light text-accent">work</span>
             <br />
             happens.
@@ -629,14 +615,14 @@ const services = [
 ];
 
 const Services = () => (
-  <section id="services" className="relative py-28 md:py-36 px-6 bg-secondary text-primary-foreground overflow-hidden">
+  <section id="services" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-secondary text-primary-foreground overflow-hidden">
     <div className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_44%/0.4),transparent_70%)]" />
     <div className="relative max-w-7xl mx-auto">
       <div className="flex items-baseline gap-6 mb-16">
         <span className="eyebrow text-accent">04 — Services</span>
         <div className="flex-1 divider-elegant-light" />
       </div>
-      <h2 className="font-display font-extrabold leading-[0.9] mb-16 text-[3rem] md:text-[4.5rem] tracking-tight max-w-3xl">
+      <h2 className="font-display font-extrabold leading-[0.9] mb-16 text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight max-w-3xl">
         Precision engineering for the
         <span className="italic font-light text-accent"> next continent</span>.
       </h2>
@@ -750,14 +736,14 @@ const portfolio = [
 ];
 
 const Portfolio = () => (
-  <section id="portfolio" className="relative py-28 md:py-36 px-6 bg-primary text-primary-foreground overflow-hidden">
+  <section id="portfolio" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-primary text-primary-foreground overflow-hidden">
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(151_57%_35%),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
         <div>
           <span className="eyebrow text-accent">07 — Investment Portfolio</span>
-          <h2 className="font-display font-extrabold mt-4 leading-[0.9] text-[3rem] md:text-[4.5rem] tracking-tight">
+          <h2 className="font-display font-extrabold mt-4 leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
             Companies scaling
             <br />
             <span className="italic font-light text-accent">innovation</span> across industries.
@@ -805,14 +791,14 @@ const testimonials = [
 ];
 
 const Testimonials = () => (
-  <section className="relative py-28 md:py-36 px-6 overflow-hidden">
+  <section className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 overflow-hidden">
     <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-3xl opacity-25 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
     <div className="relative max-w-7xl mx-auto">
       <div className="flex items-baseline gap-6 mb-16">
         <span className="eyebrow text-accent">08 — Voices</span>
         <div className="flex-1 divider-elegant" />
       </div>
-      <h2 className="font-display font-extrabold text-primary leading-[0.9] mb-16 text-[3rem] md:text-[4.5rem] tracking-tight">
+      <h2 className="font-display font-extrabold text-primary leading-[0.9] mb-16 text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
         What people <span className="italic font-light text-accent">say.</span>
       </h2>
 
@@ -859,7 +845,7 @@ const Testimonials = () => (
    HUB CTA — cinematic close
    ============================================================ */
 const HubCTA = () => (
-  <section id="hub" className="relative py-32 md:py-40 px-6 bg-primary text-primary-foreground overflow-hidden">
+  <section id="hub" className="relative py-20 sm:py-14 sm:py-20 md:py-24 lg:py-32 lg:py-40 px-5 sm:px-6 lg:px-10 bg-primary text-primary-foreground overflow-hidden">
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 bg-[radial-gradient(circle,hsl(151_57%_40%),transparent_70%)]" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 bg-[radial-gradient(circle,hsl(28_92%_44%/0.4),transparent_70%)]" />
@@ -894,7 +880,7 @@ const Index = () => (
     <Header />
     <main>
       <Hero />
-      <Marquee />
+      <Marquee text="Connecting Innovators · Fostering Talent · Showcasing Excellence" />
       <VisionMission />
       <CampusTours />
       <Initiatives />

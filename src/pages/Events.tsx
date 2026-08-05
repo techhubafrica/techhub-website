@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { heroAudience, heroCelebration, meetup2026Flyer, hackathonFlyer, campusTourFlyer, networking } from "@/assets/photos";
 import { useReveal } from "@/hooks/use-reveal";
+import Marquee from "@/components/Marquee";
 
 const eventsList = [
   {
@@ -38,21 +39,6 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
     </div>
   );
 }
-
-const Marquee = () => {
-  const text = "Conferences · Campus Tours · Hackathons · Tech Guru Meetup 2026";
-  return (
-    <div className="relative bg-primary text-primary-foreground py-4 overflow-hidden border-y border-primary-foreground/10">
-      <div className="animate-marquee whitespace-nowrap flex">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <span key={i} className="text-xs md:text-sm font-bold tracking-[0.35em] uppercase mx-10 text-primary-foreground/60">
-            {text} <span className="text-accent">✦</span>
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const Events = () => {
   const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
@@ -94,7 +80,7 @@ const Events = () => {
         ghost="EVENTS"
       />
 
-      <Marquee />
+      <Marquee text="Conferences · Campus Tours · Hackathons · Tech Guru Meetup 2026" />
 
       <main className="page-entry bg-background overflow-hidden">
         {/* ══ FEATURED EVENT ══ */}
@@ -110,7 +96,7 @@ const Events = () => {
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32">
+          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 py-14 sm:py-20 md:py-24 lg:py-32">
             <div className="card-lift sheen max-w-2xl rounded-3xl border border-primary-foreground/15 bg-primary/60 p-8 md:p-12 shadow-2xl"
               style={{ backdropFilter: "blur(18px)" }}>
               <div className="flex items-center gap-3 mb-6">
@@ -175,7 +161,7 @@ const Events = () => {
         </section>
 
         {/* ══ ALL EVENTS ══ */}
-        <section className="relative px-6 py-28 md:py-36 max-w-7xl mx-auto cv-auto">
+        <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto cv-auto">
           <div className="absolute top-1/2 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
 
           <Reveal className="mb-10">
@@ -183,7 +169,7 @@ const Events = () => {
               <span className="eyebrow text-accent">02 — Calendar</span>
               <div className="flex-1 divider-elegant" />
             </div>
-            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[3rem] md:text-[4.5rem] tracking-tight">
+            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
               Upcoming & Past <span className="italic font-light text-accent">Gatherings.</span>
             </h2>
           </Reveal>
@@ -227,7 +213,7 @@ const Events = () => {
                     </div>
                     <div className="lg:col-span-3 flex items-center justify-center p-6 lg:p-9 border-t lg:border-t-0 lg:border-l border-primary/10">
                       <button onClick={() => openRsvp(e.title)}
-                        className="btn-magnetic w-full py-3.5 px-6 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-all duration-250">
+                        className="btn-magnetic w-full py-3.5 px-5 sm:px-6 lg:px-10 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-all duration-250">
                         RSVP / Register
                       </button>
                     </div>

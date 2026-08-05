@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { BookOpen, Award, CheckCircle2, X, ArrowUpRight } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
+import Marquee from "@/components/Marquee";
 
 const objectives = [
   "Provide a platform for knowledge sharing and skills development across software, cloud, and product fields.",
@@ -35,21 +36,6 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
   );
 }
 
-const Marquee = () => {
-  const text = "1-on-1 Coaching · Leadership · Technical Mentorship · 6-Month Cycles";
-  return (
-    <div className="relative bg-primary text-primary-foreground py-4 overflow-hidden border-y border-primary-foreground/10">
-      <div className="animate-marquee whitespace-nowrap flex">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <span key={i} className="text-xs md:text-sm font-bold tracking-[0.35em] uppercase mx-10 text-primary-foreground/60">
-            {text} <span className="text-accent">✦</span>
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const Mentorship = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [role, setRole] = useState<"Mentee" | "Mentor">("Mentee");
@@ -77,11 +63,11 @@ const Mentorship = () => {
         ]}
       />
 
-      <Marquee />
+      <Marquee text="1-on-1 Coaching · Leadership · Technical Mentorship · 6-Month Cycles" />
 
       <main className="page-entry bg-background overflow-hidden">
         {/* ══ OBJECTIVES — dark section ══ */}
-        <section className="relative bg-secondary text-primary-foreground overflow-hidden px-6 py-28 md:py-36">
+        <section className="relative bg-secondary text-primary-foreground overflow-hidden px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36">
           <div className="noise-bg" />
           <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
           <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -108,7 +94,7 @@ const Mentorship = () => {
         </section>
 
         {/* ══ BENEFITS ══ */}
-        <section className="relative px-6 py-28 md:py-36 max-w-7xl mx-auto cv-auto">
+        <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto cv-auto">
           <div className="absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
 
           <Reveal className="mb-12">
@@ -116,7 +102,7 @@ const Mentorship = () => {
               <span className="eyebrow text-accent">02 — Choose Your Path</span>
               <div className="flex-1 divider-elegant" />
             </div>
-            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[3rem] md:text-[4.5rem] tracking-tight">
+            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
               Get Guidance or <span className="italic font-light text-accent">Give Back.</span>
             </h2>
           </Reveal>

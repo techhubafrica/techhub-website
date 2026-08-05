@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { Building2, ShoppingBag, Wheat, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
+import Marquee from "@/components/Marquee";
 
 const ventures = [
   {
@@ -56,21 +57,6 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
   );
 }
 
-const Marquee = () => {
-  const text = "PropTech · AgriTech · E-Commerce · Cybersecurity · High Impact Ventures";
-  return (
-    <div className="relative bg-primary text-primary-foreground py-4 overflow-hidden border-y border-primary-foreground/10">
-      <div className="animate-marquee whitespace-nowrap flex">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <span key={i} className="text-xs md:text-sm font-bold tracking-[0.35em] uppercase mx-10 text-primary-foreground/60">
-            {text} <span className="text-accent">✦</span>
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const Portfolio = () => (
   <>
     <Header />
@@ -87,10 +73,10 @@ const Portfolio = () => (
       ]}
     />
 
-    <Marquee />
+    <Marquee text="PropTech · AgriTech · E-Commerce · Cybersecurity · High Impact Ventures" />
 
     <main className="page-entry bg-background overflow-hidden">
-      <section className="relative px-6 py-28 md:py-36 max-w-7xl mx-auto space-y-6">
+      <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto space-y-6">
         <div className="absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
 
         <Reveal className="mb-12">
@@ -98,7 +84,7 @@ const Portfolio = () => (
             <span className="eyebrow text-accent">01 — Active Holdings</span>
             <div className="flex-1 divider-elegant" />
           </div>
-          <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[3rem] md:text-[4.5rem] tracking-tight">
+          <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
             Companies scaling <span className="italic font-light text-accent">innovation</span> across industries.
           </h2>
         </Reveal>
@@ -125,7 +111,7 @@ const Portfolio = () => (
               {/* CTA */}
               <div className="lg:col-span-3 flex items-center justify-center p-8 lg:p-10 border-t lg:border-t-0 lg:border-l border-primary/10">
                 <a href={v.link} target="_blank" rel="noreferrer"
-                  className="btn-magnetic group/btn w-full flex flex-col items-center gap-3 py-6 px-6 rounded-2xl border border-primary/10 hover:border-accent/40 hover:bg-accent/5 transition-all duration-400 text-center"
+                  className="btn-magnetic group/btn w-full flex flex-col items-center gap-3 py-6 px-5 sm:px-6 lg:px-10 rounded-2xl border border-primary/10 hover:border-accent/40 hover:bg-accent/5 transition-all duration-400 text-center"
                 >
                   <div className="w-10 h-10 rounded-full border border-accent/25 flex items-center justify-center text-accent group-hover/btn:bg-accent group-hover/btn:text-accent-foreground group-hover/btn:border-accent transition-all">
                     <ArrowUpRight className="w-4 h-4" />

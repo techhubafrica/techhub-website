@@ -7,6 +7,7 @@ import { Mic, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { heroAudience, heroCelebration, heroPanel, heroKeynote, networking } from "@/assets/photos";
 import { ktuGallery } from "@/assets/ktu";
 import { useReveal } from "@/hooks/use-reveal";
+import Marquee from "@/components/Marquee";
 
 const articles = [
   { id: 1, num: "01", title: "AI Infrastructure Trends Across West Africa", category: "TechNews Tuesday", date: "July 2026", excerpt: "How African cloud providers and developer communities are deploying low-latency LLMs locally — breaking the dependency on foreign infrastructure." },
@@ -22,21 +23,6 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
     </div>
   );
 }
-
-const Marquee = () => {
-  const text = "TechNews Tuesday · TechTip Thursday · Ecosystem Highlights · TechTalks";
-  return (
-    <div className="relative bg-primary text-primary-foreground py-4 overflow-hidden border-y border-primary-foreground/10">
-      <div className="animate-marquee whitespace-nowrap flex">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <span key={i} className="text-xs md:text-sm font-bold tracking-[0.35em] uppercase mx-10 text-primary-foreground/60">
-            {text} <span className="text-accent">✦</span>
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const Media = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -60,11 +46,11 @@ const Media = () => {
         ghost="MEDIA"
       />
 
-      <Marquee />
+      <Marquee text="TechNews Tuesday · TechTip Thursday · Ecosystem Highlights · TechTalks" />
 
       <main className="page-entry bg-background overflow-hidden">
         {/* ══ SPEAKER CTA ══ */}
-        <section className="relative bg-primary text-primary-foreground overflow-hidden px-6 py-16">
+        <section className="relative bg-primary text-primary-foreground overflow-hidden px-5 sm:px-6 lg:px-10 py-16">
           <div className="noise-bg" />
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
           <div className="relative max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
@@ -84,7 +70,7 @@ const Media = () => {
         </section>
 
         {/* ══ ARTICLE GRID ══ */}
-        <section className="relative px-6 py-28 md:py-36 max-w-7xl mx-auto">
+        <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto">
           <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
 
           <Reveal className="mb-10">
@@ -92,7 +78,7 @@ const Media = () => {
               <span className="eyebrow text-accent">01 — Publications</span>
               <div className="flex-1 divider-elegant" />
             </div>
-            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[3rem] md:text-[4.5rem] tracking-tight">
+            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
               Ecosystem <span className="italic font-light text-accent">Stories & Insights.</span>
             </h2>
           </Reveal>
@@ -113,7 +99,7 @@ const Media = () => {
             {filtered.map((a, i) => (
               <Reveal key={a.id} delay={i * 0.08}>
                 <article className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-background hover:border-primary/25 transition-all duration-500 overflow-hidden grid grid-cols-1 md:grid-cols-12">
-                  <div className="md:col-span-1 flex items-center justify-center px-6 py-6 md:py-10 border-b md:border-b-0 md:border-r border-primary/10">
+                  <div className="md:col-span-1 flex items-center justify-center px-5 sm:px-6 lg:px-10 py-6 md:py-10 border-b md:border-b-0 md:border-r border-primary/10">
                     <span className="font-display font-black text-3xl leading-none text-primary/20 select-none">{a.num}</span>
                   </div>
                   <div className="md:col-span-8 p-6 md:p-8">
@@ -138,7 +124,7 @@ const Media = () => {
         </section>
 
         {/* ══ PHOTO GALLERY ══ */}
-        <section className="relative px-6 pb-36 max-w-7xl mx-auto cv-auto">
+        <section className="relative px-5 sm:px-6 lg:px-10 pb-36 max-w-7xl mx-auto cv-auto">
           <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
 
           <Reveal className="mb-12">
