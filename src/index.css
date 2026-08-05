@@ -432,3 +432,32 @@
   .stagger-4 { animation-delay: 0.32s; }
   .stagger-5 { animation-delay: 0.4s; }
 }
+
+@layer base {
+  /* No accidental horizontal scroll on small screens */
+  html, body { overflow-x: hidden; }
+
+  /* Consistent visible focus for keyboard users */
+  :focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Fluid, never-overflowing display type */
+  h1, h2 { text-wrap: balance; overflow-wrap: break-word; }
+  p { text-wrap: pretty; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .reveal-left, .reveal-scale, .reveal-group > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
