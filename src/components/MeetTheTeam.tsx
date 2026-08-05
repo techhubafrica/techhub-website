@@ -274,7 +274,7 @@ const MeetTheTeam = () => {
       <section
         ref={sectionRef}
         id="team"
-        className="relative py-24 md:py-32 overflow-hidden bg-background"
+        className="relative py-14 sm:py-20 md:py-24 lg:py-32 overflow-hidden bg-background"
       >
         {/* Mouse spotlight */}
         <div
@@ -300,7 +300,7 @@ const MeetTheTeam = () => {
         ))}
 
         {/* ── Heading ─────────────────────────────────────────── */}
-        <div className="relative max-w-3xl mx-auto px-6 text-center z-10">
+        <div className="relative max-w-3xl mx-auto px-5 sm:px-6 lg:px-10 text-center z-10">
           <span className="eyebrow text-accent tracking-[0.4em]">— Our People</span>
           <h2 className="font-display font-extrabold text-primary leading-[0.93] text-[2.75rem] md:text-[4.25rem] tracking-tight mt-3">
             Meet the <span className="italic font-light text-accent">team.</span>
@@ -458,7 +458,7 @@ const MeetTheTeam = () => {
         </div>
 
         {/* ── Captions ────────────────────────────────────────── */}
-        <div className="relative max-w-4xl mx-auto px-6 mt-6 md:mt-10 z-10">
+        <div className="relative max-w-4xl mx-auto px-5 sm:px-6 lg:px-10 mt-6 md:mt-10 z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
             {captions.map((c) => (
               <div key={c.title}>

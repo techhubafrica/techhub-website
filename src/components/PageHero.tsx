@@ -31,7 +31,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats }: PageHeroProps) => {
   return (
     <section
       ref={ref}
-      className="relative bg-primary text-primary-foreground overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28 select-none"
+      className="relative bg-primary text-primary-foreground overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 select-none"
     >
       {/* Grain noise */}
       <div
@@ -89,50 +89,51 @@ const PageHero = ({ tag, title, body, ghost, cta, stats }: PageHeroProps) => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 xl:px-20">
+      <div className="relative z-10 shell xl:px-20">
         {/* Tag pill */}
-        <div className="inline-flex items-center gap-3 mb-8 px-4 py-1.5 rounded-full border border-primary-foreground/20 bg-primary-foreground/5">
+        <div className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-3.5 sm:px-4 py-1.5 rounded-full border border-primary-foreground/20 bg-primary-foreground/5">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-primary-foreground/70">{tag}</span>
+          <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.28em] sm:tracking-[0.35em] text-primary-foreground/70">{tag}</span>
         </div>
 
         {/* Display title */}
         <h1
-          className="font-display font-black tracking-[-0.045em] text-primary-foreground animate-fade-up"
-          style={{ fontSize: "clamp(2.6rem, 7vw, 6rem)", lineHeight: 0.9, textShadow: "0 20px 60px hsl(155 61% 4% / 0.7)" }}
+          className="font-display font-black tracking-[-0.04em] text-primary-foreground animate-fade-up max-w-[22ch]"
+          style={{ fontSize: "clamp(2.1rem, 8.5vw, 6rem)", lineHeight: 0.94, textShadow: "0 20px 60px hsl(155 61% 4% / 0.7)" }}
         >
           {title}
         </h1>
 
         {/* Accent divider */}
-        <div className="flex items-center gap-4 mt-8 mb-8 animate-fade-up stagger-1">
-          <div className="h-px w-16 bg-gradient-to-r from-accent to-transparent" />
+        <div className="flex items-center gap-4 mt-6 mb-6 sm:mt-8 sm:mb-8 animate-fade-up stagger-1">
+          <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-accent to-transparent" />
           <span className="w-1.5 h-1.5 rounded-full bg-accent/60" />
         </div>
 
         {/* Body */}
-        <p className="animate-fade-up stagger-2 text-primary-foreground/65 text-base md:text-[1.15rem] leading-[1.8] max-w-[580px]">
+        <p className="animate-fade-up stagger-2 text-primary-foreground/65 text-[0.95rem] sm:text-base md:text-[1.15rem] leading-[1.75] sm:leading-[1.8] max-w-[580px]">
           {body}
         </p>
 
         {/* Optional CTA */}
-        {cta && <div className="mt-10 animate-fade-up stagger-3">{cta}</div>}
+        {cta && <div className="mt-8 sm:mt-10 animate-fade-up stagger-3">{cta}</div>}
 
         {/* Optional stats bar */}
         {stats && stats.length > 0 && (
-          <div className="mt-14 pt-10 border-t border-primary-foreground/10 grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-up stagger-3">
+          <div className="mt-10 pt-8 sm:mt-14 sm:pt-10 border-t border-primary-foreground/10 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-7 sm:gap-8 animate-fade-up stagger-3">
             {stats.map((s) => (
               <div key={s.label}>
-                <p className="font-display font-black text-3xl md:text-4xl text-primary-foreground leading-none">{s.val}</p>
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mt-2">{s.label}</p>
+                <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-primary-foreground leading-none">{s.val}</p>
+                <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.22em] sm:tracking-[0.3em] text-accent mt-2">{s.label}</p>
               </div>
             ))}
           </div>
         )}
       </div>
 
+
       {/* Bottom edge fade */}
-      <div className="absolute inset-x-0 bottom-0 h-20 z-[2] pointer-events-none bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-10 sm:h-20 z-[2] pointer-events-none bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };
