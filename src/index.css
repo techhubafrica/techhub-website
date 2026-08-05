@@ -425,6 +425,17 @@
     to   { opacity: 1; transform: scale(1) translateY(0); }
   }
 
+  /* ── Loader ──────────────────────────────────────────────────── */
+  @keyframes loader-spin { to { transform: rotate(360deg); } }
+  .loader-spin { animation: loader-spin 1.5s cubic-bezier(0.65,0,0.35,1) infinite; }
+  .loader-spin-slow { animation: loader-spin 6s linear infinite reverse; }
+
+  @keyframes loader-bar {
+    0%   { transform: translateX(-110%); }
+    100% { transform: translateX(330%); }
+  }
+  .loader-bar { animation: loader-bar 1.4s cubic-bezier(0.45,0,0.25,1) infinite; }
+
   /* Staggered reveal helpers */
   .stagger-1 { animation-delay: 0.08s; }
   .stagger-2 { animation-delay: 0.16s; }
