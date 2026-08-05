@@ -58,7 +58,7 @@ const Loader = () => (
         </svg>
 
         <div className="absolute inset-0 flex items-center justify-center">
-          <Logo size="sm" onDark className="h-9 sm:h-11 animate-pulse-glow" />
+          <Logo size="sm" onDark className="h-9 sm:h-11" />
         </div>
       </div>
 
