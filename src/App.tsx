@@ -5,6 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ScrollToTop from "./components/ScrollToTop";
+import Loader from "./components/Loader";
 
 /* ── Code-split every route ───────────────────────────────────── */
 import Index from "./pages/Index"; // keep homepage eager (first paint)
@@ -21,9 +22,8 @@ const TheHub     = lazy(() => import("./pages/TheHub"));
 const NotFound   = lazy(() => import("./pages/NotFound"));
 
 /* Minimal page-transition shell while lazy chunk loads */
-const PageShell = () => (
-  <div className="page-entry min-h-screen bg-background" aria-busy="true" />
-);
+/* Cinematic page-transition shell while lazy chunk loads */
+const PageShell = () => <Loader />;
 
 const queryClient = new QueryClient();
 
