@@ -175,7 +175,7 @@ const Events = () => {
           </Reveal>
 
           {/* Tabs */}
-          <div className="flex items-center gap-8 mb-12 border-b border-primary/10">
+          <div className="rail items-center gap-6 sm:gap-8 mb-10 sm:mb-12 border-b border-primary/10 -mx-1 px-1">
             {(["upcoming", "past"] as const).map((t) => (
               <button key={t} onClick={() => setTab(t)}
                 className={`pb-4 text-xs font-black uppercase tracking-[0.22em] border-b-2 -mb-px transition-all duration-250 ${

@@ -91,7 +91,7 @@ const Careers = () => {
           </Reveal>
 
           {/* Filters */}
-          <div className="flex items-center gap-8 mb-12 border-b border-primary/10">
+          <div className="rail items-center gap-6 sm:gap-8 mb-10 sm:mb-12 border-b border-primary/10 -mx-1 px-1">
             {(["all", "Full-Time", "Internship"] as const).map((f) => (
               <button key={f} onClick={() => setFilter(f)}
                 className={`pb-4 text-xs font-black uppercase tracking-[0.22em] border-b-2 -mb-px transition-all duration-250 ${filter === f ? "border-accent text-accent" : "border-transparent text-primary/40 hover:text-primary/70"}`}>
