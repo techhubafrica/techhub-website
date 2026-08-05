@@ -99,7 +99,7 @@ const Media = () => {
             {filtered.map((a, i) => (
               <Reveal key={a.id} delay={i * 0.08}>
                 <article className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-background hover:border-primary/25 transition-all duration-500 overflow-hidden grid grid-cols-1 md:grid-cols-12">
-                  <div className="md:col-span-1 flex items-center justify-center px-5 sm:px-6 lg:px-10 py-6 md:py-10 border-b md:border-b-0 md:border-r border-primary/10">
+                  <div className="hidden md:col-span-1 md:flex items-center justify-center px-6 lg:px-10 py-10 border-r border-primary/10">
                     <span className="font-display font-black text-3xl leading-none text-primary/20 select-none">{a.num}</span>
                   </div>
                   <div className="md:col-span-8 p-6 md:p-8">

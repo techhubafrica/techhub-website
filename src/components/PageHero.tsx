@@ -133,7 +133,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats }: PageHeroProps) => {
 
 
       {/* Bottom edge fade */}
-      <div className="absolute inset-x-0 bottom-0 h-20 z-[2] pointer-events-none bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-10 sm:h-20 z-[2] pointer-events-none bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };
