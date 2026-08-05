@@ -31,7 +31,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats }: PageHeroProps) => {
   return (
     <section
       ref={ref}
-      className="relative bg-primary text-primary-foreground overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28 select-none"
+      className="relative bg-primary text-primary-foreground overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 select-none"
     >
       {/* Grain noise */}
       <div
