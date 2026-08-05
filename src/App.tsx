@@ -5,6 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ScrollToTop from "./components/ScrollToTop";
+import Loader from "./components/Loader";
 
 /* ── Code-split every route ───────────────────────────────────── */
 import Index from "./pages/Index"; // keep homepage eager (first paint)
