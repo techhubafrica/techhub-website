@@ -37,6 +37,16 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
       ref={ref}
       className="relative bg-primary text-primary-foreground overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 select-none"
     >
+      {/* Backdrop photograph */}
+      {image && (
+        <img
+          src={image}
+          alt={imageAlt ?? ""}
+          loading="eager"
+          className="absolute inset-0 w-full h-full object-cover animate-slow-zoom"
+        />
+      )}
+
       {/* Grain noise */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none opacity-[0.055]"
@@ -46,12 +56,13 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         }}
       />
 
-      {/* Directional gradient — left bias for text legibility */}
+      {/* Directional gradient — left bias for text legibility, image stays readable */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
-          background:
-            "linear-gradient(110deg, hsl(155 61% 6% / 0.97) 0%, hsl(155 61% 10% / 0.82) 45%, hsl(155 61% 14% / 0.4) 100%)",
+          background: image
+            ? "linear-gradient(105deg, hsl(155 61% 6% / 0.88) 0%, hsl(155 61% 8% / 0.6) 42%, hsl(155 61% 10% / 0.15) 100%)"
+            : "linear-gradient(110deg, hsl(155 61% 6% / 0.97) 0%, hsl(155 61% 10% / 0.82) 45%, hsl(155 61% 14% / 0.4) 100%)",
         }}
       />
 
@@ -65,7 +76,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
       />
 
       {/* Top vignette */}
-      <div className="absolute inset-x-0 top-0 h-32 z-[2] pointer-events-none bg-gradient-to-b from-primary to-transparent" />
+      <div className={`absolute inset-x-0 top-0 ${image ? "h-24 opacity-70" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-primary to-transparent`} />
 
       {/* Amber accent glow — top right */}
       <div className="absolute -top-32 right-10 w-[600px] h-[500px] rounded-full blur-3xl z-[1] pointer-events-none opacity-25"
