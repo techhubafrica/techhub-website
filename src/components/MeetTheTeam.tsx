@@ -238,21 +238,34 @@ const TeamModal = ({
 const MeetTheTeam = () => {
   const [hovered,  setHovered]  = useState<number | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
-  const [mouse,    setMouse]    = useState({ x: 50, y: 50 });
   const sectionRef              = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !window.matchMedia("(pointer: fine)").matches
+    )
+      return;
+
+    let x = 50, y = 50, frame = 0;
+    const paint = () => {
+      frame = 0;
+      el.style.setProperty("--sx", `${x.toFixed(1)}%`);
+      el.style.setProperty("--sy", `${y.toFixed(1)}%`);
+    };
     const h = (e: MouseEvent) => {
       const r = el.getBoundingClientRect();
-      setMouse({
-        x: ((e.clientX - r.left) / r.width)  * 100,
-        y: ((e.clientY - r.top)  / r.height) * 100,
-      });
+      x = ((e.clientX - r.left) / r.width) * 100;
+      y = ((e.clientY - r.top) / r.height) * 100;
+      if (!frame) frame = requestAnimationFrame(paint);
     };
     el.addEventListener("mousemove", h, { passive: true });
-    return () => el.removeEventListener("mousemove", h);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      el.removeEventListener("mousemove", h);
+    };
   }, []);
 
   const handlePrev = () => setSelected((s) => (s !== null && s > 0     ? s - 1 : s));
@@ -279,7 +292,7 @@ const MeetTheTeam = () => {
         {/* Mouse spotlight */}
         <div
           className="absolute inset-0 pointer-events-none transition-[background] duration-300 z-0"
-          style={{ background: `radial-gradient(680px circle at ${mouse.x}% ${mouse.y}%, hsl(28 92% 50% / 0.07), transparent 65%)` }}
+          style={{ background: "radial-gradient(680px circle at var(--sx, 50%) var(--sy, 50%), hsl(28 92% 50% / 0.07), transparent 65%)" }}
         />
 
         {/* Ghost text */}
