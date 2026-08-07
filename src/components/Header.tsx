@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import Logo from "@/components/Logo";
@@ -18,18 +18,27 @@ const navLinks = [
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => {
+    let frame = 0;
+    const paint = () => {
+      frame = 0;
       const y = window.scrollY;
       setScrolled(y > 40);
       const h = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(h > 0 ? Math.min(100, (y / h) * 100) : 0);
+      const pct = h > 0 ? Math.min(100, (y / h) * 100) : 0;
+      if (barRef.current) barRef.current.style.width = `${pct.toFixed(2)}%`;
     };
-    onScroll();
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+    paint();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
@@ -100,8 +109,8 @@ const Header = () => {
 
           {/* Scroll progress */}
           <div
-            className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-accent/50 to-accent transition-[width] duration-150 rounded-full"
-            style={{ width: `${progress}%` }}
+            ref={barRef}
+            className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-accent/50 to-accent rounded-full"
           />
         </div>
 
