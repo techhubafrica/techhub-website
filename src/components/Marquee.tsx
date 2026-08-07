@@ -11,7 +11,7 @@ interface MarqueeProps {
  */
 const Marquee = ({ text, tone = "primary" }: MarqueeProps) => (
   <div
-    className={`relative overflow-hidden border-y border-primary-foreground/10 py-3 sm:py-4 ${
+    className={`relative overflow-hidden py-3 sm:py-4 ${
       tone === "primary" ? "bg-primary" : "bg-secondary"
     } text-primary-foreground`}
     aria-hidden="true"
