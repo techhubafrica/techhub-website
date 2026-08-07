@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { heroBackdrops } from "@/assets/ktu";
 import { ShieldCheck, Code, Rocket, GraduationCap, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
@@ -122,6 +123,8 @@ const Services = () => {
         title={<>Engineering solutions for<br /><span className="italic font-light text-accent">Africa's digital future.</span></>}
         body="From enterprise software and cybersecurity to startup incubation and talent development — technical excellence delivered across the continent."
         ghost="BUILD"
+        image={heroBackdrops.services}
+        imageAlt="Engineers working through a build session at Tech Hub Africa"
         stats={[
           { val: "50+", label: "Projects Shipped" },
           { val: "12k+", label: "Developers Reached" },

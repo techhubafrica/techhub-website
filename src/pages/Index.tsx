@@ -237,18 +237,18 @@ const Hero = () => {
 
       {/* ══ CINEMATIC OVERLAYS ══ */}
       {/* brand-tinted base */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-primary/55 mix-blend-multiply" />
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-primary/35 mix-blend-multiply" />
       {/* directional gradient for text legibility */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(100deg, hsl(155 61% 8% / 0.92) 0%, hsl(155 61% 10% / 0.72) 38%, hsl(155 61% 12% / 0.25) 68%, transparent 100%)",
+            "linear-gradient(100deg, hsl(155 61% 8% / 0.82) 0%, hsl(155 61% 10% / 0.5) 38%, hsl(155 61% 12% / 0.12) 68%, transparent 100%)",
         }}
       />
       {/* top & bottom vignettes */}
-      <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-primary/85 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-64 z-[1] pointer-events-none bg-gradient-to-t from-primary/95 via-primary/40 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-primary/70 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-64 z-[1] pointer-events-none bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
       {/* amber ambient glow */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"

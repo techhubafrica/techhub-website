@@ -3,9 +3,9 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { heroBackdrops, ktuGallery } from "@/assets/ktu";
 import { Mic, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { heroAudience, heroCelebration, heroPanel, heroKeynote, networking } from "@/assets/photos";
-import { ktuGallery } from "@/assets/ktu";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 
@@ -44,6 +44,8 @@ const Media = () => {
         title={<>Insights, innovation,<br />and <span className="italic font-light text-accent">TechTalks.</span></>}
         body="Your weekly destination for TechNews Tuesday, TechTip Thursday, media highlights, and speaking engagements from the African tech ecosystem."
         ghost="MEDIA"
+        image={heroBackdrops.media}
+        imageAlt="Speaker presenting at a Tech Hub Africa TechTalk"
       />
 
       <Marquee text="TechNews Tuesday · TechTip Thursday · Ecosystem Highlights · TechTalks" />

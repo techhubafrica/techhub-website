@@ -6,15 +6,15 @@ import Logo from "@/components/Logo";
  */
 const Loader = () => (
   <div
-    className="fixed inset-0 z-[100] flex items-center justify-center bg-primary overflow-hidden"
+    className="fixed inset-0 z-[100] flex items-center justify-center bg-background overflow-hidden"
     role="status"
     aria-live="polite"
     aria-busy="true"
   >
     {/* ambient glows */}
     <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vmin] h-[70vmin] rounded-full bg-accent/20 blur-[90px] animate-pulse-glow" />
-      <div className="absolute -bottom-24 -right-16 w-[45vmin] h-[45vmin] rounded-full bg-secondary/60 blur-[80px]" />
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vmin] h-[70vmin] rounded-full bg-accent/15 blur-[90px] animate-pulse-glow" />
+      <div className="absolute -bottom-24 -right-16 w-[45vmin] h-[45vmin] rounded-full bg-secondary/15 blur-[80px]" />
     </div>
     <div className="noise-bg" />
 
@@ -27,7 +27,7 @@ const Loader = () => (
             cy="100"
             r="78"
             fill="none"
-            stroke="hsl(40 33% 94% / 0.12)"
+            stroke="hsl(155 61% 15% / 0.12)"
             strokeWidth="1"
           />
           <g className="loader-spin" style={{ transformOrigin: "100px 100px" }}>
@@ -49,28 +49,28 @@ const Loader = () => (
               cy="100"
               r="56"
               fill="none"
-              stroke="hsl(40 33% 94% / 0.35)"
+              stroke="hsl(155 61% 15% / 0.22)"
               strokeWidth="1"
               strokeDasharray="4 12"
             />
-            <circle cx="44" cy="100" r="2.5" fill="hsl(40 33% 94% / 0.7)" />
+            <circle cx="44" cy="100" r="2.5" fill="hsl(155 61% 15% / 0.45)" />
           </g>
         </svg>
 
         <div className="absolute inset-0 flex items-center justify-center">
-          <Logo size="sm" onDark className="h-9 sm:h-11" />
+          <Logo size="sm" className="h-9 sm:h-11" />
         </div>
       </div>
 
       {/* wordmark + progress meridian */}
       <div className="flex flex-col items-center gap-4 w-full max-w-[260px]">
-        <span className="eyebrow text-primary-foreground/50 text-center">
+        <span className="eyebrow text-foreground/45 text-center">
           Tech Hub Africa
         </span>
-        <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-primary-foreground/10">
+        <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-foreground/10">
           <div className="loader-bar absolute inset-y-0 w-1/3 rounded-full bg-gradient-to-r from-transparent via-accent to-transparent" />
         </div>
-        <span className="text-[10px] uppercase tracking-[0.32em] text-primary-foreground/35">
+        <span className="text-[10px] uppercase tracking-[0.32em] text-foreground/35">
           Loading
         </span>
       </div>

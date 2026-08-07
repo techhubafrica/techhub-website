@@ -7,9 +7,13 @@ interface PageHeroProps {
   ghost?: string;
   cta?: React.ReactNode;
   stats?: { val: string; label: string }[];
+  /** Optional backdrop photograph for the hero stage. */
+  image?: string;
+  /** Accessible description of the backdrop photograph. */
+  imageAlt?: string;
 }
 
-const PageHero = ({ tag, title, body, ghost, cta, stats }: PageHeroProps) => {
+const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: PageHeroProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [mouse, setMouse] = useState({ x: 50, y: 50 });
 
@@ -33,6 +37,16 @@ const PageHero = ({ tag, title, body, ghost, cta, stats }: PageHeroProps) => {
       ref={ref}
       className="relative bg-primary text-primary-foreground overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 select-none"
     >
+      {/* Backdrop photograph */}
+      {image && (
+        <img
+          src={image}
+          alt={imageAlt ?? ""}
+          loading="eager"
+          className="absolute inset-0 w-full h-full object-cover animate-slow-zoom"
+        />
+      )}
+
       {/* Grain noise */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none opacity-[0.055]"
@@ -42,12 +56,13 @@ const PageHero = ({ tag, title, body, ghost, cta, stats }: PageHeroProps) => {
         }}
       />
 
-      {/* Directional gradient — left bias for text legibility */}
+      {/* Directional gradient — left bias for text legibility, image stays readable */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
-          background:
-            "linear-gradient(110deg, hsl(155 61% 6% / 0.97) 0%, hsl(155 61% 10% / 0.82) 45%, hsl(155 61% 14% / 0.4) 100%)",
+          background: image
+            ? "linear-gradient(105deg, hsl(155 61% 6% / 0.88) 0%, hsl(155 61% 8% / 0.6) 42%, hsl(155 61% 10% / 0.15) 100%)"
+            : "linear-gradient(110deg, hsl(155 61% 6% / 0.97) 0%, hsl(155 61% 10% / 0.82) 45%, hsl(155 61% 14% / 0.4) 100%)",
         }}
       />
 
@@ -61,7 +76,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats }: PageHeroProps) => {
       />
 
       {/* Top vignette */}
-      <div className="absolute inset-x-0 top-0 h-32 z-[2] pointer-events-none bg-gradient-to-b from-primary to-transparent" />
+      <div className={`absolute inset-x-0 top-0 ${image ? "h-24 opacity-70" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-primary to-transparent`} />
 
       {/* Amber accent glow — top right */}
       <div className="absolute -top-32 right-10 w-[600px] h-[500px] rounded-full blur-3xl z-[1] pointer-events-none opacity-25"
@@ -132,8 +147,8 @@ const PageHero = ({ tag, title, body, ghost, cta, stats }: PageHeroProps) => {
       </div>
 
 
-      {/* Bottom edge fade */}
-      <div className="absolute inset-x-0 bottom-0 h-10 sm:h-20 z-[2] pointer-events-none bg-gradient-to-t from-background to-transparent" />
+      {/* Bottom edge fade — settles into the dark rail below, no white seam */}
+      <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 z-[2] pointer-events-none bg-gradient-to-t from-primary to-transparent" />
     </section>
   );
 };

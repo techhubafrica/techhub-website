@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { heroBackdrops } from "@/assets/ktu";
 import { MapPin, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
@@ -52,6 +53,8 @@ const Careers = () => {
         title={<>Build the future of<br />African <span className="italic font-light text-accent">technology.</span></>}
         body="We're looking for engineers, designers, community leaders, and operators who are committed to transforming Africa's digital landscape."
         ghost="CAREERS"
+        image={heroBackdrops.careers}
+        imageAlt="Tech Hub Africa team collaborating at a campus programme"
         stats={[
           { val: "5+", label: "Open Roles" },
           { val: "100%", label: "Mission Driven" },
