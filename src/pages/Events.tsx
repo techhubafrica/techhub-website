@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { heroBackdrops } from "@/assets/ktu";
 import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { heroAudience, heroCelebration, meetup2026Flyer, hackathonFlyer, campusTourFlyer, networking } from "@/assets/photos";
 import { useReveal } from "@/hooks/use-reveal";
@@ -78,6 +79,8 @@ const Events = () => {
         title={<>Connecting Africa's <span className="italic font-light text-accent">innovators</span><br />live, in person.</>}
         body="From our annual flagship Tech Guru Meetup to nationwide campus tours and 72-hour hackathons — discover where the community converges."
         ghost="EVENTS"
+        image={heroBackdrops.events}
+        imageAlt="Audience at a Tech Hub Africa conference in Accra"
       />
 
       <Marquee text="Conferences · Campus Tours · Hackathons · Tech Guru Meetup 2026" />

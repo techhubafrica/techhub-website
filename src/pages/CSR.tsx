@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { heroBackdrops } from "@/assets/ktu";
 import { ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
@@ -52,6 +53,8 @@ const CSR = () => {
         title={<>Driving inclusive <span className="italic font-light text-accent">technological impact</span><br />across Africa.</>}
         body="Through our CSR initiatives, we partner with global tech brands, financial institutions, and foundations to bridge digital inequality and empower communities."
         ghost="IMPACT"
+        image={heroBackdrops.csr}
+        imageAlt="Students trained during a Tech Hub Africa digital literacy session"
         stats={[
           { val: "12k+", label: "Students Trained" },
           { val: "25+", label: "Campuses Reached" },

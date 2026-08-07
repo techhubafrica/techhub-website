@@ -2,6 +2,7 @@ import { Compass, Target, ShieldCheck, Heart, ArrowUpRight } from "lucide-react"
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { heroBackdrops } from "@/assets/ktu";
 import MeetTheTeam from "@/components/MeetTheTeam";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
@@ -43,6 +44,8 @@ const About = () => (
       title={<>Building Africa's <span className="italic font-light text-accent">next generation</span><br />of technologists.</>}
       body="We connect innovators, empower talent, and showcase the continent's excellence in technology, science, and engineering — from Accra to the world."
       ghost="AFRICA"
+      image={heroBackdrops.about}
+      imageAlt="Tech Hub Africa community gathered at a campus event in Ghana"
       stats={[
         { val: "2020", label: "Year Founded" },
         { val: "12k+", label: "Developers Trained" },
