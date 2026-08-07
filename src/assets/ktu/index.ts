@@ -187,3 +187,17 @@ export const ktuGallery = [
 ].map(url);
 
 export const ktuAll = [...ktuHero, ...ktuGallery];
+
+/** Backdrop photographs used by each subpage hero stage. */
+export const heroBackdrops = {
+  about: url(k7362),
+  careers: url(k7433),
+  csr: url(k6963),
+  events: url(k7386),
+  media: url(k7601),
+  mentorship: url(k7017),
+  portfolio: url(k7539),
+  services: url(k6946),
+  hub: url(k7645),
+  gallery: url(k7568),
+};
