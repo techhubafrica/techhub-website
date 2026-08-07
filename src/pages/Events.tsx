@@ -90,10 +90,10 @@ const Events = () => {
         <section className="relative overflow-hidden bg-primary text-primary-foreground">
           <div className="absolute inset-0">
             <img src={heroAudience} alt="Attendees at the Tech Guru Meetup in Accra"
-              className="absolute inset-0 w-full h-full object-cover opacity-35" loading="lazy" />
-            <div className="absolute inset-0 bg-primary/72" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,hsl(155_61%_30%/0.5),transparent_65%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_90%,hsl(28_92%_50%/0.2),transparent_60%)]" />
+              className="absolute inset-0 w-full h-full object-cover opacity-70" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-primary/25" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,hsl(155_61%_30%/0.28),transparent_65%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_90%,hsl(28_92%_50%/0.18),transparent_60%)]" />
             <div className="noise-bg" />
             <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-primary to-transparent" />
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
