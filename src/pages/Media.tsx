@@ -3,10 +3,9 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { heroBackdrops } from "@/assets/ktu";
+import { heroBackdrops, ktuGallery } from "@/assets/ktu";
 import { Mic, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { heroAudience, heroCelebration, heroPanel, heroKeynote, networking } from "@/assets/photos";
-import { ktuGallery } from "@/assets/ktu";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 
