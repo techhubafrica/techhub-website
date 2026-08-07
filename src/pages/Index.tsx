@@ -166,53 +166,84 @@ const Constellation = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
+const INTERVAL = 6500;
+
 const Hero = () => {
   const [active, setActive] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
-  const [scrollY, setScrollY] = useState(0);
+  /* highest slide index whose image is allowed to download */
+  const [maxLoaded, setMaxLoaded] = useState(1);
+  const stageRef = useRef<HTMLElement | null>(null);
 
-  const INTERVAL = 6500;
-
-  /* auto-advance + progress */
+  /* auto-advance — one state update per slide, no per-frame re-renders */
   useEffect(() => {
-    let elapsed = 0;
-    const tick = setInterval(() => {
-      elapsed += 50;
-      setProgress(Math.min(100, (elapsed / INTERVAL) * 100));
-      if (elapsed >= INTERVAL) {
-        elapsed = 0;
-        setProgress(0);
-        setActive((a) => (a + 1) % heroSlides.length);
-      }
-    }, 50);
-    return () => clearInterval(tick);
+    const t = setInterval(
+      () => setActive((a) => (a + 1) % heroSlides.length),
+      INTERVAL,
+    );
+    return () => clearInterval(t);
   }, []);
 
+  /* only ever keep active + next decoded */
   useEffect(() => {
-    const h = (e: MouseEvent) =>
-      setMouse({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
-    const s = () => setScrollY(window.scrollY);
-    window.addEventListener("mousemove", h, { passive: true });
-    window.addEventListener("scroll", s, { passive: true });
+    setMaxLoaded((m) => Math.max(m, active + 1));
+  }, [active]);
+
+  /* pointer glow + scroll parallax written straight to CSS vars (rAF, no React) */
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia("(pointer: fine)").matches;
+    if (reduced) return;
+
+    let mx = 0.5, my = 0.5, sy = 0, frame = 0;
+
+    const paint = () => {
+      frame = 0;
+      el.style.setProperty("--hx", `${(mx * 100).toFixed(2)}%`);
+      el.style.setProperty("--hy", `${(my * 100).toFixed(2)}%`);
+      el.style.setProperty("--pmx", `${((mx - 0.5) * 18).toFixed(2)}px`);
+      el.style.setProperty("--pmy", `${((my - 0.5) * 10).toFixed(2)}px`);
+      el.style.setProperty("--par", `${Math.min(sy, 500).toFixed(0)}px`);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+
+    const onMove = (e: MouseEvent) => {
+      mx = e.clientX / window.innerWidth;
+      my = e.clientY / window.innerHeight;
+      schedule();
+    };
+    const onScroll = () => {
+      sy = window.scrollY;
+      schedule();
+    };
+
+    if (finePointer) window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      window.removeEventListener("mousemove", h);
-      window.removeEventListener("scroll", s);
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
   const slide = heroSlides[active];
-  const px = (mouse.x - 0.5) * 18;
-  const py = (mouse.y - 0.5) * 10;
-  const parY = Math.min(scrollY, 500);
-
-  const goto = (i: number) => { setActive(i); setProgress(0); };
+  const goto = (i: number) => setActive(i);
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden select-none bg-primary text-primary-foreground">
+    <section
+      ref={stageRef}
+      className="hero-stage relative min-h-[100svh] overflow-hidden select-none bg-primary text-primary-foreground"
+    >
 
       {/* ══ FULL-BLEED BACKGROUND SLIDESHOW ══ */}
-      <div className="absolute inset-0 z-0" style={{ transform: `translateY(${parY * 0.18}px)` }}>
+      <div
+        className="absolute inset-0 z-0 will-change-transform"
+        style={{ transform: "translate3d(0, calc(var(--par, 0px) * 0.18), 0)" }}
+      >
         {heroSlides.map((s, i) => (
           <div
             key={s.title}
@@ -221,19 +252,25 @@ const Hero = () => {
               i === active ? "opacity-100" : "opacity-0"
             }`}
           >
-            <img
-              src={s.image}
-              alt={`${s.kicker} — ${s.title}`}
-              className="w-full h-full object-cover"
-              style={{
-                transform: i === active ? "scale(1.14)" : "scale(1.02)",
-                transition: "transform 9s cubic-bezier(0.22,0.61,0.36,1)",
-              }}
-              loading={i === 0 ? "eager" : "lazy"}
-            />
+            {i <= maxLoaded && (
+              <img
+                src={s.image}
+                alt={`${s.kicker} — ${s.title}`}
+                className="w-full h-full object-cover"
+                style={{
+                  transform: i === active ? "scale(1.14)" : "scale(1.02)",
+                  transition: "transform 9s cubic-bezier(0.22,0.61,0.36,1)",
+                }}
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding={i === 0 ? "sync" : "async"}
+                fetchPriority={i === 0 ? "high" : "low"}
+                draggable={false}
+              />
+            )}
           </div>
         ))}
       </div>
+
 
       {/* ══ CINEMATIC OVERLAYS ══ */}
       {/* brand-tinted base */}
