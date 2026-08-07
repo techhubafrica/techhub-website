@@ -354,7 +354,6 @@ const Hero = () => {
         <div
           key={slide.title}
           className="relative max-w-[880px] mt-10 md:mt-14 animate-fade-up"
-          style={{ transform: `translate(${px * 0.25}px, ${py * 0.25}px)` }}
         >
           <p className="animate-fade-up text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] text-accent mb-5">
             {slide.kicker}
@@ -412,10 +411,12 @@ const Hero = () => {
                 aria-label={`Show ${s.title}`}
               >
                 <div className="relative h-px w-full bg-primary-foreground/20 mb-3 overflow-hidden">
-                  <div
-                    className="absolute inset-y-0 left-0 bg-accent transition-[width] duration-100"
-                    style={{ width: i === active ? `${progress}%` : i < active ? "0%" : "0%" }}
-                  />
+                  {i === active && (
+                    <div
+                      key={active}
+                      className="hero-progress absolute inset-y-0 left-0 bg-accent"
+                    />
+                  )}
                 </div>
                 <p
                   className={`text-[9.5px] font-black uppercase tracking-[0.32em] transition-colors ${
