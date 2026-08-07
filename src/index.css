@@ -425,6 +425,17 @@
     to   { opacity: 1; transform: scale(1) translateY(0); }
   }
 
+  /* Hero slide progress — pure CSS, no per-frame React state */
+  @keyframes hero-progress { from { width: 0%; } to { width: 100%; } }
+  .hero-progress { animation: hero-progress 6.5s linear forwards; }
+
+  /* Trim expensive compositing work on small screens */
+  @media (max-width: 767px) {
+    .noise-soft::after,
+    .media-reflection { display: none; }
+    .sheen::before { display: none; }
+  }
+
   /* ── Loader ──────────────────────────────────────────────────── */
   @keyframes loader-spin { to { transform: rotate(360deg); } }
   .loader-spin { animation: loader-spin 1.5s cubic-bezier(0.65,0,0.35,1) infinite; }
