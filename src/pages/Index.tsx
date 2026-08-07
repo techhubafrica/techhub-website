@@ -197,7 +197,7 @@ const Hero = () => {
     const finePointer = window.matchMedia("(pointer: fine)").matches;
     if (reduced) return;
 
-    let mx = 0.5, my = 0.5, sy = 0, frame = 0;
+    let mx = 0.5, my = 0.5, sy = 0, frame = 0, inView = true;
 
     const paint = () => {
       frame = 0;
@@ -208,7 +208,7 @@ const Hero = () => {
       el.style.setProperty("--par", `${Math.min(sy, 500).toFixed(0)}px`);
     };
     const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(paint);
+      if (!frame && inView) frame = requestAnimationFrame(paint);
     };
 
     const onMove = (e: MouseEvent) => {
@@ -223,8 +223,24 @@ const Hero = () => {
 
     if (finePointer) window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
+
+    /* freeze everything the moment the stage leaves the viewport */
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        el.dataset.inview = String(inView);
+        el.querySelectorAll("svg").forEach((svg) => {
+          const s = svg as SVGSVGElement & { pauseAnimations?: () => void; unpauseAnimations?: () => void };
+          inView ? s.unpauseAnimations?.() : s.pauseAnimations?.();
+        });
+      },
+      { threshold: 0 },
+    );
+    io.observe(el);
+
     return () => {
       if (frame) cancelAnimationFrame(frame);
+      io.disconnect();
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("scroll", onScroll);
     };
@@ -274,7 +290,7 @@ const Hero = () => {
 
       {/* ══ CINEMATIC OVERLAYS ══ */}
       {/* brand-tinted base */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-primary/35 mix-blend-multiply" />
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-primary/30" />
       {/* directional gradient for text legibility */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"

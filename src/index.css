@@ -425,6 +425,11 @@
     to   { opacity: 1; transform: scale(1) translateY(0); }
   }
 
+  /* Hero stage sleeps when scrolled past — zero compositing cost */
+  .hero-stage[data-inview="false"] * {
+    animation-play-state: paused !important;
+  }
+
   /* Hero slide progress — pure CSS, no per-frame React state */
   @keyframes hero-progress { from { width: 0%; } to { width: 100%; } }
   .hero-progress { animation: hero-progress 6.5s linear forwards; }
