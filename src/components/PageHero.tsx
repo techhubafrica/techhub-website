@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface PageHeroProps {
   tag: string;
@@ -15,21 +15,34 @@ interface PageHeroProps {
 
 const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: PageHeroProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [mouse, setMouse] = useState({ x: 50, y: 50 });
 
+  /* spotlight follows the pointer through CSS vars — rAF throttled, zero re-renders */
   useEffect(() => {
-    const h = (e: MouseEvent) => {
-      const el = ref.current;
-      if (!el) return;
-      const r = el.getBoundingClientRect();
-      setMouse({
-        x: ((e.clientX - r.left) / r.width) * 100,
-        y: ((e.clientY - r.top) / r.height) * 100,
-      });
-    };
     const el = ref.current;
-    el?.addEventListener("mousemove", h, { passive: true });
-    return () => el?.removeEventListener("mousemove", h);
+    if (!el) return;
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !window.matchMedia("(pointer: fine)").matches
+    )
+      return;
+
+    let x = 50, y = 50, frame = 0;
+    const paint = () => {
+      frame = 0;
+      el.style.setProperty("--sx", `${x.toFixed(1)}%`);
+      el.style.setProperty("--sy", `${y.toFixed(1)}%`);
+    };
+    const h = (e: MouseEvent) => {
+      const r = el.getBoundingClientRect();
+      x = ((e.clientX - r.left) / r.width) * 100;
+      y = ((e.clientY - r.top) / r.height) * 100;
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+    el.addEventListener("mousemove", h, { passive: true });
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      el.removeEventListener("mousemove", h);
+    };
   }, []);
 
   return (
@@ -43,6 +56,9 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
           src={image}
           alt={imageAlt ?? ""}
           loading="eager"
+          decoding="async"
+          fetchPriority="high"
+          draggable={false}
           className="absolute inset-0 w-full h-full object-cover animate-slow-zoom"
         />
       )}
@@ -68,10 +84,10 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
 
       {/* Mouse-tracked amber spotlight */}
       <div
-        className="absolute inset-0 z-[1] pointer-events-none"
+        className="absolute inset-0 z-[1] pointer-events-none hidden md:block"
         style={{
-          background: `radial-gradient(800px circle at ${mouse.x}% ${mouse.y}%, hsl(28 92% 50% / 0.1), transparent 62%)`,
-          transition: "background 0.4s ease",
+          background:
+            "radial-gradient(800px circle at var(--sx, 50%) var(--sy, 50%), hsl(28 92% 50% / 0.1), transparent 62%)",
         }}
       />
 
@@ -79,7 +95,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
       <div className={`absolute inset-x-0 top-0 ${image ? "h-24 opacity-70" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-primary to-transparent`} />
 
       {/* Amber accent glow — top right */}
-      <div className="absolute -top-32 right-10 w-[600px] h-[500px] rounded-full blur-3xl z-[1] pointer-events-none opacity-25"
+      <div className="hidden md:block absolute -top-32 right-10 w-[600px] h-[500px] rounded-full blur-3xl z-[1] pointer-events-none opacity-25"
         style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent 65%)" }} />
 
       {/* Ghost watermark text */}

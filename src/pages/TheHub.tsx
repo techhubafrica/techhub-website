@@ -55,7 +55,7 @@ const TheHub = () => {
       <main className="page-entry bg-background overflow-hidden">
         {/* ══ AMENITIES ══ */}
         <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto">
-          <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
+          <div className="hidden md:block absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
 
           <Reveal className="mb-16">
             <div className="flex items-baseline gap-6 mb-6">
@@ -96,7 +96,7 @@ const TheHub = () => {
         {/* ══ LOCATION + BOOKING ══ */}
         <section className="relative bg-secondary text-primary-foreground overflow-hidden px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 cv-auto">
           <div className="noise-bg" />
-          <div className="absolute -top-32 right-10 w-[500px] h-[400px] rounded-full blur-3xl opacity-20 pointer-events-none" style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent)" }} />
+          <div className="hidden md:block absolute -top-32 right-10 w-[500px] h-[400px] rounded-full blur-3xl opacity-20 pointer-events-none" style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent)" }} />
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
           
           <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

@@ -166,53 +166,100 @@ const Constellation = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
+const INTERVAL = 6500;
+
 const Hero = () => {
   const [active, setActive] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
-  const [scrollY, setScrollY] = useState(0);
+  /* highest slide index whose image is allowed to download */
+  const [maxLoaded, setMaxLoaded] = useState(1);
+  const stageRef = useRef<HTMLElement | null>(null);
 
-  const INTERVAL = 6500;
-
-  /* auto-advance + progress */
+  /* auto-advance — one state update per slide, no per-frame re-renders */
   useEffect(() => {
-    let elapsed = 0;
-    const tick = setInterval(() => {
-      elapsed += 50;
-      setProgress(Math.min(100, (elapsed / INTERVAL) * 100));
-      if (elapsed >= INTERVAL) {
-        elapsed = 0;
-        setProgress(0);
-        setActive((a) => (a + 1) % heroSlides.length);
-      }
-    }, 50);
-    return () => clearInterval(tick);
+    const t = setInterval(
+      () => setActive((a) => (a + 1) % heroSlides.length),
+      INTERVAL,
+    );
+    return () => clearInterval(t);
   }, []);
 
+  /* only ever keep active + next decoded */
   useEffect(() => {
-    const h = (e: MouseEvent) =>
-      setMouse({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
-    const s = () => setScrollY(window.scrollY);
-    window.addEventListener("mousemove", h, { passive: true });
-    window.addEventListener("scroll", s, { passive: true });
+    setMaxLoaded((m) => Math.max(m, active + 1));
+  }, [active]);
+
+  /* pointer glow + scroll parallax written straight to CSS vars (rAF, no React) */
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia("(pointer: fine)").matches;
+    if (reduced) return;
+
+    let mx = 0.5, my = 0.5, sy = 0, frame = 0, inView = true;
+
+    const paint = () => {
+      frame = 0;
+      el.style.setProperty("--hx", `${(mx * 100).toFixed(2)}%`);
+      el.style.setProperty("--hy", `${(my * 100).toFixed(2)}%`);
+      el.style.setProperty("--pmx", `${((mx - 0.5) * 18).toFixed(2)}px`);
+      el.style.setProperty("--pmy", `${((my - 0.5) * 10).toFixed(2)}px`);
+      el.style.setProperty("--par", `${Math.min(sy, 500).toFixed(0)}px`);
+    };
+    const schedule = () => {
+      if (!frame && inView) frame = requestAnimationFrame(paint);
+    };
+
+    const onMove = (e: MouseEvent) => {
+      mx = e.clientX / window.innerWidth;
+      my = e.clientY / window.innerHeight;
+      schedule();
+    };
+    const onScroll = () => {
+      sy = window.scrollY;
+      schedule();
+    };
+
+    if (finePointer) window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    /* freeze everything the moment the stage leaves the viewport */
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        el.dataset.inview = String(inView);
+        el.querySelectorAll("svg").forEach((svg) => {
+          const s = svg as SVGSVGElement & { pauseAnimations?: () => void; unpauseAnimations?: () => void };
+          inView ? s.unpauseAnimations?.() : s.pauseAnimations?.();
+        });
+      },
+      { threshold: 0 },
+    );
+    io.observe(el);
+
     return () => {
-      window.removeEventListener("mousemove", h);
-      window.removeEventListener("scroll", s);
+      if (frame) cancelAnimationFrame(frame);
+      io.disconnect();
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
   const slide = heroSlides[active];
-  const px = (mouse.x - 0.5) * 18;
-  const py = (mouse.y - 0.5) * 10;
-  const parY = Math.min(scrollY, 500);
-
-  const goto = (i: number) => { setActive(i); setProgress(0); };
+  const goto = (i: number) => setActive(i);
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden select-none bg-primary text-primary-foreground">
+    <section
+      ref={stageRef}
+      className="hero-stage relative min-h-[100svh] overflow-hidden select-none bg-primary text-primary-foreground"
+    >
 
       {/* ══ FULL-BLEED BACKGROUND SLIDESHOW ══ */}
-      <div className="absolute inset-0 z-0" style={{ transform: `translateY(${parY * 0.18}px)` }}>
+      <div
+        className="absolute inset-0 z-0 will-change-transform"
+        style={{ transform: "translate3d(0, calc(var(--par, 0px) * 0.18), 0)" }}
+      >
         {heroSlides.map((s, i) => (
           <div
             key={s.title}
@@ -221,23 +268,29 @@ const Hero = () => {
               i === active ? "opacity-100" : "opacity-0"
             }`}
           >
-            <img
-              src={s.image}
-              alt={`${s.kicker} — ${s.title}`}
-              className="w-full h-full object-cover"
-              style={{
-                transform: i === active ? "scale(1.14)" : "scale(1.02)",
-                transition: "transform 9s cubic-bezier(0.22,0.61,0.36,1)",
-              }}
-              loading={i === 0 ? "eager" : "lazy"}
-            />
+            {i <= maxLoaded && (
+              <img
+                src={s.image}
+                alt={`${s.kicker} — ${s.title}`}
+                className="w-full h-full object-cover"
+                style={{
+                  transform: i === active ? "scale(1.14)" : "scale(1.02)",
+                  transition: "transform 9s cubic-bezier(0.22,0.61,0.36,1)",
+                }}
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding={i === 0 ? "sync" : "async"}
+                fetchPriority={i === 0 ? "high" : "low"}
+                draggable={false}
+              />
+            )}
           </div>
         ))}
       </div>
 
+
       {/* ══ CINEMATIC OVERLAYS ══ */}
       {/* brand-tinted base */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-primary/35 mix-blend-multiply" />
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-primary/30" />
       {/* directional gradient for text legibility */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
@@ -249,11 +302,12 @@ const Hero = () => {
       {/* top & bottom vignettes */}
       <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-primary/70 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-64 z-[1] pointer-events-none bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
-      {/* amber ambient glow */}
+      {/* amber ambient glow — position driven by CSS vars */}
       <div
-        className="absolute inset-0 z-[1] pointer-events-none"
+        className="absolute inset-0 z-[1] pointer-events-none hidden md:block"
         style={{
-          background: `radial-gradient(700px circle at ${mouse.x * 100}% ${mouse.y * 100}%, hsl(28 92% 50% / 0.13), transparent 62%)`,
+          background:
+            "radial-gradient(700px circle at var(--hx, 50%) var(--hy, 50%), hsl(28 92% 50% / 0.13), transparent 62%)",
         }}
       />
       {/* fine grain */}
@@ -267,10 +321,10 @@ const Hero = () => {
 
       {/* ══ SIGNATURE CONSTELLATION ══ */}
       <div
-        className="absolute -top-10 -right-16 md:top-16 md:right-8 w-[360px] md:w-[520px] h-[360px] md:h-[520px] pointer-events-none z-[2] opacity-70"
+        className="absolute -top-10 -right-16 md:top-16 md:right-8 w-[360px] md:w-[520px] h-[360px] md:h-[520px] pointer-events-none z-[2] opacity-70 will-change-transform"
         style={{
-          transform: `translate(${px * 0.5}px, ${py * 0.5 - parY * 0.1}px)`,
-          transition: "transform 1s cubic-bezier(0.16,1,0.3,1)",
+          transform:
+            "translate3d(calc(var(--pmx, 0px) * 0.5), calc(var(--pmy, 0px) * 0.5 - var(--par, 0px) * 0.1), 0)",
         }}
       >
         <Constellation className="w-full h-full" />
@@ -316,7 +370,6 @@ const Hero = () => {
         <div
           key={slide.title}
           className="relative max-w-[880px] mt-10 md:mt-14 animate-fade-up"
-          style={{ transform: `translate(${px * 0.25}px, ${py * 0.25}px)` }}
         >
           <p className="animate-fade-up text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] text-accent mb-5">
             {slide.kicker}
@@ -374,10 +427,12 @@ const Hero = () => {
                 aria-label={`Show ${s.title}`}
               >
                 <div className="relative h-px w-full bg-primary-foreground/20 mb-3 overflow-hidden">
-                  <div
-                    className="absolute inset-y-0 left-0 bg-accent transition-[width] duration-100"
-                    style={{ width: i === active ? `${progress}%` : i < active ? "0%" : "0%" }}
-                  />
+                  {i === active && (
+                    <div
+                      key={active}
+                      className="hero-progress absolute inset-y-0 left-0 bg-accent"
+                    />
+                  )}
                 </div>
                 <p
                   className={`text-[9.5px] font-black uppercase tracking-[0.32em] transition-colors ${
@@ -421,7 +476,7 @@ const Hero = () => {
    ============================================================ */
 const VisionMission = () => (
   <section id="vision" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 overflow-hidden">
-    <div className="absolute -top-24 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-30 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
+    <div className="hidden md:block absolute -top-24 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-30 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
     <div className="relative max-w-7xl mx-auto">
       <div className="flex items-baseline gap-6 mb-16">
         <span className="eyebrow text-accent">01 — Foundations</span>
@@ -466,7 +521,7 @@ const VisionMission = () => (
    ============================================================ */
 const CampusTours = () => (
   <section id="campus" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-secondary text-primary-foreground overflow-hidden">
-    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
+    <div className="hidden md:block absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
       <div className="lg:col-span-6 relative">
@@ -525,7 +580,7 @@ const initiatives = [
 
 const Initiatives = () => (
   <section id="events" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-cream overflow-hidden">
-    <div className="absolute top-40 -left-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-30 pointer-events-none bg-[radial-gradient(circle,hsl(151_57%_35%/0.4),transparent_70%)]" />
+    <div className="hidden md:block absolute top-40 -left-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-30 pointer-events-none bg-[radial-gradient(circle,hsl(151_57%_35%/0.4),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16">
@@ -616,7 +671,7 @@ const services = [
 
 const Services = () => (
   <section id="services" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-secondary text-primary-foreground overflow-hidden">
-    <div className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_44%/0.4),transparent_70%)]" />
+    <div className="hidden md:block absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_44%/0.4),transparent_70%)]" />
     <div className="relative max-w-7xl mx-auto">
       <div className="flex items-baseline gap-6 mb-16">
         <span className="eyebrow text-accent">04 — Services</span>
@@ -698,7 +753,7 @@ const ProgramsBand = () => (
       </div>
 
       <div className="p-12 lg:p-20 bg-primary text-primary-foreground relative overflow-hidden">
-        <div className="absolute -top-10 -right-10 w-[400px] h-[400px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_44%/0.35),transparent_70%)]" />
+        <div className="hidden md:block absolute -top-10 -right-10 w-[400px] h-[400px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_44%/0.35),transparent_70%)]" />
         <div className="relative">
           <span className="eyebrow text-accent">06 — Mentorship</span>
           <h3 className="font-display font-extrabold mt-6 mb-6 leading-[0.9] text-[2.5rem] md:text-[3.5rem] tracking-tight">
@@ -737,7 +792,7 @@ const portfolio = [
 
 const Portfolio = () => (
   <section id="portfolio" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-primary text-primary-foreground overflow-hidden">
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(151_57%_35%),transparent_70%)]" />
+    <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(151_57%_35%),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
@@ -792,7 +847,7 @@ const testimonials = [
 
 const Testimonials = () => (
   <section className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 overflow-hidden">
-    <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-3xl opacity-25 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
+    <div className="hidden md:block absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-3xl opacity-25 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
     <div className="relative max-w-7xl mx-auto">
       <div className="flex items-baseline gap-6 mb-16">
         <span className="eyebrow text-accent">08 — Voices</span>

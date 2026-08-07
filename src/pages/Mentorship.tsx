@@ -72,7 +72,7 @@ const Mentorship = () => {
         {/* ══ OBJECTIVES — dark section ══ */}
         <section className="relative bg-secondary text-primary-foreground overflow-hidden px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36">
           <div className="noise-bg" />
-          <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
+          <div className="hidden md:block absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
           <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <Reveal className="lg:col-span-5">
               <span className="text-[10px] font-black uppercase tracking-[0.35em] text-accent mb-4 block">01 — Program Objectives</span>
@@ -98,7 +98,7 @@ const Mentorship = () => {
 
         {/* ══ BENEFITS ══ */}
         <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto cv-auto">
-          <div className="absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
+          <div className="hidden md:block absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
 
           <Reveal className="mb-12">
             <div className="flex items-baseline gap-6 mb-6">
