@@ -147,8 +147,8 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
       </div>
 
 
-      {/* Bottom edge fade */}
-      <div className="absolute inset-x-0 bottom-0 h-10 sm:h-20 z-[2] pointer-events-none bg-gradient-to-t from-background to-transparent" />
+      {/* Bottom edge fade — settles into the dark rail below, no white seam */}
+      <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 z-[2] pointer-events-none bg-gradient-to-t from-primary to-transparent" />
     </section>
   );
 };
