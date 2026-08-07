@@ -7,9 +7,13 @@ interface PageHeroProps {
   ghost?: string;
   cta?: React.ReactNode;
   stats?: { val: string; label: string }[];
+  /** Optional backdrop photograph for the hero stage. */
+  image?: string;
+  /** Accessible description of the backdrop photograph. */
+  imageAlt?: string;
 }
 
-const PageHero = ({ tag, title, body, ghost, cta, stats }: PageHeroProps) => {
+const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: PageHeroProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [mouse, setMouse] = useState({ x: 50, y: 50 });
 
