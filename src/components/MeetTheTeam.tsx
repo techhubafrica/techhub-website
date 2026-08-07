@@ -291,7 +291,7 @@ const MeetTheTeam = () => {
         </div>
 
         {/* Top glow */}
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full blur-3xl opacity-20 pointer-events-none z-0 bg-[radial-gradient(circle,hsl(28_92%_55%/0.25),transparent_70%)]" />
+        <div className="hidden md:block absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full blur-3xl opacity-20 pointer-events-none z-0 bg-[radial-gradient(circle,hsl(28_92%_55%/0.25),transparent_70%)]" />
 
         {/* Particles */}
         {PARTICLES.map((p, i) => (

@@ -79,7 +79,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
       <div className={`absolute inset-x-0 top-0 ${image ? "h-24 opacity-70" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-primary to-transparent`} />
 
       {/* Amber accent glow — top right */}
-      <div className="absolute -top-32 right-10 w-[600px] h-[500px] rounded-full blur-3xl z-[1] pointer-events-none opacity-25"
+      <div className="hidden md:block absolute -top-32 right-10 w-[600px] h-[500px] rounded-full blur-3xl z-[1] pointer-events-none opacity-25"
         style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent 65%)" }} />
 
       {/* Ghost watermark text */}

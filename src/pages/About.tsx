@@ -60,7 +60,7 @@ const About = () => (
 
       {/* ══ VISION & MISSION ══ */}
       <section className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 max-w-7xl mx-auto">
-        <div className="absolute -top-24 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
+        <div className="hidden md:block absolute -top-24 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
         
         <Reveal className="mb-16">
           <div className="flex items-baseline gap-6">
@@ -74,7 +74,7 @@ const About = () => (
           <Reveal className="lg:col-span-5" delay={0.05}>
             <div className="card-lift sheen noise-soft relative rounded-3xl overflow-hidden bg-primary p-10 md:p-14 h-full border border-primary-foreground/10 text-primary-foreground flex flex-col justify-between">
               <div className="noise-bg" />
-              <div className="absolute top-0 right-0 w-[280px] h-[220px] rounded-full blur-3xl opacity-20 pointer-events-none"
+              <div className="hidden md:block absolute top-0 right-0 w-[280px] h-[220px] rounded-full blur-3xl opacity-20 pointer-events-none"
                 style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent)" }} />
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
               <div className="relative z-10">
@@ -110,7 +110,7 @@ const About = () => (
 
       {/* ══ TIMELINE ══ */}
       <section className="relative bg-secondary text-primary-foreground overflow-hidden px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 cv-auto">
-        <div className="absolute top-0 left-1/3 w-[600px] h-[600px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
+        <div className="hidden md:block absolute top-0 left-1/3 w-[600px] h-[600px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
         <div className="relative max-w-7xl mx-auto">
           <Reveal className="mb-16">
             <div className="flex items-baseline gap-6 mb-6">
@@ -152,7 +152,7 @@ const About = () => (
 
       {/* ══ CORE VALUES ══ */}
       <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto cv-auto">
-        <div className="absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_44%/0.3),transparent_70%)]" />
+        <div className="hidden md:block absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_44%/0.3),transparent_70%)]" />
         
         <Reveal className="mb-16">
           <div className="flex items-baseline gap-6 mb-6">

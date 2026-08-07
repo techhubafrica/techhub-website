@@ -138,7 +138,7 @@ const Services = () => {
       <main className="page-entry bg-background overflow-hidden">
         {/* ══ SERVICE LIST ══ */}
         <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto space-y-6">
-          <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
+          <div className="hidden md:block absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
           
           <Reveal className="mb-12">
             <div className="flex items-baseline gap-6 mb-6">
@@ -206,7 +206,7 @@ const Services = () => {
         {/* ══ BOTTOM CTA ══ */}
         <section className="relative overflow-hidden bg-primary px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 cv-auto text-primary-foreground">
           <div className="noise-bg" />
-          <div className="absolute -top-32 right-10 w-[500px] h-[400px] rounded-full blur-3xl opacity-20 pointer-events-none"
+          <div className="hidden md:block absolute -top-32 right-10 w-[500px] h-[400px] rounded-full blur-3xl opacity-20 pointer-events-none"
             style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent)" }} />
           <div className="relative max-w-4xl mx-auto text-center">
             <p className="text-[10px] font-black uppercase tracking-[0.4em] text-accent mb-4">Ready to start?</p>
