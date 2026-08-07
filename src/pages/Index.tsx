@@ -286,11 +286,12 @@ const Hero = () => {
       {/* top & bottom vignettes */}
       <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-primary/70 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-64 z-[1] pointer-events-none bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
-      {/* amber ambient glow */}
+      {/* amber ambient glow — position driven by CSS vars */}
       <div
-        className="absolute inset-0 z-[1] pointer-events-none"
+        className="absolute inset-0 z-[1] pointer-events-none hidden md:block"
         style={{
-          background: `radial-gradient(700px circle at ${mouse.x * 100}% ${mouse.y * 100}%, hsl(28 92% 50% / 0.13), transparent 62%)`,
+          background:
+            "radial-gradient(700px circle at var(--hx, 50%) var(--hy, 50%), hsl(28 92% 50% / 0.13), transparent 62%)",
         }}
       />
       {/* fine grain */}
@@ -304,10 +305,10 @@ const Hero = () => {
 
       {/* ══ SIGNATURE CONSTELLATION ══ */}
       <div
-        className="absolute -top-10 -right-16 md:top-16 md:right-8 w-[360px] md:w-[520px] h-[360px] md:h-[520px] pointer-events-none z-[2] opacity-70"
+        className="absolute -top-10 -right-16 md:top-16 md:right-8 w-[360px] md:w-[520px] h-[360px] md:h-[520px] pointer-events-none z-[2] opacity-70 will-change-transform"
         style={{
-          transform: `translate(${px * 0.5}px, ${py * 0.5 - parY * 0.1}px)`,
-          transition: "transform 1s cubic-bezier(0.16,1,0.3,1)",
+          transform:
+            "translate3d(calc(var(--pmx, 0px) * 0.5), calc(var(--pmy, 0px) * 0.5 - var(--par, 0px) * 0.1), 0)",
         }}
       >
         <Constellation className="w-full h-full" />
