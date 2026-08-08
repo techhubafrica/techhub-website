@@ -301,7 +301,7 @@ const Hero = () => {
       />
       {/* top & bottom vignettes */}
       <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-background/85 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-64 z-[1] pointer-events-none bg-gradient-to-t from-background via-background/40 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-80 z-[1] pointer-events-none bg-gradient-to-t from-background via-background/75 to-transparent" />
 
       {/* amber ambient glow — position driven by CSS vars */}
       <div
