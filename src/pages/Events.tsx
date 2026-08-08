@@ -137,7 +137,7 @@ const Events = () => {
 
 
             {/* Countdown */}
-            <div className="mt-12 flex flex-wrap items-center gap-8">
+            <div className="glass-cream mt-12 rounded-2xl px-6 py-5 flex flex-wrap items-center gap-8" style={{ backdropFilter: "blur(14px)" }}>
               <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary/45">Countdown</span>
               <div className="flex items-center gap-6">
                 {[
