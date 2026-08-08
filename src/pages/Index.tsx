@@ -288,20 +288,21 @@ const Hero = () => {
       </div>
 
 
-      {/* ══ CINEMATIC OVERLAYS ══ */}
-      {/* brand-tinted base */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-primary/30" />
-      {/* directional gradient for text legibility */}
+      {/* ══ CINEMATIC OVERLAYS — cream veil ══ */}
+      {/* soft brand-cream base */}
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-background/25" />
+      {/* directional cream gradient for text legibility */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(100deg, hsl(155 61% 8% / 0.82) 0%, hsl(155 61% 10% / 0.5) 38%, hsl(155 61% 12% / 0.12) 68%, transparent 100%)",
+            "linear-gradient(100deg, hsl(40 33% 94% / 0.94) 0%, hsl(40 33% 94% / 0.78) 38%, hsl(40 33% 94% / 0.3) 70%, hsl(40 33% 94% / 0.05) 100%)",
         }}
       />
       {/* top & bottom vignettes */}
-      <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-primary/70 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-64 z-[1] pointer-events-none bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-background/85 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-64 z-[1] pointer-events-none bg-gradient-to-t from-background via-background/40 to-transparent" />
+
       {/* amber ambient glow — position driven by CSS vars */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none hidden md:block"
