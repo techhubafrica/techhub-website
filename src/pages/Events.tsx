@@ -138,7 +138,7 @@ const Events = () => {
 
             {/* Countdown */}
             <div className="mt-12 flex flex-wrap items-center gap-8">
-              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary-foreground/40">Countdown</span>
+              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary/45">Countdown</span>
               <div className="flex items-center gap-6">
                 {[
                   { label: "Days", val: timeLeft.days },
@@ -147,17 +147,18 @@ const Events = () => {
                   { label: "Secs", val: timeLeft.secs },
                 ].map((u) => (
                   <div key={u.label} className="flex items-baseline gap-1.5">
-                    <span className="font-display font-black text-primary-foreground text-3xl leading-none tabular-nums">
+                    <span className="font-display font-black text-primary text-3xl leading-none tabular-nums">
                       {String(u.val).padStart(2, "0")}
                     </span>
-                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-primary-foreground/40">{u.label}</span>
+                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-primary/45">{u.label}</span>
                   </div>
                 ))}
               </div>
-              <div className="hidden md:flex items-center gap-5 ml-auto text-xs font-semibold text-primary-foreground/60">
+              <div className="hidden md:flex items-center gap-5 ml-auto text-xs font-semibold text-muted-foreground">
                 <span className="flex items-center gap-2"><Users className="w-4 h-4 text-accent" />2,500+ attendees</span>
                 <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-accent" />AICC, Accra</span>
                 <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-accent" />Oct 14–16</span>
+
               </div>
             </div>
           </div>
