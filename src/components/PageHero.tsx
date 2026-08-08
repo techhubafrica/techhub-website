@@ -77,7 +77,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background: image
-            ? "linear-gradient(105deg, hsl(40 33% 94% / 0.96) 0%, hsl(40 33% 94% / 0.86) 38%, hsl(40 33% 94% / 0.42) 72%, hsl(40 33% 94% / 0.12) 100%)"
+            ? "linear-gradient(105deg, hsl(40 33% 94% / 0.9) 0%, hsl(40 33% 94% / 0.74) 38%, hsl(40 33% 94% / 0.3) 72%, hsl(40 33% 94% / 0.12) 100%)"
             : "linear-gradient(110deg, hsl(40 33% 96%) 0%, hsl(40 25% 91%) 55%, hsl(40 20% 87%) 100%)",
         }}
       />
