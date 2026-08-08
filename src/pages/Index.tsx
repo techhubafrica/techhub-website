@@ -252,7 +252,7 @@ const Hero = () => {
   return (
     <section
       ref={stageRef}
-      className="hero-stage relative min-h-[100svh] overflow-hidden select-none bg-primary text-primary-foreground"
+      className="hero-stage relative min-h-[100svh] overflow-hidden select-none bg-background text-foreground"
     >
 
       {/* ══ FULL-BLEED BACKGROUND SLIDESHOW ══ */}
