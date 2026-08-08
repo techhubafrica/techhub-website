@@ -373,6 +373,14 @@ const Hero = () => {
           key={slide.title}
           className="relative max-w-[880px] mt-10 md:mt-14 animate-fade-up"
         >
+          {/* soft halo so type reads over photography without hiding it */}
+          <div
+            className="absolute -inset-x-10 -inset-y-8 -z-10 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(120% 100% at 0% 40%, hsl(40 33% 94% / 0.72) 0%, hsl(40 33% 94% / 0.32) 48%, transparent 78%)",
+            }}
+          />
           <p className="animate-fade-up text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] text-accent mb-5">
             {slide.kicker}
           </p>
@@ -382,7 +390,7 @@ const Hero = () => {
             style={{
               lineHeight: 0.9,
               fontSize: "clamp(2.5rem,6.8vw,5.8rem)",
-              textShadow: "0 10px 30px hsl(40 33% 94% / 0.8)",
+              textShadow: "0 2px 18px hsl(40 33% 94% / 0.95), 0 8px 40px hsl(40 33% 94% / 0.7)",
             }}
           >
             {slide.title}
@@ -390,10 +398,11 @@ const Hero = () => {
 
           <div className="animate-fade-up stagger-2 mt-7 flex gap-5 max-w-[560px]">
             <div className="w-px bg-gradient-to-b from-accent/80 via-primary/25 to-transparent flex-shrink-0" />
-            <p className="text-muted-foreground text-[15px] md:text-[17px] leading-[1.8] font-light">
+            <p className="text-primary/80 text-[15px] md:text-[17px] leading-[1.8] font-light" style={{ textShadow: "0 1px 12px hsl(40 33% 94% / 0.9)" }}>
               {slide.body}
             </p>
           </div>
+
 
           <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-5 mt-9">
             <a
