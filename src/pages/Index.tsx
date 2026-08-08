@@ -252,7 +252,7 @@ const Hero = () => {
   return (
     <section
       ref={stageRef}
-      className="hero-stage relative min-h-[100svh] overflow-hidden select-none bg-primary text-primary-foreground"
+      className="hero-stage relative min-h-[100svh] overflow-hidden select-none bg-background text-foreground"
     >
 
       {/* ══ FULL-BLEED BACKGROUND SLIDESHOW ══ */}
@@ -288,20 +288,21 @@ const Hero = () => {
       </div>
 
 
-      {/* ══ CINEMATIC OVERLAYS ══ */}
-      {/* brand-tinted base */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-primary/30" />
-      {/* directional gradient for text legibility */}
+      {/* ══ CINEMATIC OVERLAYS — cream veil ══ */}
+      {/* soft brand-cream base */}
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-background/25" />
+      {/* directional cream gradient for text legibility */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(100deg, hsl(155 61% 8% / 0.82) 0%, hsl(155 61% 10% / 0.5) 38%, hsl(155 61% 12% / 0.12) 68%, transparent 100%)",
+            "linear-gradient(100deg, hsl(40 33% 94% / 0.94) 0%, hsl(40 33% 94% / 0.78) 38%, hsl(40 33% 94% / 0.3) 70%, hsl(40 33% 94% / 0.05) 100%)",
         }}
       />
       {/* top & bottom vignettes */}
-      <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-primary/70 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-64 z-[1] pointer-events-none bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-background/85 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-80 z-[1] pointer-events-none bg-gradient-to-t from-background via-background/75 to-transparent" />
+
       {/* amber ambient glow — position driven by CSS vars */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none hidden md:block"
@@ -333,16 +334,16 @@ const Hero = () => {
       {/* Vertical brand rail */}
       <div className="hidden xl:flex absolute left-6 top-0 bottom-0 flex-col items-center justify-between py-20 sm:py-24 md:py-32 z-10 pointer-events-none">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-px h-16 bg-gradient-to-b from-transparent to-primary-foreground/30" />
-          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary-foreground/45 [writing-mode:vertical-rl] rotate-180">
+          <div className="w-px h-16 bg-gradient-to-b from-transparent to-primary/25" />
+          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary/50 [writing-mode:vertical-rl] rotate-180">
             Est · MMXXIV
           </span>
         </div>
         <div className="flex flex-col items-center gap-4">
-          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary-foreground/45 [writing-mode:vertical-rl] rotate-180">
+          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary/50 [writing-mode:vertical-rl] rotate-180">
             Accra · Ghana
           </span>
-          <div className="w-px h-16 bg-gradient-to-t from-transparent to-primary-foreground/30" />
+          <div className="w-px h-16 bg-gradient-to-t from-transparent to-primary/25" />
         </div>
       </div>
 
@@ -351,17 +352,17 @@ const Hero = () => {
 
         {/* Chapter label */}
         <div className="flex items-center gap-5 mb-auto">
-          <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-primary-foreground/20 bg-primary/60">
+          <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-primary/15 bg-card/70">
             <span className="relative flex w-2 h-2">
               <span className="animate-ping absolute h-full w-full rounded-full bg-accent opacity-60" />
               <span className="relative w-2 h-2 rounded-full bg-accent" />
             </span>
-            <span className="text-[10px] font-bold tracking-[0.32em] uppercase text-primary-foreground/75">
+            <span className="text-[10px] font-bold tracking-[0.32em] uppercase text-primary/75">
               {slide.tag}
             </span>
           </div>
-          <div className="h-px flex-1 max-w-24 bg-gradient-to-r from-primary-foreground/25 to-transparent" />
-          <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-primary-foreground/40 hidden md:block">
+          <div className="h-px flex-1 max-w-24 bg-gradient-to-r from-primary/25 to-transparent" />
+          <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-primary/45 hidden md:block">
             {String(active + 1).padStart(2, "0")} / {String(heroSlides.length).padStart(2, "0")}
           </span>
         </div>
@@ -376,19 +377,19 @@ const Hero = () => {
           </p>
 
           <h1
-            className="animate-fade-up stagger-1 font-display font-black tracking-[-0.045em] text-primary-foreground"
+            className="animate-fade-up stagger-1 font-display font-black tracking-[-0.045em] text-primary"
             style={{
               lineHeight: 0.9,
               fontSize: "clamp(2.5rem,6.8vw,5.8rem)",
-              textShadow: "0 18px 50px hsl(155 61% 6% / 0.55)",
+              textShadow: "0 10px 30px hsl(40 33% 94% / 0.8)",
             }}
           >
             {slide.title}
           </h1>
 
           <div className="animate-fade-up stagger-2 mt-7 flex gap-5 max-w-[560px]">
-            <div className="w-px bg-gradient-to-b from-accent/80 via-primary-foreground/30 to-transparent flex-shrink-0" />
-            <p className="text-primary-foreground/85 text-[15px] md:text-[17px] leading-[1.8] font-light">
+            <div className="w-px bg-gradient-to-b from-accent/80 via-primary/25 to-transparent flex-shrink-0" />
+            <p className="text-muted-foreground text-[15px] md:text-[17px] leading-[1.8] font-light">
               {slide.body}
             </p>
           </div>
@@ -396,7 +397,7 @@ const Hero = () => {
           <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-5 mt-9">
             <a
               href={slide.href}
-              className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground text-[11px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-primary-foreground hover:text-primary transition-all duration-500"
+              className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground text-[11px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-500"
               style={{ boxShadow: "0 14px 40px -12px hsl(28 92% 44% / 0.55)" }}
             >
               {slide.cta}
@@ -404,9 +405,9 @@ const Hero = () => {
             </a>
             <a
               href="#campus"
-              className="group inline-flex items-center gap-3 text-[11px] font-bold text-primary-foreground/80 hover:text-accent transition-colors uppercase tracking-[0.28em]"
+              className="group inline-flex items-center gap-3 text-[11px] font-bold text-primary/80 hover:text-accent transition-colors uppercase tracking-[0.28em]"
             >
-              <div className="w-11 h-11 rounded-full border border-primary-foreground/30 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/10 transition-all backdrop-blur-sm">
+              <div className="w-11 h-11 rounded-full border border-primary/25 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/10 transition-all backdrop-blur-sm">
                 <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
               </div>
               Watch the film
@@ -426,7 +427,7 @@ const Hero = () => {
                 className="group text-left max-w-[180px]"
                 aria-label={`Show ${s.title}`}
               >
-                <div className="relative h-px w-full bg-primary-foreground/20 mb-3 overflow-hidden">
+                <div className="relative h-px w-full bg-primary/15 mb-3 overflow-hidden">
                   {i === active && (
                     <div
                       key={active}
@@ -436,7 +437,7 @@ const Hero = () => {
                 </div>
                 <p
                   className={`text-[9.5px] font-black uppercase tracking-[0.32em] transition-colors ${
-                    i === active ? "text-accent" : "text-primary-foreground/45 group-hover:text-primary-foreground/80"
+                    i === active ? "text-accent" : "text-primary/50 group-hover:text-primary/80"
                   }`}
                 >
                   {String(i + 1).padStart(2, "0")} · {s.kicker}
@@ -447,8 +448,8 @@ const Hero = () => {
 
           {/* Floating stat */}
           <div className="flex items-end gap-6">
-            <div className="px-5 sm:px-6 lg:px-10 py-4 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 backdrop-blur-sm animate-float">
-              <p className="font-display font-black text-4xl leading-none text-primary-foreground">
+            <div className="px-5 sm:px-6 lg:px-10 py-4 rounded-2xl border border-primary/12 bg-card/60 backdrop-blur-sm animate-float">
+              <p className="font-display font-black text-4xl leading-none text-primary">
                 {slide.stat.k}
               </p>
               <p className="text-[9px] font-bold uppercase tracking-[0.35em] text-accent mt-2">
@@ -456,8 +457,8 @@ const Hero = () => {
               </p>
             </div>
             <div className="hidden sm:flex flex-col items-center gap-1.5 pb-2">
-              <span className="text-[8.5px] font-bold uppercase tracking-[0.4em] text-primary-foreground/40">Scroll</span>
-              <div className="w-px h-8 bg-gradient-to-b from-primary-foreground/40 to-transparent" />
+              <span className="text-[8.5px] font-bold uppercase tracking-[0.4em] text-primary/45">Scroll</span>
+              <div className="w-px h-8 bg-gradient-to-b from-primary/40 to-transparent" />
             </div>
           </div>
         </div>

@@ -87,58 +87,58 @@ const Events = () => {
 
       <main className="page-entry bg-background overflow-hidden">
         {/* ══ FEATURED EVENT ══ */}
-        <section className="relative overflow-hidden bg-primary text-primary-foreground">
+        <section className="relative overflow-hidden bg-background text-foreground">
           <div className="absolute inset-0">
             <img src={heroAudience} alt="Attendees at the Tech Guru Meetup in Accra"
-              className="absolute inset-0 w-full h-full object-cover opacity-70" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-primary/25" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,hsl(155_61%_30%/0.28),transparent_65%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_90%,hsl(28_92%_50%/0.18),transparent_60%)]" />
+              className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(100deg, hsl(40 33% 94% / 0.96) 0%, hsl(40 33% 94% / 0.85) 40%, hsl(40 33% 94% / 0.4) 74%, hsl(40 33% 94% / 0.1) 100%)" }} />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_90%,hsl(28_92%_50%/0.14),transparent_60%)]" />
             <div className="noise-bg" />
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-primary to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 py-14 sm:py-20 md:py-24 lg:py-32">
-            <div className="card-lift sheen max-w-2xl rounded-3xl border border-primary-foreground/15 bg-primary/60 p-8 md:p-12 shadow-2xl"
+            <div className="card-lift sheen glass-cream max-w-2xl rounded-3xl p-8 md:p-12"
               style={{ backdropFilter: "blur(18px)" }}>
               <div className="flex items-center gap-3 mb-6">
                 <span className="h-px w-8 bg-accent" />
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">Accra, Ghana · 2026</span>
               </div>
-              <h2 className="font-display font-black text-primary-foreground text-[2.6rem] md:text-[4rem] leading-[0.92] tracking-tight">
+              <h2 className="font-display font-black text-primary text-[2.6rem] md:text-[4rem] leading-[0.92] tracking-tight">
                 Tech Guru<br />Meetup 2026
               </h2>
               <p className="mt-4 font-display font-extrabold text-accent text-xl md:text-2xl tracking-tight">
                 Where Africa meets what&rsquo;s next.
               </p>
-              <p className="mt-7 font-display font-extrabold text-primary-foreground text-lg md:text-xl">
-                Wednesday, October 14, 2026 <span className="text-primary-foreground/25 mx-2">|</span> 8:30 AM – 5:00 PM
+              <p className="mt-7 font-display font-extrabold text-primary text-lg md:text-xl">
+                Wednesday, October 14, 2026 <span className="text-primary/25 mx-2">|</span> 8:30 AM – 5:00 PM
               </p>
-              <p className="mt-2 text-primary-foreground/65 leading-relaxed text-sm">
+              <p className="mt-2 text-muted-foreground leading-relaxed text-sm">
                 Accra International Conference Centre<br />Independence Avenue, Accra
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <button onClick={() => openRsvp("Tech Guru Meetup 2026")}
                   className="btn-magnetic px-7 py-3.5 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:brightness-110 transition-all duration-200"
-                  style={{ boxShadow: "0 12px 36px -10px hsl(28 92% 44% / 0.6)" }}>
+                  style={{ boxShadow: "0 12px 36px -10px hsl(28 92% 44% / 0.5)" }}>
                   Reserve Your Seat
                 </button>
                 <button onClick={() => openRsvp("Tech Guru Meetup 2026 — Sponsorship")}
-                  className="btn-magnetic px-7 py-3.5 rounded-full border border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary-foreground hover:text-primary transition-all duration-200"
+                  className="btn-magnetic px-7 py-3.5 rounded-full border border-primary/20 bg-primary/5 text-primary font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-200"
                   style={{ backdropFilter: "blur(10px)" }}>
                   Become a Sponsor
                 </button>
               </div>
               <p className="mt-5 text-sm">
                 <span className="font-bold text-accent">General admission is free.</span>{" "}
-                <span className="text-primary-foreground/60">Space is limited.</span>
+                <span className="text-muted-foreground">Space is limited.</span>
               </p>
             </div>
 
+
             {/* Countdown */}
-            <div className="mt-12 flex flex-wrap items-center gap-8">
-              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary-foreground/40">Countdown</span>
+            <div className="glass-cream mt-12 rounded-2xl px-6 py-5 flex flex-wrap items-center gap-8" style={{ backdropFilter: "blur(14px)" }}>
+              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary/45">Countdown</span>
               <div className="flex items-center gap-6">
                 {[
                   { label: "Days", val: timeLeft.days },
@@ -147,17 +147,18 @@ const Events = () => {
                   { label: "Secs", val: timeLeft.secs },
                 ].map((u) => (
                   <div key={u.label} className="flex items-baseline gap-1.5">
-                    <span className="font-display font-black text-primary-foreground text-3xl leading-none tabular-nums">
+                    <span className="font-display font-black text-primary text-3xl leading-none tabular-nums">
                       {String(u.val).padStart(2, "0")}
                     </span>
-                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-primary-foreground/40">{u.label}</span>
+                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-primary/45">{u.label}</span>
                   </div>
                 ))}
               </div>
-              <div className="hidden md:flex items-center gap-5 ml-auto text-xs font-semibold text-primary-foreground/60">
+              <div className="hidden md:flex items-center gap-5 ml-auto text-xs font-semibold text-muted-foreground">
                 <span className="flex items-center gap-2"><Users className="w-4 h-4 text-accent" />2,500+ attendees</span>
                 <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-accent" />AICC, Accra</span>
                 <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-accent" />Oct 14–16</span>
+
               </div>
             </div>
           </div>

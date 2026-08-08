@@ -52,11 +52,11 @@ const Header = () => {
           className={`pointer-events-auto relative overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             scrolled
               ? "bg-white/80 backdrop-blur-md border border-white/60 shadow-md rounded-full px-4 sm:px-6 py-2"
-              : "rounded-full px-4 sm:px-6 py-2 border border-white/20 bg-white/10 backdrop-blur-md"
+              : "rounded-full px-4 sm:px-6 py-2 border border-white/50 bg-white/45 backdrop-blur-md"
           }`}
         >
           {/* top light edge */}
-          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-primary-foreground/40 to-transparent opacity-60 pointer-events-none" />
+          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-60 pointer-events-none" />
 
           <div className="flex items-center justify-between gap-4">
             <Link to="/" className="flex items-center shrink-0 group">
@@ -71,7 +71,7 @@ const Header = () => {
 
             <nav
               className={`hidden lg:flex items-center gap-1 text-[10.5px] font-bold uppercase tracking-[0.22em] transition-colors duration-500 ${
-                scrolled ? "text-primary/70" : "text-white/80"
+                scrolled ? "text-primary/70" : "text-primary/75"
               }`}
             >
               {navLinks.map((l) => (
@@ -79,7 +79,7 @@ const Header = () => {
                   key={l.href}
                   to={l.href}
                   className={`relative px-3.5 py-2 rounded-full transition-all duration-300 hover:text-accent ${
-                    scrolled ? "hover:bg-primary/[0.06]" : "hover:bg-white/15"
+                    "hover:bg-primary/[0.06]"
                   }`}
                 >
                   {l.label}
@@ -97,7 +97,7 @@ const Header = () => {
               </Link>
               <button
                 className={`lg:hidden w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
-                  scrolled ? "text-primary/70 hover:bg-primary/[0.06]" : "text-white/80 hover:bg-white/15"
+                  "text-primary/75 hover:bg-primary/[0.06]"
                 }`}
                 onClick={() => setOpen(!open)}
                 aria-label="Toggle menu"
