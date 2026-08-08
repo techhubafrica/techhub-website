@@ -48,7 +48,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
   return (
     <section
       ref={ref}
-      className="relative bg-primary text-primary-foreground overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 select-none"
+      className="relative bg-background text-foreground overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 select-none"
     >
       {/* Backdrop photograph */}
       {image && (
@@ -65,20 +65,20 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
 
       {/* Grain noise */}
       <div
-        className="absolute inset-0 z-[1] pointer-events-none opacity-[0.055]"
+        className="absolute inset-0 z-[1] pointer-events-none opacity-[0.05]"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
         }}
       />
 
-      {/* Directional gradient — left bias for text legibility, image stays readable */}
+      {/* Cream veil — left bias keeps type crisp, photograph stays visible right */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background: image
-            ? "linear-gradient(105deg, hsl(155 61% 6% / 0.88) 0%, hsl(155 61% 8% / 0.6) 42%, hsl(155 61% 10% / 0.15) 100%)"
-            : "linear-gradient(110deg, hsl(155 61% 6% / 0.97) 0%, hsl(155 61% 10% / 0.82) 45%, hsl(155 61% 14% / 0.4) 100%)",
+            ? "linear-gradient(105deg, hsl(40 33% 94% / 0.96) 0%, hsl(40 33% 94% / 0.86) 38%, hsl(40 33% 94% / 0.42) 72%, hsl(40 33% 94% / 0.12) 100%)"
+            : "linear-gradient(110deg, hsl(40 33% 96%) 0%, hsl(40 25% 91%) 55%, hsl(40 20% 87%) 100%)",
         }}
       />
 
@@ -91,19 +91,19 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         }}
       />
 
-      {/* Top vignette */}
-      <div className={`absolute inset-x-0 top-0 ${image ? "h-24 opacity-70" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-primary to-transparent`} />
+      {/* Top vignette — blends into the cream nav zone */}
+      <div className={`absolute inset-x-0 top-0 ${image ? "h-28" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-background to-transparent`} />
 
       {/* Amber accent glow — top right */}
       <div className="hidden md:block absolute -top-32 right-10 w-[600px] h-[500px] rounded-full blur-3xl z-[1] pointer-events-none opacity-25"
-        style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent 65%)" }} />
+        style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.35), transparent 65%)" }} />
 
       {/* Ghost watermark text */}
       {ghost && (
         <div className="absolute inset-0 z-[1] flex items-center justify-end pr-8 pointer-events-none overflow-hidden">
           <span
-            className="font-display font-black uppercase text-primary-foreground select-none"
-            style={{ fontSize: "clamp(6rem,22vw,20rem)", opacity: 0.04, letterSpacing: "-0.04em", lineHeight: 1 }}
+            className="font-display font-black uppercase text-primary select-none"
+            style={{ fontSize: "clamp(6rem,22vw,20rem)", opacity: 0.05, letterSpacing: "-0.04em", lineHeight: 1 }}
           >
             {ghost}
           </span>
@@ -112,25 +112,25 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
 
       {/* Vertical brand rail */}
       <div className="hidden xl:flex absolute left-6 top-0 bottom-0 flex-col items-center justify-center gap-4 z-10 pointer-events-none">
-        <div className="w-px h-20 bg-gradient-to-b from-transparent to-primary-foreground/20" />
-        <span className="text-[8px] font-bold uppercase tracking-[0.55em] text-primary-foreground/30 [writing-mode:vertical-rl] rotate-180">
+        <div className="w-px h-20 bg-gradient-to-b from-transparent to-primary/20" />
+        <span className="text-[8px] font-bold uppercase tracking-[0.55em] text-primary/35 [writing-mode:vertical-rl] rotate-180">
           Tech Hub Africa
         </span>
-        <div className="w-px h-20 bg-gradient-to-t from-transparent to-primary-foreground/20" />
+        <div className="w-px h-20 bg-gradient-to-t from-transparent to-primary/20" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 shell xl:px-20">
         {/* Tag pill */}
-        <div className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-3.5 sm:px-4 py-1.5 rounded-full border border-primary-foreground/20 bg-primary-foreground/5">
+        <div className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-3.5 sm:px-4 py-1.5 rounded-full border border-primary/15 bg-card/70">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-          <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.28em] sm:tracking-[0.35em] text-primary-foreground/70">{tag}</span>
+          <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.28em] sm:tracking-[0.35em] text-primary/70">{tag}</span>
         </div>
 
         {/* Display title */}
         <h1
-          className="font-display font-black tracking-[-0.04em] text-primary-foreground animate-fade-up max-w-[22ch]"
-          style={{ fontSize: "clamp(2.1rem, 8.5vw, 6rem)", lineHeight: 0.94, textShadow: "0 20px 60px hsl(155 61% 4% / 0.7)" }}
+          className="font-display font-black tracking-[-0.04em] text-primary animate-fade-up max-w-[22ch]"
+          style={{ fontSize: "clamp(2.1rem, 8.5vw, 6rem)", lineHeight: 0.94 }}
         >
           {title}
         </h1>
@@ -142,7 +142,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         </div>
 
         {/* Body */}
-        <p className="animate-fade-up stagger-2 text-primary-foreground/65 text-[0.95rem] sm:text-base md:text-[1.15rem] leading-[1.75] sm:leading-[1.8] max-w-[580px]">
+        <p className="animate-fade-up stagger-2 text-muted-foreground text-[0.95rem] sm:text-base md:text-[1.15rem] leading-[1.75] sm:leading-[1.8] max-w-[580px]">
           {body}
         </p>
 
@@ -151,10 +151,10 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
 
         {/* Optional stats bar */}
         {stats && stats.length > 0 && (
-          <div className="mt-10 pt-8 sm:mt-14 sm:pt-10 border-t border-primary-foreground/10 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-7 sm:gap-8 animate-fade-up stagger-3">
+          <div className="mt-10 pt-8 sm:mt-14 sm:pt-10 border-t border-primary/10 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-7 sm:gap-8 animate-fade-up stagger-3">
             {stats.map((s) => (
               <div key={s.label}>
-                <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-primary-foreground leading-none">{s.val}</p>
+                <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-primary leading-none">{s.val}</p>
                 <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.22em] sm:tracking-[0.3em] text-accent mt-2">{s.label}</p>
               </div>
             ))}
@@ -162,9 +162,8 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         )}
       </div>
 
-
-      {/* Bottom edge fade — settles into the dark rail below, no white seam */}
-      <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 z-[2] pointer-events-none bg-gradient-to-t from-primary to-transparent" />
+      {/* Bottom edge fade — settles into the cream page below */}
+      <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 z-[2] pointer-events-none bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };
