@@ -72,15 +72,26 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         }}
       />
 
-      {/* Cream veil — left bias keeps type crisp, photograph stays visible right */}
+      {/* Cream veil — whisper-light, photograph stays fully visible */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background: image
-            ? "linear-gradient(105deg, hsl(40 33% 94% / 0.9) 0%, hsl(40 33% 94% / 0.74) 38%, hsl(40 33% 94% / 0.3) 72%, hsl(40 33% 94% / 0.12) 100%)"
+            ? "linear-gradient(105deg, hsl(40 33% 94% / 0.55) 0%, hsl(40 33% 94% / 0.3) 36%, hsl(40 33% 94% / 0.08) 70%, hsl(40 33% 94% / 0) 100%)"
             : "linear-gradient(110deg, hsl(40 33% 96%) 0%, hsl(40 25% 91%) 55%, hsl(40 20% 87%) 100%)",
         }}
       />
+
+      {/* Type halo — soft, keeps headline legible without masking the photo */}
+      {image && (
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(90% 85% at 2% 55%, hsl(40 33% 94% / 0.7) 0%, hsl(40 33% 94% / 0.28) 45%, transparent 75%)",
+          }}
+        />
+      )}
 
       {/* Mouse-tracked amber spotlight */}
       <div
@@ -92,7 +103,8 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
       />
 
       {/* Top vignette — blends into the cream nav zone */}
-      <div className={`absolute inset-x-0 top-0 ${image ? "h-28" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-background to-transparent`} />
+      <div className={`absolute inset-x-0 top-0 ${image ? "h-28" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-background/80 to-transparent`} />
+
 
       {/* Amber accent glow — top right */}
       <div className="hidden md:block absolute -top-32 right-10 w-[600px] h-[500px] rounded-full blur-3xl z-[1] pointer-events-none opacity-25"
