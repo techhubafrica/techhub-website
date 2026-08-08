@@ -289,19 +289,20 @@ const Hero = () => {
 
 
       {/* ══ CINEMATIC OVERLAYS — cream veil ══ */}
-      {/* soft brand-cream base */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-background/25" />
-      {/* directional cream gradient for text legibility */}
+      {/* whisper-thin cream base */}
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-background/[0.06]" />
+      {/* directional cream wash — barely there, just enough for type */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(100deg, hsl(40 33% 94% / 0.94) 0%, hsl(40 33% 94% / 0.78) 38%, hsl(40 33% 94% / 0.3) 70%, hsl(40 33% 94% / 0.05) 100%)",
+            "linear-gradient(100deg, hsl(40 33% 94% / 0.58) 0%, hsl(40 33% 94% / 0.34) 34%, hsl(40 33% 94% / 0.1) 64%, hsl(40 33% 94% / 0) 100%)",
         }}
       />
       {/* top & bottom vignettes */}
-      <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-background/85 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-80 z-[1] pointer-events-none bg-gradient-to-t from-background via-background/75 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-background/45 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-72 z-[1] pointer-events-none bg-gradient-to-t from-background/95 via-background/45 to-transparent" />
+
 
       {/* amber ambient glow — position driven by CSS vars */}
       <div
@@ -372,6 +373,14 @@ const Hero = () => {
           key={slide.title}
           className="relative max-w-[880px] mt-10 md:mt-14 animate-fade-up"
         >
+          {/* soft halo so type reads over photography without hiding it */}
+          <div
+            className="absolute -left-24 -right-40 -top-16 -bottom-16 -z-10 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(75% 70% at 12% 45%, hsl(40 33% 94% / 0.62) 0%, hsl(40 33% 94% / 0.24) 45%, transparent 72%)",
+            }}
+          />
           <p className="animate-fade-up text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] text-accent mb-5">
             {slide.kicker}
           </p>
@@ -381,7 +390,7 @@ const Hero = () => {
             style={{
               lineHeight: 0.9,
               fontSize: "clamp(2.5rem,6.8vw,5.8rem)",
-              textShadow: "0 10px 30px hsl(40 33% 94% / 0.8)",
+              textShadow: "0 2px 18px hsl(40 33% 94% / 0.95), 0 8px 40px hsl(40 33% 94% / 0.7)",
             }}
           >
             {slide.title}
@@ -389,10 +398,11 @@ const Hero = () => {
 
           <div className="animate-fade-up stagger-2 mt-7 flex gap-5 max-w-[560px]">
             <div className="w-px bg-gradient-to-b from-accent/80 via-primary/25 to-transparent flex-shrink-0" />
-            <p className="text-muted-foreground text-[15px] md:text-[17px] leading-[1.8] font-light">
+            <p className="text-primary/80 text-[15px] md:text-[17px] leading-[1.8] font-light" style={{ textShadow: "0 1px 12px hsl(40 33% 94% / 0.9)" }}>
               {slide.body}
             </p>
           </div>
+
 
           <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-5 mt-9">
             <a
