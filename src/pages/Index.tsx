@@ -375,10 +375,10 @@ const Hero = () => {
         >
           {/* soft halo so type reads over photography without hiding it */}
           <div
-            className="absolute -inset-x-10 -inset-y-8 -z-10 pointer-events-none"
+            className="absolute -left-24 -right-40 -top-16 -bottom-16 -z-10 pointer-events-none"
             style={{
               background:
-                "radial-gradient(120% 100% at 0% 40%, hsl(40 33% 94% / 0.72) 0%, hsl(40 33% 94% / 0.32) 48%, transparent 78%)",
+                "radial-gradient(75% 70% at 12% 45%, hsl(40 33% 94% / 0.62) 0%, hsl(40 33% 94% / 0.24) 45%, transparent 72%)",
             }}
           />
           <p className="animate-fade-up text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] text-accent mb-5">
