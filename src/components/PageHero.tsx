@@ -72,26 +72,27 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         }}
       />
 
-      {/* Cream veil — whisper-light, photograph stays fully visible */}
+      {/* Colourless veil — neutral, photograph keeps its true colour */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background: image
-            ? "linear-gradient(105deg, hsl(40 33% 94% / 0.55) 0%, hsl(40 33% 94% / 0.3) 36%, hsl(40 33% 94% / 0.08) 70%, hsl(40 33% 94% / 0) 100%)"
+            ? "linear-gradient(105deg, hsl(0 0% 100% / 0.48) 0%, hsl(0 0% 100% / 0.24) 36%, hsl(0 0% 100% / 0.06) 70%, hsl(0 0% 100% / 0) 100%)"
             : "linear-gradient(110deg, hsl(40 33% 96%) 0%, hsl(40 25% 91%) 55%, hsl(40 20% 87%) 100%)",
         }}
       />
 
-      {/* Type halo — soft, keeps headline legible without masking the photo */}
+      {/* Type halo — soft neutral, keeps headline legible without masking the photo */}
       {image && (
         <div
           className="absolute inset-0 z-[1] pointer-events-none"
           style={{
             background:
-              "radial-gradient(90% 85% at 2% 55%, hsl(40 33% 94% / 0.7) 0%, hsl(40 33% 94% / 0.28) 45%, transparent 75%)",
+              "radial-gradient(90% 85% at 2% 55%, hsl(0 0% 100% / 0.6) 0%, hsl(0 0% 100% / 0.22) 45%, transparent 75%)",
           }}
         />
       )}
+
 
       {/* Mouse-tracked amber spotlight */}
       <div

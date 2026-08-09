@@ -288,17 +288,16 @@ const Hero = () => {
       </div>
 
 
-      {/* ══ CINEMATIC OVERLAYS — cream veil ══ */}
-      {/* whisper-thin cream base */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-background/[0.06]" />
-      {/* directional cream wash — barely there, just enough for type */}
+      {/* ══ CINEMATIC OVERLAYS — colourless neutral scrim ══ */}
+      {/* directional neutral wash — no tint, photography stays true */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(100deg, hsl(40 33% 94% / 0.58) 0%, hsl(40 33% 94% / 0.34) 34%, hsl(40 33% 94% / 0.1) 64%, hsl(40 33% 94% / 0) 100%)",
+            "linear-gradient(100deg, hsl(0 0% 100% / 0.5) 0%, hsl(0 0% 100% / 0.26) 34%, hsl(0 0% 100% / 0.06) 64%, hsl(0 0% 100% / 0) 100%)",
         }}
       />
+
       {/* top & bottom vignettes */}
       <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-background/45 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-72 z-[1] pointer-events-none bg-gradient-to-t from-background/95 via-background/45 to-transparent" />
@@ -378,7 +377,7 @@ const Hero = () => {
             className="absolute -left-24 -right-40 -top-16 -bottom-16 -z-10 pointer-events-none"
             style={{
               background:
-                "radial-gradient(75% 70% at 12% 45%, hsl(40 33% 94% / 0.62) 0%, hsl(40 33% 94% / 0.24) 45%, transparent 72%)",
+                "radial-gradient(75% 70% at 12% 45%, hsl(0 0% 100% / 0.55) 0%, hsl(0 0% 100% / 0.2) 45%, transparent 72%)",
             }}
           />
           <p className="animate-fade-up text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] text-accent mb-5">
@@ -390,7 +389,7 @@ const Hero = () => {
             style={{
               lineHeight: 0.9,
               fontSize: "clamp(2.5rem,6.8vw,5.8rem)",
-              textShadow: "0 2px 18px hsl(40 33% 94% / 0.95), 0 8px 40px hsl(40 33% 94% / 0.7)",
+              textShadow: "0 2px 18px hsl(0 0% 100% / 0.9), 0 8px 40px hsl(0 0% 100% / 0.6)",
             }}
           >
             {slide.title}
@@ -398,7 +397,7 @@ const Hero = () => {
 
           <div className="animate-fade-up stagger-2 mt-7 flex gap-5 max-w-[560px]">
             <div className="w-px bg-gradient-to-b from-accent/80 via-primary/25 to-transparent flex-shrink-0" />
-            <p className="text-primary/80 text-[15px] md:text-[17px] leading-[1.8] font-light" style={{ textShadow: "0 1px 12px hsl(40 33% 94% / 0.9)" }}>
+            <p className="text-primary/80 text-[15px] md:text-[17px] leading-[1.8] font-light" style={{ textShadow: "0 1px 12px hsl(0 0% 100% / 0.85)" }}>
               {slide.body}
             </p>
           </div>
