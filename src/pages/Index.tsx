@@ -395,12 +395,20 @@ const Hero = () => {
             {slide.title}
           </h1>
 
-          <div className="animate-fade-up stagger-2 mt-7 flex gap-5 max-w-[560px]">
-            <div className="w-px bg-gradient-to-b from-accent/80 via-primary/25 to-transparent flex-shrink-0" />
-            <p className="text-primary/80 text-[15px] md:text-[17px] leading-[1.8] font-light" style={{ textShadow: "0 1px 12px hsl(0 0% 100% / 0.85)" }}>
+          <div
+            className="animate-fade-up stagger-2 mt-7 flex gap-5 max-w-[600px] rounded-2xl pl-5 pr-6 py-4"
+            style={{
+              background: "hsl(0 0% 100% / 0.72)",
+              backdropFilter: "blur(14px)",
+              boxShadow: "0 18px 50px -22px hsl(0 0% 0% / 0.28)",
+            }}
+          >
+            <div className="w-[3px] rounded-full bg-gradient-to-b from-accent via-accent/50 to-transparent flex-shrink-0" />
+            <p className="text-primary text-[15px] md:text-[17px] leading-[1.75] font-medium">
               {slide.body}
             </p>
           </div>
+
 
 
           <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-5 mt-9">
