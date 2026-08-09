@@ -91,7 +91,7 @@ const Events = () => {
           <div className="absolute inset-0">
             <img src={heroAudience} alt="Attendees at the Tech Guru Meetup in Accra"
               className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(100deg, hsl(40 33% 94% / 0.6) 0%, hsl(40 33% 94% / 0.34) 40%, hsl(40 33% 94% / 0.1) 74%, hsl(40 33% 94% / 0) 100%)" }} />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(100deg, hsl(0 0% 100% / 0.5) 0%, hsl(0 0% 100% / 0.26) 40%, hsl(0 0% 100% / 0.06) 74%, hsl(0 0% 100% / 0) 100%)" }} />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_90%,hsl(28_92%_50%/0.14),transparent_60%)]" />
             <div className="noise-bg" />
             <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
