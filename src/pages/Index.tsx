@@ -288,17 +288,16 @@ const Hero = () => {
       </div>
 
 
-      {/* ══ CINEMATIC OVERLAYS — cream veil ══ */}
-      {/* whisper-thin cream base */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-background/[0.06]" />
-      {/* directional cream wash — barely there, just enough for type */}
+      {/* ══ CINEMATIC OVERLAYS — colourless neutral scrim ══ */}
+      {/* directional neutral wash — no tint, photography stays true */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(100deg, hsl(40 33% 94% / 0.58) 0%, hsl(40 33% 94% / 0.34) 34%, hsl(40 33% 94% / 0.1) 64%, hsl(40 33% 94% / 0) 100%)",
+            "linear-gradient(100deg, hsl(0 0% 100% / 0.5) 0%, hsl(0 0% 100% / 0.26) 34%, hsl(0 0% 100% / 0.06) 64%, hsl(0 0% 100% / 0) 100%)",
         }}
       />
+
       {/* top & bottom vignettes */}
       <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-background/45 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-72 z-[1] pointer-events-none bg-gradient-to-t from-background/95 via-background/45 to-transparent" />
