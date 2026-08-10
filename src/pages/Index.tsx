@@ -254,6 +254,17 @@ const Hero = () => {
       ref={stageRef}
       className="hero-stage relative min-h-[100svh] overflow-hidden select-none bg-background text-foreground"
     >
+      {/* ══ MATTED FRAME — museum print margin ══ */}
+      <div className="absolute inset-0 z-[3] pointer-events-none p-2 sm:p-3 md:p-4">
+        <div className="w-full h-full rounded-[20px] md:rounded-[26px] border border-primary/12 shadow-[inset_0_1px_0_hsl(0_0%_100%/0.45)]" />
+      </div>
+      <div className="absolute inset-0 z-[4] pointer-events-none">
+        {/* cream matting bands */}
+        <div className="absolute inset-x-0 top-0 h-2 sm:h-3 md:h-4 bg-background" />
+        <div className="absolute inset-x-0 bottom-0 h-2 sm:h-3 md:h-4 bg-background" />
+        <div className="absolute inset-y-0 left-0 w-2 sm:w-3 md:w-4 bg-background" />
+        <div className="absolute inset-y-0 right-0 w-2 sm:w-3 md:w-4 bg-background" />
+      </div>
 
       {/* ══ FULL-BLEED BACKGROUND SLIDESHOW ══ */}
       <div
@@ -287,33 +298,28 @@ const Hero = () => {
         ))}
       </div>
 
-
-      {/* ══ CINEMATIC OVERLAYS — colourless neutral scrim ══ */}
-      {/* directional neutral wash — no tint, photography stays true */}
+      {/* ══ SCRIM — placed only where type sits, photo stays true elsewhere ══ */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(100deg, hsl(0 0% 100% / 0.5) 0%, hsl(0 0% 100% / 0.26) 34%, hsl(0 0% 100% / 0.06) 64%, hsl(0 0% 100% / 0) 100%)",
+            "linear-gradient(95deg, hsl(0 0% 100% / 0.9) 0%, hsl(0 0% 100% / 0.78) 26%, hsl(0 0% 100% / 0.34) 48%, hsl(0 0% 100% / 0.04) 70%, hsl(0 0% 100% / 0) 100%)",
         }}
       />
-
-      {/* top & bottom vignettes */}
-      <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-background/45 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-72 z-[1] pointer-events-none bg-gradient-to-t from-background/95 via-background/45 to-transparent" />
-
+      <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-background/55 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-80 z-[1] pointer-events-none bg-gradient-to-t from-background via-background/50 to-transparent" />
 
       {/* amber ambient glow — position driven by CSS vars */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none hidden md:block"
         style={{
           background:
-            "radial-gradient(700px circle at var(--hx, 50%) var(--hy, 50%), hsl(28 92% 50% / 0.13), transparent 62%)",
+            "radial-gradient(700px circle at var(--hx, 50%) var(--hy, 50%), hsl(28 92% 50% / 0.1), transparent 62%)",
         }}
       />
       {/* fine grain */}
       <div
-        className="absolute inset-0 z-[1] pointer-events-none opacity-[0.06]"
+        className="absolute inset-0 z-[1] pointer-events-none opacity-[0.05]"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
@@ -322,7 +328,7 @@ const Hero = () => {
 
       {/* ══ SIGNATURE CONSTELLATION ══ */}
       <div
-        className="absolute -top-10 -right-16 md:top-16 md:right-8 w-[360px] md:w-[520px] h-[360px] md:h-[520px] pointer-events-none z-[2] opacity-70 will-change-transform"
+        className="hidden md:block absolute top-20 right-10 w-[440px] h-[440px] pointer-events-none z-[2] opacity-45 will-change-transform"
         style={{
           transform:
             "translate3d(calc(var(--pmx, 0px) * 0.5), calc(var(--pmy, 0px) * 0.5 - var(--par, 0px) * 0.1), 0)",
@@ -332,9 +338,9 @@ const Hero = () => {
       </div>
 
       {/* Vertical brand rail */}
-      <div className="hidden xl:flex absolute left-6 top-0 bottom-0 flex-col items-center justify-between py-20 sm:py-24 md:py-32 z-10 pointer-events-none">
+      <div className="hidden xl:flex absolute left-8 top-0 bottom-0 flex-col items-center justify-between py-24 md:py-32 z-10 pointer-events-none">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-px h-16 bg-gradient-to-b from-transparent to-primary/25" />
+          <div className="w-px h-20 bg-gradient-to-b from-transparent to-primary/25" />
           <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary/50 [writing-mode:vertical-rl] rotate-180">
             Est · MMXXIV
           </span>
@@ -343,139 +349,136 @@ const Hero = () => {
           <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary/50 [writing-mode:vertical-rl] rotate-180">
             Accra · Ghana
           </span>
-          <div className="w-px h-16 bg-gradient-to-t from-transparent to-primary/25" />
+          <div className="w-px h-20 bg-gradient-to-t from-transparent to-primary/25" />
         </div>
       </div>
 
       {/* ══ CONTENT ══ */}
-      <div className="relative z-10 min-h-[100svh] flex flex-col max-w-[1360px] mx-auto w-full px-6 xl:px-20 pt-32 md:pt-36 pb-10">
+      <div className="relative z-10 min-h-[100svh] flex flex-col max-w-[1360px] mx-auto w-full px-6 sm:px-8 xl:px-24 pt-32 md:pt-36 pb-8 md:pb-12">
 
         {/* Chapter label */}
         <div className="flex items-center gap-5 mb-auto">
-          <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-primary/15 bg-card/70">
-            <span className="relative flex w-2 h-2">
+          <div className="inline-flex items-center gap-3 pl-3 pr-4 py-1.5 rounded-full border border-primary/12 bg-card/60 backdrop-blur-sm">
+            <span className="relative flex w-1.5 h-1.5">
               <span className="animate-ping absolute h-full w-full rounded-full bg-accent opacity-60" />
-              <span className="relative w-2 h-2 rounded-full bg-accent" />
+              <span className="relative w-1.5 h-1.5 rounded-full bg-accent" />
             </span>
-            <span className="text-[10px] font-bold tracking-[0.32em] uppercase text-primary/75">
+            <span className="text-[9.5px] font-bold tracking-[0.34em] uppercase text-primary/70">
               {slide.tag}
             </span>
           </div>
-          <div className="h-px flex-1 max-w-24 bg-gradient-to-r from-primary/25 to-transparent" />
-          <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-primary/45 hidden md:block">
-            {String(active + 1).padStart(2, "0")} / {String(heroSlides.length).padStart(2, "0")}
-          </span>
+          <div className="h-px flex-1 max-w-32 bg-gradient-to-r from-primary/20 to-transparent" />
         </div>
 
         {/* Headline block — keyed for per-slide reveal */}
-        <div
-          key={slide.title}
-          className="relative max-w-[880px] mt-10 md:mt-14 animate-fade-up"
-        >
-          {/* soft halo so type reads over photography without hiding it */}
-          <div
-            className="absolute -left-24 -right-40 -top-16 -bottom-16 -z-10 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(75% 70% at 12% 45%, hsl(0 0% 100% / 0.55) 0%, hsl(0 0% 100% / 0.2) 45%, transparent 72%)",
-            }}
-          />
-          <p className="animate-fade-up text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] text-accent mb-5">
-            {slide.kicker}
-          </p>
+        <div key={slide.title} className="relative max-w-[860px] mt-12 md:mt-16">
+          <div className="flex items-center gap-4 mb-6 animate-fade-up">
+            <span className="h-px w-10 bg-accent" />
+            <p className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] text-accent">
+              {slide.kicker}
+            </p>
+          </div>
 
           <h1
-            className="animate-fade-up stagger-1 font-display font-black tracking-[-0.045em] text-primary"
+            className="animate-fade-up stagger-1 font-display font-black tracking-[-0.05em] text-primary"
             style={{
-              lineHeight: 0.9,
-              fontSize: "clamp(2.5rem,6.8vw,5.8rem)",
-              textShadow: "0 2px 18px hsl(0 0% 100% / 0.9), 0 8px 40px hsl(0 0% 100% / 0.6)",
+              lineHeight: 0.88,
+              fontSize: "clamp(2.6rem,7.2vw,6.2rem)",
+              textShadow: "0 1px 30px hsl(0 0% 100% / 0.85)",
             }}
           >
             {slide.title}
           </h1>
 
-          <div
-            className="animate-fade-up stagger-2 mt-7 flex gap-5 max-w-[600px] rounded-2xl pl-5 pr-6 py-4"
-            style={{
-              background: "hsl(0 0% 100% / 0.72)",
-              backdropFilter: "blur(14px)",
-              boxShadow: "0 18px 50px -22px hsl(0 0% 0% / 0.28)",
-            }}
-          >
-            <div className="w-[3px] rounded-full bg-gradient-to-b from-accent via-accent/50 to-transparent flex-shrink-0" />
-            <p className="text-primary text-[15px] md:text-[17px] leading-[1.75] font-medium">
+          {/* description — hairline-ruled editorial column */}
+          <div className="animate-fade-up stagger-2 mt-8 max-w-[540px] border-t border-primary/15 pt-6 flex gap-6">
+            <span className="font-display font-black text-[11px] leading-none text-accent pt-1.5 tabular-nums">
+              {String(active + 1).padStart(2, "0")}
+            </span>
+            <p
+              className="text-primary text-[15px] md:text-[17px] leading-[1.75] font-normal"
+              style={{ textShadow: "0 1px 16px hsl(0 0% 100% / 0.95)" }}
+            >
               {slide.body}
             </p>
           </div>
 
-
-
-          <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-5 mt-9">
+          <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-6 mt-10">
             <a
               href={slide.href}
-              className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground text-[11px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-500"
-              style={{ boxShadow: "0 14px 40px -12px hsl(28 92% 44% / 0.55)" }}
+              className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-primary text-primary-foreground text-[10.5px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-accent hover:text-accent-foreground transition-all duration-500"
+              style={{ boxShadow: "0 18px 46px -16px hsl(155 61% 12% / 0.55)" }}
             >
               {slide.cta}
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
             <a
               href="#campus"
-              className="group inline-flex items-center gap-3 text-[11px] font-bold text-primary/80 hover:text-accent transition-colors uppercase tracking-[0.28em]"
+              className="group inline-flex items-center gap-3 text-[10.5px] font-bold text-primary/80 hover:text-accent transition-colors uppercase tracking-[0.28em]"
             >
-              <div className="w-11 h-11 rounded-full border border-primary/25 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/10 transition-all backdrop-blur-sm">
-                <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
+              <div className="w-11 h-11 rounded-full border border-primary/25 bg-card/50 backdrop-blur-sm flex items-center justify-center group-hover:border-accent group-hover:bg-accent/10 transition-all">
+                <Play className="w-3 h-3 fill-current ml-0.5" />
               </div>
               Watch the film
             </a>
           </div>
         </div>
 
-        {/* ══ BOTTOM BAR — slide switcher + stats ══ */}
-        <div className="mt-auto pt-10 flex flex-col lg:flex-row lg:items-end gap-10 justify-between">
+        {/* ══ BOTTOM BAR — index ladder + stat ══ */}
+        <div className="mt-auto pt-12 flex flex-col-reverse lg:flex-row lg:items-end gap-8 lg:gap-14 justify-between">
 
-          {/* Slide switcher */}
-          <div className="flex flex-wrap gap-x-8 gap-y-4">
-            {heroSlides.map((s, i) => (
-              <button
-                key={s.title}
-                onClick={() => goto(i)}
-                className="group text-left max-w-[180px]"
-                aria-label={`Show ${s.title}`}
-              >
-                <div className="relative h-px w-full bg-primary/15 mb-3 overflow-hidden">
-                  {i === active && (
-                    <div
-                      key={active}
-                      className="hero-progress absolute inset-y-0 left-0 bg-accent"
-                    />
-                  )}
-                </div>
-                <p
-                  className={`text-[9.5px] font-black uppercase tracking-[0.32em] transition-colors ${
-                    i === active ? "text-accent" : "text-primary/50 group-hover:text-primary/80"
+          {/* Index ladder — never wraps */}
+          <div className="flex-1 min-w-0 max-w-2xl">
+            <div className="flex items-baseline justify-between gap-6 mb-4">
+              <div className="flex items-baseline gap-2">
+                <span className="font-display font-black text-primary text-3xl md:text-4xl leading-none tabular-nums">
+                  {String(active + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[9.5px] font-bold uppercase tracking-[0.35em] text-primary/40">
+                  / {String(heroSlides.length).padStart(2, "0")}
+                </span>
+              </div>
+              <span className="text-[9.5px] font-black uppercase tracking-[0.32em] text-accent truncate">
+                {slide.kicker}
+              </span>
+            </div>
+            <div className="flex items-stretch gap-1.5">
+              {heroSlides.map((s, i) => (
+                <button
+                  key={s.title}
+                  onClick={() => goto(i)}
+                  aria-label={`Show ${s.title}`}
+                  aria-current={i === active}
+                  className={`group relative h-8 flex items-end transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    i === active ? "flex-grow-[3]" : "flex-grow"
                   }`}
+                  style={{ flexBasis: 0 }}
                 >
-                  {String(i + 1).padStart(2, "0")} · {s.kicker}
-                </p>
-              </button>
-            ))}
+                  <span className="relative block w-full h-[2px] bg-primary/15 overflow-hidden group-hover:bg-primary/30 transition-colors">
+                    {i === active && (
+                      <span key={active} className="hero-progress absolute inset-y-0 left-0 bg-accent" />
+                    )}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Floating stat */}
-          <div className="flex items-end gap-6">
-            <div className="px-5 sm:px-6 lg:px-10 py-4 rounded-2xl border border-primary/12 bg-card/60 backdrop-blur-sm animate-float">
-              <p className="font-display font-black text-4xl leading-none text-primary">
+          {/* Stat plate + scroll cue */}
+          <div className="flex items-end gap-6 shrink-0">
+            <div className="relative px-7 py-5 border border-primary/12 bg-card/55 backdrop-blur-md">
+              <span className="absolute -top-px -left-px w-2.5 h-2.5 border-t border-l border-accent" />
+              <span className="absolute -bottom-px -right-px w-2.5 h-2.5 border-b border-r border-accent" />
+              <p className="font-display font-black text-4xl leading-none text-primary tabular-nums">
                 {slide.stat.k}
               </p>
-              <p className="text-[9px] font-bold uppercase tracking-[0.35em] text-accent mt-2">
+              <p className="text-[8.5px] font-bold uppercase tracking-[0.35em] text-accent mt-2">
                 {slide.stat.v}
               </p>
             </div>
             <div className="hidden sm:flex flex-col items-center gap-1.5 pb-2">
               <span className="text-[8.5px] font-bold uppercase tracking-[0.4em] text-primary/45">Scroll</span>
-              <div className="w-px h-8 bg-gradient-to-b from-primary/40 to-transparent" />
+              <div className="w-px h-10 bg-gradient-to-b from-primary/40 to-transparent" />
             </div>
           </div>
         </div>
@@ -483,6 +486,7 @@ const Hero = () => {
     </section>
   );
 };
+
 
 
 /* ============================================================
