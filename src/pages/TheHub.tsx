@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { heroBackdrops } from "@/assets/ktu";
-import { Wifi, Coffee, Users, Calendar, MapPin, ArrowUpRight, CheckCircle2, X } from "lucide-react";
+import { Wifi, Coffee, Users, Calendar, Box, MapPin, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 
@@ -12,6 +12,7 @@ const amenities = [
   { num: "02", icon: Users, title: "Collaborative Hot Desks", desc: "Ergonomic workstations for founders, developers, and creators of all kinds." },
   { num: "03", icon: Coffee, title: "Artisanal Coffee Bar", desc: "On-site espresso bar and lounge area for informal deep-work sessions." },
   { num: "04", icon: Calendar, title: "100-Person Event Hall", desc: "Fully equipped AV, livestreaming rigs, and flexible seating for workshops and meetups." },
+  { num: "05", icon: Box, title: "Global Metaverse VR Hub", desc: "Equipped with VR rigs, 3D development suites, and metaverse access points connecting East Legon to virtual labs worldwide." },
 ];
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -70,8 +71,8 @@ const TheHub = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {amenities.map((a, idx) => (
               <Reveal key={a.num} delay={idx * 0.08}>
-                <div className={`card-lift sheen group relative rounded-3xl overflow-hidden p-10 md:p-12 transition-all duration-500 border border-primary/10 ${idx === 0 || idx === 3 ? "bg-primary text-primary-foreground" : "bg-background"}`}>
-                  {(idx === 0 || idx === 3) && (
+                <div className={`card-lift sheen group relative rounded-3xl overflow-hidden p-10 md:p-12 transition-all duration-500 border border-primary/10 ${idx === 0 || idx === 3 || idx === 4 ? "bg-primary text-primary-foreground" : "bg-background"} ${idx === 4 ? "md:col-span-2" : ""}`}>
+                  {(idx === 0 || idx === 3 || idx === 4) && (
                     <>
                       <div className="noise-bg" />
                       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
@@ -79,13 +80,13 @@ const TheHub = () => {
                   )}
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-8">
-                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${idx === 0 || idx === 3 ? "bg-accent/15 border border-accent/30 text-accent" : "bg-accent/10 border border-accent/20 text-accent"}`}>
+                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${idx === 0 || idx === 3 || idx === 4 ? "bg-accent/15 border border-accent/30 text-accent" : "bg-accent/10 border border-accent/20 text-accent"}`}>
                         <a.icon className="w-5.5 h-5.5" />
                       </div>
-                      <span className={`font-display font-black text-5xl leading-none select-none ${idx === 0 || idx === 3 ? "text-accent/25" : "text-primary/10"}`}>{a.num}</span>
+                      <span className={`font-display font-black text-5xl leading-none select-none ${idx === 0 || idx === 3 || idx === 4 ? "text-accent/25" : "text-primary/10"}`}>{a.num}</span>
                     </div>
-                    <h3 className={`font-display font-extrabold text-2xl mb-3 ${idx === 0 || idx === 3 ? "text-primary-foreground" : "text-primary"}`}>{a.title}</h3>
-                    <p className={`text-sm leading-relaxed ${idx === 0 || idx === 3 ? "text-primary-foreground/65" : "text-primary/65"}`}>{a.desc}</p>
+                    <h3 className={`font-display font-extrabold text-2xl mb-3 ${idx === 0 || idx === 3 || idx === 4 ? "text-primary-foreground" : "text-primary"}`}>{a.title}</h3>
+                    <p className={`text-sm leading-relaxed ${idx === 0 || idx === 3 || idx === 4 ? "text-primary-foreground/65" : "text-primary/65"}`}>{a.desc}</p>
                   </div>
                 </div>
               </Reveal>

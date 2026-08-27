@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { heroBackdrops, ktuGallery } from "@/assets/ktu";
 import { Mic, ArrowUpRight, CheckCircle2, X } from "lucide-react";
-import { heroAudience, heroCelebration, heroPanel, heroKeynote, networking } from "@/assets/photos";
+import { heroAudience, heroPanel, heroKeynote, networking } from "@/assets/photos";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 
@@ -141,7 +141,7 @@ const Media = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[
-              { src: heroCelebration, alt: "Tech Hub Africa team cutting the anniversary cake", span: "md:col-span-2 md:row-span-2" },
+              { src: ktuGallery[12], alt: "Students engaged in interactive digital literacy training during the Campus Tour", span: "md:col-span-2 md:row-span-2" },
               { src: networking, alt: "Founders networking at the Tech Guru Meetup", span: "" },
               { src: heroPanel, alt: "Panel discussion at the Tech Guru Meetup", span: "" },
               { src: heroKeynote, alt: "Keynote speaker addressing the Tech Guru Meetup", span: "" },

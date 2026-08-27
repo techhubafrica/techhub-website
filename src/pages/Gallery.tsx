@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, X, Camera, MapPin, CalendarDays } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, X, Camera, MapPin, CalendarDays } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -57,7 +57,17 @@ const Gallery = () => {
               A full day inside Koforidua Technical University — tablet labs, VR demos, mentor
               circles and a few thousand watts of student energy. {ktuAll.length} curated frames.
             </p>
-            <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4 text-sm text-primary-foreground/70">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href="https://tech4all.techhubafrica.org/gallery"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-magnetic inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-accent-foreground hover:bg-white hover:text-primary transition-all duration-300 shadow-lg"
+              >
+                Visit Tech4All Official Gallery <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-x-10 gap-y-4 text-sm text-primary-foreground/70">
               <span className="inline-flex items-center gap-2">
                 <CalendarDays className="h-4 w-4 text-accent" /> 25 June 2026
               </span>
@@ -111,7 +121,16 @@ const Gallery = () => {
             </div>
           )}
 
-          <div className="mt-20 text-center">
+          <div className="mt-20 flex flex-wrap items-center justify-center gap-6 text-center">
+            <a
+              href="https://tech4all.techhubafrica.org/gallery"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-accent hover:text-primary transition-colors"
+            >
+              Explore Full Tech4All Gallery Portal <ArrowUpRight className="h-4 w-4" />
+            </a>
+            <span className="text-primary/20 hidden sm:inline">•</span>
             <Link
               to="/events"
               className="inline-flex items-center gap-2 text-sm font-medium text-primary underline-offset-4 hover:text-accent hover:underline"

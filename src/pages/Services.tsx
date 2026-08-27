@@ -3,9 +3,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { heroBackdrops } from "@/assets/ktu";
-import { ShieldCheck, Code, Rocket, GraduationCap, ArrowUpRight, CheckCircle2, X } from "lucide-react";
+import { ShieldCheck, Code, Rocket, GraduationCap, Box, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
+import ClientShowcase from "@/components/ClientShowcase";
 
 const servicesList = [
   {
@@ -39,6 +40,14 @@ const servicesList = [
     desc: "Nationwide campus tours and hands-on bootcamps training students in cloud, cybersecurity, software engineering, and AI across West Africa.",
     features: ["University Workshops & Hackathons", "Hands-on Tech Bootcamps", "Internship & Job Placement", "Industry Mentorship Network"],
     tag: "Impact", accent: "hsl(155 61% 30%)",
+  },
+  {
+    num: "05", id: "metaverse", icon: Box,
+    title: "Global Metaverse & Immersive VR Labs",
+    subtitle: "Virtual classrooms, 3D labs, and borderless African tech spaces.",
+    desc: "Connecting students, creators, and founders across borders into immersive 3D virtual spaces, Web3 labs, VR training environments, and digital campus hubs.",
+    features: ["Virtual Campus & VR Classrooms", "3D Event & Exhibition Halls", "Web3 & Immersive Tech Labs", "Borderless African Collaborations"],
+    tag: "Emerging", accent: "hsl(28 92% 44%)",
   },
 ];
 
@@ -202,6 +211,12 @@ const Services = () => {
             </Reveal>
           ))}
         </section>
+
+        {/* ══ LIVE CLIENT WEBSITES SHOWCASE ══ */}
+        <ClientShowcase
+          title="Live Websites & Web Apps Built by Tech Hub Africa"
+          subtitle="Explore real production websites, e-commerce portals, news platforms, logistics engines, and security applications engineered and delivered by our team."
+        />
 
         {/* ══ BOTTOM CTA ══ */}
         <section className="relative overflow-hidden bg-primary px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 cv-auto text-primary-foreground">

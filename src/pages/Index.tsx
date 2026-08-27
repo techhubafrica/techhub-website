@@ -7,19 +7,20 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Logo from "@/components/Logo";
 import {
-  heroAudience, heroCelebration, heroPanel, heroKeynote,
+  heroAudience, heroPanel, heroKeynote,
   campusTourFlyer, hackathonFlyer, meetup2026Flyer, awardTop100, awardWhosWho,
   serviceProgramming, serviceSoftware, serviceWebDesign,
-  portfolioGmo, portfolioOfie, portfolioThreatLock,
+  portfolioGh, portfolioGmo, portfolioOfie, portfolioThreatLock,
 } from "@/assets/photos";
 import { ktuHero } from "@/assets/ktu";
 import Marquee from "@/components/Marquee";
+import { Link } from "react-router-dom";
+import ClientShowcase from "@/components/ClientShowcase";
 
 
 
 /* ============================================================
    HERO — full-bleed cinematic slideshow
-   Swap the `image` fields below with your own photography.
    ============================================================ */
 const heroSlides = [
   {
@@ -28,7 +29,7 @@ const heroSlides = [
     title: "Campus Tours 2026",
     body: "A continent-wide movement bringing hackathons, AI workshops, and founder circles into every major university in Ghana.",
     cta: "Explore the Tour",
-    href: "#campus",
+    href: "/gallery",
     image: heroAudience,
     stat: { k: "12", v: "Cities" },
   },
@@ -38,19 +39,19 @@ const heroSlides = [
     title: "Africa's Innovation Home",
     body: "A physical and digital home for builders, mentors and investors shaping the continent's next decade of technology.",
     cta: "Step Inside",
-    href: "#vision",
-    image: heroCelebration,
+    href: "/thehub",
+    image: ktuHero[6],
     stat: { k: "300+", v: "Innovators" },
   },
   {
     tag: "Live Event",
-    kicker: "Hackathon 72",
-    title: "Seventy-Two Hours of Impact",
-    body: "Elite teams from across Africa converge to build production-grade solutions in three sleepless days.",
+    kicker: "Hackathon Challenge",
+    title: "One Month of Impact",
+    body: "Elite teams from across Africa converge to build production-grade solutions over an intense month-long challenge.",
     cta: "See the Build",
-    href: "#events",
+    href: "/events",
     image: heroPanel,
-    stat: { k: "72h", v: "Non-stop" },
+    stat: { k: "30", v: "Days" },
   },
   {
     tag: "Publication",
@@ -58,7 +59,7 @@ const heroSlides = [
     title: "Innovators & Entrepreneurs",
     body: "The definitive annual list of the founders, engineers, and creators redefining African technology.",
     cta: "Read the Issue",
-    href: "#portfolio",
+    href: "/portfolio",
     image: heroKeynote,
     stat: { k: "100", v: "Leaders" },
   },
@@ -72,123 +73,33 @@ const heroSlides = [
     image: ktuHero[0],
     stat: { k: "2,400", v: "Students" },
   },
-  {
-    tag: "Immersive Tech",
-    kicker: "XR Lab",
-    title: "First Contact With the Future",
-    body: "Virtual reality, robotics and AI demos placed directly in the hands of students who had never touched them before.",
-    cta: "See the Moment",
-    href: "/gallery",
-    image: ktuHero[1],
-    stat: { k: "18", v: "Live demos" },
-  },
-  {
-    tag: "Digital Skills",
-    kicker: "Tech For All",
-    title: "A Lab in Every Lecture Hall",
-    body: "Hands-on training sessions turning ordinary classrooms into fully equipped digital skills laboratories.",
-    cta: "Explore the Program",
-    href: "/gallery",
-    image: ktuHero[2],
-    stat: { k: "40+", v: "Sessions" },
-  },
-  {
-    tag: "Community",
-    kicker: "The Movement",
-    title: "Built On People, Not Slides",
-    body: "Mentors, volunteers and student leaders forming the human network that carries the ecosystem forward.",
-    cta: "Meet the Team",
-    href: "/about",
-    image: ktuHero[3],
-    stat: { k: "120", v: "Volunteers" },
-  },
 ];
-
-
-/* ============================================================
-   SIGNATURE ELEMENT — "The Constellation"
-   A subtle network of connected nodes representing the
-   mentorship / knowledge-exchange fabric of Tech Hub Africa.
-   Nodes gently pulse; connecting arcs draw softly. Unique to THA.
-   ============================================================ */
-const Constellation = ({ className = "" }: { className?: string }) => (
-  <svg
-    viewBox="0 0 400 400"
-    className={className}
-    fill="none"
-    aria-hidden
-  >
-    <defs>
-      <radialGradient id="cx-node" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stopColor="hsl(28,92%,50%)" stopOpacity="1" />
-        <stop offset="100%" stopColor="hsl(28,92%,44%)" stopOpacity="0" />
-      </radialGradient>
-      <linearGradient id="cx-line" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="hsl(155,61%,15%)" stopOpacity="0.05" />
-        <stop offset="50%" stopColor="hsl(28,92%,44%)" stopOpacity="0.35" />
-        <stop offset="100%" stopColor="hsl(155,61%,15%)" stopOpacity="0.05" />
-      </linearGradient>
-    </defs>
-    {/* Arcs — knowledge-exchange lines */}
-    {[
-      "M60 120 Q 200 40 340 140",
-      "M40 240 Q 200 180 360 260",
-      "M80 340 Q 200 300 320 350",
-      "M60 120 Q 140 260 80 340",
-      "M340 140 Q 300 250 360 260",
-      "M200 40 Q 220 200 200 300",
-    ].map((d, i) => (
-      <path
-        key={i}
-        d={d}
-        stroke="url(#cx-line)"
-        strokeWidth="1"
-        strokeDasharray="600"
-        strokeDashoffset="600"
-        style={{ animation: `draw 2.4s cubic-bezier(0.16,1,0.3,1) ${0.6 + i * 0.15}s both` }}
-      />
-    ))}
-    {/* Nodes */}
-    {[
-      [60, 120], [340, 140], [200, 40], [40, 240],
-      [360, 260], [80, 340], [320, 350], [200, 300],
-      [200, 180],
-    ].map(([cx, cy], i) => (
-      <g key={i} style={{ animation: `fade-in 1s ease-out ${1 + i * 0.08}s both` }}>
-        <circle cx={cx} cy={cy} r="14" fill="url(#cx-node)" opacity="0.35" />
-        <circle cx={cx} cy={cy} r="3.2" fill="hsl(28,92%,44%)" />
-        <circle cx={cx} cy={cy} r="6" fill="none" stroke="hsl(28,92%,44%)" strokeOpacity="0.4">
-          <animate attributeName="r" values="4;10;4" dur="4s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
-          <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="4s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
-        </circle>
-      </g>
-    ))}
-  </svg>
-);
 
 const INTERVAL = 6500;
 
 const Hero = () => {
   const [active, setActive] = useState(0);
-  /* highest slide index whose image is allowed to download */
+  const [prev, setPrev] = useState(0);
   const [maxLoaded, setMaxLoaded] = useState(1);
   const stageRef = useRef<HTMLElement | null>(null);
 
-  /* auto-advance — one state update per slide, no per-frame re-renders */
+  /* auto-advance */
   useEffect(() => {
-    const t = setInterval(
-      () => setActive((a) => (a + 1) % heroSlides.length),
-      INTERVAL,
-    );
+    const t = setInterval(() => {
+      setActive((a) => {
+        setPrev(a);
+        return (a + 1) % heroSlides.length;
+      });
+    }, INTERVAL);
     return () => clearInterval(t);
   }, []);
 
-  /* only ever keep active + next decoded */
+  /* progressive image loading */
   useEffect(() => {
     setMaxLoaded((m) => Math.max(m, active + 1));
   }, [active]);
 
-  /* pointer glow + scroll parallax written straight to CSS vars (rAF, no React) */
+  /* pointer glow + scroll parallax — rAF, no React re-renders */
   useEffect(() => {
     const el = stageRef.current;
     if (!el) return;
@@ -224,15 +135,10 @@ const Hero = () => {
     if (finePointer) window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    /* freeze everything the moment the stage leaves the viewport */
     const io = new IntersectionObserver(
       ([entry]) => {
         inView = entry.isIntersecting;
         el.dataset.inview = String(inView);
-        el.querySelectorAll("svg").forEach((svg) => {
-          const s = svg as SVGSVGElement & { pauseAnimations?: () => void; unpauseAnimations?: () => void };
-          inView ? s.unpauseAnimations?.() : s.pauseAnimations?.();
-        });
       },
       { threshold: 0 },
     );
@@ -247,109 +153,97 @@ const Hero = () => {
   }, []);
 
   const slide = heroSlides[active];
-  const goto = (i: number) => setActive(i);
+  const goto = (i: number) => {
+    setPrev(active);
+    setActive(i);
+  };
 
   return (
     <section
       ref={stageRef}
       className="hero-stage relative min-h-[100svh] overflow-hidden select-none bg-background text-foreground"
     >
-      {/* ══ MATTED FRAME — museum print margin ══ */}
-      <div className="absolute inset-0 z-[3] pointer-events-none p-2 sm:p-3 md:p-4">
-        <div className="w-full h-full rounded-[20px] md:rounded-[26px] border border-primary/12 shadow-[inset_0_1px_0_hsl(0_0%_100%/0.45)]" />
-      </div>
-      <div className="absolute inset-0 z-[4] pointer-events-none">
-        {/* cream matting bands */}
-        <div className="absolute inset-x-0 top-0 h-2 sm:h-3 md:h-4 bg-background" />
-        <div className="absolute inset-x-0 bottom-0 h-2 sm:h-3 md:h-4 bg-background" />
-        <div className="absolute inset-y-0 left-0 w-2 sm:w-3 md:w-4 bg-background" />
-        <div className="absolute inset-y-0 right-0 w-2 sm:w-3 md:w-4 bg-background" />
-      </div>
-
       {/* ══ FULL-BLEED BACKGROUND SLIDESHOW ══ */}
       <div
         className="absolute inset-0 z-0 will-change-transform"
         style={{ transform: "translate3d(0, calc(var(--par, 0px) * 0.18), 0)" }}
       >
-        {heroSlides.map((s, i) => (
-          <div
-            key={s.title}
-            aria-hidden={i !== active}
-            className={`absolute inset-0 transition-opacity duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              i === active ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            {i <= maxLoaded && (
-              <img
-                src={s.image}
-                alt={`${s.kicker} — ${s.title}`}
-                className="w-full h-full object-cover"
-                style={{
-                  transform: i === active ? "scale(1.14)" : "scale(1.02)",
-                  transition: "transform 9s cubic-bezier(0.22,0.61,0.36,1)",
-                }}
-                loading={i === 0 ? "eager" : "lazy"}
-                decoding={i === 0 ? "sync" : "async"}
-                fetchPriority={i === 0 ? "high" : "low"}
-                draggable={false}
-              />
-            )}
-          </div>
-        ))}
+        {heroSlides.map((s, i) => {
+          /* active slide fades in on top; previous slide stays visible underneath; all others hidden */
+          const isActive = i === active;
+          const isPrev = i === prev && prev !== active;
+          return (
+            <div
+              key={s.title}
+              aria-hidden={!isActive}
+              className={`absolute inset-0 ${
+                isActive
+                  ? "opacity-100 z-[2] transition-opacity duration-[1600ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  : isPrev
+                    ? "opacity-100 z-[1]"
+                    : "opacity-0 z-0"
+              }`}
+            >
+              {i <= maxLoaded && (
+                <img
+                  src={s.image}
+                  alt={`${s.kicker} — ${s.title}`}
+                  className="w-full h-full object-cover"
+                  style={{
+                    transform: isActive ? "scale(1.14)" : "scale(1.02)",
+                    transition: "transform 9s cubic-bezier(0.22,0.61,0.36,1)",
+                  }}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding={i === 0 ? "sync" : "async"}
+                  fetchPriority={i === 0 ? "high" : "low"}
+                  draggable={false}
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
 
-      {/* ══ SCRIM — placed only where type sits, photo stays true elsewhere ══ */}
+      {/* Text-readability scrim — light left-bias so photos stay vivid */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(95deg, hsl(0 0% 100% / 0.9) 0%, hsl(0 0% 100% / 0.78) 26%, hsl(0 0% 100% / 0.34) 48%, hsl(0 0% 100% / 0.04) 70%, hsl(0 0% 100% / 0) 100%)",
+            "linear-gradient(105deg, hsl(0 0% 0% / 0.55) 0%, hsl(0 0% 0% / 0.35) 35%, hsl(0 0% 0% / 0.1) 60%, transparent 80%)",
         }}
       />
-      <div className="absolute inset-x-0 top-0 h-44 z-[1] pointer-events-none bg-gradient-to-b from-background/55 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-80 z-[1] pointer-events-none bg-gradient-to-t from-background via-background/50 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-80 z-[1] pointer-events-none bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
 
       {/* amber ambient glow — position driven by CSS vars */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none hidden md:block"
         style={{
           background:
-            "radial-gradient(700px circle at var(--hx, 50%) var(--hy, 50%), hsl(28 92% 50% / 0.1), transparent 62%)",
+            "radial-gradient(700px circle at var(--hx, 50%) var(--hy, 50%), hsl(28 92% 50% / 0.12), transparent 62%)",
         }}
       />
       {/* fine grain */}
       <div
-        className="absolute inset-0 z-[1] pointer-events-none opacity-[0.05]"
+        className="absolute inset-0 z-[1] pointer-events-none opacity-[0.04]"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
         }}
       />
 
-      {/* ══ SIGNATURE CONSTELLATION ══ */}
-      <div
-        className="hidden md:block absolute top-20 right-10 w-[440px] h-[440px] pointer-events-none z-[2] opacity-45 will-change-transform"
-        style={{
-          transform:
-            "translate3d(calc(var(--pmx, 0px) * 0.5), calc(var(--pmy, 0px) * 0.5 - var(--par, 0px) * 0.1), 0)",
-        }}
-      >
-        <Constellation className="w-full h-full" />
-      </div>
-
       {/* Vertical brand rail */}
       <div className="hidden xl:flex absolute left-8 top-0 bottom-0 flex-col items-center justify-between py-24 md:py-32 z-10 pointer-events-none">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-px h-20 bg-gradient-to-b from-transparent to-primary/25" />
-          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary/50 [writing-mode:vertical-rl] rotate-180">
+          <div className="w-px h-20 bg-gradient-to-b from-transparent to-white/20" />
+          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-white/40 [writing-mode:vertical-rl] rotate-180">
             Est · MMXXIV
           </span>
         </div>
         <div className="flex flex-col items-center gap-4">
-          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-primary/50 [writing-mode:vertical-rl] rotate-180">
+          <span className="text-[8.5px] font-bold uppercase tracking-[0.55em] text-white/40 [writing-mode:vertical-rl] rotate-180">
             Accra · Ghana
           </span>
-          <div className="w-px h-20 bg-gradient-to-t from-transparent to-primary/25" />
+          <div className="w-px h-20 bg-gradient-to-t from-transparent to-white/20" />
         </div>
       </div>
 
@@ -358,16 +252,16 @@ const Hero = () => {
 
         {/* Chapter label */}
         <div className="flex items-center gap-5 mb-auto">
-          <div className="inline-flex items-center gap-3 pl-3 pr-4 py-1.5 rounded-full border border-primary/12 bg-card/60 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-3 pl-3 pr-4 py-1.5 rounded-full border border-white/12 bg-white/5 backdrop-blur-sm">
             <span className="relative flex w-1.5 h-1.5">
               <span className="animate-ping absolute h-full w-full rounded-full bg-accent opacity-60" />
               <span className="relative w-1.5 h-1.5 rounded-full bg-accent" />
             </span>
-            <span className="text-[9.5px] font-bold tracking-[0.34em] uppercase text-primary/70">
+            <span className="text-[9.5px] font-extrabold tracking-[0.34em] uppercase text-white/90" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.5)" }}>
               {slide.tag}
             </span>
           </div>
-          <div className="h-px flex-1 max-w-32 bg-gradient-to-r from-primary/20 to-transparent" />
+          <div className="h-px flex-1 max-w-32 bg-gradient-to-r from-white/15 to-transparent" />
         </div>
 
         {/* Headline block — keyed for per-slide reveal */}
@@ -380,105 +274,127 @@ const Hero = () => {
           </div>
 
           <h1
-            className="animate-fade-up stagger-1 font-display font-black tracking-[-0.05em] text-primary"
+            className="animate-fade-up stagger-1 font-display font-black tracking-[-0.05em] text-white"
             style={{
               lineHeight: 0.88,
               fontSize: "clamp(2.6rem,7.2vw,6.2rem)",
-              textShadow: "0 1px 30px hsl(0 0% 100% / 0.85)",
+              textShadow: "0 2px 20px hsl(0 0% 0% / 0.7), 0 4px 40px hsl(0 0% 0% / 0.4)",
             }}
           >
             {slide.title}
           </h1>
 
-          {/* description — hairline-ruled editorial column */}
-          <div className="animate-fade-up stagger-2 mt-8 max-w-[540px] border-t border-primary/15 pt-6 flex gap-6">
+          {/* description — editorial column */}
+          <div className="animate-fade-up stagger-2 mt-8 max-w-[540px] border-t border-white/15 pt-6 flex gap-6">
             <span className="font-display font-black text-[11px] leading-none text-accent pt-1.5 tabular-nums">
               {String(active + 1).padStart(2, "0")}
             </span>
-            <p
-              className="text-primary text-[15px] md:text-[17px] leading-[1.75] font-normal"
-              style={{ textShadow: "0 1px 16px hsl(0 0% 100% / 0.95)" }}
-            >
+            <p className="text-white/90 text-[15px] md:text-[17px] leading-[1.75] font-semibold" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.6)" }}>
               {slide.body}
             </p>
           </div>
 
           <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-6 mt-10">
-            <a
-              href={slide.href}
-              className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-primary text-primary-foreground text-[10.5px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-accent hover:text-accent-foreground transition-all duration-500"
-              style={{ boxShadow: "0 18px 46px -16px hsl(155 61% 12% / 0.55)" }}
+            <Link
+              to={slide.href}
+              className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground text-[10.5px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-white hover:text-primary transition-all duration-500"
+              style={{ boxShadow: "0 18px 46px -16px hsl(28 92% 44% / 0.55)" }}
             >
               {slide.cta}
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </a>
-            <a
-              href="#campus"
-              className="group inline-flex items-center gap-3 text-[10.5px] font-bold text-primary/80 hover:text-accent transition-colors uppercase tracking-[0.28em]"
+            </Link>
+            <Link
+              to="/about"
+              className="group inline-flex items-center gap-3 text-[10.5px] font-extrabold text-white hover:text-accent transition-colors uppercase tracking-[0.28em]" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.5)" }}
             >
-              <div className="w-11 h-11 rounded-full border border-primary/25 bg-card/50 backdrop-blur-sm flex items-center justify-center group-hover:border-accent group-hover:bg-accent/10 transition-all">
-                <Play className="w-3 h-3 fill-current ml-0.5" />
-              </div>
-              Watch the film
-            </a>
+              Learn More
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
           </div>
         </div>
 
-        {/* ══ BOTTOM BAR — index ladder + stat ══ */}
-        <div className="mt-auto pt-12 flex flex-col-reverse lg:flex-row lg:items-end gap-8 lg:gap-14 justify-between">
+        {/* ══ BOTTOM BAR — trust strip + index ladder + stat ══ */}
+        <div className="mt-auto pt-12 flex flex-col gap-8">
 
-          {/* Index ladder — never wraps */}
-          <div className="flex-1 min-w-0 max-w-2xl">
-            <div className="flex items-baseline justify-between gap-6 mb-4">
-              <div className="flex items-baseline gap-2">
-                <span className="font-display font-black text-primary text-3xl md:text-4xl leading-none tabular-nums">
-                  {String(active + 1).padStart(2, "0")}
-                </span>
-                <span className="text-[9.5px] font-bold uppercase tracking-[0.35em] text-primary/40">
-                  / {String(heroSlides.length).padStart(2, "0")}
-                </span>
-              </div>
-              <span className="text-[9.5px] font-black uppercase tracking-[0.32em] text-accent truncate">
-                {slide.kicker}
-              </span>
+          {/* Trust metrics */}
+          <div className="hero-trust-strip">
+            <div className="trust-item">
+              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>2024</span>
+              <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Founded</span>
             </div>
-            <div className="flex items-stretch gap-1.5">
-              {heroSlides.map((s, i) => (
-                <button
-                  key={s.title}
-                  onClick={() => goto(i)}
-                  aria-label={`Show ${s.title}`}
-                  aria-current={i === active}
-                  className={`group relative h-8 flex items-end transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    i === active ? "flex-grow-[3]" : "flex-grow"
-                  }`}
-                  style={{ flexBasis: 0 }}
-                >
-                  <span className="relative block w-full h-[2px] bg-primary/15 overflow-hidden group-hover:bg-primary/30 transition-colors">
-                    {i === active && (
-                      <span key={active} className="hero-progress absolute inset-y-0 left-0 bg-accent" />
-                    )}
-                  </span>
-                </button>
-              ))}
+            <div className="trust-divider" />
+            <div className="trust-item">
+              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>12k+</span>
+              <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Trained</span>
+            </div>
+            <div className="trust-divider" />
+            <div className="trust-item">
+              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>25+</span>
+              <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Campuses</span>
+            </div>
+            <div className="trust-divider" />
+            <div className="trust-item">
+              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>10+</span>
+              <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Countries</span>
             </div>
           </div>
 
-          {/* Stat plate + scroll cue */}
-          <div className="flex items-end gap-6 shrink-0">
-            <div className="relative px-7 py-5 border border-primary/12 bg-card/55 backdrop-blur-md">
-              <span className="absolute -top-px -left-px w-2.5 h-2.5 border-t border-l border-accent" />
-              <span className="absolute -bottom-px -right-px w-2.5 h-2.5 border-b border-r border-accent" />
-              <p className="font-display font-black text-4xl leading-none text-primary tabular-nums">
-                {slide.stat.k}
-              </p>
-              <p className="text-[8.5px] font-bold uppercase tracking-[0.35em] text-accent mt-2">
-                {slide.stat.v}
-              </p>
+          {/* Index ladder + stat */}
+          <div className="flex flex-col-reverse lg:flex-row lg:items-end gap-8 lg:gap-14 justify-between">
+
+            {/* Index ladder */}
+            <div className="flex-1 min-w-0 max-w-2xl">
+              <div className="flex items-baseline justify-between gap-6 mb-4">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-display font-black text-white text-3xl md:text-4xl leading-none tabular-nums" style={{ textShadow: "0 2px 10px hsl(0 0% 0% / 0.7)" }}>
+                    {String(active + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[9.5px] font-extrabold uppercase tracking-[0.35em] text-white/70" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>
+                    / {String(heroSlides.length).padStart(2, "0")}
+                  </span>
+                </div>
+                <span className="text-[9.5px] font-black uppercase tracking-[0.32em] text-accent truncate" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>
+                  {slide.kicker}
+                </span>
+              </div>
+              <div className="flex items-stretch gap-1.5">
+                {heroSlides.map((s, i) => (
+                  <button
+                    key={s.title}
+                    onClick={() => goto(i)}
+                    aria-label={`Show ${s.title}`}
+                    aria-current={i === active}
+                    className={`group relative h-8 flex items-end transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                      i === active ? "flex-grow-[3]" : "flex-grow"
+                    }`}
+                    style={{ flexBasis: 0 }}
+                  >
+                    <span className="relative block w-full h-[2px] bg-white/15 overflow-hidden group-hover:bg-white/30 transition-colors">
+                      {i === active && (
+                        <span key={active} className="hero-progress absolute inset-y-0 left-0 bg-accent" />
+                      )}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="hidden sm:flex flex-col items-center gap-1.5 pb-2">
-              <span className="text-[8.5px] font-bold uppercase tracking-[0.4em] text-primary/45">Scroll</span>
-              <div className="w-px h-10 bg-gradient-to-b from-primary/40 to-transparent" />
+
+            {/* Stat plate + scroll cue */}
+            <div className="flex items-end gap-6 shrink-0">
+              <div className="relative px-7 py-5 border border-white/10 bg-white/5 backdrop-blur-md">
+                <span className="absolute -top-px -left-px w-2.5 h-2.5 border-t border-l border-accent" />
+                <span className="absolute -bottom-px -right-px w-2.5 h-2.5 border-b border-r border-accent" />
+                <p className="font-display font-black text-4xl leading-none text-white tabular-nums">
+                  {slide.stat.k}
+                </p>
+                <p className="text-[8.5px] font-bold uppercase tracking-[0.35em] text-accent mt-2">
+                  {slide.stat.v}
+                </p>
+              </div>
+              <div className="hidden sm:flex flex-col items-center gap-1.5 pb-2">
+                <span className="text-[8.5px] font-extrabold uppercase tracking-[0.4em] text-white/70" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Scroll</span>
+                <div className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent" />
+              </div>
             </div>
           </div>
         </div>
@@ -578,13 +494,23 @@ const CampusTours = () => (
           Africa's rapidly evolving tech landscape. Engage with industry experts and discover
           real-world solutions.
         </p>
-        <a
-          href="#"
-          className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.25em] text-accent hover:text-primary-foreground transition-colors group"
-        >
-          Explore the Tour Gallery
-          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-        </a>
+        <div className="flex flex-wrap items-center gap-6">
+          <a
+            href="https://tech4all.techhubafrica.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-magnetic inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-primary-foreground hover:text-primary transition-all duration-300"
+          >
+            Visit Tech4All Portal <ArrowUpRight className="w-4 h-4" />
+          </a>
+          <Link
+            to="/gallery"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent hover:text-primary-foreground transition-colors group"
+          >
+            Explore Tour Gallery
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </Link>
+        </div>
       </div>
     </div>
   </section>
@@ -594,8 +520,8 @@ const CampusTours = () => (
    INITIATIVES — premium product-showcase cards
    ============================================================ */
 const initiatives = [
-  { title: "Tech Guru Meetup", meta: "18 Dec 2026", tone: "forest" as const, Icon: Users, image: meetup2026Flyer, fit: "cover" as const },
-  { title: "Hackathon Challenge", meta: "72 Hours · Live", tone: "amber" as const, Icon: Rocket, image: hackathonFlyer, fit: "cover" as const },
+  { title: "Tech Guru Meetup", meta: "Dec 18, 2026 · Location TBA", tone: "forest" as const, Icon: Users, image: meetup2026Flyer, fit: "cover" as const },
+  { title: "Hackathon Challenge", meta: "1 Month · Live", tone: "amber" as const, Icon: Rocket, image: hackathonFlyer, fit: "cover" as const },
   { title: "Top 100 Magazine", meta: "Innovators & Founders", tone: "deep" as const, Icon: Sparkles, image: awardTop100, fit: "contain" as const },
   { title: "Marquis Who's Who", meta: "Honored Listee 2025", tone: "charcoal" as const, Icon: Globe2, image: awardWhosWho, fit: "contain" as const },
 ];
@@ -620,10 +546,13 @@ const Initiatives = () => (
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {initiatives.map((it, i) => (
-          <a
+        {initiatives.map((it, i) => {
+          const Tag = (it.title === "Tech Guru Meetup" || it.title === "Hackathon Challenge") ? Link : "a";
+          const props = Tag === Link ? { to: "/events" } : { href: "#" };
+          return (
+          <Tag
             key={it.title}
-            href="#"
+            {...props}
             className="card-lift sheen group relative rounded-2xl overflow-hidden bg-background border border-primary/10"
           >
             <div className="relative aspect-[4/5] overflow-hidden">
@@ -660,8 +589,9 @@ const Initiatives = () => (
                 <ArrowUpRight className="w-4 h-4 text-primary/40 group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
               </div>
             </div>
-          </a>
-        ))}
+          </Tag>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -695,20 +625,27 @@ const Services = () => (
   <section id="services" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-secondary text-primary-foreground overflow-hidden">
     <div className="hidden md:block absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_44%/0.4),transparent_70%)]" />
     <div className="relative max-w-7xl mx-auto">
-      <div className="flex items-baseline gap-6 mb-16">
-        <span className="eyebrow text-accent">04 — Services</span>
-        <div className="flex-1 divider-elegant-light" />
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div>
+          <span className="eyebrow text-accent">04 — Digital Engineering & Web Design</span>
+          <h2 className="font-display font-extrabold leading-[0.9] mt-4 text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight max-w-3xl">
+            Stunning web design &amp;<br />
+            <span className="italic font-light text-accent"> precision engineering</span>.
+          </h2>
+        </div>
+        <Link
+          to="/services"
+          className="btn-magnetic inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-primary-foreground hover:text-primary transition-all duration-300 self-start md:self-auto"
+        >
+          Explore All Services <ArrowUpRight className="w-4 h-4" />
+        </Link>
       </div>
-      <h2 className="font-display font-extrabold leading-[0.9] mb-16 text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight max-w-3xl">
-        Precision engineering for the
-        <span className="italic font-light text-accent"> next continent</span>.
-      </h2>
 
       <div className="grid md:grid-cols-3 gap-6">
         {services.map((s, i) => (
           <div
             key={s.title}
-            className="card-lift sheen noise-soft group relative p-10 lg:p-12 rounded-2xl bg-primary/80 border border-primary-foreground/10 overflow-hidden"
+            className="card-lift sheen noise-soft group relative p-10 lg:p-12 rounded-3xl bg-primary/80 border border-primary-foreground/10 overflow-hidden flex flex-col justify-between"
           >
             <img
               src={s.image}
@@ -719,20 +656,32 @@ const Services = () => (
             />
             <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/85 to-primary" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_top,hsl(28_92%_55%/0.25),transparent_60%)]" />
-            <div className="relative flex items-center justify-between mb-10">
-              <div className="w-14 h-14 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
-                <s.Icon className="w-6 h-6 text-accent" strokeWidth={1.4} />
+            
+            <div className="relative">
+              <div className="flex items-center justify-between mb-8">
+                <div className="w-14 h-14 rounded-2xl bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
+                  <s.Icon className="w-6 h-6 text-accent" strokeWidth={1.4} />
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary-foreground/40">
+                  0{i + 1}
+                </span>
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary-foreground/40">
-                0{i + 1}
-              </span>
+              <h3 className="font-display text-2xl md:text-3xl font-extrabold mb-4 leading-tight">
+                {s.title}
+              </h3>
+              <p className="text-sm text-primary-foreground/70 leading-relaxed mb-6">
+                {s.desc}
+              </p>
             </div>
-            <h3 className="relative font-display text-2xl md:text-3xl font-extrabold mb-5 leading-tight">
-              {s.title}
-            </h3>
-            <p className="relative text-sm text-primary-foreground/70 leading-relaxed">
-              {s.desc}
-            </p>
+
+            <div className="relative pt-6 border-t border-primary-foreground/10 flex items-center justify-between">
+              <Link
+                to="/services"
+                className="text-xs font-bold uppercase tracking-[0.2em] text-accent group-hover:text-primary-foreground transition-colors flex items-center gap-2"
+              >
+                Learn More <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         ))}
       </div>
@@ -766,12 +715,12 @@ const ProgramsBand = () => (
             </li>
           ))}
         </ul>
-        <a
-          href="#"
+        <Link
+          to="/careers"
           className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.25em] text-primary hover:text-accent transition-colors group"
         >
           Read More <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-        </a>
+        </Link>
       </div>
 
       <div className="p-12 lg:p-20 bg-primary text-primary-foreground relative overflow-hidden">
@@ -787,12 +736,12 @@ const ProgramsBand = () => (
             A powerful tool for growth. We connect emerging leaders and innovators with experienced
             professionals who provide guidance, support and valuable insights.
           </p>
-          <a
-            href="#"
+          <Link
+            to="/mentorship"
             className="btn-magnetic inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.25em] rounded-full hover:bg-primary transition-colors duration-300"
           >
             Read More <ArrowUpRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
         <span className="absolute -bottom-8 -right-8 font-display font-extrabold text-[10rem] leading-none text-primary-foreground/[0.04] select-none pointer-events-none">
           06
@@ -806,10 +755,10 @@ const ProgramsBand = () => (
    PORTFOLIO — glass cards on charcoal
    ============================================================ */
 const portfolio = [
-  { Icon: Building2, name: "GH Accommodation", sector: "Real Estate Tech", desc: "Your gateway to affordable, reliable housing.", logo: null },
-  { Icon: ShoppingBag, name: "GMO Marketplace", sector: "E-Commerce", desc: "Ghana Mall — your one-stop shop for everything.", logo: portfolioGmo },
-  { Icon: Sprout, name: "Ofie Agro Ltd", sector: "Agri-Tech", desc: "Taste of tradition, fresh from Ofie.", logo: portfolioOfie },
-  { Icon: ShieldCheck, name: "Threat Lock Agency", sector: "Cybersecurity", desc: "Protect your website. Setup in five minutes.", logo: portfolioThreatLock },
+  { name: "GH Accommodation", sector: "PropTech & Housing", desc: "Your Gateway To Affordable, Reliable, And Convenient Housing.", logo: portfolioGh, url: "https://techhubafrica.org/gh-accommodation" },
+  { name: "GMO Marketplace", sector: "E-Commerce & Retail", desc: "Ghana Mall – Your One-Stop Shop for Everything!", logo: portfolioGmo, url: "https://techhubafrica.org/gmo-marketplace" },
+  { name: "Ofie Agro Ltd", sector: "AgriTech & Supply Chain", desc: "Taste of Tradition, Fresh from Ofie.", logo: portfolioOfie, url: "https://techhubafrica.org/ofie-afro-ltd" },
+  { name: "Threat Lock Agency", sector: "Cybersecurity Platform", desc: "Protect your website. Setup in 5 minutes and stop attacks before they start.", logo: portfolioThreatLock, url: "https://threatlock.techhubafrica.org" },
 ];
 
 const Portfolio = () => (
@@ -821,37 +770,59 @@ const Portfolio = () => (
         <div>
           <span className="eyebrow text-accent">07 — Investment Portfolio</span>
           <h2 className="font-display font-extrabold mt-4 leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
-            Companies scaling
+            Companies in our
             <br />
-            <span className="italic font-light text-accent">innovation</span> across industries.
+            <span className="italic font-light text-accent">investment portfolio.</span>
           </h2>
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
         {portfolio.map((p) => (
-          <a
+          <div
             key={p.name}
-            href="#"
-            className="card-lift sheen group relative rounded-2xl bg-primary/80 border border-primary-foreground/10 p-8 overflow-hidden"
+            className="card-lift sheen group relative rounded-3xl bg-primary/90 border border-primary-foreground/15 p-6 sm:p-7 flex flex-col justify-between h-full overflow-hidden transition-all duration-500 hover:border-accent/50 hover:bg-primary"
           >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_100%_0%,hsl(28_92%_55%/0.3),transparent_60%)]" />
-            <div className="relative flex items-start justify-between mb-10">
-              <div className="w-14 h-14 rounded-full bg-background/95 border border-primary-foreground/10 flex items-center justify-center overflow-hidden">
-                {p.logo ? (
-                  <img src={p.logo} alt={`${p.name} logo`} loading="lazy" className="w-full h-full object-contain p-1.5" />
-                ) : (
-                  <p.Icon className="w-5 h-5 text-accent" strokeWidth={1.5} />
-                )}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_100%_0%,hsl(28_92%_55%/0.25),transparent_60%)]" />
+            
+            <div>
+              {/* Logo box */}
+              <div className="relative h-44 w-full rounded-2xl bg-white p-6 flex items-center justify-center overflow-hidden border border-primary-foreground/10 shadow-sm group-hover:scale-[1.02] transition-transform duration-500">
+                <img
+                  src={p.logo}
+                  alt={`${p.name} logo`}
+                  loading="lazy"
+                  className="max-h-full max-w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
-              <ArrowUpRight className="w-5 h-5 text-primary-foreground/30 group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+
+              {/* Tag & Title */}
+              <div className="mt-6 mb-3">
+                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-1">
+                  {p.sector}
+                </span>
+                <h3 className="font-display font-extrabold text-2xl text-primary-foreground leading-tight tracking-tight group-hover:text-accent transition-colors">
+                  {p.name}
+                </h3>
+              </div>
+
+              {/* Tagline */}
+              <p className="text-sm text-primary-foreground/75 leading-relaxed font-semibold mb-6">
+                {p.desc}
+              </p>
             </div>
-            <p className="relative text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-3">
-              {p.sector}
-            </p>
-            <h3 className="relative font-display text-xl font-extrabold mb-3 leading-tight">{p.name}</h3>
-            <p className="relative text-sm text-primary-foreground/60 leading-relaxed">{p.desc}</p>
-          </a>
+
+            {/* Read More button */}
+            <a
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-magnetic w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-accent text-accent-foreground font-bold text-[10.5px] uppercase tracking-[0.22em] hover:bg-primary-foreground hover:text-primary transition-all duration-300 shadow-md"
+              style={{ boxShadow: "0 10px 24px -10px hsl(28 92% 44% / 0.6)" }}
+            >
+              Read More <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
         ))}
       </div>
     </div>
@@ -939,12 +910,12 @@ const HubCTA = () => (
         A physical and digital home for builders, mentors and investors shaping Africa's next
         decade of innovation.
       </p>
-      <a
-        href="#"
+      <Link
+        to="/thehub"
         className="btn-magnetic inline-flex items-center gap-2 px-10 py-5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.3em] rounded-full hover:bg-background hover:text-primary transition-all duration-500"
       >
         Visit The Hub <ArrowUpRight className="w-4 h-4" />
-      </a>
+      </Link>
     </div>
   </section>
 );
@@ -962,6 +933,11 @@ const Index = () => (
       <CampusTours />
       <Initiatives />
       <Services />
+      <ClientShowcase
+        limit={6}
+        title="Live Production Websites Built by Tech Hub Africa"
+        subtitle="Don't just take our word for it. Explore live e-commerce portals, news networks, logistics platforms, and security applications engineered by our team."
+      />
       <ProgramsBand />
       <Portfolio />
       <Testimonials />

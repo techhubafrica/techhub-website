@@ -1,30 +1,69 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import {
-  teamDoreen, teamJemima, teamSpeaker1, teamSpeaker2,
-  teamMember3, teamMember4, teamMember5,
+  teamDoreen, teamJemima, teamElisha,
 } from "@/assets/photos";
 
-/* ── Team data ───────────────────────────────────────────────── */
 const team = [
-  { displayOrder: "03", name: "Team Member",          role: "Operations",         tone: "charcoal" as const, photo: teamSpeaker1, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { displayOrder: "04", name: "Team Member",          role: "Engineering",        tone: "forest"   as const, photo: teamSpeaker2, bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { displayOrder: "05", name: "Team Member",          role: "Design",             tone: "amber"    as const, photo: teamMember3,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { displayOrder: "01", name: "Doreen Awuku-Agyeman", role: "Founder & CEO",     tone: "forest"   as const, photo: teamDoreen,   bio: "Transformational leader and visionary entrepreneur driving innovation at the intersection of technology, business, and social impact. Founder of Tech Hub Africa LLC — empowering Africa's tech ecosystem and fostering a vibrant, inclusive digital future." },
-  { displayOrder: "02", name: "Jemima Prempeh",       role: "Co-Founder & COO",  tone: "deep"     as const, photo: teamJemima,   bio: "Visionary leader and innovation driver, spearheading Innovation and marketing communications at Tech Hub Africa, fueling business growth through creative storytelling and cutting-edge strategies." },
-  { displayOrder: "06", name: "Team Member",          role: "Research",           tone: "deep"     as const, photo: teamMember4,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
-  { displayOrder: "07", name: "Team Member",          role: "Community",          tone: "charcoal" as const, photo: teamMember5,  bio: "A dedicated member of the Tech Hub Africa team working to inspire, educate and equip the next generation of African technologists." },
+  {
+    displayOrder: "01",
+    name: "Doreen Awuku-Agyeman",
+    role: "Founder & CEO",
+    tone: "forest" as const,
+    photo: teamDoreen,
+    bio: [
+      "Doreen Awuku-Agyeman is a transformational leader and visionary entrepreneur, driving innovation and growth at the intersection of technology, business, and social impact. As the Founder and CEO of Tech Hub Africa LLC, she spearheads the company's mission to empower Africa's tech ecosystem and foster a vibrant, inclusive digital future.",
+      "A seasoned executive with over 20 years of experience in the telecom and technology sectors, Doreen has held leadership roles at Verizon and Cox Communications. Her achievements include launching the world's first 5G services, developing innovative marketing strategies, and driving business growth through strategic partnerships and investments.",
+      "Doreen serves on the Advisory Boards of the Harvard Business Review and the American National Advertisers Association (ANA). She is also the Regional Administrator for the International Central Gospel Church, North America Region, and holds leadership roles in Women in Technology, Cable, and Media (WITC), and the Holy Child School Past Students Association (HOPSA USA-Canada), where she serves as President.",
+      "A passionate advocate for diversity, equity, and inclusion, Doreen has received recognition for her commitment to empowering underrepresented groups in tech. She has been featured in various industry publications and has spoken at conferences on topics such as innovation, leadership, and social impact.",
+      "Doreen holds an MBA and dual master's degrees from the University of Maryland, a Stanford Advanced Project Management Certification from Stanford University, and a Bachelor of Science in Computer Networking.",
+      "Under her leadership, Tech Hub Africa LLC is poised to revolutionize the African tech landscape, driving economic growth, social progress, and innovation."
+    ]
+  },
+  {
+    displayOrder: "02",
+    name: "Jemima Prempeh",
+    role: "Co-Founder & COO",
+    tone: "deep" as const,
+    photo: teamJemima,
+    bio: [
+      "Visionary leader and innovation driver, Jemima Prempeh spearheads Innovation and marketing communications at Tech Hub Africa, fueling business growth through creative storytelling and cutting-edge strategies.",
+      "With over two decades of experience across Healthcare, Marketing, Brand development, Digital innovation, and Leadership.",
+      "Jemima's achievements include:",
+      "• Successfully launching and scaling multiple startups, generating millions in revenue",
+      "• Leading diverse teams in healthcare, development, and business negotiations",
+      "• Leveraging expertise in finance, HR, data-driven marketing, and content creation",
+      "A recognized industry thought leader.",
+      "At Tech Hub Africa, Jemima amplifies the company's mission through inclusive innovation, customer-centric solutions, and her distinctive strengths:",
+      "• Collaborative leadership",
+      "• Creative genius",
+      "• Unparalleled customer centricity",
+      "• Marketing prowess"
+    ]
+  },
+  {
+    displayOrder: "03",
+    name: "Elisha Kweku Arko",
+    role: "Director of IT",
+    tone: "charcoal" as const,
+    photo: teamElisha,
+    bio: [
+      "Elisha Arko, Director of IT at Tech Hub Africa LLC, is a seasoned technology expert with a passion for driving innovation and growth. With over 15 years of experience in IT leadership, Elisha has a proven track record of developing and implementing cutting-edge solutions that enhance business performance.",
+      "His expertise spans IT strategy, cloud computing, cybersecurity, and data analytics. At Tech Hub Africa, Elisha leads the IT team in supporting the organization's mission to empower innovators and foster talent in Africa's tech ecosystem."
+    ]
+  }
 ];
 
 const captions = [
-  { title: "Builders First",       body: "Engineers, designers and organisers who ship real programs for real communities across the continent." },
-  { title: "Mentors & Faculty",    body: "Industry practitioners guiding students through code, product and entrepreneurship at every campus stop." },
-  { title: "Operators & Partners", body: "The people behind the logistics, partnerships and storytelling that keep the ecosystem moving." },
+  { title: "Executive Leadership", body: "Visionary entrepreneurs and industry veterans guiding Tech Hub Africa's mission across the continent." },
+  { title: "Strategic Vision",     body: "Leveraging two decades of telecom, healthcare, and enterprise IT leadership to build Pan-African tech infrastructure." },
+  { title: "Community Impact",   body: "Fostering inclusive digital growth, talent development, and university ecosystems." },
 ];
 
 /* ── Arc geometry ───────────────────────────────────────────── */
 const R      = 760;
-const SPREAD = 94;
+const SPREAD = 54;
 const TILT   = 0.38;
 const N      = team.length;
 const MID    = Math.floor((N - 1) / 2);
@@ -70,6 +109,14 @@ const TeamModal = ({
   onNext: () => void;
 }) => {
   const member = team[index];
+  const bioRef = useRef<HTMLDivElement>(null);
+
+  /* Reset bio scroll to top when index changes */
+  useEffect(() => {
+    if (bioRef.current) {
+      bioRef.current.scrollTop = 0;
+    }
+  }, [index]);
 
   /* Keyboard navigation */
   useEffect(() => {
@@ -88,109 +135,138 @@ const TeamModal = ({
     return () => { document.body.style.overflow = ""; };
   }, []);
 
-  return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-8">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 overflow-hidden">
 
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-primary/85"
-        style={{ backdropFilter: "blur(10px)", animation: "fade-in 0.3s ease forwards" }}
+        className="fixed inset-0 bg-primary/85"
+        style={{ backdropFilter: "blur(10px)", animation: "fade-in 0.25s ease forwards" }}
         onClick={onClose}
       />
 
-      {/* Dialog */}
+      {/* Dialog Container */}
       <div
         className="relative z-10 w-full max-w-2xl bg-background rounded-3xl overflow-hidden
-          flex flex-col md:flex-row
-          shadow-[0_48px_120px_-20px_hsl(155_61%_5%/0.9),0_0_0_1px_hsl(155_61%_15%/0.12)]"
-        style={{ animation: "scale-in-modal 0.4s cubic-bezier(0.16,1,0.3,1) forwards" }}
+          flex flex-col md:flex-row my-auto max-h-[85vh]
+          shadow-[0_48px_120px_-20px_hsl(155_61%_5%/0.95),0_0_0_1px_hsl(155_61%_15%/0.15)]"
+        style={{ animation: "scale-in-modal 0.35s cubic-bezier(0.16,1,0.3,1) forwards" }}
         onClick={(e) => e.stopPropagation()}
       >
 
-        {/* ── Left: Portrait ─────────────────────────────────── */}
-        <div className="relative md:w-[240px] shrink-0 aspect-[3/4] md:aspect-auto">
+        {/* ── Left: Compact Portrait ─────────────────────────── */}
+        <div className="relative h-[140px] sm:h-[170px] md:h-auto md:w-[220px] shrink-0 bg-primary overflow-hidden">
           <img
             src={member.photo}
             alt={`${member.name}, ${member.role} at Tech Hub Africa`}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-top"
           />
 
-          {/* Bottom gradient + name */}
-          <div className="absolute inset-x-0 bottom-0 p-5
-            bg-gradient-to-t from-primary via-primary/80 to-transparent">
-            <p className="text-[8px] font-bold uppercase tracking-[0.28em] text-accent mb-1">
+          {/* Bottom gradient overlay */}
+          <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-primary via-primary/75 to-transparent md:hidden">
+            <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-accent mb-0.5">
               {member.role}
             </p>
-            <p className="font-display font-extrabold text-primary-foreground text-xl leading-tight">
+            <p className="font-display font-extrabold text-primary-foreground text-base leading-tight">
               {member.name}
             </p>
           </div>
 
           {/* Number badge */}
-          <div className="absolute top-4 left-4">
-            <span className="text-[8px] font-black tracking-[0.2em] text-accent
-              bg-primary/75 px-2 py-1 rounded-full border border-accent/30">
+          <div className="absolute top-3 left-3">
+            <span className="text-[9px] font-black tracking-[0.2em] text-accent
+              bg-primary/80 px-2.5 py-1 rounded-full border border-accent/30 backdrop-blur-sm">
               {String(index + 1).padStart(2, "0")}
             </span>
           </div>
         </div>
 
-        {/* ── Right: Details ─────────────────────────────────── */}
-        <div className="flex-1 p-7 md:p-10 flex flex-col relative">
+        {/* ── Right: Immediate Content ────────────────────────── */}
+        <div className="flex-1 p-5 sm:p-7 md:p-8 flex flex-col justify-between overflow-hidden relative">
 
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 w-9 h-9 rounded-full
-              border border-primary/15 flex items-center justify-center
-              text-primary/50 hover:text-primary hover:bg-primary/8
-              hover:border-primary/30 transition-all duration-200"
+            className="absolute top-4 right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full
+              border border-primary/15 flex items-center justify-center bg-background/80
+              text-primary/70 hover:text-primary hover:bg-primary/10
+              hover:border-primary/30 transition-all duration-200 z-10"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
           </button>
 
-          {/* Counter */}
-          <p className="text-[9px] font-black uppercase tracking-[0.35em] text-accent/50 mb-6">
-            {member.displayOrder} &nbsp;/&nbsp; {String(N).padStart(2, "0")}
-          </p>
+          <div>
+            {/* Header info */}
+            <div className="hidden md:block mb-4">
+              <span className="eyebrow text-accent">{member.role}</span>
+              <h3 className="font-display font-extrabold text-primary leading-[0.95]
+                text-2xl sm:text-3xl md:text-3.5xl tracking-tight mt-1">
+                {member.name}
+              </h3>
+            </div>
 
-          {/* Role eyebrow */}
-          <p className="eyebrow text-accent mb-2">{member.role}</p>
+            {/* Mobile Title */}
+            <div className="md:hidden mb-3 pr-8">
+              <span className="text-[10px] font-black uppercase tracking-widest text-accent">{member.role}</span>
+              <h3 className="font-display font-extrabold text-primary text-xl tracking-tight">
+                {member.name}
+              </h3>
+            </div>
 
-          {/* Name */}
-          <h3 className="font-display font-extrabold text-primary leading-[0.95]
-            text-3xl md:text-[2.6rem] tracking-tight mb-5">
-            {member.name}
-          </h3>
+            {/* Divider */}
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-px flex-1 bg-primary/10" />
+              <div className="w-1.5 h-1.5 rounded-full bg-accent/50" />
+              <div className="h-px w-6 bg-primary/10" />
+            </div>
 
-          {/* Divider */}
-          <div className="flex items-center gap-3 mb-6">
-            <div className="h-px flex-1 bg-primary/10" />
-            <div className="w-1.5 h-1.5 rounded-full bg-accent/40" />
-            <div className="h-px w-8 bg-primary/10" />
+            {/* Bio Scroll Container */}
+            <div
+              ref={bioRef}
+              className="space-y-3 text-primary/80 text-xs sm:text-sm leading-relaxed
+                max-h-[200px] sm:max-h-[260px] md:max-h-[300px] overflow-y-auto pr-2 custom-scrollbar"
+            >
+              {Array.isArray(member.bio) ? (
+                member.bio.map((p, idx) => (
+                  <p key={idx} className="font-medium text-primary/85">
+                    {p}
+                  </p>
+                ))
+              ) : (
+                <p className="font-medium text-primary/85">{member.bio}</p>
+              )}
+            </div>
           </div>
 
-          {/* Bio */}
-          <p className="text-primary/55 text-sm leading-relaxed flex-1">
-            {member.bio}
-          </p>
+          {/* Controls Footer */}
+          <div className="pt-4 mt-4 border-t border-primary/10 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onPrev}
+                disabled={index === 0}
+                className="w-9 h-9 rounded-full border border-primary/20 flex items-center justify-center
+                  text-primary/70 hover:bg-primary hover:text-primary-foreground hover:border-primary
+                  disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
+                aria-label="Previous member"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
 
-          {/* Navigation */}
-          <div className="flex items-center gap-3 mt-8">
-            <button
-              onClick={onPrev}
-              disabled={index === 0}
-              className="w-11 h-11 rounded-full border border-primary/20 flex items-center justify-center
-                text-primary/60 hover:bg-primary hover:text-primary-foreground hover:border-primary
-                disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-300"
-              aria-label="Previous member"
-            >
-              <ChevronLeft className="w-4.5 h-4.5" />
-            </button>
+              <button
+                onClick={onNext}
+                disabled={index === N - 1}
+                className="w-9 h-9 rounded-full border border-primary/20 flex items-center justify-center
+                  text-primary/70 hover:bg-primary hover:text-primary-foreground hover:border-primary
+                  disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
+                aria-label="Next member"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
 
-            {/* Dot pagination */}
-            <div className="flex items-center gap-1.5 flex-1 justify-center">
+            {/* Dot indicators */}
+            <div className="flex items-center gap-1.5">
               {team.map((_, i) => (
                 <button
                   key={i}
@@ -201,34 +277,24 @@ const TeamModal = ({
                   }}
                   className={`rounded-full transition-all duration-300 ${
                     i === index
-                      ? "w-5 h-2 bg-accent"
-                      : "w-2 h-2 bg-primary/20 hover:bg-primary/40"
+                      ? "w-4 h-1.5 bg-accent"
+                      : "w-1.5 h-1.5 bg-primary/20 hover:bg-primary/40"
                   }`}
                   aria-label={`View ${team[i].name}`}
                 />
               ))}
             </div>
 
-            <button
-              onClick={onNext}
-              disabled={index === N - 1}
-              className="w-11 h-11 rounded-full border border-primary/20 flex items-center justify-center
-                text-primary/60 hover:bg-primary hover:text-primary-foreground hover:border-primary
-                disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-300"
-              aria-label="Next member"
-            >
-              <ChevronRight className="w-4.5 h-4.5" />
-            </button>
+            <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent">
+              {member.displayOrder} / 03
+            </span>
           </div>
 
-          {/* Keyboard hint */}
-          <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-primary/25 mt-3 text-center">
-            ← → Arrow keys to navigate · Esc to close
-          </p>
         </div>
 
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
@@ -329,145 +395,78 @@ const MeetTheTeam = () => {
           </div>
         </div>
 
-        {/* ── Arc gallery ─────────────────────────────────────── */}
-        <div className="relative mt-14 md:mt-20 z-10" style={{ height: 510 }}>
-
-          {/* SVG arc guide */}
-          <div className="absolute inset-x-0 top-0 flex justify-center pointer-events-none z-0">
-            <svg viewBox={`0 0 ${SVG_W} ${SVG_H}`} style={{ width: SVG_W, height: SVG_H, overflow: "visible" }} fill="none">
-              <path d={`M ${ARC_X1} ${ARC_Y1} A ${R} ${R} 0 0 0 ${ARC_X2} ${ARC_Y1}`} stroke="hsl(28,92%,50%)" strokeWidth="10" strokeLinecap="round" opacity="0.07" />
-              <path d={`M ${ARC_X1} ${ARC_Y1} A ${R} ${R} 0 0 0 ${ARC_X2} ${ARC_Y1}`} stroke="hsl(28,92%,44%)" strokeWidth="1.4" strokeLinecap="round" strokeDasharray="7 5" opacity="0.38"
-                style={{ strokeDashoffset: 4800, animation: "draw-arc 2.6s cubic-bezier(0.16,1,0.3,1) 0.4s forwards" }} />
-              {cardDots.map(({ cx, cy }, i) => {
-                const isCenter = i === MID;
-                return (
-                  <g key={i}>
-                    {isCenter && (
-                      <circle cx={cx} cy={cy} r="14" fill="hsl(28,92%,50%)" opacity="0.15">
-                        <animate attributeName="r"       values="10;20;10" dur="2.8s" repeatCount="indefinite" />
-                        <animate attributeName="opacity" values="0.2;0;0.2" dur="2.8s" repeatCount="indefinite" />
-                      </circle>
-                    )}
-                    <circle cx={cx} cy={cy} r={isCenter ? 4.5 : 2.8} fill="hsl(28,92%,44%)" opacity={isCenter ? 1 : 0.6} />
-                    <circle cx={cx} cy={cy} r={isCenter ? 1.8 : 1.1} fill="white" opacity="0.8" />
-                  </g>
-                );
-              })}
-            </svg>
-          </div>
-
-          {/* Cards */}
-          <div className="absolute inset-x-0 top-0 flex justify-center">
-            <div style={{ position: "relative", width: 0, height: 0 }}>
-              {team.map((m, i) => {
-                const deg       = -SPREAD / 2 + i * (SPREAD / (N - 1));
-                const rad       = (deg * Math.PI) / 180;
-                const x         = R * Math.sin(rad);
-                const y         = R * (1 - Math.cos(rad));
-                const tilt      = deg * TILT;
-                const isCenter  = i === MID;
-                const isHovered = hovered === i;
-                const isSelected = selected === i;
-                const isDimmed  = hovered !== null && !isHovered;
-                const z         = isHovered || isSelected ? 50 : (N - Math.abs(MID - i));
-
-                return (
+        {/* ── Executive Leadership 3-Card Showcase ───────────────── */}
+        <div className="relative max-w-5xl mx-auto px-5 sm:px-6 lg:px-10 mt-12 md:mt-16 z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+            {team.map((m, i) => {
+              const isHovered = hovered === i;
+              return (
+                <div
+                  key={m.name}
+                  className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-card overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl hover:border-accent/50 transition-all duration-500 cursor-pointer"
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                  onClick={() => setSelected(i)}
+                >
+                  {/* Top Ambient Glow */}
                   <div
-                    key={m.name}
-                    className="absolute"
-                    style={{
-                      left: 0, top: 0, zIndex: z,
-                      transform: `translate(calc(-50% + ${x}px), ${y}px) rotate(${tilt}deg)`,
-                      transition: "transform 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease",
-                      opacity: isDimmed ? 0.45 : 1,
-                    }}
-                    onMouseEnter={() => setHovered(i)}
-                    onMouseLeave={() => setHovered(null)}
-                    onClick={() => setSelected(i)}
-                  >
-                    {/* Centre pulsing ring */}
-                    {isCenter && (
-                      <div className="absolute pointer-events-none" style={{ inset: -10, borderRadius: "1.8rem" }}>
-                        <div className="w-full h-full border-2 border-accent/40 animate-pulse-glow" style={{ borderRadius: "inherit" }} />
-                      </div>
-                    )}
+                    className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent via-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  />
 
-                    {/* Hover corona */}
-                    <div className="absolute pointer-events-none" style={{
-                      inset: -20, borderRadius: "2.2rem",
-                      background: "radial-gradient(circle at 50% 60%, hsl(28 92% 44% / 0.3), transparent 68%)",
-                      filter: "blur(14px)",
-                      opacity: isHovered ? 1 : 0,
-                      transition: "opacity 0.4s ease",
-                    }} />
+                  {/* Portrait Container */}
+                  <div className="relative aspect-[3/3.6] w-full overflow-hidden bg-primary/5">
+                    <img
+                      src={m.photo}
+                      alt={`${m.name}, ${m.role} at Tech Hub Africa`}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
 
-                    {/* Card */}
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent" />
+
+                    {/* Number Badge */}
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="text-[10px] font-black tracking-[0.25em] text-accent bg-primary/80 px-3 py-1 rounded-full border border-accent/30 backdrop-blur-md">
+                        {m.displayOrder}
+                      </span>
+                    </div>
+
+                    {/* Hover Prompt */}
                     <div
-                      className="relative overflow-hidden cursor-pointer"
-                      style={{
-                        width: "clamp(88px, 11vw, 158px)",
-                        aspectRatio: "3 / 4.2",
-                        borderRadius: "1.5rem",
-                        transform: isHovered ? "scale(1.1)" : "scale(1)",
-                        transition: "transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.45s ease, filter 0.45s ease",
-                        boxShadow: isHovered
-                          ? "0 36px 90px -16px hsl(155 61% 8% / 0.7), 0 0 0 2px hsl(28 92% 44% / 0.7)"
-                          : isCenter
-                          ? "0 24px 60px -18px hsl(155 61% 15% / 0.5), 0 0 0 1.5px hsl(28 92% 44% / 0.4)"
-                          : "0 18px 48px -16px hsl(155 61% 15% / 0.38)",
-                        filter: isHovered ? "drop-shadow(0 0 22px hsl(28 92% 44% / 0.45))" : "none",
-                      }}
+                      className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none transition-opacity duration-300"
+                      style={{ opacity: isHovered ? 1 : 0 }}
                     >
-                      <img
-                        src={m.photo}
-                        alt={`${m.name}, ${m.role} at Tech Hub Africa`}
-                        loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent" />
+                      <span className="text-[10px] font-black uppercase tracking-[0.25em] text-accent-foreground bg-accent px-4 py-2 rounded-full shadow-xl">
+                        View Details
+                      </span>
+                    </div>
+                  </div>
 
-                      {/* "Click to view" hint on hover */}
-                      <div className="absolute inset-0 z-[6] flex items-center justify-center pointer-events-none"
-                        style={{ opacity: isHovered ? 1 : 0, transition: "opacity 0.3s ease" }}>
-                        <span className="text-[7px] font-black uppercase tracking-[0.25em] text-white/90
-                          bg-black/40 px-2.5 py-1 rounded-full border border-white/20">
-                          View
-                        </span>
-                      </div>
+                  {/* Content Footer */}
+                  <div className="p-6 bg-card flex-1 flex flex-col justify-between border-t border-primary/5">
+                    <div>
+                      <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-accent block mb-1">
+                        {m.role}
+                      </span>
+                      <h3 className="font-display font-extrabold text-primary text-xl sm:text-2xl tracking-tight group-hover:text-accent transition-colors">
+                        {m.name}
+                      </h3>
+                    </div>
 
-                      {/* Top shimmer on hover */}
-                      <div className="absolute inset-x-0 top-0 h-px pointer-events-none"
-                        style={{ background: "linear-gradient(90deg, transparent, hsl(28 92% 60% / 0.8), transparent)", opacity: isHovered ? 1 : 0, transition: "opacity 0.3s ease" }} />
-
-                      {/* Number badge */}
-                      <div className="absolute top-2.5 left-2.5 z-[5]">
-                        <span className="font-black text-accent leading-none"
-                          style={{ fontSize: "8px", letterSpacing: "0.2em", background: "hsl(155 61% 8% / 0.75)", padding: "2px 6px", borderRadius: "99px", border: "1px solid hsl(28 92% 44% / 0.4)" }}>
-                          {m.displayOrder}
-                        </span>
-                      </div>
-
-                      {/* Name + role */}
-                      <div className="absolute inset-x-0 bottom-0 z-[4] px-2.5 py-2.5 bg-gradient-to-t from-primary via-primary/85 to-transparent">
-                        <p className="font-bold uppercase text-accent leading-none mb-0.5"
-                          style={{ fontSize: "clamp(6px, 0.8vw, 8px)", letterSpacing: "0.25em" }}>
-                          {m.role}
-                        </p>
-                        <p className="font-display font-extrabold text-primary-foreground leading-none"
-                          style={{ fontSize: "clamp(9px, 1vw, 11px)" }}>
-                          {m.name}
-                        </p>
+                    <div className="mt-6 pt-4 border-t border-primary/10 flex items-center justify-between">
+                      <span className="text-xs font-bold text-primary/70 group-hover:text-accent transition-colors">
+                        Executive Profile
+                      </span>
+                      <div className="w-8 h-8 rounded-full border border-primary/15 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-accent-foreground group-hover:border-accent transition-all duration-300">
+                        <ChevronRight className="w-4 h-4" />
                       </div>
                     </div>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
-
-          {/* Edge fades */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-28 bg-gradient-to-r from-background to-transparent z-20" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-28 bg-gradient-to-l from-background to-transparent z-20" />
         </div>
 
         {/* ── Captions ────────────────────────────────────────── */}

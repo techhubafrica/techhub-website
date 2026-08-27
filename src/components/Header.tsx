@@ -1,18 +1,19 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, ExternalLink } from "lucide-react";
 import Logo from "@/components/Logo";
 
-const navLinks = [
+const navLinks: { label: string; href: string; external?: boolean }[] = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Events", href: "/events" },
   { label: "Careers", href: "/careers" },
-  { label: "Mentorship", href: "/mentorship" },
   { label: "CSR", href: "/csr" },
-  { label: "Portfolio", href: "/portfolio" },
   { label: "Media", href: "/media" },
   { label: "Gallery", href: "/gallery" },
+  { label: "Tech4All", href: "https://tech4all.techhubafrica.org/", external: true },
+  { label: "Academy", href: "https://academy.techhubafrica.org", external: true },
 ];
 
 const Header = () => {
@@ -70,21 +71,32 @@ const Header = () => {
             </Link>
 
             <nav
-              className={`hidden lg:flex items-center gap-1 text-[10.5px] font-bold uppercase tracking-[0.22em] transition-colors duration-500 ${
+              className={`hidden xl:flex items-center gap-0.5 text-[9.5px] font-bold uppercase tracking-[0.18em] whitespace-nowrap transition-colors duration-500 ${
                 scrolled ? "text-primary/70" : "text-primary/75"
               }`}
             >
-              {navLinks.map((l) => (
-                <Link
-                  key={l.href}
-                  to={l.href}
-                  className={`relative px-3.5 py-2 rounded-full transition-all duration-300 hover:text-accent ${
-                    "hover:bg-primary/[0.06]"
-                  }`}
-                >
-                  {l.label}
-                </Link>
-              ))}
+              {navLinks.map((l) =>
+                l.external ? (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`relative inline-flex items-center px-2 py-2 rounded-full transition-all duration-300 hover:text-accent hover:bg-primary/[0.06]`}
+                  >
+                    {l.label}
+                    <ExternalLink className="w-3 h-3 ml-1" />
+                  </a>
+                ) : (
+                  <Link
+                    key={l.href}
+                    to={l.href}
+                    className={`relative px-2 py-2 rounded-full transition-all duration-300 hover:text-accent hover:bg-primary/[0.06]`}
+                  >
+                    {l.label}
+                  </Link>
+                )
+              )}
             </nav>
 
             <div className="flex items-center gap-2">
@@ -96,7 +108,7 @@ const Header = () => {
                 Visit The Hub <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
               <button
-                className={`lg:hidden w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
+                className={`xl:hidden w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
                   "text-primary/75 hover:bg-primary/[0.06]"
                 }`}
                 onClick={() => setOpen(!open)}
@@ -115,17 +127,31 @@ const Header = () => {
         </div>
 
         {open && (
-          <div className="pointer-events-auto lg:hidden mt-2 bg-white/80 backdrop-blur-md border border-white/40 shadow-lg rounded-3xl px-6 py-6 flex flex-col gap-3 animate-fade-up">
-            {navLinks.map((l) => (
-              <Link
-                key={l.href}
-                to={l.href}
-                onClick={() => setOpen(false)}
-                className="text-sm font-bold uppercase tracking-[0.2em] text-primary/80 hover:text-accent transition-colors"
-              >
-                {l.label}
-              </Link>
-            ))}
+          <div className="pointer-events-auto xl:hidden mt-2 bg-white/80 backdrop-blur-md border border-white/40 shadow-lg rounded-3xl px-6 py-6 flex flex-col gap-3 animate-fade-up">
+            {navLinks.map((l) =>
+              l.external ? (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="inline-flex items-center text-sm font-bold uppercase tracking-[0.2em] text-primary/80 hover:text-accent transition-colors"
+                >
+                  {l.label}
+                  <ExternalLink className="w-3 h-3 ml-1" />
+                </a>
+              ) : (
+                <Link
+                  key={l.href}
+                  to={l.href}
+                  onClick={() => setOpen(false)}
+                  className="text-sm font-bold uppercase tracking-[0.2em] text-primary/80 hover:text-accent transition-colors"
+                >
+                  {l.label}
+                </Link>
+              )
+            )}
             <Link
               to="/thehub"
               onClick={() => setOpen(false)}

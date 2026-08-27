@@ -1,34 +1,33 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PageHero from "@/components/PageHero";
-import { heroBackdrops } from "@/assets/ktu";
+import { ktuHero } from "@/assets/ktu";
 import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X } from "lucide-react";
-import { heroAudience, heroCelebration, meetup2026Flyer, hackathonFlyer, campusTourFlyer, networking } from "@/assets/photos";
+import { heroAudience, meetup2026Flyer, hackathonFlyer, campusTourFlyer, networking } from "@/assets/photos";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 
 const eventsList = [
   {
-    num: "01", id: "meetup-2026",
+    num: "01", id: "tech-guru",
     title: "Tech Guru Meetup 2026", tag: "Flagship", tagColor: "hsl(28 92% 44%)",
-    date: "October 14–16, 2026", location: "Accra International Conference Centre",
-    desc: "The ultimate gathering of African tech leaders, founders, engineers, and investors. Three days of keynotes, live demos, investor matchmaking, and networking.",
-    capacity: "2,500+ Attendees", status: "Registration Open", image: meetup2026Flyer,
+    date: "December 18, 2026", location: "Location TBA",
+    desc: "The ultimate gathering of African tech leaders, founders, engineers, and investors. Keynotes, live demos, investor matchmaking, and networking.",
+    status: "Registration Open", image: meetup2026Flyer,
   },
   {
     num: "02", id: "campus-tour",
     title: "Tech4All Campus Tour 2026", tag: "Campus", tagColor: "hsl(155 61% 30%)",
     date: "Ongoing Throughout 2026", location: "Univ. of Ghana · KNUST · Regional Hubs",
     desc: "Empowering university students with coding bootcamps, AI workshops, and career pathways across West Africa.",
-    capacity: "5,000+ Students", status: "Active Tour", image: campusTourFlyer,
+    status: "Active Tour", image: campusTourFlyer,
   },
   {
-    num: "03", id: "hackathon-72",
-    title: "Seventy-Two Hours of Impact", tag: "Hackathon", tagColor: "hsl(28 92% 44%)",
-    date: "November 20–22, 2026", location: "The Hub — East Legon & Virtual",
-    desc: "Elite teams build production-grade solutions to real-world African infrastructure, climate, and finance challenges — in 72 sleepless hours.",
-    capacity: "50 Teams", status: "Applications Open", image: hackathonFlyer,
+    num: "03", id: "hackathon-challenge",
+    title: "Month-Long Hackathon Challenge", tag: "Hackathon", tagColor: "hsl(28 92% 44%)",
+    date: "November 1–30, 2026", location: "The Hub — East Legon & Virtual",
+    desc: "Elite teams build production-grade solutions to real-world African infrastructure, climate, and finance challenges over an intensive month-long competition.",
+    status: "Applications Open", image: hackathonFlyer,
   },
 ];
 
@@ -49,7 +48,7 @@ const Events = () => {
 
   const [timeLeft, setTimeLeft] = useState({ days: 77, hours: 14, mins: 25, secs: 40 });
   useEffect(() => {
-    const target = new Date("2026-10-14T08:30:00").getTime();
+    const target = new Date("2026-12-18T09:00:00").getTime();
     const tick = () => {
       const diff = target - Date.now();
       if (diff <= 0) return;
@@ -74,20 +73,10 @@ const Events = () => {
   return (
     <>
       <Header />
-      <PageHero
-        tag="Gatherings & Conferences"
-        title={<>Connecting Africa's <span className="italic font-light text-accent">innovators</span><br />live, in person.</>}
-        body="From our annual flagship Tech Guru Meetup to nationwide campus tours and 72-hour hackathons — discover where the community converges."
-        ghost="EVENTS"
-        image={heroBackdrops.events}
-        imageAlt="Audience at a Tech Hub Africa conference in Accra"
-      />
-
-      <Marquee text="Conferences · Campus Tours · Hackathons · Tech Guru Meetup 2026" />
 
       <main className="page-entry bg-background overflow-hidden">
-        {/* ══ FEATURED EVENT ══ */}
-        <section className="relative overflow-hidden bg-background text-foreground">
+        {/* ══ HERO FEATURED EVENT: TECH GURU MEETUP ══ */}
+        <section className="relative overflow-hidden bg-background text-foreground pt-20 sm:pt-24 md:pt-28">
           <div className="absolute inset-0">
             <img src={heroAudience} alt="Attendees at the Tech Guru Meetup in Accra"
               className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
@@ -98,24 +87,24 @@ const Events = () => {
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 py-14 sm:py-20 md:py-24 lg:py-32">
+          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 py-14 sm:py-20 md:py-24 lg:py-28">
             <div className="card-lift sheen glass-cream max-w-2xl rounded-3xl p-8 md:p-12"
               style={{ backdropFilter: "blur(18px)" }}>
               <div className="flex items-center gap-3 mb-6">
                 <span className="h-px w-8 bg-accent" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">Accra, Ghana · 2026</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">December 18, 2026 · Location TBA</span>
               </div>
-              <h2 className="font-display font-black text-primary text-[2.6rem] md:text-[4rem] leading-[0.92] tracking-tight">
+              <h1 className="font-display font-black text-primary text-[2.6rem] md:text-[4rem] leading-[0.92] tracking-tight">
                 Tech Guru<br />Meetup 2026
-              </h2>
+              </h1>
               <p className="mt-4 font-display font-extrabold text-accent text-xl md:text-2xl tracking-tight">
                 Where Africa meets what&rsquo;s next.
               </p>
               <p className="mt-7 font-display font-extrabold text-primary text-lg md:text-xl">
-                Wednesday, October 14, 2026 <span className="text-primary/25 mx-2">|</span> 8:30 AM – 5:00 PM
+                Friday, December 18, 2026 <span className="text-primary/25 mx-2">|</span> Time TBA
               </p>
               <p className="mt-2 text-muted-foreground leading-relaxed text-sm">
-                Accra International Conference Centre<br />Independence Avenue, Accra
+                Location TBA<br />Official venue announcement coming soon
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <button onClick={() => openRsvp("Tech Guru Meetup 2026")}
@@ -134,7 +123,6 @@ const Events = () => {
                 <span className="text-muted-foreground">Space is limited.</span>
               </p>
             </div>
-
 
             {/* Countdown */}
             <div className="glass-cream mt-12 rounded-2xl px-6 py-5 flex flex-wrap items-center gap-8" style={{ backdropFilter: "blur(14px)" }}>
@@ -155,14 +143,15 @@ const Events = () => {
                 ))}
               </div>
               <div className="hidden md:flex items-center gap-5 ml-auto text-xs font-semibold text-muted-foreground">
-                <span className="flex items-center gap-2"><Users className="w-4 h-4 text-accent" />2,500+ attendees</span>
-                <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-accent" />AICC, Accra</span>
-                <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-accent" />Oct 14–16</span>
-
+                <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-accent" />Location TBA</span>
+                <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-accent" />Dec 18, 2026</span>
               </div>
             </div>
           </div>
         </section>
+
+        {/* ══ CONVEYOR BELT MARQUEE (Right below Tech Guru Meetup Hero) ══ */}
+        <Marquee text="Conferences · Campus Tours · Hackathons · Tech Guru Meetup 2026" />
 
         {/* ══ ALL EVENTS ══ */}
         <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto cv-auto">
@@ -211,15 +200,25 @@ const Events = () => {
                       <h3 className="font-display font-extrabold text-primary text-2xl md:text-3xl tracking-tight mb-3 group-hover:text-accent transition-colors">{e.title}</h3>
                       <p className="text-primary/65 text-sm leading-relaxed">{e.desc}</p>
                       <div className="flex items-center gap-4 mt-4 text-xs font-bold text-primary/60">
-                        <span className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5 text-accent" />{e.capacity}</span>
-                        <span className="text-accent">• {e.status}</span>
+                        <span className="text-accent">{e.status}</span>
                       </div>
                     </div>
                     <div className="lg:col-span-3 flex items-center justify-center p-6 lg:p-9 border-t lg:border-t-0 lg:border-l border-primary/10">
-                      <button onClick={() => openRsvp(e.title)}
-                        className="btn-magnetic w-full py-3.5 px-5 sm:px-6 lg:px-10 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-all duration-250">
-                        RSVP / Register
-                      </button>
+                      {e.id === "campus-tour" ? (
+                        <a
+                          href="https://tech4all.techhubafrica.org/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-magnetic w-full py-3.5 px-5 sm:px-6 lg:px-10 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-all duration-250 text-center flex items-center justify-center gap-2"
+                        >
+                          Visit Portal <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      ) : (
+                        <button onClick={() => openRsvp(e.title)}
+                          className="btn-magnetic w-full py-3.5 px-5 sm:px-6 lg:px-10 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-all duration-250">
+                          RSVP / Register
+                        </button>
+                      )}
                     </div>
                     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
                   </div>
@@ -230,7 +229,7 @@ const Events = () => {
             <Reveal>
               <div className="card-lift sheen rounded-3xl border border-primary/10 bg-background overflow-hidden">
                 <div className="grid md:grid-cols-2 gap-0">
-                  <img src={heroCelebration} alt="Tech Guru Meetup 2025 celebration" loading="lazy" className="w-full h-64 md:h-full object-cover" />
+                  <img src={ktuHero[1]} alt="Campus Tour hands-on technology session" loading="lazy" className="w-full h-64 md:h-full object-cover" />
                   <img src={networking} alt="Networking at the Tech Guru Meetup 2025" loading="lazy" className="hidden md:block w-full h-full object-cover" />
                 </div>
                 <div className="p-10 md:p-16 text-center">

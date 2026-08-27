@@ -2,14 +2,17 @@ import { Link } from "react-router-dom";
 import { Linkedin, Instagram, Twitter, Youtube, Facebook } from "lucide-react";
 import Logo from "@/components/Logo";
 
-const columns = [
+const columns: {
+  title: string;
+  links: { label: string; href: string; external?: boolean }[];
+}[] = [
   {
     title: "Who We Are",
     links: [
       { label: "About Us", href: "/about" },
       { label: "Meet The Team", href: "/about#team" },
       { label: "Services", href: "/services" },
-      { label: "Venture Portfolio", href: "/portfolio" },
+      { label: "Investment Portfolio", href: "/#portfolio" },
       { label: "The Hub Campus", href: "/thehub" },
     ],
   },
@@ -17,8 +20,8 @@ const columns = [
     title: "Quick Links",
     links: [
       { label: "Events & Meetups", href: "/events" },
-      { label: "Careers & Jobs", href: "/careers" },
-      { label: "Mentorship Program", href: "/mentorship" },
+      { label: "Careers & Internships", href: "/careers" },
+      { label: "Mentorship Program", href: "/careers#mentorship" },
       { label: "CSR & Sponsorships", href: "/csr" },
       { label: "Media & TechTalks", href: "/media" },
     ],
@@ -27,8 +30,10 @@ const columns = [
     title: "Ecosystem Programs",
     links: [
       { label: "Tech Guru Meetup 2026", href: "/events" },
-      { label: "Tech4All Campus Tour", href: "/services" },
-      { label: "72-Hour Hackathon", href: "/events" },
+      { label: "Tech4All Campus Tour", href: "https://tech4all.techhubafrica.org/", external: true },
+      { label: "Hackathon Challenge", href: "/events" },
+      { label: "Tech Hub Academy", href: "https://academy.techhubafrica.org", external: true },
+      { label: "Global Metaverse", href: "/services#metaverse" },
       { label: "Threat Lock Auditing", href: "/services" },
       { label: "Speaking Engagements", href: "/media" },
     ],
@@ -59,9 +64,20 @@ const Footer = () => (
           <ul className="space-y-4 text-sm font-medium text-primary-foreground/70">
             {col.links.map((link) => (
               <li key={link.label}>
-                <Link to={link.href} className="hover:text-accent transition-colors">
-                  {link.label}
-                </Link>
+                {link.external ? (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-accent transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link to={link.href} className="hover:text-accent transition-colors">
+                    {link.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
