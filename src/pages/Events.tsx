@@ -253,7 +253,7 @@ const Events = () => {
 
           <Reveal className="mb-10">
             <div className="flex items-baseline gap-6 mb-6">
-              <span className="eyebrow text-accent">02 — Calendar</span>
+              <span className="eyebrow text-accent">03 — Calendar</span>
               <div className="flex-1 divider-elegant" />
             </div>
             <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
