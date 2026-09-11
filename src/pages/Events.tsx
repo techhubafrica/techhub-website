@@ -135,7 +135,7 @@ const Events = () => {
                 Location TBA<br />Official venue announcement coming soon
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <button onClick={() => openRsvp("Tech Guru Meetup 2026")}
+                <button onClick={() => document.getElementById("reservations")?.scrollIntoView({ behavior: "smooth" })}
                   className="btn-magnetic px-7 py-3.5 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:brightness-110 transition-all duration-200"
                   style={{ boxShadow: "0 12px 36px -10px hsl(28 92% 44% / 0.5)" }}>
                   Reserve Your Seat
