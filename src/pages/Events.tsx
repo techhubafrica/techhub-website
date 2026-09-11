@@ -199,38 +199,76 @@ const Events = () => {
             </p>
           </Reveal>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
             {ticketTiers.map((t, i) => (
-              <Reveal key={t.id} delay={i * 0.07}>
-                <div className={`card-lift sheen group relative h-full flex flex-col rounded-3xl border p-6 lg:p-7 transition-all duration-500 ${
-                  t.featured ? "border-accent/45 bg-accent/[0.06]" : "border-primary/10 bg-background hover:border-primary/25"
+              <Reveal key={t.id} delay={i * 0.07} className={i % 2 === 1 ? "lg:translate-y-10" : ""}>
+                <div className={`group relative h-full flex flex-col overflow-hidden rounded-[1.75rem] transition-all duration-500 hover:-translate-y-2 ${
+                  t.featured
+                    ? "bg-primary text-primary-foreground shadow-[0_32px_80px_-28px_hsl(var(--primary)/0.55)]"
+                    : "border border-primary/12 bg-background shadow-[0_20px_50px_-32px_hsl(var(--primary)/0.35)] hover:border-primary/30"
                 }`}>
-                  {t.featured && (
-                    <span className="absolute top-5 right-5 text-[9px] font-black uppercase tracking-[0.22em] px-2.5 py-1 rounded-full bg-accent text-accent-foreground">
-                      Popular
-                    </span>
-                  )}
-                  <Ticket className="w-5 h-5 text-accent mb-5" strokeWidth={1.6} />
-                  <h3 className="font-display font-extrabold text-primary text-xl tracking-tight">{t.name}</h3>
-                  <p className="mt-3 font-display font-black text-primary text-[2.4rem] leading-none tracking-tight">{t.price}</p>
-                  <p className="mt-4 text-sm text-primary/65 leading-relaxed">{t.blurb}</p>
-                  <ul className="mt-5 space-y-2.5 flex-1">
-                    {t.perks.map((p) => (
-                      <li key={p} className="flex gap-2.5 text-xs text-primary/70 leading-relaxed">
-                        <Check className="w-3.5 h-3.5 mt-0.5 shrink-0 text-accent" />
-                        <span>{p}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-7 space-y-2.5">
-                    <a href={t.pay} target="_blank" rel="noopener noreferrer"
-                      className="btn-magnetic w-full py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-all duration-250 flex items-center justify-center gap-2">
-                      Pay Now <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
-                    <button onClick={() => openRsvp(`Tech Guru Meetup 2026 — ${t.name}`)}
-                      className="w-full py-3 rounded-full border border-primary/15 text-primary/70 font-bold text-[10px] uppercase tracking-[0.2em] hover:border-primary/40 hover:text-primary transition-all duration-250">
-                      Register
-                    </button>
+                  {/* ghost numeral */}
+                  <span aria-hidden className={`pointer-events-none absolute -top-8 -right-3 font-display font-black leading-none tracking-tighter select-none transition-transform duration-700 group-hover:-translate-y-2 ${
+                    t.featured ? "text-[9rem] text-primary-foreground/[0.06]" : "text-[9rem] text-primary/[0.05]"
+                  }`}>
+                    {["01", "02", "03", "04"][i]}
+                  </span>
+                  {/* top accent hairline that draws on hover */}
+                  <span className={`absolute top-0 left-7 h-[3px] w-10 rounded-full transition-all duration-500 group-hover:w-20 ${t.featured ? "bg-accent" : "bg-accent"}`} />
+
+                  <div className="relative flex-1 p-7 lg:p-8 flex flex-col">
+                    <div className="flex items-center justify-between">
+                      <span className={`text-[9px] font-black uppercase tracking-[0.3em] ${t.featured ? "text-primary-foreground/50" : "text-primary/40"}`}>
+                        Tier {["I", "II", "III", "IV"][i]}
+                      </span>
+                      {t.featured && (
+                        <span className="text-[8px] font-black uppercase tracking-[0.24em] px-2.5 py-1 rounded-full bg-accent text-accent-foreground">
+                          Popular
+                        </span>
+                      )}
+                    </div>
+
+                    <h3 className={`mt-6 font-display font-extrabold text-2xl tracking-tight leading-[1.05] ${t.featured ? "text-primary-foreground" : "text-primary"}`}>
+                      {t.name.replace(" Ticket", "")}
+                      <span className={`block italic font-light text-base mt-1 ${t.featured ? "text-accent" : "text-primary/45"}`}>ticket</span>
+                    </h3>
+
+                    <p className="mt-5 flex items-baseline gap-2">
+                      <span className={`font-display font-black text-[2.9rem] leading-none tracking-tight ${t.featured ? "text-primary-foreground" : "text-primary"}`}>{t.price}</span>
+                      <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${t.featured ? "text-primary-foreground/50" : "text-primary/40"}`}>/ seat</span>
+                    </p>
+
+                    <p className={`mt-4 text-[13px] leading-relaxed ${t.featured ? "text-primary-foreground/70" : "text-primary/65"}`}>{t.blurb}</p>
+
+                    <div className={`my-6 h-px w-full ${t.featured ? "bg-primary-foreground/15" : "bg-primary/10"}`} />
+
+                    <ul className="space-y-3 flex-1">
+                      {t.perks.map((p) => (
+                        <li key={p} className={`flex gap-2.5 text-xs leading-relaxed ${t.featured ? "text-primary-foreground/80" : "text-primary/70"}`}>
+                          <span className={`mt-[5px] w-1.5 h-1.5 rounded-full shrink-0 ${t.featured ? "bg-accent" : "bg-accent"}`} />
+                          <span>{p}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="mt-8 space-y-2.5">
+                      <a href={t.pay} target="_blank" rel="noopener noreferrer"
+                        className={`btn-magnetic w-full py-3.5 rounded-full font-bold text-[10px] uppercase tracking-[0.22em] transition-all duration-300 flex items-center justify-center gap-2 ${
+                          t.featured
+                            ? "bg-accent text-accent-foreground hover:shadow-[0_12px_36px_-10px_hsl(var(--accent)/0.7)]"
+                            : "bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground"
+                        }`}>
+                        Pay Now <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </a>
+                      <button onClick={() => openRsvp(`Tech Guru Meetup 2026 — ${t.name}`)}
+                        className={`w-full py-3 rounded-full border font-bold text-[10px] uppercase tracking-[0.22em] transition-all duration-300 ${
+                          t.featured
+                            ? "border-primary-foreground/25 text-primary-foreground/80 hover:border-primary-foreground/60 hover:text-primary-foreground"
+                            : "border-primary/15 text-primary/70 hover:border-primary/40 hover:text-primary"
+                        }`}>
+                        Register
+                      </button>
+                    </div>
                   </div>
                 </div>
               </Reveal>
