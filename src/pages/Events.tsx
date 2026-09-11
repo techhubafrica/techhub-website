@@ -181,6 +181,72 @@ const Events = () => {
         {/* ══ CONVEYOR BELT MARQUEE (Right below Tech Guru Meetup Hero) ══ */}
         <Marquee text="Conferences · Campus Tours · Hackathons · Tech Guru Meetup 2026" />
 
+        {/* ══ RESERVATIONS / TICKETS ══ */}
+        <section id="reservations" className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-24 lg:py-32 max-w-7xl mx-auto cv-auto">
+          <div className="hidden md:block absolute -top-20 right-0 w-[480px] h-[480px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_50%),transparent_70%)]" />
+
+          <Reveal className="mb-10 sm:mb-14">
+            <div className="flex items-baseline gap-6 mb-6">
+              <span className="eyebrow text-accent">02 — Reservations</span>
+              <div className="flex-1 divider-elegant" />
+            </div>
+            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
+              Reserve your <span className="italic font-light text-accent">place.</span>
+            </h2>
+            <p className="mt-5 max-w-2xl text-sm sm:text-base text-primary/65 leading-relaxed">
+              Tech Guru Meetup 2026 · Friday, 18 December 2026 · Location TBA. Select a ticket tier, complete payment,
+              then submit the registration form with your payment receipt.
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {ticketTiers.map((t, i) => (
+              <Reveal key={t.id} delay={i * 0.07}>
+                <div className={`card-lift sheen group relative h-full flex flex-col rounded-3xl border p-6 lg:p-7 transition-all duration-500 ${
+                  t.featured ? "border-accent/45 bg-accent/[0.06]" : "border-primary/10 bg-background hover:border-primary/25"
+                }`}>
+                  {t.featured && (
+                    <span className="absolute top-5 right-5 text-[9px] font-black uppercase tracking-[0.22em] px-2.5 py-1 rounded-full bg-accent text-accent-foreground">
+                      Popular
+                    </span>
+                  )}
+                  <Ticket className="w-5 h-5 text-accent mb-5" strokeWidth={1.6} />
+                  <h3 className="font-display font-extrabold text-primary text-xl tracking-tight">{t.name}</h3>
+                  <p className="mt-3 font-display font-black text-primary text-[2.4rem] leading-none tracking-tight">{t.price}</p>
+                  <p className="mt-4 text-sm text-primary/65 leading-relaxed">{t.blurb}</p>
+                  <ul className="mt-5 space-y-2.5 flex-1">
+                    {t.perks.map((p) => (
+                      <li key={p} className="flex gap-2.5 text-xs text-primary/70 leading-relaxed">
+                        <Check className="w-3.5 h-3.5 mt-0.5 shrink-0 text-accent" />
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-7 space-y-2.5">
+                    <a href={t.pay} target="_blank" rel="noopener noreferrer"
+                      className="btn-magnetic w-full py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-all duration-250 flex items-center justify-center gap-2">
+                      Pay Now <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                    <button onClick={() => openRsvp(`Tech Guru Meetup 2026 — ${t.name}`)}
+                      className="w-full py-3 rounded-full border border-primary/15 text-primary/70 font-bold text-[10px] uppercase tracking-[0.2em] hover:border-primary/40 hover:text-primary transition-all duration-250">
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.1}>
+            <div className="glass-cream mt-8 rounded-2xl border border-primary/10 px-6 py-5 flex flex-wrap items-center gap-x-8 gap-y-3">
+              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary/45">Good to know</span>
+              <span className="text-xs text-primary/65 flex items-center gap-2"><Users className="w-3.5 h-3.5 text-accent" />Students must present a valid school ID at entry</span>
+              <span className="text-xs text-primary/65 flex items-center gap-2"><Calendar className="w-3.5 h-3.5 text-accent" />Registration closes once capacity is reached</span>
+              <span className="text-xs text-primary/65 flex items-center gap-2"><Ticket className="w-3.5 h-3.5 text-accent" />Payments are processed securely via Paystack</span>
+            </div>
+          </Reveal>
+        </section>
+
         {/* ══ ALL EVENTS ══ */}
         <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto cv-auto">
           <div className="hidden md:block absolute top-1/2 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
