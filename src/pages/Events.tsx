@@ -368,16 +368,42 @@ const Events = () => {
                 </div>
               ) : (
                 <form onSubmit={handleRsvp} className="space-y-5">
-                  {["Full Name", "Email Address", "Organization / University"].map((label) => (
+                  {["Full Name", "Email Address", "Phone", "Occupation / Role", "Organization / University"].map((label) => (
                     <div key={label}>
                       <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">{label}</label>
-                      <input required type={label.includes("Email") ? "email" : "text"}
+                      <input required={label !== "Organization / University"}
+                        type={label.includes("Email") ? "email" : label === "Phone" ? "tel" : "text"}
                         className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                     </div>
                   ))}
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">Ticket Type</label>
+                    <select required defaultValue={ticketTiers.find((t) => selectedEvent.includes(t.name))?.id ?? ""}
+                      className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200">
+                      <option value="" disabled>Select one</option>
+                      {ticketTiers.map((t) => (
+                        <option key={t.id} value={t.id}>{t.name} — {t.price}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">Payment Receipt Screenshot</label>
+                    <input type="file" accept="image/*,application/pdf"
+                      className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-xs text-primary/70 file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:bg-primary file:text-primary-foreground file:text-[10px] file:font-bold file:uppercase file:tracking-wider" />
+                    <p className="mt-2 text-[11px] text-primary/50 leading-relaxed">
+                      Pay first via the ticket card, then upload the receipt emailed to you.
+                    </p>
+                  </div>
+                  <label className="flex gap-3 text-[11px] text-primary/60 leading-relaxed">
+                    <input required type="checkbox" className="mt-0.5 accent-current shrink-0" />
+                    <span>
+                      I consent to Tech Hub Africa LLC processing my details for event management and future event updates,
+                      in line with Ghana&rsquo;s Data Protection Laws. I may opt out at any time.
+                    </span>
+                  </label>
                   <button type="submit"
                     className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">
-                    Confirm RSVP
+                    Submit Registration
                   </button>
                 </form>
               )}
