@@ -147,7 +147,7 @@ const Events = () => {
                 </button>
               </div>
               <p className="mt-5 text-sm">
-                <span className="font-bold text-accent">General admission is free.</span>{" "}
+                <span className="font-bold text-accent">Tickets from GH₵50.</span>{" "}
                 <span className="text-muted-foreground">Space is limited.</span>
               </p>
             </div>
