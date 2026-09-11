@@ -547,8 +547,9 @@ const Initiatives = () => (
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         {initiatives.map((it, i) => {
-          const Tag = (it.title === "Tech Guru Meetup" || it.title === "Hackathon Challenge") ? Link : "a";
-          const props = Tag === Link ? { to: "/events" } : { href: "#" };
+          const isRoute = it.title === "Tech Guru Meetup" || it.title === "Hackathon Challenge";
+          const Tag = (isRoute ? Link : "a") as React.ElementType;
+          const props: Record<string, string> = isRoute ? { to: "/events" } : { href: "#" };
           return (
           <Tag
             key={it.title}
