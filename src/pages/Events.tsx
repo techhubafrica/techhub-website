@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ktuHero } from "@/assets/ktu";
-import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X } from "lucide-react";
+import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X, Ticket, Check } from "lucide-react";
 import { heroAudience, meetup2026Flyer, hackathonFlyer, campusTourFlyer, networking } from "@/assets/photos";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
@@ -28,6 +28,34 @@ const eventsList = [
     date: "November 1–30, 2026", location: "The Hub — East Legon & Virtual",
     desc: "Elite teams build production-grade solutions to real-world African infrastructure, climate, and finance challenges over an intensive month-long competition.",
     status: "Applications Open", image: hackathonFlyer,
+  },
+];
+
+const ticketTiers = [
+  {
+    id: "general", name: "General Ticket", price: "GH₵100",
+    blurb: "Full access to keynotes, panels, live demos, and the networking floor.",
+    perks: ["All keynote sessions", "Exhibition & demo floor", "Networking reception"],
+    pay: "https://paystack.shop/pay/bpbi3v7b-o",
+  },
+  {
+    id: "student", name: "Student Ticket", price: "GH₵50",
+    blurb: "Discounted admission for students with a valid school ID.",
+    perks: ["All keynote sessions", "Career & mentorship corner", "Student ID required at entry"],
+    pay: "https://paystack.shop/pay/ince1ae1jh",
+  },
+  {
+    id: "corporate", name: "Corporate Ticket", price: "GH₵200",
+    blurb: "For teams and organizations attending on behalf of a company.",
+    perks: ["Priority seating", "Business matchmaking access", "Company listing in attendee directory"],
+    pay: "https://paystack.shop/pay/9n8a1voto9",
+    featured: true,
+  },
+  {
+    id: "vip", name: "VIP Ticket", price: "GH₵250",
+    blurb: "Premium experience with front-row access and the private lounge.",
+    perks: ["Front-row reserved seating", "VIP lounge & refreshments", "Speaker & investor meet-and-greet"],
+    pay: "https://paystack.shop/pay/q3eyww8q0t",
   },
 ];
 
@@ -107,7 +135,7 @@ const Events = () => {
                 Location TBA<br />Official venue announcement coming soon
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <button onClick={() => openRsvp("Tech Guru Meetup 2026")}
+                <button onClick={() => document.getElementById("reservations")?.scrollIntoView({ behavior: "smooth" })}
                   className="btn-magnetic px-7 py-3.5 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:brightness-110 transition-all duration-200"
                   style={{ boxShadow: "0 12px 36px -10px hsl(28 92% 44% / 0.5)" }}>
                   Reserve Your Seat
@@ -119,7 +147,7 @@ const Events = () => {
                 </button>
               </div>
               <p className="mt-5 text-sm">
-                <span className="font-bold text-accent">General admission is free.</span>{" "}
+                <span className="font-bold text-accent">Tickets from GH₵50.</span>{" "}
                 <span className="text-muted-foreground">Space is limited.</span>
               </p>
             </div>
@@ -153,13 +181,79 @@ const Events = () => {
         {/* ══ CONVEYOR BELT MARQUEE (Right below Tech Guru Meetup Hero) ══ */}
         <Marquee text="Conferences · Campus Tours · Hackathons · Tech Guru Meetup 2026" />
 
+        {/* ══ RESERVATIONS / TICKETS ══ */}
+        <section id="reservations" className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-24 lg:py-32 max-w-7xl mx-auto cv-auto">
+          <div className="hidden md:block absolute -top-20 right-0 w-[480px] h-[480px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_50%),transparent_70%)]" />
+
+          <Reveal className="mb-10 sm:mb-14">
+            <div className="flex items-baseline gap-6 mb-6">
+              <span className="eyebrow text-accent">02 — Reservations</span>
+              <div className="flex-1 divider-elegant" />
+            </div>
+            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
+              Reserve your <span className="italic font-light text-accent">place.</span>
+            </h2>
+            <p className="mt-5 max-w-2xl text-sm sm:text-base text-primary/65 leading-relaxed">
+              Tech Guru Meetup 2026 · Friday, 18 December 2026 · Location TBA. Select a ticket tier, complete payment,
+              then submit the registration form with your payment receipt.
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {ticketTiers.map((t, i) => (
+              <Reveal key={t.id} delay={i * 0.07}>
+                <div className={`card-lift sheen group relative h-full flex flex-col rounded-3xl border p-6 lg:p-7 transition-all duration-500 ${
+                  t.featured ? "border-accent/45 bg-accent/[0.06]" : "border-primary/10 bg-background hover:border-primary/25"
+                }`}>
+                  {t.featured && (
+                    <span className="absolute top-5 right-5 text-[9px] font-black uppercase tracking-[0.22em] px-2.5 py-1 rounded-full bg-accent text-accent-foreground">
+                      Popular
+                    </span>
+                  )}
+                  <Ticket className="w-5 h-5 text-accent mb-5" strokeWidth={1.6} />
+                  <h3 className="font-display font-extrabold text-primary text-xl tracking-tight">{t.name}</h3>
+                  <p className="mt-3 font-display font-black text-primary text-[2.4rem] leading-none tracking-tight">{t.price}</p>
+                  <p className="mt-4 text-sm text-primary/65 leading-relaxed">{t.blurb}</p>
+                  <ul className="mt-5 space-y-2.5 flex-1">
+                    {t.perks.map((p) => (
+                      <li key={p} className="flex gap-2.5 text-xs text-primary/70 leading-relaxed">
+                        <Check className="w-3.5 h-3.5 mt-0.5 shrink-0 text-accent" />
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-7 space-y-2.5">
+                    <a href={t.pay} target="_blank" rel="noopener noreferrer"
+                      className="btn-magnetic w-full py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-accent hover:text-accent-foreground transition-all duration-250 flex items-center justify-center gap-2">
+                      Pay Now <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                    <button onClick={() => openRsvp(`Tech Guru Meetup 2026 — ${t.name}`)}
+                      className="w-full py-3 rounded-full border border-primary/15 text-primary/70 font-bold text-[10px] uppercase tracking-[0.2em] hover:border-primary/40 hover:text-primary transition-all duration-250">
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.1}>
+            <div className="glass-cream mt-8 rounded-2xl border border-primary/10 px-6 py-5 flex flex-wrap items-center gap-x-8 gap-y-3">
+              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary/45">Good to know</span>
+              <span className="text-xs text-primary/65 flex items-center gap-2"><Users className="w-3.5 h-3.5 text-accent" />Students must present a valid school ID at entry</span>
+              <span className="text-xs text-primary/65 flex items-center gap-2"><Calendar className="w-3.5 h-3.5 text-accent" />Registration closes once capacity is reached</span>
+              <span className="text-xs text-primary/65 flex items-center gap-2"><Ticket className="w-3.5 h-3.5 text-accent" />Payments are processed securely via Paystack</span>
+            </div>
+          </Reveal>
+        </section>
+
         {/* ══ ALL EVENTS ══ */}
         <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto cv-auto">
           <div className="hidden md:block absolute top-1/2 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
 
           <Reveal className="mb-10">
             <div className="flex items-baseline gap-6 mb-6">
-              <span className="eyebrow text-accent">02 — Calendar</span>
+              <span className="eyebrow text-accent">03 — Calendar</span>
               <div className="flex-1 divider-elegant" />
             </div>
             <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
@@ -274,16 +368,42 @@ const Events = () => {
                 </div>
               ) : (
                 <form onSubmit={handleRsvp} className="space-y-5">
-                  {["Full Name", "Email Address", "Organization / University"].map((label) => (
+                  {["Full Name", "Email Address", "Phone", "Occupation / Role", "Organization / University"].map((label) => (
                     <div key={label}>
                       <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">{label}</label>
-                      <input required type={label.includes("Email") ? "email" : "text"}
+                      <input required={label !== "Organization / University"}
+                        type={label.includes("Email") ? "email" : label === "Phone" ? "tel" : "text"}
                         className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                     </div>
                   ))}
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">Ticket Type</label>
+                    <select required defaultValue={ticketTiers.find((t) => selectedEvent.includes(t.name))?.id ?? ""}
+                      className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200">
+                      <option value="" disabled>Select one</option>
+                      {ticketTiers.map((t) => (
+                        <option key={t.id} value={t.id}>{t.name} — {t.price}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">Payment Receipt Screenshot</label>
+                    <input type="file" accept="image/*,application/pdf"
+                      className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-xs text-primary/70 file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:bg-primary file:text-primary-foreground file:text-[10px] file:font-bold file:uppercase file:tracking-wider" />
+                    <p className="mt-2 text-[11px] text-primary/50 leading-relaxed">
+                      Pay first via the ticket card, then upload the receipt emailed to you.
+                    </p>
+                  </div>
+                  <label className="flex gap-3 text-[11px] text-primary/60 leading-relaxed">
+                    <input required type="checkbox" className="mt-0.5 accent-current shrink-0" />
+                    <span>
+                      I consent to Tech Hub Africa LLC processing my details for event management and future event updates,
+                      in line with Ghana&rsquo;s Data Protection Laws. I may opt out at any time.
+                    </span>
+                  </label>
                   <button type="submit"
                     className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">
-                    Confirm RSVP
+                    Submit Registration
                   </button>
                 </form>
               )}
