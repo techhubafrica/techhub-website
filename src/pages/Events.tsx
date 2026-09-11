@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ktuHero } from "@/assets/ktu";
-import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X } from "lucide-react";
+import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X, Ticket, Check } from "lucide-react";
 import { heroAudience, meetup2026Flyer, hackathonFlyer, campusTourFlyer, networking } from "@/assets/photos";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
@@ -28,6 +28,34 @@ const eventsList = [
     date: "November 1–30, 2026", location: "The Hub — East Legon & Virtual",
     desc: "Elite teams build production-grade solutions to real-world African infrastructure, climate, and finance challenges over an intensive month-long competition.",
     status: "Applications Open", image: hackathonFlyer,
+  },
+];
+
+const ticketTiers = [
+  {
+    id: "general", name: "General Ticket", price: "GH₵100",
+    blurb: "Full access to keynotes, panels, live demos, and the networking floor.",
+    perks: ["All keynote sessions", "Exhibition & demo floor", "Networking reception"],
+    pay: "https://paystack.shop/pay/bpbi3v7b-o",
+  },
+  {
+    id: "student", name: "Student Ticket", price: "GH₵50",
+    blurb: "Discounted admission for students with a valid school ID.",
+    perks: ["All keynote sessions", "Career & mentorship corner", "Student ID required at entry"],
+    pay: "https://paystack.shop/pay/ince1ae1jh",
+  },
+  {
+    id: "corporate", name: "Corporate Ticket", price: "GH₵200",
+    blurb: "For teams and organizations attending on behalf of a company.",
+    perks: ["Priority seating", "Business matchmaking access", "Company listing in attendee directory"],
+    pay: "https://paystack.shop/pay/9n8a1voto9",
+    featured: true,
+  },
+  {
+    id: "vip", name: "VIP Ticket", price: "GH₵250",
+    blurb: "Premium experience with front-row access and the private lounge.",
+    perks: ["Front-row reserved seating", "VIP lounge & refreshments", "Speaker & investor meet-and-greet"],
+    pay: "https://paystack.shop/pay/q3eyww8q0t",
   },
 ];
 
