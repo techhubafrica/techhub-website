@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ktuHero } from "@/assets/ktu";
-import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X, Ticket, Check } from "lucide-react";
+import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X, Ticket } from "lucide-react";
 import { heroAudience, meetup2026Flyer, hackathonFlyer, campusTourFlyer, networking } from "@/assets/photos";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
@@ -276,7 +276,7 @@ const Events = () => {
           </div>
 
           <Reveal delay={0.1}>
-            <div className="glass-cream mt-8 rounded-2xl border border-primary/10 px-6 py-5 flex flex-wrap items-center gap-x-8 gap-y-3">
+            <div className="glass-cream mt-8 lg:mt-16 rounded-2xl border border-primary/10 px-6 py-5 flex flex-wrap items-center gap-x-8 gap-y-3">
               <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary/45">Good to know</span>
               <span className="text-xs text-primary/65 flex items-center gap-2"><Users className="w-3.5 h-3.5 text-accent" />Students must present a valid school ID at entry</span>
               <span className="text-xs text-primary/65 flex items-center gap-2"><Calendar className="w-3.5 h-3.5 text-accent" />Registration closes once capacity is reached</span>
