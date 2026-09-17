@@ -297,7 +297,7 @@ const Hero = () => {
           <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-6 mt-10">
             <Link
               to={slide.href}
-              className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground text-[10.5px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-white hover:text-primary transition-all duration-500"
+              className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground text-[10.5px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-white hover:text-foreground transition-all duration-500"
               style={{ boxShadow: "0 18px 46px -16px hsl(28 92% 44% / 0.55)" }}
             >
               {slide.cta}
@@ -419,12 +419,12 @@ const VisionMission = () => (
       <div className="flex items-baseline gap-6 mb-16">
         <span className="eyebrow text-accent">01 — Foundations</span>
         <div className="flex-1 divider-elegant" />
-        <span className="eyebrow text-primary/40 hidden md:inline">The North Star</span>
+        <span className="eyebrow text-foreground/40 hidden md:inline">The North Star</span>
       </div>
 
       <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
         <div className="lg:col-span-7">
-          <h2 className="font-display font-extrabold text-primary leading-[0.9] mb-12 text-[2.2rem] sm:text-[3.5rem] md:text-[5rem] tracking-tight">
+          <h2 className="font-display font-extrabold text-foreground leading-[0.9] mb-12 text-[2.2rem] sm:text-[3.5rem] md:text-[5rem] tracking-tight">
             A future where
             <br />
             Africa <span className="italic font-light text-accent">leads.</span>
@@ -434,15 +434,15 @@ const VisionMission = () => (
         <div className="lg:col-span-5 space-y-10 lg:pt-8">
           <div className="relative pl-6 border-l border-accent/60">
             <p className="eyebrow text-accent mb-3">Our Vision</p>
-            <p className="text-primary/80 leading-relaxed">
+            <p className="text-foreground/80 leading-relaxed">
               A future where Africa is recognized as a global leader in technology, science and
               engineering — where innovation thrives, talent is nurtured, and the continent's
               contributions are celebrated.
             </p>
           </div>
-          <div className="relative pl-6 border-l border-primary/25">
-            <p className="eyebrow text-primary/60 mb-3">Our Mission</p>
-            <p className="text-primary/80 leading-relaxed">
+          <div className="relative pl-6 border-l border-foreground/25">
+            <p className="eyebrow text-foreground/60 mb-3">Our Mission</p>
+            <p className="text-foreground/80 leading-relaxed">
               Empowering Africa's tech ecosystem by connecting innovators, fostering talent, and
               showcasing excellence — to promote a vibrant and inclusive digital future for the
               continent.
@@ -459,7 +459,7 @@ const VisionMission = () => (
    ============================================================ */
 const CampusTours = () => (
   <section id="campus" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-secondary text-primary-foreground overflow-hidden">
-    <div className="hidden md:block absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
+    <div className="hidden md:block absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
       <div className="lg:col-span-6 relative">
@@ -499,7 +499,7 @@ const CampusTours = () => (
             href="https://tech4all.techhubafrica.org/"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-magnetic inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-primary-foreground hover:text-primary transition-all duration-300"
+            className="btn-magnetic inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-primary-foreground hover:text-foreground transition-all duration-300"
           >
             Visit Tech4All Portal <ArrowUpRight className="w-4 h-4" />
           </a>
@@ -528,19 +528,19 @@ const initiatives = [
 
 const Initiatives = () => (
   <section id="events" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-cream overflow-hidden">
-    <div className="hidden md:block absolute top-40 -left-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-30 pointer-events-none bg-[radial-gradient(circle,hsl(151_57%_35%/0.4),transparent_70%)]" />
+    <div className="hidden md:block absolute top-40 -left-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-30 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)/0.6),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16">
         <div>
           <span className="eyebrow text-accent">03 — Core Initiatives</span>
-          <h2 className="font-display font-extrabold text-primary mt-4 leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
+          <h2 className="font-display font-extrabold text-foreground mt-4 leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
             Where the <span className="italic font-light text-accent">work</span>
             <br />
             happens.
           </h2>
         </div>
-        <p className="text-primary/60 max-w-sm">
+        <p className="text-foreground/60 max-w-sm">
           Programs, publications, and platforms building tomorrow's African tech leaders.
         </p>
       </div>
@@ -554,7 +554,7 @@ const Initiatives = () => (
           <Tag
             key={it.title}
             {...props}
-            className="card-lift sheen group relative rounded-2xl overflow-hidden bg-background border border-primary/10"
+            className="card-lift sheen group relative rounded-2xl overflow-hidden bg-background border border-foreground/10"
           >
             <div className="relative aspect-[4/5] overflow-hidden">
               <div className="absolute inset-0 bg-primary" />
@@ -580,14 +580,14 @@ const Initiatives = () => (
               <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent mb-2">
                 {it.meta}
               </p>
-              <h3 className="font-display text-xl font-extrabold leading-tight text-primary mb-4">
+              <h3 className="font-display text-xl font-extrabold leading-tight text-foreground mb-4">
                 {it.title}
               </h3>
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary/60 group-hover:text-accent transition-colors">
+                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-foreground/60 group-hover:text-accent transition-colors">
                   Learn more
                 </span>
-                <ArrowUpRight className="w-4 h-4 text-primary/40 group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+                <ArrowUpRight className="w-4 h-4 text-foreground/40 group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
               </div>
             </div>
           </Tag>
@@ -636,7 +636,7 @@ const Services = () => (
         </div>
         <Link
           to="/services"
-          className="btn-magnetic inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-primary-foreground hover:text-primary transition-all duration-300 self-start md:self-auto"
+          className="btn-magnetic inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-primary-foreground hover:text-foreground transition-all duration-300 self-start md:self-auto"
         >
           Explore All Services <ArrowUpRight className="w-4 h-4" />
         </Link>
@@ -696,29 +696,29 @@ const Services = () => (
 const ProgramsBand = () => (
   <section id="programs" className="relative bg-cream overflow-hidden">
     <div className="max-w-7xl mx-auto grid lg:grid-cols-2">
-      <div className="p-12 lg:p-20 border-b lg:border-b-0 lg:border-r border-primary/10 relative">
+      <div className="p-12 lg:p-20 border-b lg:border-b-0 lg:border-r border-foreground/10 relative">
         <span className="eyebrow text-accent">05 — Internships</span>
-        <h3 className="font-display font-extrabold text-primary mt-6 mb-6 leading-[0.9] text-[2.5rem] md:text-[3.5rem] tracking-tight">
+        <h3 className="font-display font-extrabold text-foreground mt-6 mb-6 leading-[0.9] text-[2.5rem] md:text-[3.5rem] tracking-tight">
           Available
           <br />
           <span className="italic font-light text-accent">Internships</span>
         </h3>
-        <p className="text-primary/70 leading-relaxed mb-8 max-w-md">
+        <p className="text-foreground/70 leading-relaxed mb-8 max-w-md">
           We offer opportunities to talented, motivated individuals passionate about technology —
           committed to diversity and inclusion across the industry.
         </p>
         <ul className="space-y-3 mb-10">
           {["Event Planning", "Marketing", "Research", "Operations"].map((role) => (
-            <li key={role} className="flex items-center gap-4 border-b border-primary/10 pb-3 group cursor-pointer hover:border-accent/60 transition-colors">
+            <li key={role} className="flex items-center gap-4 border-b border-foreground/10 pb-3 group cursor-pointer hover:border-accent/60 transition-colors">
               <span className="w-1.5 h-1.5 bg-accent rounded-full group-hover:scale-150 transition-transform" />
-              <span className="font-display font-bold text-primary group-hover:text-accent transition-colors">{role}</span>
-              <ArrowUpRight className="ml-auto w-4 h-4 text-primary/30 group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+              <span className="font-display font-bold text-foreground group-hover:text-accent transition-colors">{role}</span>
+              <ArrowUpRight className="ml-auto w-4 h-4 text-foreground/30 group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
             </li>
           ))}
         </ul>
         <Link
           to="/careers"
-          className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.25em] text-primary hover:text-accent transition-colors group"
+          className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.25em] text-foreground hover:text-accent transition-colors group"
         >
           Read More <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
         </Link>
@@ -764,7 +764,7 @@ const portfolio = [
 
 const Portfolio = () => (
   <section id="portfolio" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-primary text-primary-foreground overflow-hidden">
-    <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(151_57%_35%),transparent_70%)]" />
+    <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
@@ -818,7 +818,7 @@ const Portfolio = () => (
               href={p.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-magnetic w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-accent text-accent-foreground font-bold text-[10.5px] uppercase tracking-[0.22em] hover:bg-primary-foreground hover:text-primary transition-all duration-300 shadow-md"
+              className="btn-magnetic w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-accent text-accent-foreground font-bold text-[10.5px] uppercase tracking-[0.22em] hover:bg-primary-foreground hover:text-foreground transition-all duration-300 shadow-md"
               style={{ boxShadow: "0 10px 24px -10px hsl(28 92% 44% / 0.6)" }}
             >
               Read More <ArrowUpRight className="w-3.5 h-3.5" />
@@ -847,7 +847,7 @@ const Testimonials = () => (
         <span className="eyebrow text-accent">08 — Voices</span>
         <div className="flex-1 divider-elegant" />
       </div>
-      <h2 className="font-display font-extrabold text-primary leading-[0.9] mb-16 text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
+      <h2 className="font-display font-extrabold text-foreground leading-[0.9] mb-16 text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
         What people <span className="italic font-light text-accent">say.</span>
       </h2>
 
@@ -855,18 +855,18 @@ const Testimonials = () => (
         {testimonials.map((t, i) => (
           <figure
             key={t.name}
-            className={`card-lift sheen relative p-8 rounded-2xl bg-background border border-primary/10 flex flex-col ${i === 1 ? "md:translate-y-6" : ""}`}
+            className={`card-lift sheen relative p-8 rounded-2xl bg-background border border-foreground/10 flex flex-col ${i === 1 ? "md:translate-y-6" : ""}`}
           >
             <div className="absolute -top-4 left-8 w-10 h-10 rounded-full bg-accent flex items-center justify-center shadow-lg">
               <Quote className="w-4 h-4 text-accent-foreground" strokeWidth={2} />
             </div>
-            <blockquote className="font-display text-xl text-primary leading-snug flex-1 mb-8 mt-4">
+            <blockquote className="font-display text-xl text-foreground leading-snug flex-1 mb-8 mt-4">
               "{t.body}"
             </blockquote>
-            <figcaption className="flex items-center justify-between border-t border-primary/10 pt-6">
+            <figcaption className="flex items-center justify-between border-t border-foreground/10 pt-6">
               <div>
-                <p className="font-bold text-sm text-primary">{t.name}</p>
-                <p className="text-[10px] uppercase tracking-widest text-primary/50 mt-1">{t.when}</p>
+                <p className="font-bold text-sm text-foreground">{t.name}</p>
+                <p className="text-[10px] uppercase tracking-widest text-foreground/50 mt-1">{t.when}</p>
               </div>
               <div className="flex gap-0.5">
                 {Array.from({ length: 5 }).map((_, k) => (
@@ -881,7 +881,7 @@ const Testimonials = () => (
       <div className="mt-16 flex justify-center">
         <a
           href="#"
-          className="btn-magnetic inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary text-xs font-bold uppercase tracking-[0.25em] rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
+          className="btn-magnetic inline-flex items-center gap-2 px-8 py-4 border border-foreground text-foreground text-xs font-bold uppercase tracking-[0.25em] rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
         >
           Give Us Your Review <ArrowUpRight className="w-4 h-4" />
         </a>
@@ -896,7 +896,7 @@ const Testimonials = () => (
 const HubCTA = () => (
   <section id="hub" className="relative py-20 sm:py-14 sm:py-20 md:py-24 lg:py-32 lg:py-40 px-5 sm:px-6 lg:px-10 bg-primary text-primary-foreground overflow-hidden">
     <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 bg-[radial-gradient(circle,hsl(151_57%_40%),transparent_70%)]" />
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 bg-[radial-gradient(circle,hsl(var(--primary)),transparent_70%)]" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 bg-[radial-gradient(circle,hsl(28_92%_44%/0.4),transparent_70%)]" />
     </div>
 
@@ -913,7 +913,7 @@ const HubCTA = () => (
       </p>
       <Link
         to="/thehub"
-        className="btn-magnetic inline-flex items-center gap-2 px-10 py-5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.3em] rounded-full hover:bg-background hover:text-primary transition-all duration-500"
+        className="btn-magnetic inline-flex items-center gap-2 px-10 py-5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.3em] rounded-full hover:bg-background hover:text-foreground transition-all duration-500"
       >
         Visit The Hub <ArrowUpRight className="w-4 h-4" />
       </Link>

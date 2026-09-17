@@ -71,7 +71,7 @@ const About = () => (
           <div className="flex items-baseline gap-6">
             <span className="eyebrow text-accent">01 — Foundations</span>
             <div className="flex-1 divider-elegant" />
-            <span className="eyebrow text-primary/40 hidden md:inline">The North Star</span>
+            <span className="eyebrow text-foreground/40 hidden md:inline">The North Star</span>
           </div>
         </Reveal>
 
@@ -97,17 +97,17 @@ const About = () => (
 
           {/* Mission */}
           <Reveal className="lg:col-span-6" delay={0.15}>
-            <div className="card-lift sheen relative rounded-3xl border border-primary/10 bg-secondary/30 p-8 sm:p-12 h-full flex flex-col justify-between">
+            <div className="card-lift sheen relative rounded-3xl border border-foreground/10 bg-secondary/30 p-8 sm:p-12 h-full flex flex-col justify-between">
               <div>
                 <span className="text-[10px] font-black uppercase tracking-[0.35em] text-accent mb-4 block">Our Mission</span>
-                <h3 className="font-display font-extrabold text-primary text-3xl sm:text-4xl tracking-tight leading-[0.92] mb-6">
+                <h3 className="font-display font-extrabold text-foreground text-3xl sm:text-4xl tracking-tight leading-[0.92] mb-6">
                   Empowering Africa&rsquo;s <span className="italic font-light text-accent">tech ecosystem.</span>
                 </h3>
-                <p className="text-primary/75 text-sm sm:text-base leading-relaxed mb-8">
+                <p className="text-foreground/75 text-sm sm:text-base leading-relaxed mb-8">
                   Empowering Africa&rsquo;s tech ecosystem by connecting innovators, fostering talent, and showcasing excellence in technology, science, and engineering, to promote a vibrant and inclusive digital future for the continent.
                 </p>
               </div>
-              <a href="/services" className="group inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.25em] text-accent hover:text-primary transition-colors">
+              <a href="/services" className="group inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.25em] text-accent hover:text-foreground transition-colors">
                 Explore What We Build <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </a>
             </div>
@@ -219,7 +219,7 @@ const About = () => (
             <span className="eyebrow text-accent">03 — What Drives Us</span>
             <div className="flex-1 divider-elegant" />
           </div>
-          <h2 className="font-display font-black text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[0.92] text-primary">
+          <h2 className="font-display font-black text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[0.92] text-foreground">
             Our Core <span className="italic font-light text-accent">Values.</span>
           </h2>
         </Reveal>
@@ -228,7 +228,7 @@ const About = () => (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
           {/* 01. Excellence First (Span 7) */}
           <Reveal className="lg:col-span-7" delay={0.05}>
-            <div className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-primary text-primary-foreground p-8 sm:p-12 overflow-hidden h-full flex flex-col justify-between shadow-xl">
+            <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-primary text-primary-foreground p-8 sm:p-12 overflow-hidden h-full flex flex-col justify-between shadow-xl">
               <div className="noise-bg" />
               <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full blur-3xl opacity-25 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.5),transparent_70%)]" />
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
@@ -260,37 +260,37 @@ const About = () => (
 
           {/* 02. Inclusion & Accessibility (Span 5) */}
           <Reveal className="lg:col-span-5" delay={0.12}>
-            <div className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-card p-8 sm:p-10 overflow-hidden h-full flex flex-col justify-between shadow-md hover:border-accent/40 transition-all duration-500">
+            <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-card p-8 sm:p-10 overflow-hidden h-full flex flex-col justify-between shadow-md hover:border-accent/40 transition-all duration-500">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div>
                 <div className="flex items-center justify-between mb-8">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/30 border border-foreground/15 text-foreground flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Target className="w-5.5 h-5.5" />
                   </div>
-                  <span className="text-[9px] font-black uppercase tracking-[0.25em] text-emerald-700 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+                  <span className="text-[9px] font-black uppercase tracking-[0.25em] text-foreground/70 bg-primary/30 px-2.5 py-1 rounded-full border border-foreground/15">
                     Pillar 02
                   </span>
                 </div>
 
-                <h3 className="font-display font-extrabold text-primary text-2xl sm:text-3xl tracking-tight mb-3 group-hover:text-accent transition-colors">
+                <h3 className="font-display font-extrabold text-foreground text-2xl sm:text-3xl tracking-tight mb-3 group-hover:text-accent transition-colors">
                   Inclusion &amp; Access.
                 </h3>
-                <p className="text-primary/75 text-sm sm:text-base leading-relaxed font-medium">
+                <p className="text-foreground/75 text-sm sm:text-base leading-relaxed font-medium">
                   Empowering talent across every region, university, and community — bridging gender and geographic barriers across West Africa and beyond.
                 </p>
               </div>
 
               <div className="mt-8 pt-4 flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-primary/50">Pan-African Reach</span>
-                <span className="font-display font-black text-3xl text-primary/15">02</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/50">Pan-African Reach</span>
+                <span className="font-display font-black text-3xl text-foreground/15">02</span>
               </div>
             </div>
           </Reveal>
 
           {/* 03. Security & Integrity (Span 5) */}
           <Reveal className="lg:col-span-5" delay={0.18}>
-            <div className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-card p-8 sm:p-10 overflow-hidden h-full flex flex-col justify-between shadow-md hover:border-accent/40 transition-all duration-500">
+            <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-card p-8 sm:p-10 overflow-hidden h-full flex flex-col justify-between shadow-md hover:border-accent/40 transition-all duration-500">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div>
@@ -303,26 +303,26 @@ const About = () => (
                   </span>
                 </div>
 
-                <h3 className="font-display font-extrabold text-primary text-2xl sm:text-3xl tracking-tight mb-3 group-hover:text-accent transition-colors">
+                <h3 className="font-display font-extrabold text-foreground text-2xl sm:text-3xl tracking-tight mb-3 group-hover:text-accent transition-colors">
                   Security &amp; Integrity.
                 </h3>
-                <p className="text-primary/75 text-sm sm:text-base leading-relaxed font-medium">
+                <p className="text-foreground/75 text-sm sm:text-base leading-relaxed font-medium">
                   Safeguarding digital infrastructure with Threat Lock WAF defense and maintaining high-trust relationships with partners and enterprises.
                 </p>
               </div>
 
               <div className="mt-8 pt-4 flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-primary/50">Enterprise Trust</span>
-                <span className="font-display font-black text-3xl text-primary/15">03</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/50">Enterprise Trust</span>
+                <span className="font-display font-black text-3xl text-foreground/15">03</span>
               </div>
             </div>
           </Reveal>
 
           {/* 04. Community Driven (Span 7) */}
           <Reveal className="lg:col-span-7" delay={0.24}>
-            <div className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-secondary text-primary-foreground p-8 sm:p-12 overflow-hidden h-full flex flex-col justify-between shadow-xl">
+            <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-secondary text-primary-foreground p-8 sm:p-12 overflow-hidden h-full flex flex-col justify-between shadow-xl">
               <div className="noise-bg" />
-              <div className="absolute top-0 left-0 w-[300px] h-[300px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%/0.4),transparent_70%)]" />
+              <div className="absolute top-0 left-0 w-[300px] h-[300px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)/0.6),transparent_70%)]" />
 
               <div>
                 <div className="flex items-center justify-between mb-8">

@@ -64,7 +64,7 @@ const Media = () => {
             </div>
             <button
               onClick={() => { setModalOpen(true); setSubmitted(false); }}
-              className="btn-magnetic inline-flex items-center gap-3 px-8 py-4 bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] rounded-full hover:bg-primary-foreground hover:text-primary transition-all duration-250 shrink-0"
+              className="btn-magnetic inline-flex items-center gap-3 px-8 py-4 bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] rounded-full hover:bg-primary-foreground hover:text-foreground transition-all duration-250 shrink-0"
               style={{ boxShadow: "0 14px 40px -12px hsl(28 92% 44% / 0.6)" }}>
               Sign Up to Speak <Mic className="w-4 h-4" />
             </button>
@@ -80,17 +80,17 @@ const Media = () => {
               <span className="eyebrow text-accent">01 — Publications</span>
               <div className="flex-1 divider-elegant" />
             </div>
-            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
+            <h2 className="font-display font-extrabold text-foreground leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
               Ecosystem <span className="italic font-light text-accent">Stories & Insights.</span>
             </h2>
           </Reveal>
 
           {/* Filters */}
-          <div className="rail items-center gap-6 sm:gap-8 mb-10 sm:mb-12 border-b border-primary/10 -mx-1 px-1">
+          <div className="rail items-center gap-6 sm:gap-8 mb-10 sm:mb-12 border-b border-foreground/10 -mx-1 px-1">
             {(["all", "TechNews Tuesday", "TechTip Thursday"] as const).map((f) => (
               <button key={f} onClick={() => setFilter(f)}
                 className={`pb-4 text-xs font-black uppercase tracking-[0.22em] border-b-2 -mb-px transition-all duration-250 ${
-                  filter === f ? "border-accent text-accent" : "border-transparent text-primary/40 hover:text-primary/70"
+                  filter === f ? "border-accent text-accent" : "border-transparent text-foreground/40 hover:text-foreground/70"
                 }`}>
                 {f === "all" ? "All Articles" : f}
               </button>
@@ -100,21 +100,21 @@ const Media = () => {
           <div className="space-y-6">
             {filtered.map((a, i) => (
               <Reveal key={a.id} delay={i * 0.08}>
-                <article className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-background hover:border-primary/25 transition-all duration-500 overflow-hidden grid grid-cols-1 md:grid-cols-12">
-                  <div className="hidden md:col-span-1 md:flex items-center justify-center px-6 lg:px-10 py-10 border-r border-primary/10">
-                    <span className="font-display font-black text-3xl leading-none text-primary/20 select-none">{a.num}</span>
+                <article className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-background hover:border-foreground/25 transition-all duration-500 overflow-hidden grid grid-cols-1 md:grid-cols-12">
+                  <div className="hidden md:col-span-1 md:flex items-center justify-center px-6 lg:px-10 py-10 border-r border-foreground/10">
+                    <span className="font-display font-black text-3xl leading-none text-foreground/20 select-none">{a.num}</span>
                   </div>
                   <div className="md:col-span-8 p-6 md:p-8">
                     <div className="flex flex-wrap gap-2 mb-3">
                       <span className="text-[9px] font-black uppercase tracking-widest text-accent bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20">{a.category}</span>
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-primary/40">• {a.date}</span>
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-foreground/40">• {a.date}</span>
                     </div>
-                    <h3 className="font-display font-extrabold text-primary text-xl md:text-2xl tracking-tight mb-3 group-hover:text-accent transition-colors">{a.title}</h3>
-                    <p className="text-primary/65 text-sm leading-relaxed">{a.excerpt}</p>
+                    <h3 className="font-display font-extrabold text-foreground text-xl md:text-2xl tracking-tight mb-3 group-hover:text-accent transition-colors">{a.title}</h3>
+                    <p className="text-foreground/65 text-sm leading-relaxed">{a.excerpt}</p>
                   </div>
-                  <div className="md:col-span-3 flex items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-primary/10">
+                  <div className="md:col-span-3 flex items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-foreground/10">
                     <a href="#"
-                      className="btn-magnetic w-full py-3.5 px-5 rounded-full border border-primary/12 text-primary/70 font-bold text-[10px] uppercase tracking-[0.2em] hover:border-accent hover:text-accent transition-all duration-250 text-center flex items-center justify-center gap-2">
+                      className="btn-magnetic w-full py-3.5 px-5 rounded-full border border-foreground/12 text-foreground/70 font-bold text-[10px] uppercase tracking-[0.2em] hover:border-accent hover:text-accent transition-all duration-250 text-center flex items-center justify-center gap-2">
                       Read Article <ArrowUpRight className="w-3.5 h-3.5" />
                     </a>
                   </div>
@@ -127,14 +127,14 @@ const Media = () => {
 
         {/* ══ PHOTO GALLERY ══ */}
         <section className="relative px-5 sm:px-6 lg:px-10 pb-36 max-w-7xl mx-auto cv-auto">
-          <div className="hidden md:block absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
+          <div className="hidden md:block absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)),transparent_70%)]" />
 
           <Reveal className="mb-12">
             <div className="flex items-baseline gap-6 mb-6">
               <span className="eyebrow text-accent">02 — From the Archive</span>
               <div className="flex-1 divider-elegant" />
             </div>
-            <h2 className="font-display font-extrabold text-primary text-[2.5rem] md:text-[3.5rem] leading-[0.92] tracking-tight">
+            <h2 className="font-display font-extrabold text-foreground text-[2.5rem] md:text-[3.5rem] leading-[0.92] tracking-tight">
               Moments from the <span className="italic font-light text-accent">ecosystem.</span>
             </h2>
           </Reveal>
@@ -151,7 +151,7 @@ const Media = () => {
               { src: ktuGallery[33], alt: "Mentor guiding students at the KTU campus tour", span: "" },
             ].map((img, i) => (
               <Reveal key={img.alt} delay={i * 0.06} className={img.span}>
-                <figure className="card-lift sheen group relative overflow-hidden rounded-3xl border border-primary/10 w-full h-full min-h-[220px]">
+                <figure className="card-lift sheen group relative overflow-hidden rounded-3xl border border-foreground/10 w-full h-full min-h-[220px]">
                   <img src={img.src} alt={img.alt} loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
@@ -190,16 +190,16 @@ const Media = () => {
                   <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent">
                     <CheckCircle2 className="w-7 h-7" />
                   </div>
-                  <h4 className="font-display font-extrabold text-xl text-primary">Proposal Submitted!</h4>
-                  <p className="mt-2 text-sm text-primary/55">Our media team will review your topic and follow up with available TechTalk dates.</p>
+                  <h4 className="font-display font-extrabold text-xl text-foreground">Proposal Submitted!</h4>
+                  <p className="mt-2 text-sm text-foreground/55">Our media team will review your topic and follow up with available TechTalk dates.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {["Full Name", "Email Address", "Proposed Talk Title"].map((label) => (
                     <div key={label}>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">{label}</label>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
                       <input required type={label.includes("Email") ? "email" : "text"}
-                        className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200" />
+                        className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                     </div>
                   ))}
                   <button type="submit"

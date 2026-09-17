@@ -72,7 +72,7 @@ const Mentorship = () => {
         {/* ══ OBJECTIVES — dark section ══ */}
         <section className="relative bg-secondary text-primary-foreground overflow-hidden px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36">
           <div className="noise-bg" />
-          <div className="hidden md:block absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%),transparent_70%)]" />
+          <div className="hidden md:block absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)),transparent_70%)]" />
           <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <Reveal className="lg:col-span-5">
               <span className="text-[10px] font-black uppercase tracking-[0.35em] text-accent mb-4 block">01 — Program Objectives</span>
@@ -105,7 +105,7 @@ const Mentorship = () => {
               <span className="eyebrow text-accent">02 — Choose Your Path</span>
               <div className="flex-1 divider-elegant" />
             </div>
-            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
+            <h2 className="font-display font-extrabold text-foreground leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
               Get Guidance or <span className="italic font-light text-accent">Give Back.</span>
             </h2>
           </Reveal>
@@ -113,7 +113,7 @@ const Mentorship = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Mentee */}
             <Reveal delay={0.05}>
-              <div className="card-lift sheen rounded-3xl border border-primary/10 bg-background p-10 md:p-12 flex flex-col justify-between h-full">
+              <div className="card-lift sheen rounded-3xl border border-foreground/10 bg-background p-10 md:p-12 flex flex-col justify-between h-full">
                 <div>
                   <div className="flex items-center justify-between mb-8">
                     <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
@@ -121,12 +121,12 @@ const Mentorship = () => {
                     </div>
                     <span className="text-[9px] font-black uppercase tracking-widest text-accent bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20">For Mentees</span>
                   </div>
-                  <h3 className="font-display font-extrabold text-primary text-2xl md:text-3xl tracking-tight leading-[0.92] mb-6">
+                  <h3 className="font-display font-extrabold text-foreground text-2xl md:text-3xl tracking-tight leading-[0.92] mb-6">
                     Accelerate your <span className="italic font-light text-accent">career.</span>
                   </h3>
                   <ul className="space-y-3.5 mb-8">
                     {menteeBenefits.map((b) => (
-                      <li key={b} className="flex items-start gap-3 text-sm text-primary/70">
+                      <li key={b} className="flex items-start gap-3 text-sm text-foreground/70">
                         <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-1.5" />
                         {b}
                       </li>
@@ -187,15 +187,15 @@ const Mentorship = () => {
               {submitted ? (
                 <div className="text-center py-8">
                   <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent"><CheckCircle2 className="w-7 h-7" /></div>
-                  <h4 className="font-display font-extrabold text-xl text-primary">Registration Submitted!</h4>
-                  <p className="mt-2 text-sm text-primary/55">We'll match you with our 2026 cohort within 2 weeks.</p>
+                  <h4 className="font-display font-extrabold text-xl text-foreground">Registration Submitted!</h4>
+                  <p className="mt-2 text-sm text-foreground/55">We'll match you with our 2026 cohort within 2 weeks.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {["Full Name", "Email Address", "Area of Expertise / Focus"].map((label) => (
                     <div key={label}>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">{label}</label>
-                      <input required type={label.includes("Email") ? "email" : "text"} className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200" />
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
+                      <input required type={label.includes("Email") ? "email" : "text"} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                     </div>
                   ))}
                   <button type="submit" className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">Submit Application</button>

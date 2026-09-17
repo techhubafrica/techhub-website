@@ -188,9 +188,9 @@ const TeamModal = ({
           <button
             onClick={onClose}
             className="absolute top-4 right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full
-              border border-primary/15 flex items-center justify-center bg-background/80
-              text-primary/70 hover:text-primary hover:bg-primary/10
-              hover:border-primary/30 transition-all duration-200 z-10"
+              border border-foreground/15 flex items-center justify-center bg-background/80
+              text-foreground/70 hover:text-foreground hover:bg-primary/10
+              hover:border-foreground/30 transition-all duration-200 z-10"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
@@ -200,7 +200,7 @@ const TeamModal = ({
             {/* Header info */}
             <div className="hidden md:block mb-4">
               <span className="eyebrow text-accent">{member.role}</span>
-              <h3 className="font-display font-extrabold text-primary leading-[0.95]
+              <h3 className="font-display font-extrabold text-foreground leading-[0.95]
                 text-2xl sm:text-3xl md:text-3.5xl tracking-tight mt-1">
                 {member.name}
               </h3>
@@ -209,7 +209,7 @@ const TeamModal = ({
             {/* Mobile Title */}
             <div className="md:hidden mb-3 pr-8">
               <span className="text-[10px] font-black uppercase tracking-widest text-accent">{member.role}</span>
-              <h3 className="font-display font-extrabold text-primary text-xl tracking-tight">
+              <h3 className="font-display font-extrabold text-foreground text-xl tracking-tight">
                 {member.name}
               </h3>
             </div>
@@ -224,29 +224,29 @@ const TeamModal = ({
             {/* Bio Scroll Container */}
             <div
               ref={bioRef}
-              className="space-y-3 text-primary/80 text-xs sm:text-sm leading-relaxed
+              className="space-y-3 text-foreground/80 text-xs sm:text-sm leading-relaxed
                 max-h-[200px] sm:max-h-[260px] md:max-h-[300px] overflow-y-auto pr-2 custom-scrollbar"
             >
               {Array.isArray(member.bio) ? (
                 member.bio.map((p, idx) => (
-                  <p key={idx} className="font-medium text-primary/85">
+                  <p key={idx} className="font-medium text-foreground/85">
                     {p}
                   </p>
                 ))
               ) : (
-                <p className="font-medium text-primary/85">{member.bio}</p>
+                <p className="font-medium text-foreground/85">{member.bio}</p>
               )}
             </div>
           </div>
 
           {/* Controls Footer */}
-          <div className="pt-4 mt-4 border-t border-primary/10 flex items-center justify-between">
+          <div className="pt-4 mt-4 border-t border-foreground/10 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <button
                 onClick={onPrev}
                 disabled={index === 0}
-                className="w-9 h-9 rounded-full border border-primary/20 flex items-center justify-center
-                  text-primary/70 hover:bg-primary hover:text-primary-foreground hover:border-primary
+                className="w-9 h-9 rounded-full border border-foreground/20 flex items-center justify-center
+                  text-foreground/70 hover:bg-primary hover:text-primary-foreground hover:border-foreground
                   disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
                 aria-label="Previous member"
               >
@@ -256,8 +256,8 @@ const TeamModal = ({
               <button
                 onClick={onNext}
                 disabled={index === N - 1}
-                className="w-9 h-9 rounded-full border border-primary/20 flex items-center justify-center
-                  text-primary/70 hover:bg-primary hover:text-primary-foreground hover:border-primary
+                className="w-9 h-9 rounded-full border border-foreground/20 flex items-center justify-center
+                  text-foreground/70 hover:bg-primary hover:text-primary-foreground hover:border-foreground
                   disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
                 aria-label="Next member"
               >
@@ -363,7 +363,7 @@ const MeetTheTeam = () => {
 
         {/* Ghost text */}
         <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none overflow-hidden z-0">
-          <span className="font-display font-black uppercase text-primary select-none"
+          <span className="font-display font-black uppercase text-foreground select-none"
             style={{ fontSize: "30vw", opacity: 0.022, letterSpacing: "-0.04em", lineHeight: 1 }}>
             TEAM
           </span>
@@ -381,10 +381,10 @@ const MeetTheTeam = () => {
         {/* ── Heading ─────────────────────────────────────────── */}
         <div className="relative max-w-3xl mx-auto px-5 sm:px-6 lg:px-10 text-center z-10">
           <span className="eyebrow text-accent tracking-[0.4em]">— Our People</span>
-          <h2 className="font-display font-extrabold text-primary leading-[0.93] text-[2.75rem] md:text-[4.25rem] tracking-tight mt-3">
+          <h2 className="font-display font-extrabold text-foreground leading-[0.93] text-[2.75rem] md:text-[4.25rem] tracking-tight mt-3">
             Meet the <span className="italic font-light text-accent">team.</span>
           </h2>
-          <p className="mt-5 text-primary/55 text-sm md:text-base leading-relaxed max-w-md mx-auto">
+          <p className="mt-5 text-foreground/55 text-sm md:text-base leading-relaxed max-w-md mx-auto">
             The builders, mentors and operators powering Tech Hub Africa —
             across engineering, education and community.
           </p>
@@ -403,7 +403,7 @@ const MeetTheTeam = () => {
               return (
                 <div
                   key={m.name}
-                  className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-card overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl hover:border-accent/50 transition-all duration-500 cursor-pointer"
+                  className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-card overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl hover:border-accent/50 transition-all duration-500 cursor-pointer"
                   onMouseEnter={() => setHovered(i)}
                   onMouseLeave={() => setHovered(null)}
                   onClick={() => setSelected(i)}
@@ -444,21 +444,21 @@ const MeetTheTeam = () => {
                   </div>
 
                   {/* Content Footer */}
-                  <div className="p-6 bg-card flex-1 flex flex-col justify-between border-t border-primary/5">
+                  <div className="p-6 bg-card flex-1 flex flex-col justify-between border-t border-foreground/5">
                     <div>
                       <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-accent block mb-1">
                         {m.role}
                       </span>
-                      <h3 className="font-display font-extrabold text-primary text-xl sm:text-2xl tracking-tight group-hover:text-accent transition-colors">
+                      <h3 className="font-display font-extrabold text-foreground text-xl sm:text-2xl tracking-tight group-hover:text-accent transition-colors">
                         {m.name}
                       </h3>
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-primary/10 flex items-center justify-between">
-                      <span className="text-xs font-bold text-primary/70 group-hover:text-accent transition-colors">
+                    <div className="mt-6 pt-4 border-t border-foreground/10 flex items-center justify-between">
+                      <span className="text-xs font-bold text-foreground/70 group-hover:text-accent transition-colors">
                         Executive Profile
                       </span>
-                      <div className="w-8 h-8 rounded-full border border-primary/15 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-accent-foreground group-hover:border-accent transition-all duration-300">
+                      <div className="w-8 h-8 rounded-full border border-foreground/15 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-accent-foreground group-hover:border-accent transition-all duration-300">
                         <ChevronRight className="w-4 h-4" />
                       </div>
                     </div>
@@ -474,8 +474,8 @@ const MeetTheTeam = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
             {captions.map((c) => (
               <div key={c.title}>
-                <h3 className="font-display text-sm font-extrabold text-primary tracking-tight mb-2">{c.title}</h3>
-                <p className="text-[11px] md:text-xs text-primary/50 leading-relaxed max-w-[240px] mx-auto">{c.body}</p>
+                <h3 className="font-display text-sm font-extrabold text-foreground tracking-tight mb-2">{c.title}</h3>
+                <p className="text-[11px] md:text-xs text-foreground/50 leading-relaxed max-w-[240px] mx-auto">{c.body}</p>
               </div>
             ))}
           </div>

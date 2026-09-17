@@ -133,7 +133,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
       {/* Vertical brand rail */}
       <div className="hidden xl:flex absolute left-6 top-0 bottom-0 flex-col items-center justify-center gap-4 z-10 pointer-events-none">
         <div className="w-px h-20 bg-gradient-to-b from-transparent to-primary/20" />
-        <span className="text-[8px] font-bold uppercase tracking-[0.55em] text-primary/35 [writing-mode:vertical-rl] rotate-180">
+        <span className="text-[8px] font-bold uppercase tracking-[0.55em] text-foreground/35 [writing-mode:vertical-rl] rotate-180">
           Tech Hub Africa
         </span>
         <div className="w-px h-20 bg-gradient-to-t from-transparent to-primary/20" />
@@ -142,14 +142,14 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
       {/* Content */}
       <div className="relative z-10 shell xl:px-20">
         {/* Tag pill */}
-        <div className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-3.5 sm:px-4 py-1.5 rounded-full border border-primary/15 bg-card/70">
+        <div className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-3.5 sm:px-4 py-1.5 rounded-full border border-foreground/15 bg-card/70">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-          <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.28em] sm:tracking-[0.35em] text-primary/70">{tag}</span>
+          <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.28em] sm:tracking-[0.35em] text-foreground/70">{tag}</span>
         </div>
 
         {/* Display title */}
         <h1
-          className="font-display font-black tracking-[-0.04em] text-primary animate-fade-up max-w-[22ch]"
+          className="font-display font-black tracking-[-0.04em] text-foreground animate-fade-up max-w-[22ch]"
           style={{ fontSize: "clamp(2.1rem, 8.5vw, 6rem)", lineHeight: 0.94 }}
         >
           {title}
@@ -171,10 +171,10 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
 
         {/* Optional stats bar */}
         {stats && stats.length > 0 && (
-          <div className="mt-10 pt-8 sm:mt-14 sm:pt-10 border-t border-primary/10 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-7 sm:gap-8 animate-fade-up stagger-3">
+          <div className="mt-10 pt-8 sm:mt-14 sm:pt-10 border-t border-foreground/10 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-7 sm:gap-8 animate-fade-up stagger-3">
             {stats.map((s) => (
               <div key={s.label}>
-                <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-primary leading-none">{s.val}</p>
+                <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-foreground leading-none">{s.val}</p>
                 <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.22em] sm:tracking-[0.3em] text-accent mt-2">{s.label}</p>
               </div>
             ))}

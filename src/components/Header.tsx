@@ -72,7 +72,7 @@ const Header = () => {
 
             <nav
               className={`hidden xl:flex items-center gap-0.5 text-[9.5px] font-bold uppercase tracking-[0.18em] whitespace-nowrap transition-colors duration-500 ${
-                scrolled ? "text-primary/70" : "text-primary/75"
+                scrolled ? "text-foreground/70" : "text-foreground/75"
               }`}
             >
               {navLinks.map((l) =>
@@ -109,7 +109,7 @@ const Header = () => {
               </Link>
               <button
                 className={`xl:hidden w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
-                  "text-primary/75 hover:bg-primary/[0.06]"
+                  "text-foreground/75 hover:bg-primary/[0.06]"
                 }`}
                 onClick={() => setOpen(!open)}
                 aria-label="Toggle menu"
@@ -136,7 +136,7 @@ const Header = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center text-sm font-bold uppercase tracking-[0.2em] text-primary/80 hover:text-accent transition-colors"
+                  className="inline-flex items-center text-sm font-bold uppercase tracking-[0.2em] text-foreground/80 hover:text-accent transition-colors"
                 >
                   {l.label}
                   <ExternalLink className="w-3 h-3 ml-1" />
@@ -146,7 +146,7 @@ const Header = () => {
                   key={l.href}
                   to={l.href}
                   onClick={() => setOpen(false)}
-                  className="text-sm font-bold uppercase tracking-[0.2em] text-primary/80 hover:text-accent transition-colors"
+                  className="text-sm font-bold uppercase tracking-[0.2em] text-foreground/80 hover:text-accent transition-colors"
                 >
                   {l.label}
                 </Link>

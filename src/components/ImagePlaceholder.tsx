@@ -11,7 +11,7 @@ interface Props {
 const toneClasses: Record<NonNullable<Props["tone"]>, string> = {
   forest: "bg-secondary text-secondary-foreground/60",
   deep: "bg-primary text-primary-foreground/50",
-  cream: "bg-cream-warm text-primary/50",
+  cream: "bg-cream-warm text-foreground/50",
   amber: "bg-accent/90 text-accent-foreground/70",
   charcoal: "bg-primary text-primary-foreground/50",
 };
