@@ -79,7 +79,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         style={{
           background: image
             ? "linear-gradient(105deg, hsl(0 0% 100% / 0.48) 0%, hsl(0 0% 100% / 0.24) 36%, hsl(0 0% 100% / 0.06) 70%, hsl(0 0% 100% / 0) 100%)"
-            : "linear-gradient(110deg, hsl(40 33% 96%) 0%, hsl(40 25% 91%) 55%, hsl(40 20% 87%) 100%)",
+            : "linear-gradient(110deg, hsl(var(--background)) 0%, hsl(var(--primary) / 0.45) 100%)",
         }}
       />
 
@@ -104,7 +104,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         }}
       />
 
-      {/* Top vignette — blends into the cream nav zone */}
+      {/* Top vignette — blends into the white navigation zone */}
       <div className={`absolute inset-x-0 top-0 ${image ? "h-28" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-background/80 to-transparent`} />
 
 
@@ -182,7 +182,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         )}
       </div>
 
-      {/* Bottom edge fade — settles into the cream page below */}
+      {/* Bottom edge fade — settles into the white page below */}
       <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 z-[2] pointer-events-none bg-gradient-to-t from-background to-transparent" />
     </section>
   );

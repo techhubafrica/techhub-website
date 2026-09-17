@@ -52,8 +52,8 @@ const Header = () => {
         <div
           className={`pointer-events-auto relative overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             scrolled
-              ? "bg-white/80 backdrop-blur-md border border-white/60 shadow-md rounded-full px-4 sm:px-6 py-2"
-              : "rounded-full px-4 sm:px-6 py-2 border border-white/50 bg-white/45 backdrop-blur-md"
+              ? "bg-background/90 backdrop-blur-md border border-foreground/10 shadow-md rounded-full px-4 sm:px-6 py-2"
+              : "rounded-full px-4 sm:px-6 py-2 border border-foreground/10 bg-background/70 backdrop-blur-md"
           }`}
         >
           {/* top light edge */}
@@ -127,7 +127,7 @@ const Header = () => {
         </div>
 
         {open && (
-          <div className="pointer-events-auto xl:hidden mt-2 bg-white/80 backdrop-blur-md border border-white/40 shadow-lg rounded-3xl px-6 py-6 flex flex-col gap-3 animate-fade-up">
+          <div className="pointer-events-auto xl:hidden mt-2 bg-background/95 backdrop-blur-md border border-foreground/10 shadow-lg rounded-3xl px-6 py-6 flex flex-col gap-3 animate-fade-up">
             {navLinks.map((l) =>
               l.external ? (
                 <a
