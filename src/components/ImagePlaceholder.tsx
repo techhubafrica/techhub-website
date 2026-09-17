@@ -39,10 +39,10 @@ const ImagePlaceholder = ({
     <div className="absolute inset-0 opacity-[0.06] bg-[radial-gradient(circle_at_20%_10%,_currentColor_1px,_transparent_1px)] [background-size:22px_22px] pointer-events-none" />
 
     {/* Corner brackets */}
-    <div className="absolute top-4 left-4 w-6 h-6 border-l border-t border-white/25 z-[2]" />
-    <div className="absolute top-4 right-4 w-6 h-6 border-r border-t border-white/25 z-[2]" />
-    <div className="absolute bottom-4 left-4 w-6 h-6 border-l border-b border-white/25 z-[2]" />
-    <div className="absolute bottom-4 right-4 w-6 h-6 border-r border-b border-white/25 z-[2]" />
+    <div className="absolute top-4 left-4 w-6 h-6 border-l border-t border-foreground/25 z-[2]" />
+    <div className="absolute top-4 right-4 w-6 h-6 border-r border-t border-foreground/25 z-[2]" />
+    <div className="absolute bottom-4 left-4 w-6 h-6 border-l border-b border-foreground/25 z-[2]" />
+    <div className="absolute bottom-4 right-4 w-6 h-6 border-r border-b border-foreground/25 z-[2]" />
 
     {/* Reflection sweep */}
     {showReflection && <div className="media-reflection" />}

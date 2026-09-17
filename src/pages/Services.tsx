@@ -15,7 +15,7 @@ const servicesList = [
     subtitle: "Full-stack web, mobile, and cloud built for scale.",
     desc: "We design and build production-grade software for African enterprises, startups, and public sector orgs — from custom portals to high-performance mobile apps.",
     features: ["Custom Web & Mobile Apps", "Cloud Infrastructure & DevOps", "API Integrations & Microservices", "UI/UX Design Systems"],
-    tag: "Core", accent: "hsl(var(--primary))",
+    tag: "Core", accent: "hsl(156 24% 24%)",
   },
   {
     num: "02", id: "incubation", icon: Rocket,
@@ -39,7 +39,7 @@ const servicesList = [
     subtitle: "In-demand skills for the next generation.",
     desc: "Nationwide campus tours and hands-on bootcamps training students in cloud, cybersecurity, software engineering, and AI across West Africa.",
     features: ["University Workshops & Hackathons", "Hands-on Tech Bootcamps", "Internship & Job Placement", "Industry Mentorship Network"],
-    tag: "Impact", accent: "hsl(var(--primary))",
+    tag: "Impact", accent: "hsl(156 24% 24%)",
   },
   {
     num: "05", id: "metaverse", icon: Box,

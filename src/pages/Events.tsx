@@ -17,7 +17,7 @@ const eventsList = [
   },
   {
     num: "02", id: "campus-tour",
-    title: "Tech4All Campus Tour 2026", tag: "Campus", tagColor: "hsl(var(--primary))",
+    title: "Tech4All Campus Tour 2026", tag: "Campus", tagColor: "hsl(156 24% 24%)",
     date: "Ongoing Throughout 2026", location: "Univ. of Ghana · KNUST · Regional Hubs",
     desc: "Empowering university students with coding bootcamps, AI workshops, and career pathways across West Africa.",
     status: "Active Tour", image: campusTourFlyer,

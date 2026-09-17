@@ -149,7 +149,7 @@ const TeamModal = ({
       <div
         className="relative z-10 w-full max-w-2xl bg-background rounded-3xl overflow-hidden
           flex flex-col md:flex-row my-auto max-h-[85vh]
-          shadow-[0_48px_120px_-20px_hsl(155_61%_5%/0.95),0_0_0_1px_hsl(155_61%_15%/0.15)]"
+          shadow-[0_48px_120px_-20px_hsl(var(--foreground)/0.45),0_0_0_1px_hsl(var(--foreground)/0.15)]"
         style={{ animation: "scale-in-modal 0.35s cubic-bezier(0.16,1,0.3,1) forwards" }}
         onClick={(e) => e.stopPropagation()}
       >

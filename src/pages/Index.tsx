@@ -410,7 +410,7 @@ const Hero = () => {
    ============================================================ */
 
 /* ============================================================
-   VISION & MISSION — cream chapter with overlapping accent
+   VISION & MISSION — white chapter with overlapping accent
    ============================================================ */
 const VisionMission = () => (
   <section id="vision" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 overflow-hidden">
@@ -753,7 +753,7 @@ const ProgramsBand = () => (
 );
 
 /* ============================================================
-   PORTFOLIO — glass cards on charcoal
+   PORTFOLIO — glass cards on brand mint
    ============================================================ */
 const portfolio = [
   { name: "GH Accommodation", sector: "PropTech & Housing", desc: "Your Gateway To Affordable, Reliable, And Convenient Housing.", logo: portfolioGh, url: "https://techhubafrica.org/gh-accommodation" },

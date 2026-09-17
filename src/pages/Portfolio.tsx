@@ -21,7 +21,7 @@ const ventures = [
     desc: "Your Gateway To Affordable, Reliable, And Convenient Housing.",
     summary: "GH Accommodation uses location-based algorithms and verified landlord listings to connect students, young professionals, and families with transparent housing options across Ghana.",
     link: "https://techhubafrica.org/gh-accommodation",
-    color: "hsl(var(--primary))",
+    color: "hsl(156 24% 24%)",
   },
   {
     num: "02",
@@ -41,7 +41,7 @@ const ventures = [
     desc: "Taste of Tradition, Fresh from Ofie.",
     summary: "Digitizing agricultural supply chains in Ghana — linking smallholder farmers directly to urban distributors, reducing post-harvest losses and ensuring fair market pricing.",
     link: "https://techhubafrica.org/ofie-afro-ltd",
-    color: "hsl(var(--primary))",
+    color: "hsl(156 24% 24%)",
   },
   {
     num: "04",
