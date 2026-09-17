@@ -45,8 +45,7 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto px-6 mb-12">
       <div className="inline-block mb-2">
         <div
-          className="inline-flex items-center justify-center px-6 py-4 rounded-2xl border border-white/30 backdrop-blur-md"
-          style={{ background: "rgba(255,255,255,0.18)" }}
+          className="inline-flex items-center justify-center px-6 py-4 rounded-2xl border border-foreground/15 bg-background/70 backdrop-blur-md"
         >
           <Link to="/">
             <Logo size="lg" onDark={false} />

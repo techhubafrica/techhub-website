@@ -1,7 +1,7 @@
 interface MarqueeProps {
   /** Single phrase, repeated across the rail. */
   text: string;
-  /** Surface tone — dark forest by default. */
+  /** Surface tone — brand mint by default. */
   tone?: "primary" | "secondary";
 }
 

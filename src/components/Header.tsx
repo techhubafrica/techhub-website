@@ -52,8 +52,8 @@ const Header = () => {
         <div
           className={`pointer-events-auto relative overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             scrolled
-              ? "bg-white/80 backdrop-blur-md border border-white/60 shadow-md rounded-full px-4 sm:px-6 py-2"
-              : "rounded-full px-4 sm:px-6 py-2 border border-white/50 bg-white/45 backdrop-blur-md"
+              ? "bg-background/90 backdrop-blur-md border border-foreground/10 shadow-md rounded-full px-4 sm:px-6 py-2"
+              : "rounded-full px-4 sm:px-6 py-2 border border-foreground/10 bg-background/70 backdrop-blur-md"
           }`}
         >
           {/* top light edge */}
@@ -72,7 +72,7 @@ const Header = () => {
 
             <nav
               className={`hidden xl:flex items-center gap-0.5 text-[9.5px] font-bold uppercase tracking-[0.18em] whitespace-nowrap transition-colors duration-500 ${
-                scrolled ? "text-primary/70" : "text-primary/75"
+                scrolled ? "text-foreground/70" : "text-foreground/75"
               }`}
             >
               {navLinks.map((l) =>
@@ -109,7 +109,7 @@ const Header = () => {
               </Link>
               <button
                 className={`xl:hidden w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
-                  "text-primary/75 hover:bg-primary/[0.06]"
+                  "text-foreground/75 hover:bg-primary/[0.06]"
                 }`}
                 onClick={() => setOpen(!open)}
                 aria-label="Toggle menu"
@@ -127,7 +127,7 @@ const Header = () => {
         </div>
 
         {open && (
-          <div className="pointer-events-auto xl:hidden mt-2 bg-white/80 backdrop-blur-md border border-white/40 shadow-lg rounded-3xl px-6 py-6 flex flex-col gap-3 animate-fade-up">
+          <div className="pointer-events-auto xl:hidden mt-2 bg-background/95 backdrop-blur-md border border-foreground/10 shadow-lg rounded-3xl px-6 py-6 flex flex-col gap-3 animate-fade-up">
             {navLinks.map((l) =>
               l.external ? (
                 <a
@@ -136,7 +136,7 @@ const Header = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center text-sm font-bold uppercase tracking-[0.2em] text-primary/80 hover:text-accent transition-colors"
+                  className="inline-flex items-center text-sm font-bold uppercase tracking-[0.2em] text-foreground/80 hover:text-accent transition-colors"
                 >
                   {l.label}
                   <ExternalLink className="w-3 h-3 ml-1" />
@@ -146,7 +146,7 @@ const Header = () => {
                   key={l.href}
                   to={l.href}
                   onClick={() => setOpen(false)}
-                  className="text-sm font-bold uppercase tracking-[0.2em] text-primary/80 hover:text-accent transition-colors"
+                  className="text-sm font-bold uppercase tracking-[0.2em] text-foreground/80 hover:text-accent transition-colors"
                 >
                   {l.label}
                 </Link>

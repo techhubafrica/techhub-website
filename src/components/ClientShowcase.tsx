@@ -27,7 +27,7 @@ export const ClientShowcase = ({
     <section className={`relative py-16 sm:py-20 md:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-secondary text-primary-foreground overflow-hidden ${className}`}>
       {/* Glow accents */}
       <div className="hidden md:block absolute -top-24 right-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.4),transparent_70%)]" />
-      <div className="hidden md:block absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(155_61%_35%/0.4),transparent_70%)]" />
+      <div className="hidden md:block absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)/0.6),transparent_70%)]" />
 
       <div className="relative max-w-7xl mx-auto">
         {/* Section Header */}
@@ -76,7 +76,7 @@ export const ClientShowcase = ({
                   <div className="flex items-center gap-1.5 shrink-0">
                     <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-primary" />
                   </div>
                   <span className="truncate text-accent font-bold">{site.displayUrl}</span>
                   <Globe className="w-3.5 h-3.5 text-accent shrink-0" />

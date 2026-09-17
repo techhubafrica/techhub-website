@@ -21,7 +21,7 @@ const ventures = [
     desc: "Your Gateway To Affordable, Reliable, And Convenient Housing.",
     summary: "GH Accommodation uses location-based algorithms and verified landlord listings to connect students, young professionals, and families with transparent housing options across Ghana.",
     link: "https://techhubafrica.org/gh-accommodation",
-    color: "hsl(155 61% 30%)",
+    color: "hsl(156 24% 24%)",
   },
   {
     num: "02",
@@ -41,7 +41,7 @@ const ventures = [
     desc: "Taste of Tradition, Fresh from Ofie.",
     summary: "Digitizing agricultural supply chains in Ghana — linking smallholder farmers directly to urban distributors, reducing post-harvest losses and ensuring fair market pricing.",
     link: "https://techhubafrica.org/ofie-afro-ltd",
-    color: "hsl(155 61% 30%)",
+    color: "hsl(156 24% 24%)",
   },
   {
     num: "04",
@@ -93,7 +93,7 @@ const Portfolio = () => (
             <span className="eyebrow text-accent">01 — Investment Portfolio</span>
             <div className="flex-1 divider-elegant" />
           </div>
-          <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
+          <h2 className="font-display font-extrabold text-foreground leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
             Companies in our <span className="italic font-light text-accent">investment portfolio.</span>
           </h2>
         </Reveal>
@@ -102,20 +102,20 @@ const Portfolio = () => (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {ventures.map((v, i) => (
             <Reveal key={v.name} delay={i * 0.08}>
-              <div className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-card p-6 sm:p-7 flex flex-col justify-between h-full transition-all duration-500 hover:border-accent/40 hover:shadow-xl overflow-hidden">
+              <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-card p-6 sm:p-7 flex flex-col justify-between h-full transition-all duration-500 hover:border-accent/40 hover:shadow-xl overflow-hidden">
                 {/* Subtle hover gradient */}
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div>
                   {/* Top Logo Container */}
-                  <div className="relative h-44 sm:h-48 w-full rounded-2xl bg-white border border-primary/8 flex items-center justify-center p-6 overflow-hidden shadow-sm group-hover:scale-[1.02] transition-transform duration-500">
+                  <div className="relative h-44 sm:h-48 w-full rounded-2xl bg-white border border-foreground/8 flex items-center justify-center p-6 overflow-hidden shadow-sm group-hover:scale-[1.02] transition-transform duration-500">
                     <img
                       src={v.logo}
                       alt={`${v.name} logo`}
                       loading="lazy"
                       className="max-h-full max-w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
                     />
-                    <span className="absolute top-3 right-3 text-[9px] font-black uppercase tracking-[0.25em] px-2.5 py-1 rounded-full border border-primary/10 bg-background/80 text-primary/60">
+                    <span className="absolute top-3 right-3 text-[9px] font-black uppercase tracking-[0.25em] px-2.5 py-1 rounded-full border border-foreground/10 bg-background/80 text-foreground/60">
                       {v.num}
                     </span>
                   </div>
@@ -125,12 +125,12 @@ const Portfolio = () => (
                     <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">
                       {v.tag}
                     </span>
-                    <h3 className="font-display font-extrabold text-2xl text-primary leading-tight tracking-tight group-hover:text-accent transition-colors">
+                    <h3 className="font-display font-extrabold text-2xl text-foreground leading-tight tracking-tight group-hover:text-accent transition-colors">
                       {v.name}
                     </h3>
                   </div>
 
-                  <p className="text-sm text-primary/75 leading-relaxed font-semibold mb-6">
+                  <p className="text-sm text-foreground/75 leading-relaxed font-semibold mb-6">
                     {v.desc}
                   </p>
                 </div>

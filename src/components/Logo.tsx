@@ -26,8 +26,8 @@ export const Logo: React.FC<LogoProps> = ({ size = "md", className = "", onDark 
       className={`w-auto object-contain max-h-full select-none ${sizeClasses} ${className}`}
       style={{
         filter: onDark
-          ? "drop-shadow(0 2px 10px hsl(155 61% 6% / 0.55))"
-          : "drop-shadow(0 1px 1px hsl(155 61% 15% / 0.12))",
+          ? "drop-shadow(0 2px 10px hsl(var(--foreground) / 0.4))"
+          : "drop-shadow(0 1px 1px hsl(var(--foreground) / 0.12))",
       }}
     />
   );

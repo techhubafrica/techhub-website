@@ -62,7 +62,7 @@ const Gallery = () => {
                 href="https://tech4all.techhubafrica.org/gallery"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-magnetic inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-accent-foreground hover:bg-white hover:text-primary transition-all duration-300 shadow-lg"
+                className="btn-magnetic inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-accent-foreground hover:bg-white hover:text-foreground transition-all duration-300 shadow-lg"
               >
                 Visit Tech4All Official Gallery <ArrowUpRight className="h-4 w-4" />
               </a>
@@ -126,14 +126,14 @@ const Gallery = () => {
               href="https://tech4all.techhubafrica.org/gallery"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-accent hover:text-primary transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-accent hover:text-foreground transition-colors"
             >
               Explore Full Tech4All Gallery Portal <ArrowUpRight className="h-4 w-4" />
             </a>
-            <span className="text-primary/20 hidden sm:inline">•</span>
+            <span className="text-foreground/20 hidden sm:inline">•</span>
             <Link
               to="/events"
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary underline-offset-4 hover:text-accent hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-medium text-foreground underline-offset-4 hover:text-accent hover:underline"
             >
               See upcoming events <ArrowRight className="h-4 w-4" />
             </Link>

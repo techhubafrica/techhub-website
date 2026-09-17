@@ -75,7 +75,7 @@ const CSR = () => {
               <span className="eyebrow text-accent">01 — Partner With Us</span>
               <div className="flex-1 divider-elegant" />
             </div>
-            <h2 className="font-display font-black text-4xl md:text-5xl tracking-tight leading-[0.92] text-primary">
+            <h2 className="font-display font-black text-4xl md:text-5xl tracking-tight leading-[0.92] text-foreground">
               Sponsorship<br /><span className="italic font-light text-accent">Opportunities.</span>
             </h2>
           </Reveal>
@@ -83,7 +83,7 @@ const CSR = () => {
           <div className="space-y-6">
             {tiers.map((t, idx) => (
               <Reveal key={t.num} delay={idx * 0.08}>
-                <div className={`card-lift sheen group relative rounded-3xl overflow-hidden transition-all duration-500 border border-primary/10 ${idx === 1 ? "bg-primary text-primary-foreground" : "bg-background"}`}>
+                <div className={`card-lift sheen group relative rounded-3xl overflow-hidden transition-all duration-500 border border-foreground/10 ${idx === 1 ? "bg-primary text-primary-foreground" : "bg-background"}`}>
                   {idx === 1 && (
                     <>
                       <div className="noise-bg" />
@@ -94,17 +94,17 @@ const CSR = () => {
                   )}
 
                   <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12">
-                    <div className="lg:col-span-2 flex items-start gap-5 lg:flex-col lg:gap-4 p-8 pb-0 lg:pb-8 border-b lg:border-b-0 border-primary/10 lg:border-r">
-                      <span className={`font-display font-black text-5xl leading-none select-none ${idx === 1 ? "text-accent/35" : "text-primary/15"}`}>{t.num}</span>
+                    <div className="lg:col-span-2 flex items-start gap-5 lg:flex-col lg:gap-4 p-8 pb-0 lg:pb-8 border-b lg:border-b-0 border-foreground/10 lg:border-r">
+                      <span className={`font-display font-black text-5xl leading-none select-none ${idx === 1 ? "text-accent/35" : "text-foreground/15"}`}>{t.num}</span>
                       <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${idx === 1 ? "text-accent bg-accent/10 border-accent/25" : "text-accent bg-accent/10 border-accent/20"}`}>{t.tag}</span>
                     </div>
 
                     <div className="lg:col-span-7 p-8 lg:p-10">
-                      <h3 className={`font-display font-extrabold text-2xl md:text-3xl tracking-tight mb-3 ${idx === 1 ? "text-primary-foreground" : "text-primary"}`}>{t.name}</h3>
-                      <p className={`text-sm leading-relaxed mb-6 ${idx === 1 ? "text-primary-foreground/65" : "text-primary/65"}`}>{t.desc}</p>
+                      <h3 className={`font-display font-extrabold text-2xl md:text-3xl tracking-tight mb-3 ${idx === 1 ? "text-primary-foreground" : "text-foreground"}`}>{t.name}</h3>
+                      <p className={`text-sm leading-relaxed mb-6 ${idx === 1 ? "text-primary-foreground/65" : "text-foreground/65"}`}>{t.desc}</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6">
                         {t.benefits.map((b) => (
-                          <div key={b} className={`flex items-start gap-2.5 text-xs font-semibold ${idx === 1 ? "text-primary-foreground/75" : "text-primary/75"}`}>
+                          <div key={b} className={`flex items-start gap-2.5 text-xs font-semibold ${idx === 1 ? "text-primary-foreground/75" : "text-foreground/75"}`}>
                             <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-1" />
                             {b}
                           </div>
@@ -112,11 +112,11 @@ const CSR = () => {
                       </div>
                     </div>
 
-                    <div className="lg:col-span-3 flex items-center justify-center p-8 lg:p-10 border-t lg:border-t-0 lg:border-l border-primary/10">
+                    <div className="lg:col-span-3 flex items-center justify-center p-8 lg:p-10 border-t lg:border-t-0 lg:border-l border-foreground/10">
                       <button onClick={() => open(t.name)}
                         className={`btn-magnetic w-full py-4 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 ${
                           idx === 1
-                            ? "bg-accent text-accent-foreground hover:bg-primary-foreground hover:text-primary"
+                            ? "bg-accent text-accent-foreground hover:bg-primary-foreground hover:text-foreground"
                             : "bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground"
                         }`}
                       >
@@ -146,17 +146,17 @@ const CSR = () => {
               {submitted ? (
                 <div className="text-center py-8">
                   <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent"><CheckCircle2 className="w-7 h-7" /></div>
-                  <h4 className="font-display font-extrabold text-xl text-primary">Inquiry Received!</h4>
-                  <p className="mt-2 text-sm text-primary/55">Our partnerships lead will send you a detailed package within 48 hours.</p>
+                  <h4 className="font-display font-extrabold text-xl text-foreground">Inquiry Received!</h4>
+                  <p className="mt-2 text-sm text-foreground/55">Our partnerships lead will send you a detailed package within 48 hours.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {["Company / Foundation Name", "Contact Email", "Brief Message"].map((label) => (
                     <div key={label}>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">{label}</label>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
                       {label === "Brief Message"
-                        ? <textarea required rows={3} className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
-                        : <input required type={label.includes("Email") ? "email" : "text"} className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200" />
+                        ? <textarea required rows={3} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
+                        : <input required type={label.includes("Email") ? "email" : "text"} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                       }
                     </div>
                   ))}

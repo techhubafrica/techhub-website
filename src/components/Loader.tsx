@@ -1,7 +1,7 @@
 import Logo from "@/components/Logo";
 
 /**
- * Cinematic route loader — forest stage, orbiting constellation arcs
+ * Cinematic route loader — brand stage, orbiting constellation arcs
  * and a drawing amber meridian. Mirrors the hero's connection motif.
  */
 const Loader = () => (
@@ -27,7 +27,7 @@ const Loader = () => (
             cy="100"
             r="78"
             fill="none"
-            stroke="hsl(155 61% 15% / 0.12)"
+            stroke="hsl(var(--foreground) / 0.12)"
             strokeWidth="1"
           />
           <g className="loader-spin" style={{ transformOrigin: "100px 100px" }}>
@@ -49,11 +49,11 @@ const Loader = () => (
               cy="100"
               r="56"
               fill="none"
-              stroke="hsl(155 61% 15% / 0.22)"
+              stroke="hsl(var(--primary))"
               strokeWidth="1"
               strokeDasharray="4 12"
             />
-            <circle cx="44" cy="100" r="2.5" fill="hsl(155 61% 15% / 0.45)" />
+            <circle cx="44" cy="100" r="2.5" fill="hsl(var(--foreground) / 0.45)" />
           </g>
         </svg>
 

@@ -235,7 +235,7 @@ const Careers = () => {
               <span className="eyebrow text-accent">01 — Life at Tech Hub</span>
               <div className="flex-1 divider-elegant" />
             </div>
-            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
+            <h2 className="font-display font-extrabold text-foreground leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
               A workplace designed for <span className="italic font-light text-accent">impact &amp; growth.</span>
             </h2>
           </Reveal>
@@ -243,16 +243,16 @@ const Careers = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {culturePillars.map((c, idx) => (
               <Reveal key={c.title} delay={idx * 0.08}>
-                <div className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-background p-8 transition-all duration-500 hover:border-accent/40 hover:shadow-xl h-full flex flex-col justify-between overflow-hidden">
+                <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-background p-8 transition-all duration-500 hover:border-accent/40 hover:shadow-xl h-full flex flex-col justify-between overflow-hidden">
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div>
                     <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 text-accent flex items-center justify-center mb-6 group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300">
                       <c.icon className="w-5.5 h-5.5" />
                     </div>
-                    <h3 className="font-display font-extrabold text-primary text-xl mb-3 tracking-tight group-hover:text-accent transition-colors">
+                    <h3 className="font-display font-extrabold text-foreground text-xl mb-3 tracking-tight group-hover:text-accent transition-colors">
                       {c.title}
                     </h3>
-                    <p className="text-primary/70 text-sm leading-relaxed">
+                    <p className="text-foreground/70 text-sm leading-relaxed">
                       {c.desc}
                     </p>
                   </div>
@@ -321,7 +321,7 @@ const Careers = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {filteredJobs.map((job, idx) => (
                   <Reveal key={job.id} delay={idx * 0.07}>
-                    <div className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-card p-6 sm:p-7 flex flex-col justify-between h-full shadow-sm hover:shadow-xl hover:border-accent/40 transition-all duration-500 overflow-hidden text-primary">
+                    <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-card p-6 sm:p-7 flex flex-col justify-between h-full shadow-sm hover:shadow-xl hover:border-accent/40 transition-all duration-500 overflow-hidden text-foreground">
                       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       
                       <div>
@@ -330,25 +330,25 @@ const Careers = () => {
                           <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">
                             {job.dept}
                           </span>
-                          <h3 className="font-display font-extrabold text-xl sm:text-2xl text-primary leading-tight tracking-tight min-h-[3rem] flex items-center group-hover:text-accent transition-colors">
+                          <h3 className="font-display font-extrabold text-xl sm:text-2xl text-foreground leading-tight tracking-tight min-h-[3rem] flex items-center group-hover:text-accent transition-colors">
                             {job.title}
                           </h3>
                         </div>
 
                         {/* 2. Banner Graphic in Center */}
-                        <div className="relative h-44 sm:h-48 w-full rounded-2xl bg-slate-50 border border-primary/8 flex items-center justify-center p-2 mb-6 overflow-hidden shadow-inner group-hover:scale-[1.02] transition-transform duration-500">
+                        <div className="relative h-44 sm:h-48 w-full rounded-2xl bg-slate-50 border border-foreground/8 flex items-center justify-center p-2 mb-6 overflow-hidden shadow-inner group-hover:scale-[1.02] transition-transform duration-500">
                           <img
                             src={job.image}
                             alt={`${job.title} banner`}
                             loading="lazy"
                             className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105"
                           />
-                          <span className="absolute top-3 right-3 text-[8.5px] font-bold uppercase tracking-wider text-emerald-700 bg-white/90 backdrop-blur-sm px-2.5 py-0.5 rounded-full border border-emerald-500/30 shadow-sm">
+                          <span className="absolute top-3 right-3 text-[8.5px] font-bold uppercase tracking-wider text-foreground/70 bg-white/90 backdrop-blur-sm px-2.5 py-0.5 rounded-full border border-foreground/20 shadow-sm">
                             {job.type}
                           </span>
                         </div>
 
-                        <p className="text-xs sm:text-sm text-primary/70 leading-relaxed font-medium mb-6">
+                        <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed font-medium mb-6">
                           {job.summary}
                         </p>
                       </div>
@@ -378,17 +378,17 @@ const Careers = () => {
                 Don&rsquo;t Miss Out!
               </span>
             </div>
-            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight mb-6">
+            <h2 className="font-display font-extrabold text-foreground leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight mb-6">
               Welcome to <span className="italic font-light text-accent">Tech Hub Internships.</span>
             </h2>
-            <p className="text-primary/75 text-base sm:text-lg leading-relaxed max-w-3xl">
+            <p className="text-foreground/75 text-base sm:text-lg leading-relaxed max-w-3xl">
               We are excited to offer internship opportunities to talented and motivated individuals who are passionate about technology and committed to diversity and inclusion in the tech industry.
             </p>
           </Reveal>
 
           {/* Available Internships Grid */}
           <div className="mb-16">
-            <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-primary tracking-tight mb-8">
+            <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-foreground tracking-tight mb-8">
               Available Internships
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -411,14 +411,14 @@ const Careers = () => {
                 },
               ].map((intern, idx) => (
                 <Reveal key={intern.title} delay={idx * 0.08}>
-                  <div className="card-lift sheen group relative rounded-3xl border border-primary/10 bg-card p-6 sm:p-7 flex flex-col justify-between h-full shadow-sm hover:shadow-xl hover:border-accent/40 transition-all duration-500 overflow-hidden">
+                  <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-card p-6 sm:p-7 flex flex-col justify-between h-full shadow-sm hover:shadow-xl hover:border-accent/40 transition-all duration-500 overflow-hidden">
                     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div>
                       <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">Role 0{idx + 1}</span>
-                      <h4 className="font-display font-extrabold text-xl text-primary mb-3 group-hover:text-accent transition-colors">
+                      <h4 className="font-display font-extrabold text-xl text-foreground mb-3 group-hover:text-accent transition-colors">
                         {intern.title}
                       </h4>
-                      <p className="text-xs sm:text-sm text-primary/70 leading-relaxed font-medium">
+                      <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed font-medium">
                         {intern.desc}
                       </p>
                     </div>
@@ -432,13 +432,13 @@ const Careers = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
             {/* Benefits */}
             <Reveal delay={0.05}>
-              <div className="card-lift sheen rounded-3xl border border-primary/10 bg-card p-8 sm:p-10 flex flex-col justify-between h-full shadow-sm">
+              <div className="card-lift sheen rounded-3xl border border-foreground/10 bg-card p-8 sm:p-10 flex flex-col justify-between h-full shadow-sm">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-10 h-10 rounded-2xl bg-accent/15 border border-accent/30 text-accent flex items-center justify-center">
                       <Sparkles className="w-5 h-5" />
                     </div>
-                    <h3 className="font-display font-extrabold text-2xl text-primary tracking-tight">
+                    <h3 className="font-display font-extrabold text-2xl text-foreground tracking-tight">
                       Internship <span className="italic font-light text-accent">Benefits</span>
                     </h3>
                   </div>
@@ -450,7 +450,7 @@ const Careers = () => {
                       "Contribute to diversity and inclusion initiatives in the tech industry",
                       "Flexible working hours and remote work options available",
                     ].map((b, i) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-primary/75 leading-relaxed font-medium">
+                      <li key={i} className="flex items-start gap-3 text-sm text-foreground/75 leading-relaxed font-medium">
                         <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                         <span>{b}</span>
                       </li>
@@ -462,13 +462,13 @@ const Careers = () => {
 
             {/* Eligibility */}
             <Reveal delay={0.12}>
-              <div className="card-lift sheen rounded-3xl border border-primary/10 bg-card p-8 sm:p-10 flex flex-col justify-between h-full shadow-sm">
+              <div className="card-lift sheen rounded-3xl border border-foreground/10 bg-card p-8 sm:p-10 flex flex-col justify-between h-full shadow-sm">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-10 h-10 rounded-2xl bg-accent/15 border border-accent/30 text-accent flex items-center justify-center">
                       <GraduationCap className="w-5 h-5" />
                     </div>
-                    <h3 className="font-display font-extrabold text-2xl text-primary tracking-tight">
+                    <h3 className="font-display font-extrabold text-2xl text-foreground tracking-tight">
                       Eligibility <span className="italic font-light text-accent">Criteria</span>
                     </h3>
                   </div>
@@ -479,7 +479,7 @@ const Careers = () => {
                       "Strong communication and teamwork skills",
                       "Passionate about technology and diversity and inclusion in the tech industry",
                     ].map((e, i) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-primary/75 leading-relaxed font-medium">
+                      <li key={i} className="flex items-start gap-3 text-sm text-foreground/75 leading-relaxed font-medium">
                         <span className="w-2 h-2 rounded-full bg-accent shrink-0 mt-2" />
                         <span>{e}</span>
                       </li>
@@ -492,26 +492,26 @@ const Careers = () => {
 
           {/* Application Form */}
           <Reveal className="mb-20">
-            <div className="rounded-3xl border border-primary/10 bg-card p-8 sm:p-12 shadow-xl max-w-4xl mx-auto relative overflow-hidden">
+            <div className="rounded-3xl border border-foreground/10 bg-card p-8 sm:p-12 shadow-xl max-w-4xl mx-auto relative overflow-hidden">
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent via-primary to-accent" />
               
               <div className="text-center mb-10">
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent block mb-2">How to Apply</span>
-                <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-primary tracking-tight mb-3">
+                <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-foreground tracking-tight mb-3">
                   Apply For <span className="italic font-light text-accent">Internship.</span>
                 </h3>
-                <p className="text-sm text-primary/70 max-w-xl mx-auto leading-relaxed">
+                <p className="text-sm text-foreground/70 max-w-xl mx-auto leading-relaxed">
                   Send your resume and cover letter by filling the form below. Specify the internship position you are applying for.
                 </p>
               </div>
 
               {internSubmitted ? (
-                <div className="text-center py-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 p-8">
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto mb-4">
+                <div className="text-center py-12 rounded-2xl bg-primary/30 border border-foreground/20 p-8">
+                  <div className="w-16 h-16 rounded-full bg-primary/55 text-foreground flex items-center justify-center mx-auto mb-4">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h4 className="font-display font-extrabold text-2xl text-primary mb-2">Application Submitted!</h4>
-                  <p className="text-sm text-primary/75 max-w-md mx-auto">
+                  <h4 className="font-display font-extrabold text-2xl text-foreground mb-2">Application Submitted!</h4>
+                  <p className="text-sm text-foreground/75 max-w-md mx-auto">
                     Thank you for applying. Our talent team will review your resume and contact you at the provided email address.
                   </p>
                 </div>
@@ -520,35 +520,35 @@ const Careers = () => {
                   {/* Name Row */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                     <div>
-                      <label className="block text-[10.5px] font-bold uppercase tracking-wider text-primary/70 mb-2">
+                      <label className="block text-[10.5px] font-bold uppercase tracking-wider text-foreground/70 mb-2">
                         First Name *
                       </label>
                       <input
                         required
                         type="text"
                         placeholder="John"
-                        className="w-full px-4 py-3.5 rounded-2xl border border-primary/15 bg-background text-sm text-primary focus:outline-none focus:border-accent transition-colors"
+                        className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10.5px] font-bold uppercase tracking-wider text-primary/70 mb-2">
+                      <label className="block text-[10.5px] font-bold uppercase tracking-wider text-foreground/70 mb-2">
                         Middle Name
                       </label>
                       <input
                         type="text"
                         placeholder="(Optional)"
-                        className="w-full px-4 py-3.5 rounded-2xl border border-primary/15 bg-background text-sm text-primary focus:outline-none focus:border-accent transition-colors"
+                        className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10.5px] font-bold uppercase tracking-wider text-primary/70 mb-2">
+                      <label className="block text-[10.5px] font-bold uppercase tracking-wider text-foreground/70 mb-2">
                         Last Name *
                       </label>
                       <input
                         required
                         type="text"
                         placeholder="Doe"
-                        className="w-full px-4 py-3.5 rounded-2xl border border-primary/15 bg-background text-sm text-primary focus:outline-none focus:border-accent transition-colors"
+                        className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
                       />
                     </div>
                   </div>
@@ -556,37 +556,37 @@ const Careers = () => {
                   {/* Contact Row */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-[10.5px] font-bold uppercase tracking-wider text-primary/70 mb-2">
+                      <label className="block text-[10.5px] font-bold uppercase tracking-wider text-foreground/70 mb-2">
                         Email Address *
                       </label>
                       <input
                         required
                         type="email"
                         placeholder="john@example.com"
-                        className="w-full px-4 py-3.5 rounded-2xl border border-primary/15 bg-background text-sm text-primary focus:outline-none focus:border-accent transition-colors"
+                        className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10.5px] font-bold uppercase tracking-wider text-primary/70 mb-2">
+                      <label className="block text-[10.5px] font-bold uppercase tracking-wider text-foreground/70 mb-2">
                         Phone *
                       </label>
                       <input
                         required
                         type="tel"
                         placeholder="+233 xx xxx xxxx"
-                        className="w-full px-4 py-3.5 rounded-2xl border border-primary/15 bg-background text-sm text-primary focus:outline-none focus:border-accent transition-colors"
+                        className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
                       />
                     </div>
                   </div>
 
                   {/* Internship Position Select */}
                   <div>
-                    <label className="block text-[10.5px] font-bold uppercase tracking-wider text-primary/70 mb-2">
+                    <label className="block text-[10.5px] font-bold uppercase tracking-wider text-foreground/70 mb-2">
                       Internship position you are applying for? *
                     </label>
                     <select
                       required
-                      className="w-full px-4 py-3.5 rounded-2xl border border-primary/15 bg-background text-sm text-primary focus:outline-none focus:border-accent transition-colors"
+                      className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
                     >
                       <option value="">-- Select Position --</option>
                       <option value="Event Planning Intern">Event Planning Intern</option>
@@ -598,10 +598,10 @@ const Careers = () => {
 
                   {/* File Upload Dropzone */}
                   <div>
-                    <label className="block text-[10.5px] font-bold uppercase tracking-wider text-primary/70 mb-2">
+                    <label className="block text-[10.5px] font-bold uppercase tracking-wider text-foreground/70 mb-2">
                       Upload Resume and Cover letter *
                     </label>
-                    <div className="relative border-2 border-dashed border-primary/20 hover:border-accent/60 rounded-2xl p-6 text-center bg-background/50 transition-colors cursor-pointer group">
+                    <div className="relative border-2 border-dashed border-foreground/20 hover:border-accent/60 rounded-2xl p-6 text-center bg-background/50 transition-colors cursor-pointer group">
                       <input
                         required
                         type="file"
@@ -610,13 +610,13 @@ const Careers = () => {
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                       />
                       <div className="flex flex-col items-center justify-center">
-                        <span className="text-xs font-semibold text-primary/70 group-hover:text-accent mb-1 transition-colors">
+                        <span className="text-xs font-semibold text-foreground/70 group-hover:text-accent mb-1 transition-colors">
                           {selectedFileName ? selectedFileName : "No file chosen"}
                         </span>
                         <span className="text-xs text-accent font-bold uppercase tracking-wider">
                           Drag and Drop (or) Choose Files
                         </span>
-                        <span className="text-[10px] text-primary/40 mt-1">PDF, DOC, DOCX up to 10MB</span>
+                        <span className="text-[10px] text-foreground/40 mt-1">PDF, DOC, DOCX up to 10MB</span>
                       </div>
                     </div>
                   </div>
@@ -627,11 +627,11 @@ const Careers = () => {
                       required
                       type="checkbox"
                       id="consent"
-                      className="mt-1 w-4 h-4 accent-accent rounded border-primary/20 cursor-pointer"
+                      className="mt-1 w-4 h-4 accent-accent rounded border-foreground/20 cursor-pointer"
                     />
-                    <label htmlFor="consent" className="text-xs text-primary/75 leading-snug cursor-pointer select-none">
+                    <label htmlFor="consent" className="text-xs text-foreground/75 leading-snug cursor-pointer select-none">
                       Consent * <br />
-                      <span className="font-semibold text-primary">Yes, I agree with the privacy policy and terms and conditions.</span>
+                      <span className="font-semibold text-foreground">Yes, I agree with the privacy policy and terms and conditions.</span>
                     </label>
                   </div>
 
@@ -649,7 +649,7 @@ const Careers = () => {
 
           {/* Frequently Asked Questions */}
           <div className="max-w-4xl mx-auto">
-            <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-primary tracking-tight mb-8 text-center">
+            <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-foreground tracking-tight mb-8 text-center">
               Frequently Asked Questions
             </h3>
             <div className="space-y-4">
@@ -671,13 +671,13 @@ const Careers = () => {
                 },
               ].map((faq) => (
                 <Reveal key={faq.num}>
-                  <div className="card-lift sheen p-6 sm:p-8 rounded-3xl border border-primary/10 bg-card flex flex-col sm:flex-row items-start gap-6 shadow-sm">
+                  <div className="card-lift sheen p-6 sm:p-8 rounded-3xl border border-foreground/10 bg-card flex flex-col sm:flex-row items-start gap-6 shadow-sm">
                     <span className="font-display font-black text-3xl text-accent/40 leading-none shrink-0">{faq.num}</span>
                     <div>
-                      <h4 className="font-display font-extrabold text-lg sm:text-xl text-primary mb-2">
+                      <h4 className="font-display font-extrabold text-lg sm:text-xl text-foreground mb-2">
                         {faq.q}
                       </h4>
-                      <p className="text-xs sm:text-sm text-primary/75 leading-relaxed font-medium">
+                      <p className="text-xs sm:text-sm text-foreground/75 leading-relaxed font-medium">
                         {faq.a}
                       </p>
                     </div>
@@ -778,7 +778,7 @@ const Careers = () => {
                 <div className="flex flex-wrap justify-center gap-4 mb-8">
                   <button
                     onClick={() => handleOpenMentorship("Mentee")}
-                    className="btn-magnetic py-4 px-8 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.22em] hover:bg-primary-foreground hover:text-primary transition-all duration-300 shadow-xl"
+                    className="btn-magnetic py-4 px-8 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.22em] hover:bg-primary-foreground hover:text-foreground transition-all duration-300 shadow-xl"
                     style={{ boxShadow: "0 10px 24px -10px hsl(28 92% 44% / 0.6)" }}
                   >
                     Join Our Mentorship Program
@@ -827,20 +827,20 @@ const Careers = () => {
               {submitted ? (
                 <div className="text-center py-8">
                   <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent"><CheckCircle2 className="w-7 h-7" /></div>
-                  <h4 className="font-display font-extrabold text-xl text-primary">Application Received!</h4>
-                  <p className="mt-2 text-sm text-primary/55">Thank you for applying. Our talent acquisition team will review your application and respond within 5 business days.</p>
+                  <h4 className="font-display font-extrabold text-xl text-foreground">Application Received!</h4>
+                  <p className="mt-2 text-sm text-foreground/55">Thank you for applying. Our talent acquisition team will review your application and respond within 5 business days.</p>
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit} className="space-y-5">
                   {["Full Name", "Email Address", "LinkedIn / Portfolio URL"].map((label) => (
                     <div key={label}>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">{label}</label>
-                      <input required type={label.includes("Email") ? "email" : label.includes("URL") ? "url" : "text"} className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200" />
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
+                      <input required type={label.includes("Email") ? "email" : label.includes("URL") ? "url" : "text"} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                     </div>
                   ))}
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">Brief Cover Letter / Introduction</label>
-                    <textarea required rows={3} placeholder="Tell us briefly why you're interested in this role..." className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">Brief Cover Letter / Introduction</label>
+                    <textarea required rows={3} placeholder="Tell us briefly why you're interested in this role..." className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
                   </div>
                   <button type="submit" className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">Submit Application</button>
                 </form>
@@ -865,15 +865,15 @@ const Careers = () => {
               {submitted ? (
                 <div className="text-center py-8">
                   <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent"><CheckCircle2 className="w-7 h-7" /></div>
-                  <h4 className="font-display font-extrabold text-xl text-primary">Registration Submitted!</h4>
-                  <p className="mt-2 text-sm text-primary/55">We'll match you with our 2026 mentorship cohort within 2 weeks.</p>
+                  <h4 className="font-display font-extrabold text-xl text-foreground">Registration Submitted!</h4>
+                  <p className="mt-2 text-sm text-foreground/55">We'll match you with our 2026 mentorship cohort within 2 weeks.</p>
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit} className="space-y-5">
                   {["Full Name", "Email Address", "Area of Expertise / Focus"].map((label) => (
                     <div key={label}>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">{label}</label>
-                      <input required type={label.includes("Email") ? "email" : "text"} className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200" />
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
+                      <input required type={label.includes("Email") ? "email" : "text"} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                     </div>
                   ))}
                   <button type="submit" className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">Submit Registration</button>

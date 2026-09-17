@@ -63,7 +63,7 @@ const TheHub = () => {
               <span className="eyebrow text-accent">01 — Facilities</span>
               <div className="flex-1 divider-elegant" />
             </div>
-            <h2 className="font-display font-black text-4xl md:text-5xl tracking-tight leading-[0.92] text-primary">
+            <h2 className="font-display font-black text-4xl md:text-5xl tracking-tight leading-[0.92] text-foreground">
               Built for<br /><span className="italic font-light text-accent">deep work.</span>
             </h2>
           </Reveal>
@@ -71,7 +71,7 @@ const TheHub = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {amenities.map((a, idx) => (
               <Reveal key={a.num} delay={idx * 0.08}>
-                <div className={`card-lift sheen group relative rounded-3xl overflow-hidden p-10 md:p-12 transition-all duration-500 border border-primary/10 ${idx === 0 || idx === 3 || idx === 4 ? "bg-primary text-primary-foreground" : "bg-background"} ${idx === 4 ? "md:col-span-2" : ""}`}>
+                <div className={`card-lift sheen group relative rounded-3xl overflow-hidden p-10 md:p-12 transition-all duration-500 border border-foreground/10 ${idx === 0 || idx === 3 || idx === 4 ? "bg-primary text-primary-foreground" : "bg-background"} ${idx === 4 ? "md:col-span-2" : ""}`}>
                   {(idx === 0 || idx === 3 || idx === 4) && (
                     <>
                       <div className="noise-bg" />
@@ -83,10 +83,10 @@ const TheHub = () => {
                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${idx === 0 || idx === 3 || idx === 4 ? "bg-accent/15 border border-accent/30 text-accent" : "bg-accent/10 border border-accent/20 text-accent"}`}>
                         <a.icon className="w-5.5 h-5.5" />
                       </div>
-                      <span className={`font-display font-black text-5xl leading-none select-none ${idx === 0 || idx === 3 || idx === 4 ? "text-accent/25" : "text-primary/10"}`}>{a.num}</span>
+                      <span className={`font-display font-black text-5xl leading-none select-none ${idx === 0 || idx === 3 || idx === 4 ? "text-accent/25" : "text-foreground/10"}`}>{a.num}</span>
                     </div>
-                    <h3 className={`font-display font-extrabold text-2xl mb-3 ${idx === 0 || idx === 3 || idx === 4 ? "text-primary-foreground" : "text-primary"}`}>{a.title}</h3>
-                    <p className={`text-sm leading-relaxed ${idx === 0 || idx === 3 || idx === 4 ? "text-primary-foreground/65" : "text-primary/65"}`}>{a.desc}</p>
+                    <h3 className={`font-display font-extrabold text-2xl mb-3 ${idx === 0 || idx === 3 || idx === 4 ? "text-primary-foreground" : "text-foreground"}`}>{a.title}</h3>
+                    <p className={`text-sm leading-relaxed ${idx === 0 || idx === 3 || idx === 4 ? "text-primary-foreground/65" : "text-foreground/65"}`}>{a.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -127,7 +127,7 @@ const TheHub = () => {
                   </div>
                   <button
                     onClick={() => { setBookingOpen(true); setSubmitted(false); }}
-                    className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary-foreground hover:text-primary transition-all duration-300 flex items-center justify-center gap-2"
+                    className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary-foreground hover:text-foreground transition-all duration-300 flex items-center justify-center gap-2"
                     style={{ boxShadow: "0 14px 40px -12px hsl(28 92% 44% / 0.6)" }}
                   >
                     Book a Desk / Tour <ArrowUpRight className="w-4 h-4" />
@@ -154,20 +154,20 @@ const TheHub = () => {
               {submitted ? (
                 <div className="text-center py-8">
                   <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent"><CheckCircle2 className="w-7 h-7" /></div>
-                  <h4 className="font-display font-extrabold text-xl text-primary">Booking Confirmed!</h4>
-                  <p className="mt-2 text-sm text-primary/55">Our campus team will prepare your desk pass and email confirmation details.</p>
+                  <h4 className="font-display font-extrabold text-xl text-foreground">Booking Confirmed!</h4>
+                  <p className="mt-2 text-sm text-foreground/55">Our campus team will prepare your desk pass and email confirmation details.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {["Full Name", "Email Address"].map((label) => (
                     <div key={label}>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">{label}</label>
-                      <input required type={label.includes("Email") ? "email" : "text"} className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200" />
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
+                      <input required type={label.includes("Email") ? "email" : "text"} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                     </div>
                   ))}
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">Preferred Visit Date</label>
-                    <input required type="date" className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200" />
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">Preferred Visit Date</label>
+                    <input required type="date" className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                   </div>
                   <button type="submit" className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">Confirm Booking</button>
                 </form>

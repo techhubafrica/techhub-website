@@ -15,7 +15,7 @@ const servicesList = [
     subtitle: "Full-stack web, mobile, and cloud built for scale.",
     desc: "We design and build production-grade software for African enterprises, startups, and public sector orgs — from custom portals to high-performance mobile apps.",
     features: ["Custom Web & Mobile Apps", "Cloud Infrastructure & DevOps", "API Integrations & Microservices", "UI/UX Design Systems"],
-    tag: "Core", accent: "hsl(155 61% 30%)",
+    tag: "Core", accent: "hsl(156 24% 24%)",
   },
   {
     num: "02", id: "incubation", icon: Rocket,
@@ -39,7 +39,7 @@ const servicesList = [
     subtitle: "In-demand skills for the next generation.",
     desc: "Nationwide campus tours and hands-on bootcamps training students in cloud, cybersecurity, software engineering, and AI across West Africa.",
     features: ["University Workshops & Hackathons", "Hands-on Tech Bootcamps", "Internship & Job Placement", "Industry Mentorship Network"],
-    tag: "Impact", accent: "hsl(155 61% 30%)",
+    tag: "Impact", accent: "hsl(156 24% 24%)",
   },
   {
     num: "05", id: "metaverse", icon: Box,
@@ -84,22 +84,22 @@ const FormModal = ({ open, onClose, title, submitted, onSubmit }: {
               <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent">
                 <CheckCircle2 className="w-7 h-7" />
               </div>
-              <h4 className="font-display font-extrabold text-xl text-primary">Inquiry Received!</h4>
-              <p className="mt-2 text-sm text-primary/55">Our team will respond within 24 hours.</p>
+              <h4 className="font-display font-extrabold text-xl text-foreground">Inquiry Received!</h4>
+              <p className="mt-2 text-sm text-foreground/55">Our team will respond within 24 hours.</p>
             </div>
           ) : (
             <form onSubmit={onSubmit} className="space-y-5">
               {["Your Name", "Email Address"].map((label) => (
                 <div key={label}>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">{label}</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
                   <input required type={label.includes("Email") ? "email" : "text"}
-                    className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 transition-colors duration-200" />
+                    className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                 </div>
               ))}
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-primary/60 mb-1.5">Project Details</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">Project Details</label>
                 <textarea required rows={4}
-                  className="w-full px-4 py-3 rounded-xl border border-primary/12 bg-secondary/60 text-sm text-primary focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
+                  className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
               </div>
               <button type="submit"
                 className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-300">
@@ -154,16 +154,16 @@ const Services = () => {
               <span className="eyebrow text-accent">01 — Service Pillars</span>
               <div className="flex-1 divider-elegant" />
             </div>
-            <h2 className="font-display font-extrabold text-primary leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
+            <h2 className="font-display font-extrabold text-foreground leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
               Precision solutions <span className="italic font-light text-accent">built to scale.</span>
             </h2>
           </Reveal>
 
           {servicesList.map((s, idx) => (
             <Reveal key={s.id} delay={idx * 0.08}>
-              <div className="card-lift sheen group relative grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-3xl overflow-hidden border border-primary/10 bg-background hover:border-primary/25 transition-all duration-500">
+              <div className="card-lift sheen group relative grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-3xl overflow-hidden border border-foreground/10 bg-background hover:border-foreground/25 transition-all duration-500">
                 {/* Left number */}
-                <div className="lg:col-span-2 flex items-start justify-between lg:flex-col lg:items-start gap-4 p-8 pb-0 lg:pb-8 border-b lg:border-b-0 lg:border-r border-primary/10">
+                <div className="lg:col-span-2 flex items-start justify-between lg:flex-col lg:items-start gap-4 p-8 pb-0 lg:pb-8 border-b lg:border-b-0 lg:border-r border-foreground/10">
                   <span className="font-display font-black text-5xl md:text-6xl leading-none select-none"
                     style={{ color: s.accent, opacity: 0.35 }}>
                     {s.num}
@@ -180,13 +180,13 @@ const Services = () => {
                       style={{ background: `${s.accent}18`, border: `1px solid ${s.accent}30` }}>
                       <s.icon className="w-4 h-4" />
                     </div>
-                    <span className="text-primary/50 text-xs font-semibold tracking-wider">{s.subtitle}</span>
+                    <span className="text-foreground/50 text-xs font-semibold tracking-wider">{s.subtitle}</span>
                   </div>
-                  <h3 className="font-display font-extrabold text-primary text-2xl md:text-3xl tracking-tight leading-snug mb-4 group-hover:text-accent transition-colors">{s.title}</h3>
-                  <p className="text-primary/65 text-sm md:text-base leading-relaxed mb-6">{s.desc}</p>
+                  <h3 className="font-display font-extrabold text-foreground text-2xl md:text-3xl tracking-tight leading-snug mb-4 group-hover:text-accent transition-colors">{s.title}</h3>
+                  <p className="text-foreground/65 text-sm md:text-base leading-relaxed mb-6">{s.desc}</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6">
                     {s.features.map((f) => (
-                      <div key={f} className="flex items-center gap-2.5 text-xs font-semibold text-primary/75">
+                      <div key={f} className="flex items-center gap-2.5 text-xs font-semibold text-foreground/75">
                         <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />{f}
                       </div>
                     ))}
@@ -194,13 +194,13 @@ const Services = () => {
                 </div>
 
                 {/* CTA */}
-                <div className="lg:col-span-3 flex items-center justify-center p-8 border-t lg:border-t-0 lg:border-l border-primary/10">
+                <div className="lg:col-span-3 flex items-center justify-center p-8 border-t lg:border-t-0 lg:border-l border-foreground/10">
                   <button onClick={() => openQuoteModal(s.title)}
-                    className="btn-magnetic group/btn w-full lg:w-auto flex flex-col items-center gap-4 py-6 px-8 rounded-2xl border border-primary/12 hover:border-accent/50 hover:bg-accent/5 transition-all duration-300">
+                    className="btn-magnetic group/btn w-full lg:w-auto flex flex-col items-center gap-4 py-6 px-8 rounded-2xl border border-foreground/12 hover:border-accent/50 hover:bg-accent/5 transition-all duration-300">
                     <div className="w-10 h-10 rounded-full border border-accent/30 flex items-center justify-center text-accent group-hover/btn:bg-accent group-hover/btn:text-accent-foreground group-hover/btn:border-accent transition-all duration-250">
                       <ArrowUpRight className="w-4 h-4" />
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-primary/60 group-hover/btn:text-accent transition-colors duration-250 text-center">
+                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-foreground/60 group-hover/btn:text-accent transition-colors duration-250 text-center">
                       Request<br />Service
                     </span>
                   </button>
@@ -232,7 +232,7 @@ const Services = () => {
               Tell us about your project and our engineering team will get back to you within 24 hours.
             </p>
             <button onClick={() => openQuoteModal("General Inquiry")}
-              className="btn-magnetic inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.3em] rounded-full hover:bg-primary-foreground hover:text-primary transition-all duration-300"
+              className="btn-magnetic inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.3em] rounded-full hover:bg-primary-foreground hover:text-foreground transition-all duration-300"
               style={{ boxShadow: "0 14px 40px -12px hsl(28 92% 44% / 0.6)" }}>
               Start a Conversation <ArrowUpRight className="w-4 h-4" />
             </button>
