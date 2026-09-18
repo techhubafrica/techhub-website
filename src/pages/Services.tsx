@@ -161,7 +161,7 @@ const Services = () => {
 
           {servicesList.map((s, idx) => (
             <Reveal key={s.id} delay={idx * 0.08}>
-              <div className="card-lift sheen group relative grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-3xl overflow-hidden border border-foreground/10 bg-background hover:border-foreground/25 transition-all duration-500">
+              <div className="card-lift art-card sheen group relative grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-3xl overflow-hidden hover:border-accent/40 transition-all duration-500">
                 {/* Left number */}
                 <div className="lg:col-span-2 flex items-start justify-between lg:flex-col lg:items-start gap-4 p-8 pb-0 lg:pb-8 border-b lg:border-b-0 lg:border-r border-foreground/10">
                   <span className="font-display font-black text-5xl md:text-6xl leading-none select-none"

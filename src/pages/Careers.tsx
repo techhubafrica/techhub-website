@@ -321,7 +321,7 @@ const Careers = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {filteredJobs.map((job, idx) => (
                   <Reveal key={job.id} delay={idx * 0.07}>
-                    <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-card p-6 sm:p-7 flex flex-col justify-between h-full shadow-sm hover:shadow-xl hover:border-accent/40 transition-all duration-500 overflow-hidden text-foreground">
+                    <div className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full hover:border-accent/40 transition-all duration-500 overflow-hidden text-foreground">
                       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       
                       <div>
@@ -411,7 +411,7 @@ const Careers = () => {
                 },
               ].map((intern, idx) => (
                 <Reveal key={intern.title} delay={idx * 0.08}>
-                  <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-card p-6 sm:p-7 flex flex-col justify-between h-full shadow-sm hover:shadow-xl hover:border-accent/40 transition-all duration-500 overflow-hidden">
+                  <div className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full hover:border-accent/40 transition-all duration-500 overflow-hidden">
                     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div>
                       <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">Role 0{idx + 1}</span>
@@ -432,7 +432,7 @@ const Careers = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
             {/* Benefits */}
             <Reveal delay={0.05}>
-              <div className="card-lift sheen rounded-3xl border border-foreground/10 bg-card p-8 sm:p-10 flex flex-col justify-between h-full shadow-sm">
+              <div className="card-lift art-card sheen rounded-3xl p-8 sm:p-10 flex flex-col justify-between h-full">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-10 h-10 rounded-2xl bg-accent/15 border border-accent/30 text-accent flex items-center justify-center">
@@ -462,7 +462,7 @@ const Careers = () => {
 
             {/* Eligibility */}
             <Reveal delay={0.12}>
-              <div className="card-lift sheen rounded-3xl border border-foreground/10 bg-card p-8 sm:p-10 flex flex-col justify-between h-full shadow-sm">
+              <div className="card-lift art-card sheen rounded-3xl p-8 sm:p-10 flex flex-col justify-between h-full">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-10 h-10 rounded-2xl bg-accent/15 border border-accent/30 text-accent flex items-center justify-center">
