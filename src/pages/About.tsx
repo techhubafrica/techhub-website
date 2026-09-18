@@ -260,7 +260,7 @@ const About = () => (
 
           {/* 02. Inclusion & Accessibility (Span 5) */}
           <Reveal className="lg:col-span-5" delay={0.12}>
-            <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-card p-8 sm:p-10 overflow-hidden h-full flex flex-col justify-between shadow-md hover:border-accent/40 transition-all duration-500">
+            <div className="card-lift art-card sheen group relative rounded-3xl p-8 sm:p-10 overflow-hidden h-full flex flex-col justify-between hover:border-accent/40 transition-all duration-500">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div>
@@ -290,7 +290,7 @@ const About = () => (
 
           {/* 03. Security & Integrity (Span 5) */}
           <Reveal className="lg:col-span-5" delay={0.18}>
-            <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-card p-8 sm:p-10 overflow-hidden h-full flex flex-col justify-between shadow-md hover:border-accent/40 transition-all duration-500">
+            <div className="card-lift art-card sheen group relative rounded-3xl p-8 sm:p-10 overflow-hidden h-full flex flex-col justify-between hover:border-accent/40 transition-all duration-500">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div>

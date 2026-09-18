@@ -102,7 +102,7 @@ const Portfolio = () => (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {ventures.map((v, i) => (
             <Reveal key={v.name} delay={i * 0.08}>
-              <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-card p-6 sm:p-7 flex flex-col justify-between h-full transition-all duration-500 hover:border-accent/40 hover:shadow-xl overflow-hidden">
+              <div className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full transition-all duration-500 hover:border-accent/40 overflow-hidden">
                 {/* Subtle hover gradient */}
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

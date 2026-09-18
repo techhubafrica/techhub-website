@@ -65,18 +65,18 @@ export const ClientShowcase = ({
           {filtered.map((site) => (
             <div
               key={site.id}
-              className="card-lift sheen group relative rounded-3xl border border-primary-foreground/15 bg-primary/75 backdrop-blur-md p-6 sm:p-8 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:border-accent/50 hover:bg-primary/95"
+              className="card-lift art-card sheen group relative rounded-3xl p-5 sm:p-6 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:border-accent/50"
             >
               {/* Top ambient highlight */}
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div>
                 {/* Browser-style address top bar */}
-                <div className="flex items-center justify-between gap-3 px-3 py-2 rounded-t-xl bg-background/60 border border-primary-foreground/15 text-[10.5px] font-mono text-primary-foreground/70">
+                <div className="flex items-center justify-between gap-3 px-3 py-2.5 rounded-t-xl bg-foreground/[0.04] border border-foreground/15 text-[10.5px] font-mono text-foreground/70">
                   <div className="flex items-center gap-1.5 shrink-0">
                     <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-primary" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-foreground/30" />
                   </div>
                   <span className="truncate text-accent font-bold">{site.displayUrl}</span>
                   <Globe className="w-3.5 h-3.5 text-accent shrink-0" />
@@ -84,14 +84,14 @@ export const ClientShowcase = ({
 
                 {/* Screenshot preview frame */}
                 {site.image && (
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-b-xl border-x border-b border-primary-foreground/15 mb-6 group/img">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-b-xl border-x border-b border-foreground/15 mb-6 group/img shadow-md">
                     <img
                       src={site.image}
                       alt={`Screenshot of ${site.name} built by Tech Hub Africa`}
                       loading="lazy"
                       className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 via-transparent to-transparent opacity-50 group-hover:opacity-20 transition-opacity duration-300" />
                   </div>
                 )}
 
@@ -102,22 +102,22 @@ export const ClientShowcase = ({
                   </span>
                 </div>
 
-                <h3 className="font-display font-extrabold text-2xl tracking-tight text-primary-foreground group-hover:text-accent transition-colors mb-3">
+                <h3 className="font-display font-extrabold text-2xl tracking-tight text-foreground group-hover:text-accent transition-colors mb-3">
                   {site.name}
                 </h3>
 
-                <p className="text-primary-foreground/70 text-sm leading-relaxed mb-6">
+                <p className="text-foreground/70 text-sm leading-relaxed mb-6">
                   {site.description}
                 </p>
               </div>
 
               <div>
                 {/* Tech Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-primary-foreground/10">
+                <div className="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-foreground/10">
                   {site.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-primary-foreground/8 text-primary-foreground/60 border border-primary-foreground/10"
+                      className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-primary/55 text-foreground/65 border border-foreground/10"
                     >
                       {tag}
                     </span>

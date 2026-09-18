@@ -205,7 +205,7 @@ const Events = () => {
                 <div className={`group relative h-full flex flex-col overflow-hidden rounded-[1.75rem] transition-all duration-500 hover:-translate-y-2 ${
                   t.featured
                     ? "bg-primary text-primary-foreground shadow-[0_32px_80px_-28px_hsl(var(--primary)/0.55)]"
-                    : "border border-foreground/12 bg-background shadow-[0_20px_50px_-32px_hsl(var(--primary)/0.35)] hover:border-foreground/30"
+                    : "art-card border border-foreground/15 shadow-[0_20px_50px_-32px_hsl(var(--foreground)/0.35)] hover:border-accent/40"
                 }`}>
                   {/* ghost numeral */}
                   <span aria-hidden className={`pointer-events-none absolute -top-8 -right-3 font-display font-black leading-none tracking-tighter select-none transition-transform duration-700 group-hover:-translate-y-2 ${
@@ -315,7 +315,7 @@ const Events = () => {
             <div className="space-y-6">
               {eventsList.map((e, i) => (
                 <Reveal key={e.id} delay={i * 0.08}>
-                  <div className="card-lift sheen group relative rounded-3xl border border-foreground/10 bg-background hover:border-foreground/25 overflow-hidden transition-all duration-500 grid grid-cols-1 lg:grid-cols-12">
+                  <div className="card-lift art-card sheen group relative rounded-3xl hover:border-accent/40 overflow-hidden transition-all duration-500 grid grid-cols-1 lg:grid-cols-12">
                     <div className="lg:col-span-3 relative overflow-hidden border-b lg:border-b-0 lg:border-r border-foreground/10">
                       <img src={e.image} alt={`${e.title} — Tech Hub Africa`} loading="lazy"
                         className="w-full h-48 lg:h-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -359,7 +359,7 @@ const Events = () => {
             </div>
           ) : (
             <Reveal>
-              <div className="card-lift sheen rounded-3xl border border-foreground/10 bg-background overflow-hidden">
+              <div className="card-lift art-card sheen rounded-3xl overflow-hidden">
                 <div className="grid md:grid-cols-2 gap-0">
                   <img src={ktuHero[1]} alt="Campus Tour hands-on technology session" loading="lazy" className="w-full h-64 md:h-full object-cover" />
                   <img src={networking} alt="Networking at the Tech Guru Meetup 2025" loading="lazy" className="hidden md:block w-full h-full object-cover" />

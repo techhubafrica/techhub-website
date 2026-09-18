@@ -554,7 +554,7 @@ const Initiatives = () => (
           <Tag
             key={it.title}
             {...props}
-            className="card-lift sheen group relative rounded-2xl overflow-hidden bg-background border border-foreground/10"
+            className="card-lift art-card sheen group relative rounded-2xl overflow-hidden"
           >
             <div className="relative aspect-[4/5] overflow-hidden">
               <div className="absolute inset-0 bg-primary" />
@@ -646,7 +646,7 @@ const Services = () => (
         {services.map((s, i) => (
           <div
             key={s.title}
-            className="card-lift sheen noise-soft group relative p-10 lg:p-12 rounded-3xl bg-primary/80 border border-primary-foreground/10 overflow-hidden flex flex-col justify-between"
+            className="card-lift art-card-mint sheen noise-soft group relative p-10 lg:p-12 rounded-3xl overflow-hidden flex flex-col justify-between"
           >
             <img
               src={s.image}
@@ -655,27 +655,27 @@ const Services = () => (
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover opacity-[0.18] group-hover:opacity-30 group-hover:scale-105 transition-all duration-[1200ms]"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/85 to-primary" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/85 to-background" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_top,hsl(28_92%_55%/0.25),transparent_60%)]" />
             
             <div className="relative">
               <div className="flex items-center justify-between mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
+                <div className="w-14 h-14 rounded-2xl bg-primary/70 border border-foreground/15 flex items-center justify-center">
                   <s.Icon className="w-6 h-6 text-accent" strokeWidth={1.4} />
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary-foreground/40">
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-foreground/40">
                   0{i + 1}
                 </span>
               </div>
               <h3 className="font-display text-2xl md:text-3xl font-extrabold mb-4 leading-tight">
                 {s.title}
               </h3>
-              <p className="text-sm text-primary-foreground/70 leading-relaxed mb-6">
+              <p className="text-sm text-foreground/70 leading-relaxed mb-6">
                 {s.desc}
               </p>
             </div>
 
-            <div className="relative pt-6 border-t border-primary-foreground/10 flex items-center justify-between">
+            <div className="relative pt-6 border-t border-foreground/10 flex items-center justify-between">
               <Link
                 to="/services"
                 className="text-xs font-bold uppercase tracking-[0.2em] text-accent group-hover:text-primary-foreground transition-colors flex items-center gap-2"
@@ -782,7 +782,7 @@ const Portfolio = () => (
         {portfolio.map((p) => (
           <div
             key={p.name}
-            className="card-lift sheen group relative rounded-3xl bg-primary/90 border border-primary-foreground/15 p-6 sm:p-7 flex flex-col justify-between h-full overflow-hidden transition-all duration-500 hover:border-accent/50 hover:bg-primary"
+            className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full overflow-hidden transition-all duration-500 hover:border-accent/50"
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_100%_0%,hsl(28_92%_55%/0.25),transparent_60%)]" />
             
@@ -802,13 +802,13 @@ const Portfolio = () => (
                 <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-1">
                   {p.sector}
                 </span>
-                <h3 className="font-display font-extrabold text-2xl text-primary-foreground leading-tight tracking-tight group-hover:text-accent transition-colors">
+                <h3 className="font-display font-extrabold text-2xl text-foreground leading-tight tracking-tight group-hover:text-accent transition-colors">
                   {p.name}
                 </h3>
               </div>
 
               {/* Tagline */}
-              <p className="text-sm text-primary-foreground/75 leading-relaxed font-semibold mb-6">
+              <p className="text-sm text-foreground/75 leading-relaxed font-semibold mb-6">
                 {p.desc}
               </p>
             </div>
@@ -855,7 +855,7 @@ const Testimonials = () => (
         {testimonials.map((t, i) => (
           <figure
             key={t.name}
-            className={`card-lift sheen relative p-8 rounded-2xl bg-background border border-foreground/10 flex flex-col ${i === 1 ? "md:translate-y-6" : ""}`}
+            className={`card-lift art-card sheen relative p-8 rounded-2xl flex flex-col ${i === 1 ? "md:translate-y-6" : ""}`}
           >
             <div className="absolute -top-4 left-8 w-10 h-10 rounded-full bg-accent flex items-center justify-center shadow-lg">
               <Quote className="w-4 h-4 text-accent-foreground" strokeWidth={2} />
