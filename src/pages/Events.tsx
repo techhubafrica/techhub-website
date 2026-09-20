@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { ktuHero } from "@/assets/ktu";
 import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X, Ticket } from "lucide-react";
 import { heroAudience, meetup2026Flyer, hackathonFlyer, campusTourFlyer, networking } from "@/assets/photos";
+import { techGuruAudience, techGuruAuditorium, techGuruCelebration, techGuruCommunity, techGuruKeynote } from "@/assets/tech-guru";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 
@@ -106,7 +107,7 @@ const Events = () => {
         {/* ══ HERO FEATURED EVENT: TECH GURU MEETUP ══ */}
         <section className="relative overflow-hidden bg-background text-foreground pt-20 sm:pt-24 md:pt-28">
           <div className="absolute inset-0">
-            <img src={heroAudience} alt="Attendees at the Tech Guru Meetup in Accra"
+            <img src={techGuruAudience} alt="Attendees at the Tech Guru Meetup in Accra"
               className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
             <div className="absolute inset-0" style={{ background: "linear-gradient(100deg, hsl(0 0% 100% / 0.5) 0%, hsl(0 0% 100% / 0.26) 40%, hsl(0 0% 100% / 0.06) 74%, hsl(0 0% 100% / 0) 100%)" }} />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_90%,hsl(28_92%_50%/0.14),transparent_60%)]" />
@@ -360,9 +361,11 @@ const Events = () => {
           ) : (
             <Reveal>
               <div className="card-lift art-card sheen rounded-3xl overflow-hidden">
-                <div className="grid md:grid-cols-2 gap-0">
-                  <img src={ktuHero[1]} alt="Campus Tour hands-on technology session" loading="lazy" className="w-full h-64 md:h-full object-cover" />
-                  <img src={networking} alt="Networking at the Tech Guru Meetup 2025" loading="lazy" className="hidden md:block w-full h-full object-cover" />
+                <div className="grid grid-cols-2 md:grid-cols-12 grid-rows-2 h-[22rem] sm:h-[30rem] gap-1 bg-background">
+                  <img src={techGuruAuditorium} alt="A packed Tech Guru Meetup 2025 audience" loading="lazy" className="col-span-2 md:col-span-7 row-span-2 w-full h-full object-cover" />
+                  <img src={techGuruKeynote} alt="A Tech Guru Meetup speaker addressing attendees" loading="lazy" className="md:col-span-5 w-full h-full object-cover" />
+                  <img src={techGuruCelebration} alt="Tech Guru Meetup community celebrating together" loading="lazy" className="md:col-span-3 w-full h-full object-cover" />
+                  <img src={techGuruCommunity} alt="Women from the Tech Guru Meetup community" loading="lazy" className="md:col-span-2 w-full h-full object-cover" />
                 </div>
                 <div className="p-10 md:p-16 text-center">
                   <span className="font-display font-black text-[5rem] leading-none select-none text-foreground/10">2025</span>

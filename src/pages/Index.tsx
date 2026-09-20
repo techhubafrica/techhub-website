@@ -13,6 +13,7 @@ import {
   portfolioGh, portfolioGmo, portfolioOfie, portfolioThreatLock,
 } from "@/assets/photos";
 import { ktuHero } from "@/assets/ktu";
+import { techGuruAudience } from "@/assets/tech-guru";
 import Marquee from "@/components/Marquee";
 import { Link } from "react-router-dom";
 import ClientShowcase from "@/components/ClientShowcase";
@@ -60,7 +61,7 @@ const heroSlides = [
     body: "The definitive annual list of the founders, engineers, and creators redefining African technology.",
     cta: "Read the Issue",
     href: "/portfolio",
-    image: heroKeynote,
+    image: techGuruAudience,
     stat: { k: "100", v: "Leaders" },
   },
   {
