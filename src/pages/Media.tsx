@@ -12,7 +12,7 @@ import Marquee from "@/components/Marquee";
 const articles = [
   { id: 1, num: "01", title: "AI Infrastructure Trends Across West Africa", category: "TechNews Tuesday", date: "July 2026", excerpt: "How African cloud providers and developer communities are deploying low-latency LLMs locally — breaking the dependency on foreign infrastructure." },
   { id: 2, num: "02", title: "5 Steps to Securing Web Apps Against DDoS", category: "TechTip Thursday", date: "July 2026", excerpt: "Practical hardening steps for React and Node deployments — tested against real-world attack patterns captured by Threat Lock's monitoring data." },
-  { id: 3, num: "03", title: "Campus Tour Reaches 25 University Hubs", category: "TechNews Tuesday", date: "June 2026", excerpt: "Highlights and student project showcases from Tech Hub Africa's nationwide digital literacy campaign — 5,000+ students trained in 2026 alone." },
+  { id: 3, num: "03", title: "Campus Tour Reaches 25 University Hubs", category: "TechNews Tuesday", date: "June 2026", excerpt: "Highlights and student project showcases from Tech Hub Africa's nationwide digital literacy campaign — 10,400+ students trained in 2026 alone." },
 ];
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
