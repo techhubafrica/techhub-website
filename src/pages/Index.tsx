@@ -477,7 +477,7 @@ const CampusTours = () => (
             <Users className="w-5 h-5 text-accent" />
             <p className="eyebrow text-accent">Students</p>
           </div>
-          <p className="font-display font-extrabold text-4xl">5,000+</p>
+          <p className="font-display font-extrabold text-4xl">10,400+</p>
           <p className="text-xs text-primary-foreground/60 mt-1">reached in prior tours</p>
         </div>
       </div>
