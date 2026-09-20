@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Logo from "@/components/Logo";
 import {
-  heroAudience, heroPanel, heroKeynote,
+  heroAudience, heroPanel,
   campusTourFlyer, hackathonFlyer, meetup2026Flyer, awardTop100, awardWhosWho,
   serviceProgramming, serviceSoftware, serviceWebDesign,
   portfolioGh, portfolioGmo, portfolioOfie, portfolioThreatLock,

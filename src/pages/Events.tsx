@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ktuHero } from "@/assets/ktu";
 import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X, Ticket } from "lucide-react";
-import { heroAudience, meetup2026Flyer, hackathonFlyer, campusTourFlyer, networking } from "@/assets/photos";
+import { meetup2026Flyer, hackathonFlyer, campusTourFlyer } from "@/assets/photos";
 import { techGuruAudience, techGuruAuditorium, techGuruCelebration, techGuruCommunity, techGuruKeynote } from "@/assets/tech-guru";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
