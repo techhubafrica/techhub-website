@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Calendar, MapPin, Users, ArrowUpRight, CheckCircle2, X, Ticket } from "lucide-react";
 import { meetup2026Flyer, hackathonFlyer, campusTourFlyer } from "@/assets/photos";
-import { techGuruAudience, techGuruAuditorium, techGuruCelebration, techGuruCommunity, techGuruKeynote } from "@/assets/tech-guru";
+import { techGuruAudience, techGuruAuditorium, techGuruCelebration, techGuruCommunity, techGuruKeynote, techGuruPreparation, techGuruNetworking, techGuruShowcase, techGuruFullHouse, techGuruPanel, techGuruAwards, techGuruInterview, techGuruTeam } from "@/assets/tech-guru";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 
@@ -360,11 +360,19 @@ const Events = () => {
           ) : (
             <Reveal>
               <div className="card-lift art-card sheen rounded-3xl overflow-hidden">
-                <div className="grid grid-cols-2 md:grid-cols-12 grid-rows-2 h-[22rem] sm:h-[30rem] gap-1 bg-background">
+                <div className="grid grid-cols-2 md:grid-cols-12 auto-rows-[9rem] sm:auto-rows-[12rem] gap-1 bg-background">
                   <img src={techGuruAuditorium} alt="A packed Tech Guru Meetup 2025 audience" loading="lazy" className="col-span-2 md:col-span-7 row-span-2 w-full h-full object-cover" />
-                  <img src={techGuruKeynote} alt="A Tech Guru Meetup speaker addressing attendees" loading="lazy" className="md:col-span-5 w-full h-full object-cover" />
+                  <img src={techGuruKeynote} alt="A Tech Guru Meetup speaker addressing attendees" loading="lazy" className="md:col-span-5 row-span-2 w-full h-full object-cover" />
+                  <img src={techGuruPreparation} alt="The Tech Guru Meetup welcome gifts prepared for guests" loading="lazy" className="md:col-span-3 w-full h-full object-cover" />
+                  <img src={techGuruNetworking} alt="Guests connecting at the Tech Guru Meetup" loading="lazy" className="md:col-span-5 w-full h-full object-cover" />
+                  <img src={techGuruShowcase} alt="Young innovators exploring a technology demonstration" loading="lazy" className="md:col-span-4 w-full h-full object-cover" />
+                  <img src={techGuruFullHouse} alt="The full 2025 Tech Guru Meetup audience" loading="lazy" className="col-span-2 md:col-span-8 row-span-2 w-full h-full object-cover" />
+                  <img src={techGuruPanel} alt="Tech Guru Meetup panelists in conversation" loading="lazy" className="md:col-span-4 w-full h-full object-cover" />
+                  <img src={techGuruAwards} alt="An award presentation at the Tech Guru Meetup" loading="lazy" className="md:col-span-4 w-full h-full object-cover" />
                   <img src={techGuruCelebration} alt="Tech Guru Meetup community celebrating together" loading="lazy" className="md:col-span-3 w-full h-full object-cover" />
-                  <img src={techGuruCommunity} alt="Women from the Tech Guru Meetup community" loading="lazy" className="md:col-span-2 w-full h-full object-cover" />
+                  <img src={techGuruCommunity} alt="Women from the Tech Guru Meetup community" loading="lazy" className="md:col-span-3 w-full h-full object-cover" />
+                  <img src={techGuruInterview} alt="A guest interview at the Tech Guru Meetup" loading="lazy" className="md:col-span-3 w-full h-full object-cover" />
+                  <img src={techGuruTeam} alt="The Tech Guru Meetup organizing team" loading="lazy" className="col-span-2 md:col-span-6 w-full h-full object-cover" />
                 </div>
                 <div className="p-10 md:p-16 text-center">
                   <span className="font-display font-black text-[5rem] leading-none select-none text-foreground/10">2025</span>
