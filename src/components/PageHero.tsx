@@ -64,53 +64,19 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         />
       )}
 
-      {/* Grain noise */}
-      <div
-        className="absolute inset-0 z-[1] pointer-events-none opacity-[0.05]"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
-        }}
-      />
-
-      {/* Colourless veil — neutral, photograph keeps its true colour */}
+      {/* Clear neutral overlay — one readable layer that preserves true photo colour */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background: image
-            ? "linear-gradient(105deg, hsl(0 0% 100% / 0.48) 0%, hsl(0 0% 100% / 0.24) 36%, hsl(0 0% 100% / 0.06) 70%, hsl(0 0% 100% / 0) 100%)"
+            ? "linear-gradient(90deg, hsl(var(--background) / 0.9) 0%, hsl(var(--background) / 0.76) 34%, hsl(var(--background) / 0.28) 62%, hsl(var(--background) / 0.08) 100%)"
             : "linear-gradient(110deg, hsl(var(--background)) 0%, hsl(var(--primary) / 0.45) 100%)",
-        }}
-      />
-
-      {/* Type halo — soft neutral, keeps headline legible without masking the photo */}
-      {image && (
-        <div
-          className="absolute inset-0 z-[1] pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(90% 85% at 2% 55%, hsl(0 0% 100% / 0.6) 0%, hsl(0 0% 100% / 0.22) 45%, transparent 75%)",
-          }}
-        />
-      )}
-
-
-      {/* Mouse-tracked amber spotlight */}
-      <div
-        className="absolute inset-0 z-[1] pointer-events-none hidden md:block"
-        style={{
-          background:
-            "radial-gradient(800px circle at var(--sx, 50%) var(--sy, 50%), hsl(28 92% 50% / 0.1), transparent 62%)",
         }}
       />
 
       {/* Top vignette — blends into the white navigation zone */}
       <div className={`absolute inset-x-0 top-0 ${image ? "h-28" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-background/80 to-transparent`} />
 
-
-      {/* Amber accent glow — top right */}
-      <div className="hidden md:block absolute -top-32 right-10 w-[600px] h-[500px] rounded-full blur-3xl z-[1] pointer-events-none opacity-25"
-        style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.35), transparent 65%)" }} />
 
       {/* Logo watermark */}
       {ghost && (
