@@ -74,34 +74,56 @@ const inline = (s: string) =>
   );
 
 function RichText({ text }: { text: string }) {
-  return (
-    <div className="space-y-4">
-      {text.split(/\n{2,}/).filter((b) => b.trim()).map((block, i) => {
-        const t = block.trim();
-        if (/^#{1,3}\s/.test(t)) {
-          return (
-            <h4 key={i} className="font-display font-extrabold text-foreground text-sm uppercase tracking-[0.2em] mt-6">
-              {t.replace(/^#{1,3}\s+/, "")}
-            </h4>
-          );
-        }
-        const rows = t.split("\n").map((l) => l.trim()).filter(Boolean);
-        if (rows.every((l) => /^[-*]\s+/.test(l))) {
-          return (
-            <ul key={i} className="space-y-2">
-              {rows.map((l, j) => (
-                <li key={j} className="flex gap-3 text-[13px] leading-relaxed text-foreground/70">
-                  <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-                  <span>{inline(l.replace(/^[-*]\s+/, ""))}</span>
-                </li>
-              ))}
-            </ul>
-          );
-        }
-        return <p key={i} className="text-[13px] sm:text-sm leading-relaxed text-foreground/70">{inline(t)}</p>;
-      })}
-    </div>
-  );
+  const nodes: React.ReactNode[] = [];
+  let para: string[] = [];
+  let list: string[] = [];
+
+  const flushPara = () => {
+    if (para.length) {
+      nodes.push(
+        <p key={`p${nodes.length}`} className="text-[13px] sm:text-sm leading-relaxed text-foreground/70">
+          {inline(para.join(" "))}
+        </p>
+      );
+    }
+    para = [];
+  };
+
+  const flushList = () => {
+    if (list.length) {
+      nodes.push(
+        <ul key={`l${nodes.length}`} className="space-y-2">
+          {list.map((l, j) => (
+            <li key={j} className="flex gap-3 text-[13px] leading-relaxed text-foreground/70">
+              <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+              <span>{inline(l)}</span>
+            </li>
+          ))}
+        </ul>
+      );
+    }
+    list = [];
+  };
+
+  text.replace(/\r/g, "").split("\n").forEach((raw) => {
+    const line = raw.trim();
+    if (!line) { flushPara(); flushList(); return; }
+    if (/^#{1,3}\s/.test(line)) {
+      flushPara(); flushList();
+      nodes.push(
+        <h4 key={`h${nodes.length}`} className="font-display font-extrabold text-foreground text-xs uppercase tracking-[0.22em] mt-7 first:mt-0">
+          {inline(line.replace(/^#{1,3}\s+/, ""))}
+        </h4>
+      );
+      return;
+    }
+    if (/^[-*]\s+/.test(line)) { flushPara(); list.push(line.replace(/^[-*]\s+/, "")); return; }
+    flushList();
+    para.push(line);
+  });
+  flushPara(); flushList();
+
+  return <div className="space-y-4">{nodes}</div>;
 }
 
 const Events = () => {
