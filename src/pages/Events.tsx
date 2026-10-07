@@ -558,7 +558,7 @@ const Events = () => {
         <section className="px-5 sm:px-6 lg:px-10 pb-20 sm:pb-28">
           <Reveal>
             <div className="glass-cream card-lift rounded-3xl px-6 sm:px-12 py-12 sm:py-16 max-w-3xl mx-auto text-center" style={{ backdropFilter: "blur(14px)" }}>
-              <p className="eyebrow text-accent justify-center">Stay updated</p>
+              <p className="eyebrow text-accent">Stay updated</p>
               <h2 className="font-display font-extrabold text-foreground leading-[0.95] text-[1.8rem] sm:text-[2.6rem] tracking-tight mt-3">
                 Be the first to hear about upcoming events.
               </h2>
