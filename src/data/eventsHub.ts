@@ -59,7 +59,7 @@ export type HubEvent = {
   fields: RegField[];
 };
 
-export const hubEvents: HubEvent[] = [
+const rawEvents: HubEvent[] = [
   {
     id: 6,
     slug: "the-hub-tradeshow-2026",
@@ -283,6 +283,23 @@ export const hubEvents: HubEvent[] = [
     ],
   },
 ];
+
+
+/* Tech Hub Africa publishes the Corporate rate at GH₵200 — the feed still
+   carries GHS 2,000. Applied once here so ticket cards, dropdowns and
+   price lines can never disagree. */
+const RATE_OVERRIDE: Record<string, number> = { "Corporate Ticket Fee": 200 };
+
+const applyRates = (e: HubEvent): HubEvent => ({
+  ...e,
+  tickets: e.tickets.map((t) =>
+    t.name in RATE_OVERRIDE && !t.isFree
+      ? { ...t, price: RATE_OVERRIDE[t.name], priceLabel: `GHS ${RATE_OVERRIDE[t.name].toLocaleString()}` }
+      : t
+  ),
+});
+
+export const hubEvents: HubEvent[] = rawEvents.map(applyRates);
 
 export const upcomingEvents = hubEvents.filter((e) => !e.isPast);
 export const pastEvents = hubEvents.filter((e) => e.isPast);
