@@ -69,13 +69,13 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background: image
-            ? "linear-gradient(90deg, hsl(var(--background) / 0.9) 0%, hsl(var(--background) / 0.76) 34%, hsl(var(--background) / 0.28) 62%, hsl(var(--background) / 0.08) 100%)"
+            ? "linear-gradient(90deg, hsl(var(--background) / 0.5) 0%, hsl(var(--background) / 0.32) 34%, hsl(var(--background) / 0.1) 62%, hsl(var(--background) / 0.02) 100%)"
             : "linear-gradient(110deg, hsl(var(--background)) 0%, hsl(var(--primary) / 0.45) 100%)",
         }}
       />
 
       {/* Top vignette — blends into the white navigation zone */}
-      <div className={`absolute inset-x-0 top-0 ${image ? "h-28" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-background/80 to-transparent`} />
+      <div className={`absolute inset-x-0 top-0 ${image ? "h-28" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-background/50 to-transparent`} />
 
 
       {/* Logo watermark */}
