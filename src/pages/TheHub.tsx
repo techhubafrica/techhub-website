@@ -2,7 +2,6 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { heroBackdrops } from "@/assets/ktu";
 import { Wifi, Coffee, Users, Calendar, Box, MapPin, ArrowUpRight, CheckCircle2, X } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
@@ -41,8 +40,6 @@ const TheHub = () => {
         title={<>THE HUB —<br /><span className="italic font-light text-accent">East Legon, Accra.</span></>}
         body="Our flagship co-working, incubation, and event space at 48 IPS Road, East Legon. Purpose-built to fuel collaboration across Africa's tech community."
         ghost="HUB"
-        image={heroBackdrops.hub}
-        imageAlt="Innovation campus workspace at Tech Hub Africa East Legon"
         stats={[
           { val: "5,000", label: "sq ft Campus" },
           { val: "100+", label: "Event Capacity" },

@@ -174,54 +174,108 @@ const Events = () => {
 
       <main className="page-entry bg-background overflow-hidden">
         {/* ══ HERO — FEATURED EVENT ══ */}
-        <section className="photo-hero-clear relative overflow-hidden bg-background text-foreground pt-20 sm:pt-24 md:pt-28">
-          <div className="absolute inset-0">
-            <img src={techGuruAudience} alt="Attendees at the Tech Guru Meetup in Accra"
-              className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+        <section className="relative overflow-hidden bg-background text-foreground pt-28 pb-16 sm:pt-36 sm:pb-24 select-none">
+          {/* Ambient illumination */}
+          <div
+            className="absolute top-0 right-0 w-[550px] h-[550px] rounded-full blur-3xl opacity-35 pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, hsl(var(--primary) / 0.7) 0%, transparent 70%)",
+            }}
+          />
+          <div
+            className="hidden md:block absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full blur-3xl opacity-20 pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 65%)",
+            }}
+          />
+
+          {/* Subtle architectural dot matrix grid */}
+          <div
+            className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]"
+            style={{
+              backgroundImage: "radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+            }}
+          />
+
+          {/* Ghost watermark text */}
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none overflow-hidden pr-6 md:pr-12 z-0">
+            <span
+              className="font-display font-black uppercase text-foreground/[0.035] tracking-tighter leading-none block whitespace-nowrap"
+              style={{ fontSize: "clamp(6rem, 20vw, 18rem)" }}
+            >
+              MEETUP
+            </span>
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 py-14 sm:py-20 md:py-24 lg:py-28">
-            <div className="max-w-2xl p-8 md:p-12">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="h-px w-8 bg-accent" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">
+          {/* Vertical brand rail */}
+          <div className="hidden xl:flex absolute left-8 top-0 bottom-0 flex-col items-center justify-center gap-4 z-10 pointer-events-none">
+            <div className="w-px h-20 bg-gradient-to-b from-transparent to-foreground/15" />
+            <span className="text-[8px] font-bold uppercase tracking-[0.55em] text-foreground/35 [writing-mode:vertical-rl] rotate-180">
+              Tech Hub Africa
+            </span>
+            <div className="w-px h-20 bg-gradient-to-t from-transparent to-foreground/15" />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-10">
+            <div className="max-w-3xl">
+              {/* Event meta pill */}
+              <div className="inline-flex items-center gap-2.5 mb-6 px-3.5 sm:px-4 py-1.5 rounded-full border border-foreground/12 bg-primary/20 backdrop-blur-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-foreground/80">
                   {featuredEvent.dateLabel} · {featuredEvent.venue}
                 </span>
               </div>
-              <h1 className="font-display font-black text-foreground text-[2.6rem] md:text-[4rem] leading-[0.92] tracking-tight">
-                Tech Guru<br />Meetup 2026
+
+              {/* Display Title */}
+              <h1 className="font-display font-black text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.92] tracking-tight">
+                Tech Guru<br /><span className="text-accent italic font-light">Meetup 2026</span>
               </h1>
-              <p className="photo-hero-copy mt-4 font-display font-extrabold text-accent text-lg md:text-xl tracking-tight leading-snug">
+
+              {/* Accent divider */}
+              <div className="flex items-center gap-4 mt-6 mb-6 sm:mt-8 sm:mb-8">
+                <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-accent to-transparent" />
+                <span className="w-1.5 h-1.5 rounded-full bg-accent/60" />
+              </div>
+
+              {/* Tagline */}
+              <p className="font-display font-bold text-accent text-lg md:text-xl tracking-tight leading-snug">
                 The Augmented Continent: Where Africa Builds, Showcases &amp; Scales The Future.
               </p>
-              <p className="mt-7 font-display font-extrabold text-foreground text-lg md:text-xl">
-                Friday, 18 December 2026 <span className="text-foreground/25 mx-2">|</span> 4:00 p.m. – 9:00 p.m.
+
+              <p className="mt-6 font-display font-bold text-foreground text-base sm:text-lg">
+                Friday, 18 December 2026 <span className="text-foreground/20 mx-2">|</span> 4:00 p.m. – 9:00 p.m.
               </p>
-              <p className="mt-2 text-muted-foreground leading-relaxed text-sm">
+              <p className="mt-1.5 text-muted-foreground leading-relaxed text-sm">
                 {featuredEvent.venue}, {featuredEvent.location}
               </p>
+
+              {/* CTAs */}
               <div className="mt-8 flex flex-wrap gap-3">
-                <button onClick={() => document.getElementById("reservations")?.scrollIntoView({ behavior: "smooth" })}
+                <button
+                  onClick={() => document.getElementById("reservations")?.scrollIntoView({ behavior: "smooth" })}
                   className="btn-magnetic px-7 py-3.5 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:brightness-110 transition-all duration-200"
-                  style={{ boxShadow: "0 12px 36px -10px hsl(28 92% 44% / 0.5)" }}>
+                  style={{ boxShadow: "0 12px 36px -10px hsl(28 92% 44% / 0.5)" }}
+                >
                   Reserve Your Seat
                 </button>
-                <button onClick={() => openSponsor("Tech Guru Meetup 2026")}
-                  className="btn-magnetic px-7 py-3.5 rounded-full border border-foreground/20 bg-primary/5 text-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-200"
-                  style={{ backdropFilter: "blur(10px)" }}>
+                <button
+                  onClick={() => openSponsor("Tech Guru Meetup 2026")}
+                  className="btn-magnetic px-7 py-3.5 rounded-full border border-foreground/15 bg-card/60 text-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-foreground hover:text-background transition-all duration-200"
+                >
                   Become a Sponsor
                 </button>
               </div>
+
               <p className="mt-5 text-sm">
                 <span className="font-bold text-accent">Tickets from GH₵50.</span>{" "}
                 <span className="text-muted-foreground">Registration closes 4 December 2026.</span>
               </p>
             </div>
 
-            {/* Countdown */}
-            <div className="photo-hero-detail mt-12 rounded-lg px-6 py-5 flex flex-wrap items-center gap-8">
-              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-foreground/45">Countdown</span>
+            {/* Countdown card */}
+            <div className="mt-12 rounded-2xl px-6 py-5 flex flex-wrap items-center gap-8 border border-foreground/10 bg-primary/10 max-w-4xl">
+              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-foreground/50">Countdown</span>
               <div className="flex items-center gap-6">
                 {[
                   { label: "Days", val: timeLeft.days },
@@ -233,7 +287,7 @@ const Events = () => {
                     <span className="font-display font-black text-foreground text-3xl leading-none tabular-nums">
                       {String(u.val).padStart(2, "0")}
                     </span>
-                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-foreground/45">{u.label}</span>
+                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-foreground/50">{u.label}</span>
                   </div>
                 ))}
               </div>
@@ -243,6 +297,9 @@ const Events = () => {
               </div>
             </div>
           </div>
+
+          {/* Subtle bottom edge line */}
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent pointer-events-none" />
         </section>
 
         <Marquee text="Conferences · Workshops · Hackathons · Tech Guru Meetup 2026" />

@@ -88,7 +88,9 @@ import k7650 from "./ktu-7650.jpg.asset.json";
 import k7660 from "./ktu-7660.jpg.asset.json";
 import k7662 from "./ktu-7662.jpg.asset.json";
 
-const url = (a: { url: string }) => a.url;
+const CDN_BASE = "https://d4a8a1c6-054e-44fe-b6e5-31579c478a0c.lovableproject.com";
+const url = (a: { url: string }) =>
+  a.url.startsWith("/__l5e") ? `${CDN_BASE}${a.url}` : a.url;
 
 /** Cinematic, wide frames used by the homepage hero slideshow. */
 export const ktuHero = [
@@ -190,14 +192,14 @@ export const ktuAll = [...ktuHero, ...ktuGallery];
 
 /** Backdrop photographs used by each subpage hero stage. */
 export const heroBackdrops = {
-  about: url(k7362),
+  about: url(k7417),
   careers: url(k7433),
   csr: url(k6963),
-  events: url(k7386),
+  events: url(k7420),
   media: url(k7601),
   mentorship: url(k7017),
   portfolio: url(k7539),
   services: url(k6946),
   hub: url(k7645),
-  gallery: url(k7568),
+  gallery: url(k7588),
 };

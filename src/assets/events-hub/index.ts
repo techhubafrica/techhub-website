@@ -5,7 +5,9 @@ import pitch2026 from "./pitch-2026.webp.asset.json";
 import meetup2025 from "./meetup-2025.webp.asset.json";
 import meetup2024 from "./meetup-2024.webp.asset.json";
 
-const url = (asset: { url: string }) => asset.url;
+const CDN_BASE = "https://d4a8a1c6-054e-44fe-b6e5-31579c478a0c.lovableproject.com";
+const url = (asset: { url: string }) =>
+  asset.url.startsWith("/__l5e") ? `${CDN_BASE}${asset.url}` : asset.url;
 
 export const eventTradeshow2026 = url(tradeshow2026);
 export const eventMeetup2026 = url(meetup2026);

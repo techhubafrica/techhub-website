@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { heroBackdrops } from "@/assets/ktu";
 import { ArrowUpRight } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
@@ -72,8 +71,6 @@ const Portfolio = () => (
       title={<>Backing Africa's most<br /><span className="italic font-light text-accent">promising ventures.</span></>}
       body="We invest technical talent, capital, and market access into high-potential companies across PropTech, AgriTech, E-Commerce, and Cybersecurity."
       ghost="BUILD"
-      image={heroBackdrops.portfolio}
-      imageAlt="Founders demoing a product at a Tech Hub Africa showcase"
       stats={[
         { val: "4", label: "Portfolio Companies" },
         { val: "$2M+", label: "Value Created" },

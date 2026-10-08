@@ -8,6 +8,13 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    proxy: {
+      "/__l5e": {
+        target: "https://d4a8a1c6-054e-44fe-b6e5-31579c478a0c.lovableproject.com",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
     hmr: {
       overlay: false,
     },

@@ -3,9 +3,9 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { heroBackdrops, ktuGallery } from "@/assets/ktu";
-import { Mic, ArrowUpRight, CheckCircle2, X } from "lucide-react";
-import { heroAudience, heroPanel, heroKeynote, networking } from "@/assets/photos";
+import { ktuGallery } from "@/assets/ktu";
+import { heroKeynote, networking } from "@/assets/photos";
+import { techGuruPanel, techGuruAuditorium } from "@/assets/tech-guru";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 
@@ -44,8 +44,6 @@ const Media = () => {
         title={<>Insights, innovation,<br />and <span className="italic font-light text-accent">TechTalks.</span></>}
         body="Your weekly destination for TechNews Tuesday, TechTip Thursday, media highlights, and speaking engagements from the African tech ecosystem."
         ghost="MEDIA"
-        image={heroBackdrops.media}
-        imageAlt="Speaker presenting at a Tech Hub Africa TechTalk"
       />
 
       <Marquee text="TechNews Tuesday · TechTip Thursday · Ecosystem Highlights · TechTalks" />
@@ -143,9 +141,9 @@ const Media = () => {
             {[
               { src: ktuGallery[12], alt: "Students engaged in interactive digital literacy training during the Campus Tour", span: "md:col-span-2 md:row-span-2" },
               { src: networking, alt: "Founders networking at the Tech Guru Meetup", span: "" },
-              { src: heroPanel, alt: "Panel discussion at the Tech Guru Meetup", span: "" },
+              { src: techGuruPanel, alt: "Panel discussion at the Tech Guru Meetup", span: "" },
               { src: heroKeynote, alt: "Keynote speaker addressing the Tech Guru Meetup", span: "" },
-              { src: heroAudience, alt: "Full conference hall at the Tech Guru Meetup in Accra", span: "" },
+              { src: techGuruAuditorium, alt: "Auditorium session at the Tech Guru Meetup in Accra", span: "" },
               { src: ktuGallery[6], alt: "Students in a tablet training session at KTU", span: "md:col-span-2" },
               { src: ktuGallery[20], alt: "Computer lab session during the KTU campus tour", span: "" },
               { src: ktuGallery[33], alt: "Mentor guiding students at the KTU campus tour", span: "" },

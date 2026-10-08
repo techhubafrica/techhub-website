@@ -2,7 +2,6 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { heroBackdrops } from "@/assets/ktu";
 import { BookOpen, Award, CheckCircle2, X, ArrowUpRight } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
@@ -56,8 +55,6 @@ const Mentorship = () => {
         title={<>Guiding Africa's<br /><span className="italic font-light text-accent">emerging tech leaders.</span></>}
         body="We connect ambitious students and early-stage innovators with experienced global industry leaders for 1-on-1 career guidance, technical coaching, and network growth."
         ghost="MENTOR"
-        image={heroBackdrops.mentorship}
-        imageAlt="Mentor coaching a student at a Tech Hub Africa session"
         stats={[
           { val: "120+", label: "Active Mentors" },
           { val: "600+", label: "Mentees Matched" },

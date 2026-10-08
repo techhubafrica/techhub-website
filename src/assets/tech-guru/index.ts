@@ -12,7 +12,9 @@ import awards from "./tech-guru-9460.webp.asset.json";
 import interview from "./tech-guru-9555.webp.asset.json";
 import team from "./tech-guru-9615.webp.asset.json";
 
-const url = (asset: { url: string }) => asset.url;
+const CDN_BASE = "https://d4a8a1c6-054e-44fe-b6e5-31579c478a0c.lovableproject.com";
+const url = (asset: { url: string }) =>
+  asset.url.startsWith("/__l5e") ? `${CDN_BASE}${asset.url}` : asset.url;
 
 export const techGuruAudience = url(audience);
 export const techGuruAuditorium = url(auditorium);

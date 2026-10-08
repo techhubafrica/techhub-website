@@ -38,12 +38,15 @@ const Gallery = () => {
 
       {/* ---------- Editorial masthead ---------- */}
       <section className="relative overflow-hidden bg-primary text-primary-foreground pt-36 pb-20 md:pt-44 md:pb-28">
+        {/* Ambient brand glow & subtle pattern */}
+        <div className="absolute -top-24 right-[-10%] h-[420px] w-[420px] rounded-full bg-accent/20 blur-[120px] pointer-events-none" />
         <div
-          className="absolute inset-0 opacity-25 bg-cover bg-center"
-          style={{ backgroundImage: `url(${ktuAll[0]})` }}
+          className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]"
+          style={{
+            backgroundImage: "radial-gradient(hsl(var(--primary-foreground)) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/85 to-primary/60" />
-        <div className="absolute -top-24 right-[-10%] h-[420px] w-[420px] rounded-full bg-accent/20 blur-[120px]" />
         <div className="relative container mx-auto px-5 sm:px-6 lg:px-10">
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.25em] backdrop-blur">

@@ -14,7 +14,7 @@ interface PageHeroProps {
   imageAlt?: string;
 }
 
-const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: PageHeroProps) => {
+const PageHero = ({ tag, title, body, ghost, cta, stats }: PageHeroProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   /* spotlight follows the pointer through CSS vars — rAF throttled, zero re-renders */
@@ -49,73 +49,87 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
   return (
     <section
       ref={ref}
-      className={`relative bg-background text-foreground overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 select-none ${image ? "photo-hero-clear" : ""}`}
+      className="relative overflow-hidden bg-background text-foreground pt-28 pb-14 sm:pt-36 sm:pb-20 md:pt-44 md:pb-24 select-none"
     >
-      {/* Backdrop photograph */}
-      {image && (
-        <img
-          src={image}
-          alt={imageAlt ?? ""}
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-          draggable={false}
-          className="absolute inset-0 w-full h-full object-cover animate-slow-zoom"
-        />
-      )}
-
-      {/* Non-photo heroes retain their brand backdrop; photographs stay untouched. */}
-      {!image && <div
-        className="absolute inset-0 z-[1] pointer-events-none"
+      {/* ── Ambient brand illumination ── */}
+      <div
+        className="absolute top-0 right-0 w-[550px] h-[550px] rounded-full blur-3xl opacity-35 pointer-events-none"
         style={{
-          background: "linear-gradient(110deg, hsl(var(--background)) 0%, hsl(var(--primary) / 0.45) 100%)",
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.7) 0%, transparent 70%)",
         }}
-      />}
+      />
+      <div
+        className="hidden md:block absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full blur-3xl opacity-20 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 65%)",
+        }}
+      />
 
-      {/* Top vignette — blends into the white navigation zone */}
-      {!image && <div className="absolute inset-x-0 top-0 h-32 z-[2] pointer-events-none bg-gradient-to-b from-background/50 to-transparent" />}
+      {/* Mouse-tracked amber spotlight */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none hidden md:block"
+        style={{
+          background:
+            "radial-gradient(650px circle at var(--sx, 50%) var(--sy, 50%), hsl(28 92% 50% / 0.07), transparent 60%)",
+        }}
+      />
 
+      {/* Subtle architectural dot matrix grid */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]"
+        style={{
+          backgroundImage: "radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
 
-      {/* Logo watermark */}
-      {ghost && !image && (
-        <div className="absolute inset-0 z-[1] flex items-center justify-end pointer-events-none overflow-hidden">
-          <img
-            src={logoWatermark}
-            alt=""
-            aria-hidden="true"
-            draggable={false}
-            className="select-none h-[clamp(10rem,38vw,28rem)] w-auto mr-[3%] opacity-[0.06]"
-            style={{
-              filter: "grayscale(1)",
-              maskImage: "linear-gradient(to left, black 60%, transparent 100%)",
-              WebkitMaskImage: "linear-gradient(to left, black 60%, transparent 100%)",
-            }}
-          />
+      {/* Ghost watermark text */}
+      {ghost && (
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none overflow-hidden pr-6 md:pr-12 z-0">
+          <span
+            className="font-display font-black uppercase text-foreground/[0.035] tracking-tighter leading-none block whitespace-nowrap"
+            style={{ fontSize: "clamp(6rem, 20vw, 18rem)" }}
+          >
+            {ghost}
+          </span>
         </div>
       )}
 
+      {/* Subtle logo watermark */}
+      <div className="absolute right-[-4%] top-1/2 -translate-y-1/2 select-none pointer-events-none overflow-hidden z-0 opacity-[0.035]">
+        <img
+          src={logoWatermark}
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          className="h-[clamp(14rem,35vw,26rem)] w-auto grayscale"
+        />
+      </div>
+
       {/* Vertical brand rail */}
-      <div className="hidden xl:flex absolute left-6 top-0 bottom-0 flex-col items-center justify-center gap-4 z-10 pointer-events-none">
-        <div className="w-px h-20 bg-gradient-to-b from-transparent to-primary/20" />
+      <div className="hidden xl:flex absolute left-8 top-0 bottom-0 flex-col items-center justify-center gap-4 z-10 pointer-events-none">
+        <div className="w-px h-20 bg-gradient-to-b from-transparent to-foreground/15" />
         <span className="text-[8px] font-bold uppercase tracking-[0.55em] text-foreground/35 [writing-mode:vertical-rl] rotate-180">
           Tech Hub Africa
         </span>
-        <div className="w-px h-20 bg-gradient-to-t from-transparent to-primary/20" />
+        <div className="w-px h-20 bg-gradient-to-t from-transparent to-foreground/15" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 shell xl:px-20">
         {/* Tag pill */}
-        <div className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-3.5 sm:px-4 py-1.5 rounded-full border border-foreground/15 bg-card/10 backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-3.5 sm:px-4 py-1.5 rounded-full border border-foreground/12 bg-primary/20 backdrop-blur-xs">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-          <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.28em] sm:tracking-[0.35em] text-foreground/70">{tag}</span>
+          <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.28em] sm:tracking-[0.35em] text-foreground/80">
+            {tag}
+          </span>
         </div>
 
         {/* Display title */}
         <h1
           className="font-display font-black tracking-[-0.04em] text-foreground animate-fade-up max-w-[22ch]"
           style={{
-            fontSize: "clamp(2.1rem, 8.5vw, 6rem)",
+            fontSize: "clamp(2.3rem, 6.5vw, 5.2rem)",
             lineHeight: 0.94,
           }}
         >
@@ -129,9 +143,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         </div>
 
         {/* Body */}
-        <p
-          className={`animate-fade-up stagger-2 text-foreground font-medium text-[0.95rem] sm:text-base md:text-[1.15rem] leading-[1.75] sm:leading-[1.8] max-w-[580px] ${image ? "photo-hero-copy" : ""}`}
-        >
+        <p className="animate-fade-up stagger-2 text-muted-foreground text-[0.98rem] sm:text-base md:text-[1.12rem] leading-[1.8] max-w-[620px]">
           {body}
         </p>
 
@@ -143,16 +155,20 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
           <div className="mt-10 pt-8 sm:mt-14 sm:pt-10 border-t border-foreground/10 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-7 sm:gap-8 animate-fade-up stagger-3">
             {stats.map((s) => (
               <div key={s.label}>
-                <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-foreground leading-none">{s.val}</p>
-                <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.22em] sm:tracking-[0.3em] text-accent mt-2">{s.label}</p>
+                <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-foreground leading-none">
+                  {s.val}
+                </p>
+                <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.22em] sm:tracking-[0.3em] text-accent mt-2">
+                  {s.label}
+                </p>
               </div>
             ))}
           </div>
         )}
       </div>
 
-      {/* Bottom edge fade — settles into the white page below */}
-      {!image && <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 z-[2] pointer-events-none bg-gradient-to-t from-background to-transparent" />}
+      {/* Subtle bottom edge line */}
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent pointer-events-none" />
     </section>
   );
 };
