@@ -174,19 +174,15 @@ const Events = () => {
 
       <main className="page-entry bg-background overflow-hidden">
         {/* ══ HERO — FEATURED EVENT ══ */}
-        <section className="relative overflow-hidden bg-background text-foreground pt-20 sm:pt-24 md:pt-28">
+        <section className="photo-hero-clear relative overflow-hidden bg-background text-foreground pt-20 sm:pt-24 md:pt-28">
           <div className="absolute inset-0">
             <img src={techGuruAudience} alt="Attendees at the Tech Guru Meetup in Accra"
               className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(100deg, hsl(0 0% 100% / 0.5) 0%, hsl(0 0% 100% / 0.26) 40%, hsl(0 0% 100% / 0.06) 74%, hsl(0 0% 100% / 0) 100%)" }} />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_90%,hsl(28_92%_50%/0.14),transparent_60%)]" />
-            <div className="noise-bg" />
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 py-14 sm:py-20 md:py-24 lg:py-28">
-            <div className="card-lift sheen glass-cream max-w-2xl rounded-3xl p-8 md:p-12" style={{ backdropFilter: "blur(18px)" }}>
+            <div className="max-w-2xl p-8 md:p-12">
               <div className="flex items-center gap-3 mb-6">
                 <span className="h-px w-8 bg-accent" />
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">
@@ -196,7 +192,7 @@ const Events = () => {
               <h1 className="font-display font-black text-foreground text-[2.6rem] md:text-[4rem] leading-[0.92] tracking-tight">
                 Tech Guru<br />Meetup 2026
               </h1>
-              <p className="mt-4 font-display font-extrabold text-accent text-lg md:text-xl tracking-tight leading-snug">
+              <p className="photo-hero-copy mt-4 font-display font-extrabold text-accent text-lg md:text-xl tracking-tight leading-snug">
                 The Augmented Continent: Where Africa Builds, Showcases &amp; Scales The Future.
               </p>
               <p className="mt-7 font-display font-extrabold text-foreground text-lg md:text-xl">
@@ -224,7 +220,7 @@ const Events = () => {
             </div>
 
             {/* Countdown */}
-            <div className="glass-cream mt-12 rounded-2xl px-6 py-5 flex flex-wrap items-center gap-8" style={{ backdropFilter: "blur(14px)" }}>
+            <div className="photo-hero-detail mt-12 rounded-lg px-6 py-5 flex flex-wrap items-center gap-8">
               <span className="text-[9px] font-black uppercase tracking-[0.3em] text-foreground/45">Countdown</span>
               <div className="flex items-center gap-6">
                 {[

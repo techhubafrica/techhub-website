@@ -49,7 +49,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
   return (
     <section
       ref={ref}
-      className="relative bg-background text-foreground overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 select-none"
+      className={`relative bg-background text-foreground overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 select-none ${image ? "photo-hero-clear" : ""}`}
     >
       {/* Backdrop photograph */}
       {image && (
@@ -64,22 +64,20 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         />
       )}
 
-      {/* Clear neutral overlay — one readable layer that preserves true photo colour */}
-      <div
+      {/* Non-photo heroes retain their brand backdrop; photographs stay untouched. */}
+      {!image && <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
-          background: image
-            ? "linear-gradient(90deg, hsl(var(--background) / 0.5) 0%, hsl(var(--background) / 0.32) 34%, hsl(var(--background) / 0.1) 62%, hsl(var(--background) / 0.02) 100%)"
-            : "linear-gradient(110deg, hsl(var(--background)) 0%, hsl(var(--primary) / 0.45) 100%)",
+          background: "linear-gradient(110deg, hsl(var(--background)) 0%, hsl(var(--primary) / 0.45) 100%)",
         }}
-      />
+      />}
 
       {/* Top vignette — blends into the white navigation zone */}
-      <div className={`absolute inset-x-0 top-0 ${image ? "h-28" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-background/50 to-transparent`} />
+      {!image && <div className="absolute inset-x-0 top-0 h-32 z-[2] pointer-events-none bg-gradient-to-b from-background/50 to-transparent" />}
 
 
       {/* Logo watermark */}
-      {ghost && (
+      {ghost && !image && (
         <div className="absolute inset-0 z-[1] flex items-center justify-end pointer-events-none overflow-hidden">
           <img
             src={logoWatermark}
@@ -108,7 +106,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
       {/* Content */}
       <div className="relative z-10 shell xl:px-20">
         {/* Tag pill */}
-        <div className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-3.5 sm:px-4 py-1.5 rounded-full border border-foreground/15 bg-card/70">
+        <div className="inline-flex items-center gap-2.5 mb-6 sm:mb-8 px-3.5 sm:px-4 py-1.5 rounded-full border border-foreground/15 bg-card/10 backdrop-blur-sm">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
           <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.28em] sm:tracking-[0.35em] text-foreground/70">{tag}</span>
         </div>
@@ -119,7 +117,6 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
           style={{
             fontSize: "clamp(2.1rem, 8.5vw, 6rem)",
             lineHeight: 0.94,
-            textShadow: "0 1px 2px hsl(var(--background) / 0.55), 0 4px 24px hsl(var(--background) / 0.45), 0 0 60px hsl(var(--background) / 0.35)",
           }}
         >
           {title}
@@ -133,8 +130,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
 
         {/* Body */}
         <p
-          className="animate-fade-up stagger-2 text-muted-foreground text-[0.95rem] sm:text-base md:text-[1.15rem] leading-[1.75] sm:leading-[1.8] max-w-[580px]"
-          style={{ textShadow: "0 1px 2px hsl(var(--background) / 0.6), 0 2px 16px hsl(var(--background) / 0.5)" }}
+          className={`animate-fade-up stagger-2 text-foreground font-medium text-[0.95rem] sm:text-base md:text-[1.15rem] leading-[1.75] sm:leading-[1.8] max-w-[580px] ${image ? "photo-hero-copy" : ""}`}
         >
           {body}
         </p>
@@ -156,7 +152,7 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
       </div>
 
       {/* Bottom edge fade — settles into the white page below */}
-      <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 z-[2] pointer-events-none bg-gradient-to-t from-background to-transparent" />
+      {!image && <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 z-[2] pointer-events-none bg-gradient-to-t from-background to-transparent" />}
     </section>
   );
 };

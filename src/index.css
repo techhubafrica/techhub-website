@@ -43,6 +43,8 @@
     --amber: 28 92% 44%;
     --cream: 0 0% 100%;
     --cream-warm: 0 0% 97%;
+    --hero-text-edge: 0 0% 100%;
+    --hero-glass: 0 0% 100%;
 
     --sidebar-background: 153 64% 86%;
     --sidebar-foreground: 156 24% 12%;
@@ -105,6 +107,24 @@
 
 @layer utilities {
   .font-display { font-family: 'Urbanist', system-ui, sans-serif; }
+
+  /* Readability stays on the lettering and copy, never across the photograph. */
+  .photo-hero-clear h1,
+  .photo-hero-clear p,
+  .photo-hero-clear span {
+    text-shadow: 0 1px 1px hsl(var(--hero-text-edge) / 0.9);
+  }
+  .photo-hero-copy {
+    background: hsl(var(--hero-glass) / 0.08);
+    backdrop-filter: blur(4px);
+    border-left: 2px solid hsl(var(--accent));
+    padding: 0.6rem 0.85rem;
+  }
+  .photo-hero-detail {
+    background: hsl(var(--hero-glass) / 0.1);
+    border: 1px solid hsl(var(--hero-glass) / 0.25);
+    backdrop-filter: blur(4px);
+  }
 
   .eyebrow { @apply text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em]; }
 
