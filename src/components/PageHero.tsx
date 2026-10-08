@@ -69,13 +69,13 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background: image
-            ? "linear-gradient(90deg, hsl(var(--background) / 0.9) 0%, hsl(var(--background) / 0.76) 34%, hsl(var(--background) / 0.28) 62%, hsl(var(--background) / 0.08) 100%)"
+            ? "linear-gradient(90deg, hsl(var(--background) / 0.5) 0%, hsl(var(--background) / 0.32) 34%, hsl(var(--background) / 0.1) 62%, hsl(var(--background) / 0.02) 100%)"
             : "linear-gradient(110deg, hsl(var(--background)) 0%, hsl(var(--primary) / 0.45) 100%)",
         }}
       />
 
       {/* Top vignette — blends into the white navigation zone */}
-      <div className={`absolute inset-x-0 top-0 ${image ? "h-28" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-background/80 to-transparent`} />
+      <div className={`absolute inset-x-0 top-0 ${image ? "h-28" : "h-32"} z-[2] pointer-events-none bg-gradient-to-b from-background/50 to-transparent`} />
 
 
       {/* Logo watermark */}
@@ -116,7 +116,11 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         {/* Display title */}
         <h1
           className="font-display font-black tracking-[-0.04em] text-foreground animate-fade-up max-w-[22ch]"
-          style={{ fontSize: "clamp(2.1rem, 8.5vw, 6rem)", lineHeight: 0.94 }}
+          style={{
+            fontSize: "clamp(2.1rem, 8.5vw, 6rem)",
+            lineHeight: 0.94,
+            textShadow: "0 1px 2px hsl(var(--background) / 0.55), 0 4px 24px hsl(var(--background) / 0.45), 0 0 60px hsl(var(--background) / 0.35)",
+          }}
         >
           {title}
         </h1>
@@ -128,7 +132,10 @@ const PageHero = ({ tag, title, body, ghost, cta, stats, image, imageAlt }: Page
         </div>
 
         {/* Body */}
-        <p className="animate-fade-up stagger-2 text-muted-foreground text-[0.95rem] sm:text-base md:text-[1.15rem] leading-[1.75] sm:leading-[1.8] max-w-[580px]">
+        <p
+          className="animate-fade-up stagger-2 text-muted-foreground text-[0.95rem] sm:text-base md:text-[1.15rem] leading-[1.75] sm:leading-[1.8] max-w-[580px]"
+          style={{ textShadow: "0 1px 2px hsl(var(--background) / 0.6), 0 2px 16px hsl(var(--background) / 0.5)" }}
+        >
           {body}
         </p>
 
