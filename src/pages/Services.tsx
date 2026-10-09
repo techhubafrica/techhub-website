@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { ShieldCheck, Code, Rocket, GraduationCap, Box, ArrowUpRight, CheckCircle2, X } from "lucide-react";
+import { ShieldCheck, Code, Rocket, GraduationCap, Box, ArrowUpRight, CheckCircle2, X, Workflow, MessagesSquare } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 import ClientShowcase from "@/components/ClientShowcase";
@@ -47,6 +47,37 @@ const servicesList = [
     desc: "Connecting students, creators, and founders across borders into immersive 3D virtual spaces, Web3 labs, VR training environments, and digital campus hubs.",
     features: ["Virtual Campus & VR Classrooms", "3D Event & Exhibition Halls", "Web3 & Immersive Tech Labs", "Borderless African Collaborations"],
     tag: "Emerging", accent: "hsl(28 92% 44%)",
+  },
+];
+
+/* ── Productivity & Efficiency: the operating layer beneath the software ── */
+const productivityList = [
+  {
+    num: "01",
+    icon: Workflow,
+    tag: "Efficiency",
+    title: "Smart Work",
+    subtitle: "Curated efficiency programs & tools for employees",
+    desc: "We design and roll out the working systems your teams actually adopt — curated productivity stacks, automation playbooks and enablement programmes that turn scattered tools into measurable output.",
+    features: ["Curated Tool Stacks", "Workflow Automation Playbooks", "Team Enablement Programmes", "Output & Time Analytics"],
+  },
+  {
+    num: "02",
+    icon: MessagesSquare,
+    tag: "Platform",
+    title: "CRM & Corporate Communication Platform",
+    subtitle: "One connected spine for customers, teams and stakeholders",
+    desc: "A single platform where leads, clients, campaigns and internal channels live together — so every conversation, deal and announcement stays traceable from first touch to renewal.",
+    features: ["Pipeline & Client Records", "Unified Messaging Channels", "Campaign & Outreach Automation", "Executive Dashboards"],
+  },
+  {
+    num: "03",
+    icon: ShieldCheck,
+    tag: "Security",
+    title: "Threat Lock",
+    subtitle: "Cyber security mitigation services",
+    desc: "Threat Lock closes the gaps attackers exploit — continuous monitoring, rapid mitigation and hardening across web, cloud and endpoint surfaces, with zero latency overhead for your users.",
+    features: ["Real-Time Threat Mitigation", "Attack Surface Hardening", "Incident Response Drills", "Compliance & Audit Reporting"],
   },
 ];
 
@@ -207,6 +238,103 @@ const Services = () => {
               </div>
             </Reveal>
           ))}
+        </section>
+
+        {/* ══ PRODUCTIVITY & EFFICIENCY ══ */}
+        <section id="productivity" className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 lg:py-32 max-w-7xl mx-auto">
+          <div className="hidden md:block absolute top-16 left-0 w-[440px] h-[440px] rounded-full blur-3xl opacity-[0.16] pointer-events-none bg-[radial-gradient(circle,hsl(156_62%_58%/0.55),transparent_70%)]" />
+
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+            {/* Heading block */}
+            <Reveal className="lg:col-span-5">
+              <div className="lg:sticky lg:top-28">
+                <div className="flex items-baseline gap-6 mb-6">
+                  <span className="eyebrow text-accent">02 — Productivity &amp; Efficiency</span>
+                  <div className="flex-1 divider-elegant" />
+                </div>
+                <h2 className="font-display font-extrabold text-foreground leading-[0.9] tracking-tight text-[2.1rem] sm:text-[3rem] md:text-[3.4rem]">
+                  Productivity <span className="italic font-light text-accent">and</span><br />
+                  Efficiency
+                </h2>
+                <p className="mt-6 text-sm md:text-base text-foreground/65 leading-relaxed max-w-md">
+                  The operating layer beneath the software: programmes, platforms and protection that keep
+                  teams moving, customers close and the business secure.
+                </p>
+                <div className="mt-8 flex items-center gap-3">
+                  <span className="h-px w-16 bg-accent/45" />
+                  <span className="text-[9px] font-black uppercase tracking-[0.3em] text-foreground/40">
+                    Three capabilities
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Ledger rows */}
+            <div className="lg:col-span-7 space-y-5">
+              {productivityList.map((p, idx) => (
+                <Reveal key={p.title} delay={idx * 0.08}>
+                  <div className="card-lift art-card sheen noise-soft group relative overflow-hidden rounded-3xl p-7 sm:p-9">
+                    <span
+                      className="pointer-events-none absolute -top-8 right-4 font-display font-black leading-none select-none text-[7rem] sm:text-[9rem] opacity-60"
+                      style={{ color: "hsl(var(--primary))" }}
+                      aria-hidden="true"
+                    >
+                      {p.num}
+                    </span>
+
+                    <div className="relative flex items-start gap-5 sm:gap-7">
+                      <div
+                        className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shrink-0 text-accent"
+                        style={{ background: "hsl(var(--primary) / 0.5)", border: "1px solid hsl(var(--primary))" }}
+                      >
+                        <p.icon className="w-5 h-5" strokeWidth={1.5} />
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="text-[9px] font-black uppercase tracking-[0.3em] text-accent bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20 shrink-0">
+                            {p.tag}
+                          </span>
+                          <span className="h-px w-8 bg-accent/30" />
+                        </div>
+
+                        <h3 className="font-display font-extrabold text-foreground text-xl sm:text-2xl tracking-tight leading-snug group-hover:text-accent transition-colors">
+                          {p.title}
+                        </h3>
+                        <p className="mt-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-foreground/50">
+                          {p.subtitle}
+                        </p>
+                        <p className="mt-4 text-sm text-foreground/65 leading-relaxed">{p.desc}</p>
+
+                        <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6">
+                          {p.features.map((f) => (
+                            <div key={f} className="flex items-center gap-2.5 text-xs font-semibold text-foreground/75">
+                              <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                              {f}
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="mt-6 pt-5 border-t border-foreground/10 flex items-center justify-between gap-4">
+                          <span className="font-display font-black text-[10px] uppercase tracking-[0.3em] text-foreground/25 select-none">
+                            {p.num} / 03
+                          </span>
+                          <button
+                            onClick={() => openQuoteModal(p.title)}
+                            className="btn-magnetic inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.25em] text-foreground/55 hover:text-accent transition-colors duration-250"
+                          >
+                            Request Service <ArrowUpRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* ══ LIVE CLIENT WEBSITES SHOWCASE ══ */}
