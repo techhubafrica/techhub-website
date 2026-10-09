@@ -3,6 +3,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { Mic, ArrowUpRight, X, CheckCircle2 } from "lucide-react";
 import { ktuGallery } from "@/assets/ktu";
 import { heroKeynote, networking } from "@/assets/photos";
 import { techGuruPanel, techGuruAuditorium } from "@/assets/tech-guru";
