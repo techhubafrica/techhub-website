@@ -4,16 +4,14 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { Mic, ArrowUpRight, X, CheckCircle2 } from "lucide-react";
-import { ktuGallery } from "@/assets/ktu";
 import { heroKeynote, networking } from "@/assets/photos";
-import { techGuruPanel, techGuruAuditorium } from "@/assets/tech-guru";
+import { techGuruPanel, techGuruAuditorium, techGuruShowcase, techGuruNetworking, techGuruAwards, techGuruTeam } from "@/assets/tech-guru";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 
 const articles = [
   { id: 1, num: "01", title: "AI Infrastructure Trends Across West Africa", category: "TechNews Tuesday", date: "July 2026", excerpt: "How African cloud providers and developer communities are deploying low-latency LLMs locally — breaking the dependency on foreign infrastructure." },
   { id: 2, num: "02", title: "5 Steps to Securing Web Apps Against DDoS", category: "TechTip Thursday", date: "July 2026", excerpt: "Practical hardening steps for React and Node deployments — tested against real-world attack patterns captured by Threat Lock's monitoring data." },
-  { id: 3, num: "03", title: "Campus Tour Reaches 25 University Hubs", category: "TechNews Tuesday", date: "June 2026", excerpt: "Highlights and student project showcases from Tech Hub Africa's nationwide digital literacy campaign — 10,400+ students trained in 2026 alone." },
 ];
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -140,14 +138,14 @@ const Media = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[
-              { src: ktuGallery[12], alt: "Students engaged in interactive digital literacy training during the Campus Tour", span: "md:col-span-2 md:row-span-2" },
+              { src: techGuruShowcase, alt: "Enterprise innovation showcase at Tech Guru Meetup", span: "md:col-span-2 md:row-span-2" },
               { src: networking, alt: "Founders networking at the Tech Guru Meetup", span: "" },
               { src: techGuruPanel, alt: "Panel discussion at the Tech Guru Meetup", span: "" },
               { src: heroKeynote, alt: "Keynote speaker addressing the Tech Guru Meetup", span: "" },
               { src: techGuruAuditorium, alt: "Auditorium session at the Tech Guru Meetup in Accra", span: "" },
-              { src: ktuGallery[6], alt: "Students in a tablet training session at KTU", span: "md:col-span-2" },
-              { src: ktuGallery[20], alt: "Computer lab session during the KTU campus tour", span: "" },
-              { src: ktuGallery[33], alt: "Mentor guiding students at the KTU campus tour", span: "" },
+              { src: techGuruNetworking, alt: "Business networking at Tech Guru Meetup", span: "md:col-span-2" },
+              { src: techGuruAwards, alt: "Awards at Tech Guru Meetup", span: "" },
+              { src: techGuruTeam, alt: "Tech Hub Africa event team", span: "" },
             ].map((img, i) => (
               <Reveal key={img.alt} delay={i * 0.06} className={img.span}>
                 <figure className="card-lift sheen group relative overflow-hidden rounded-3xl border border-foreground/10 w-full h-full min-h-[220px]">
@@ -161,8 +159,8 @@ const Media = () => {
 
           <div className="mt-12 flex justify-center">
             <Link to="/gallery" className="group inline-flex items-center gap-3 rounded-full bg-primary px-8 py-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent">
-              Open the KTU 2026 archive
-              <span className="text-primary-foreground/60 group-hover:text-primary-foreground">88 photos</span>
+              Open the Tech Guru Meetup archive
+              <span className="text-primary-foreground/60 group-hover:text-primary-foreground">12 photos</span>
             </Link>
           </div>
         </section>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { ShieldCheck, Code, Rocket, GraduationCap, Box, ArrowUpRight, CheckCircle2, X, Workflow, MessagesSquare } from "lucide-react";
+import { ShieldCheck, Code, Rocket, Building2, Box, ArrowUpRight, CheckCircle2, X, Workflow, MessagesSquare } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 import ClientShowcase from "@/components/ClientShowcase";
@@ -33,19 +33,19 @@ const servicesList = [
     tag: "Flagship", accent: "hsl(28 92% 44%)",
   },
   {
-    num: "04", id: "campus", icon: GraduationCap,
-    title: "Tech4All Campus & Talent Development",
-    subtitle: "In-demand skills for the next generation.",
-    desc: "Nationwide campus tours and hands-on bootcamps training students in cloud, cybersecurity, software engineering, and AI across West Africa.",
-    features: ["University Workshops & Hackathons", "Hands-on Tech Bootcamps", "Internship & Job Placement", "Industry Mentorship Network"],
-    tag: "Impact", accent: "hsl(156 24% 24%)",
+    num: "04", id: "enterprise", icon: Building2,
+    title: "Enterprise Solutions",
+    subtitle: "Connected systems built around your business.",
+    desc: "Custom enterprise platforms that connect business processes, operational data and existing tools into one dependable working environment.",
+    features: ["Business Process Automation", "Enterprise System Integration", "Custom Business Applications", "Operational Reporting"],
+    tag: "Enterprise", accent: "hsl(var(--foreground))",
   },
   {
     num: "05", id: "metaverse", icon: Box,
     title: "Global Metaverse & Immersive VR Labs",
-    subtitle: "Virtual classrooms, 3D labs, and borderless African tech spaces.",
-    desc: "Connecting students, creators, and founders across borders into immersive 3D virtual spaces, Web3 labs, VR training environments, and digital campus hubs.",
-    features: ["Virtual Campus & VR Classrooms", "3D Event & Exhibition Halls", "Web3 & Immersive Tech Labs", "Borderless African Collaborations"],
+    subtitle: "Immersive experiences for enterprise training and exhibitions.",
+    desc: "Immersive virtual spaces for corporate training, product demonstrations, exhibitions and distributed business teams.",
+    features: ["Corporate Training Environments", "3D Event & Exhibition Halls", "Immersive Product Demonstrations", "Distributed Team Collaboration"],
     tag: "Emerging", accent: "hsl(28 92% 44%)",
   },
 ];
@@ -72,6 +72,15 @@ const productivityList = [
   },
   {
     num: "03",
+    icon: Building2,
+    tag: "Workplace",
+    title: "Corporate Intranet",
+    subtitle: "A secure home for your organisation’s information",
+    desc: "Connect employees with company news, shared knowledge and internal resources through an intranet tailored to your organisation.",
+    features: ["Employee Directory", "Company News & Announcements", "Document & Knowledge Hub", "Access-Controlled Team Spaces"],
+  },
+  {
+    num: "04",
     icon: ShieldCheck,
     tag: "Security",
     title: "Threat Lock",
@@ -160,12 +169,12 @@ const Services = () => {
       <PageHero
         tag="What We Build"
         title={<>Engineering solutions for<br /><span className="italic font-light text-accent">Africa's digital future.</span></>}
-        body="From enterprise software and cybersecurity to startup incubation and talent development — technical excellence delivered across the continent."
+        body="From enterprise software and cybersecurity to startup incubation and enterprise integration — technical excellence delivered across the continent."
         ghost="BUILD"
         stats={[
           { val: "50+", label: "Projects Shipped" },
           { val: "12k+", label: "Developers Reached" },
-          { val: "4", label: "Service Pillars" },
+          { val: "5", label: "Service Pillars" },
           { val: "10+", label: "Countries Active" },
         ]}
       />
@@ -263,7 +272,7 @@ const Services = () => {
                 <div className="mt-8 flex items-center gap-3">
                   <span className="h-px w-16 bg-accent/45" />
                   <span className="text-[9px] font-black uppercase tracking-[0.3em] text-foreground/40">
-                    Three capabilities
+                    Four capabilities
                   </span>
                 </div>
               </div>
@@ -317,7 +326,7 @@ const Services = () => {
 
                         <div className="mt-6 pt-5 border-t border-foreground/10 flex items-center justify-between gap-4">
                           <span className="font-display font-black text-[10px] uppercase tracking-[0.3em] text-foreground/25 select-none">
-                            {p.num} / 03
+                            {p.num} / 04
                           </span>
                           <button
                             onClick={() => openQuoteModal(p.title)}
