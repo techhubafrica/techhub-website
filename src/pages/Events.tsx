@@ -20,16 +20,16 @@ import Marquee from "@/components/Marquee";
 /* ── Ticket tiers for the flagship meetup (rate set by Tech Hub Africa) ── */
 const ticketTiers = [
   {
-    id: "general", name: "General Ticket", price: "GH₵100",
-    blurb: "Full access to keynotes, panels, live demos, and the networking floor.",
-    perks: ["All keynote sessions", "Exhibition & demo floor", "Networking reception"],
-    pay: "https://paystack.shop/pay/bpbi3v7b-o",
-  },
-  {
     id: "student", name: "Student Ticket", price: "GH₵50",
     blurb: "Discounted admission for students with a valid school ID.",
     perks: ["All keynote sessions", "Career & mentorship corner", "Student ID required at entry"],
     pay: "https://paystack.shop/pay/ince1ae1jh",
+  },
+  {
+    id: "general", name: "General Ticket", price: "GH₵100",
+    blurb: "Full access to keynotes, panels, live demos, and the networking floor.",
+    perks: ["All keynote sessions", "Exhibition & demo floor", "Networking reception"],
+    pay: "https://paystack.shop/pay/bpbi3v7b-o",
   },
   {
     id: "corporate", name: "Corporate Ticket", price: "GH₵200",
@@ -50,7 +50,6 @@ const ticketTiers = [
 const sponsorTracks = [
   { key: "meetup", label: "Tech Guru Meetup", note: "Stage, lounge and speaker branding at the flagship night." },
   { key: "tradeshow", label: "The Hub Tradeshow", note: "Booth placement in the live innovation showcase." },
-  { key: "seminar", label: "Innovation & Leadership Seminar", note: "Executive audience, thought-leadership slot." },
   { key: "pitch", label: "Startup Pitch Competition", note: "Naming rights on the pitch stage and the prize." },
 ];
 
@@ -317,7 +316,7 @@ const Events = () => {
               Upcoming <span className="italic font-light text-accent">events.</span>
             </h2>
             <p className="mt-5 max-w-2xl text-sm sm:text-base text-foreground/65 leading-relaxed">
-              Four gatherings, one season — the flagship meetup, a tradeshow, a leadership seminar and a
+              Three gatherings, one season — the flagship meetup, a tradeshow and a
               pitch competition. All at La Palm Royal Beach Hotel, Accra.
             </p>
           </Reveal>
@@ -450,8 +449,8 @@ const Events = () => {
                       <span className={`block italic font-light text-base mt-1 ${t.featured ? "text-accent" : "text-foreground/45"}`}>ticket</span>
                     </h3>
 
-                    <p className="mt-5 flex items-baseline gap-2">
-                      <span className={`font-display font-black text-[2.9rem] leading-none tracking-tight ${t.featured ? "text-primary-foreground" : "text-foreground"}`}>{t.price}</span>
+                    <p className="mt-5 flex flex-wrap items-baseline gap-2">
+                      <span className={`font-display font-black text-[2.25rem] leading-none tracking-tight ${t.featured ? "text-primary-foreground" : "text-foreground"}`}>{t.price}</span>
                       <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${t.featured ? "text-primary-foreground/50" : "text-foreground/40"}`}>/ seat</span>
                     </p>
 

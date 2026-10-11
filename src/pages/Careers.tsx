@@ -21,7 +21,6 @@ import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 import {
   internshipsFlyer,
-  campusTourFlyer,
   careerDigitalMarketing,
   serviceSoftware,
   serviceWebDesign,
@@ -102,7 +101,7 @@ const culturePillars = [
   {
     icon: Sparkles,
     title: "Purpose & Transformational Impact",
-    desc: "Every product, line of code, and campus tour directly empowers African talent and digitizes vital industries across the continent.",
+    desc: "Every product and line of code helps our clients work smarter and strengthens Africa’s digital economy.",
   },
   {
     icon: Heart,
@@ -124,7 +123,7 @@ const culturePillars = [
 const internshipTracks = [
   { title: "Software Engineering", desc: "Build full-stack web platforms and cloud microservices alongside senior engineers." },
   { title: "Cybersecurity & WAF", desc: "Hands-on training in threat monitoring, vulnerability scanning, and security auditing." },
-  { title: "Event & Marketing", desc: "Plan summit logistics, campus tour workshops, digital media campaigns, and public relations." },
+  { title: "Event & Marketing", desc: "Plan summit logistics, corporate workshops, digital media campaigns, and public relations." },
   { title: "Research & Operations", desc: "Perform tech sector research, startup incubation support, and partner ecosystem management." },
 ];
 
@@ -258,6 +257,22 @@ const Careers = () => {
                   </div>
                 </div>
               </Reveal>
+            ))}
+          </div>
+        </section>
+
+        <section id="reviews" className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 py-16 sm:py-20">
+          <Reveal className="mb-10">
+            <span className="eyebrow text-accent">Our People — Reviews</span>
+            <h2 className="mt-4 font-display font-extrabold text-foreground text-3xl sm:text-5xl leading-tight">Intern &amp; employee <span className="font-light italic text-accent">voices.</span></h2>
+          </Reveal>
+          <div className="grid gap-6 md:grid-cols-2">
+            {["Intern", "Employee"].map((role) => (
+              <figure key={role} className="art-card rounded-lg p-7 sm:p-9">
+                <span className="text-xs font-semibold uppercase text-accent">{role} review · Placeholder</span>
+                <p className="mt-6 text-lg font-display text-muted-foreground">Review coming soon.</p>
+                <figcaption className="mt-8 border-t border-border pt-5 text-sm text-muted-foreground">Name and role to be added</figcaption>
+              </figure>
             ))}
           </div>
         </section>
@@ -662,7 +677,7 @@ const Careers = () => {
                 {
                   num: "02",
                   q: "How do I apply for an internship at Tech Hub Africa?",
-                  a: "Please send your resume and cover letter to info@techhubafrica.org or fill out the application form above.",
+                  a: "Please send your resume and cover letter to hr@techhubafrica.org or fill out the application form above.",
                 },
                 {
                   num: "03",
@@ -797,10 +812,10 @@ const Careers = () => {
                   <p className="text-xs sm:text-sm text-primary-foreground/75 leading-relaxed">
                     If you&rsquo;re interested in joining our mentorship program, please submit your request and areas of interest to:{" "}
                     <a
-                      href="mailto:info@techhubafrica.org"
+                      href="mailto:hr@techhubafrica.org"
                       className="font-bold text-accent hover:underline inline-flex items-center gap-1"
                     >
-                      info@techhubafrica.org <ArrowUpRight className="w-3.5 h-3.5" />
+                      hr@techhubafrica.org <ArrowUpRight className="w-3.5 h-3.5" />
                     </a>
                     . Our team will review your application and match you with a suitable mentor.
                   </p>

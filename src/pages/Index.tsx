@@ -8,12 +8,11 @@ import Footer from "@/components/Footer";
 import Logo from "@/components/Logo";
 import {
   heroAudience, heroPanel,
-  campusTourFlyer, hackathonFlyer, meetup2026Flyer, awardTop100, awardWhosWho,
+  hackathonFlyer, meetup2026Flyer, awardTop100, awardWhosWho,
   serviceProgramming, serviceSoftware, serviceWebDesign,
   portfolioGh, portfolioGmo, portfolioOfie, portfolioThreatLock,
 } from "@/assets/photos";
-import { ktuHero } from "@/assets/ktu";
-import { techGuruAudience } from "@/assets/tech-guru";
+import { techGuruAudience, techGuruShowcase, techGuruNetworking, techGuruPanel } from "@/assets/tech-guru";
 import Marquee from "@/components/Marquee";
 import { Link } from "react-router-dom";
 import ClientShowcase from "@/components/ClientShowcase";
@@ -25,54 +24,34 @@ import ClientShowcase from "@/components/ClientShowcase";
    ============================================================ */
 const heroSlides = [
   {
-    tag: "Featured Program",
-    kicker: "Tech For All",
-    title: "Campus Tours 2026",
-    body: "A continent-wide movement bringing hackathons, AI workshops, and founder circles into every major university in Ghana.",
-    cta: "Explore the Tour",
-    href: "/gallery",
-    image: heroAudience,
-    stat: { k: "12", v: "Cities" },
+    tag: "Enterprise Solutions", kicker: "Tech Hub Africa", title: "Built for Business",
+    body: "Software engineering, enterprise platforms and secure digital systems for organisations building Africa’s future.",
+    cta: "Explore Our Services", href: "/services", image: techGuruShowcase,
+    stat: { k: "01", v: "Enterprise" },
   },
   {
-    tag: "Now Building",
-    kicker: "The Hub",
-    title: "Africa's Innovation Home",
-    body: "A physical and digital home for builders, mentors and investors shaping the continent's next decade of technology.",
-    cta: "Step Inside",
-    href: "/thehub",
-    image: ktuHero[6],
-    stat: { k: "300+", v: "Innovators" },
+    tag: "Connected Workplace", kicker: "Corporate Intranet", title: "Your Teams, Connected",
+    body: "Bring company knowledge, employee communication and everyday workflows together in a corporate intranet.",
+    cta: "Connect Your Workplace", href: "/services#productivity", image: techGuruNetworking,
+    stat: { k: "02", v: "Workplace" },
   },
   {
-    tag: "Live Event",
-    kicker: "Hackathon Challenge",
-    title: "One Month of Impact",
-    body: "Elite teams from across Africa converge to build production-grade solutions over an intense month-long challenge.",
-    cta: "See the Build",
-    href: "/events",
-    image: heroPanel,
-    stat: { k: "30", v: "Days" },
+    tag: "Business Platforms", kicker: "CRM Services", title: "Every Relationship Matters",
+    body: "Connect customer records, sales pipelines and corporate communication in one cohesive business platform.",
+    cta: "Explore CRM Services", href: "/services#productivity", image: techGuruPanel,
+    stat: { k: "03", v: "Customer Success" },
   },
   {
-    tag: "Publication",
-    kicker: "Top 100",
-    title: "Innovators & Entrepreneurs",
-    body: "The definitive annual list of the founders, engineers, and creators redefining African technology.",
-    cta: "Read the Issue",
-    href: "/portfolio",
-    image: techGuruAudience,
-    stat: { k: "100", v: "Leaders" },
+    tag: "Flagship Gathering", kicker: "Tech Guru Meetup", title: "Where Business Connects",
+    body: "Meet founders, industry leaders and investors at Tech Guru Meetup — Africa’s business and technology community, together.",
+    cta: "Explore the Meetup", href: "/events", image: techGuruAudience,
+    stat: { k: "2026", v: "Tech Guru Meetup" },
   },
   {
-    tag: "Campus Tour",
-    kicker: "KTU 2026",
-    title: "Where Curiosity Meets Code",
-    body: "Thousands of students at Koforidua Technical University met their first tablet lab, first VR headset, and first mentor in one single day.",
-    cta: "View the Archive",
-    href: "/gallery",
-    image: ktuHero[0],
-    stat: { k: "2,400", v: "Students" },
+    tag: "Cybersecurity", kicker: "Threat Lock", title: "Protect What You Build",
+    body: "Cyber security mitigation services that help safeguard your organisation’s websites and digital infrastructure.",
+    cta: "Explore Threat Lock", href: "/services#productivity", image: techGuruShowcase,
+    stat: { k: "05", v: "Security" },
   },
 ];
 
@@ -325,13 +304,13 @@ const Hero = () => {
             </div>
             <div className="trust-divider" />
             <div className="trust-item">
-              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>12k+</span>
-              <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Trained</span>
+              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>CRM</span>
+              <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Customer Platforms</span>
             </div>
             <div className="trust-divider" />
             <div className="trust-item">
-              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>25+</span>
-              <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Campuses</span>
+              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>Intranet</span>
+              <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Connected Teams</span>
             </div>
             <div className="trust-divider" />
             <div className="trust-item">
@@ -449,68 +428,6 @@ const VisionMission = () => (
               continent.
             </p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-/* ============================================================
-   CAMPUS TOURS — asymmetric break-out
-   ============================================================ */
-const CampusTours = () => (
-  <section id="campus" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-secondary text-primary-foreground overflow-hidden">
-    <div className="hidden md:block absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)),transparent_70%)]" />
-
-    <div className="relative max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
-      <div className="lg:col-span-6 relative">
-        <div className="aspect-[4/5] shadow-[var(--shadow-cinema)]">
-          <img
-            src={campusTourFlyer}
-            alt="Tech Hub Africa Tech For All Campus Tour 2026 flyer"
-            loading="lazy"
-            className="w-full h-full object-cover rounded-lg"
-          />
-        </div>
-        {/* Floating stat card */}
-        <div className="hidden md:block absolute -bottom-10 -right-10 bg-secondary border border-primary-foreground/10 rounded-lg p-6 min-w-[200px] animate-float">
-          <div className="flex items-center gap-3 mb-2">
-            <Users className="w-5 h-5 text-accent" />
-            <p className="eyebrow text-accent">Students</p>
-          </div>
-          <p className="font-display font-extrabold text-4xl">10,400+</p>
-          <p className="text-xs text-primary-foreground/60 mt-1">reached in prior tours</p>
-        </div>
-      </div>
-
-      <div className="lg:col-span-6 lg:pl-8">
-        <span className="eyebrow text-accent">02 — Flagship Program</span>
-        <h2 className="font-display font-extrabold leading-[0.9] mt-6 mb-8 text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
-          Tech For All
-          <br />
-          <span className="italic font-light text-accent">Campus Tours</span> 2026
-        </h2>
-        <p className="text-primary-foreground/70 leading-relaxed mb-8 max-w-lg">
-          Join us on a mission to inspire, educate and equip students with the skills to thrive in
-          Africa's rapidly evolving tech landscape. Engage with industry experts and discover
-          real-world solutions.
-        </p>
-        <div className="flex flex-wrap items-center gap-6">
-          <a
-            href="https://tech4all.techhubafrica.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-magnetic inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-primary-foreground hover:text-foreground transition-all duration-300"
-          >
-            Visit Tech4All Portal <ArrowUpRight className="w-4 h-4" />
-          </a>
-          <Link
-            to="/gallery"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent hover:text-primary-foreground transition-colors group"
-          >
-            Explore Tour Gallery
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </Link>
         </div>
       </div>
     </div>
@@ -932,7 +849,6 @@ const Index = () => (
       <Hero />
       <Marquee text="Connecting Innovators · Fostering Talent · Showcasing Excellence" />
       <VisionMission />
-      <CampusTours />
       <Initiatives />
       <Services />
       <ClientShowcase
@@ -940,7 +856,6 @@ const Index = () => (
         title="Live Production Websites Built by Tech Hub Africa"
         subtitle="Don't just take our word for it. Explore live e-commerce portals, news networks, logistics platforms, and security applications engineered by our team."
       />
-      <ProgramsBand />
       <Portfolio />
       <Testimonials />
 

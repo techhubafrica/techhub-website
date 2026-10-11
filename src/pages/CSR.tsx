@@ -8,11 +8,6 @@ import Marquee from "@/components/Marquee";
 
 const tiers = [
   {
-    num: "01", name: "Campus Tour Sponsor", tag: "Community Tier",
-    desc: "Sponsor digital literacy bootcamps and hackathons at university campuses across Ghana and West Africa.",
-    benefits: ["Brand placement at 5+ campus events", "Logo on all campus materials", "Student testimonial features", "CSR impact report"],
-  },
-  {
     num: "02", name: "Tech Guru Meetup Partner", tag: "Flagship Tier",
     desc: "Premium brand presence, keynote opportunities, and VIP access at our 2,500+ attendee flagship conference.",
     benefits: ["Keynote speaking slot (15 mins)", "Exhibition booth (6×4m)", "VIP networking dinner access", "Full media & press coverage"],
@@ -48,19 +43,13 @@ const CSR = () => {
     <>
       <Header />
       <PageHero
-        tag="Social Impact & Partnerships"
-        title={<>Driving inclusive <span className="italic font-light text-accent">technological impact</span><br />across Africa.</>}
-        body="Through our CSR initiatives, we partner with global tech brands, financial institutions, and foundations to bridge digital inequality and empower communities."
+        tag="Corporate Partnerships"
+        title={<>Connecting business through <span className="italic font-light text-accent">technology partnerships.</span></>}
+        body="Partner with Tech Hub Africa through commercial events, innovation showcases and business networking."
         ghost="IMPACT"
-        stats={[
-          { val: "12k+", label: "Students Trained" },
-          { val: "25+", label: "Campuses Reached" },
-          { val: "14", label: "Hackathons Funded" },
-          { val: "350+", label: "Scholarships Awarded" },
-        ]}
       />
 
-      <Marquee text="CSR Partnerships · Social Impact · Digital Inclusion · Corporate Sponsorships" />
+      <Marquee text="Corporate Partnerships · Innovation Showcases · Business Networking" />
 
       <main className="page-entry bg-background overflow-hidden">
         {/* ══ SPONSOR TIERS ══ */}

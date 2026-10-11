@@ -22,7 +22,7 @@ const columns: {
       { label: "Events & Meetups", href: "/events" },
       { label: "Careers & Internships", href: "/careers" },
       { label: "Mentorship Program", href: "/careers#mentorship" },
-      { label: "CSR & Sponsorships", href: "/csr" },
+      { label: "Corporate Partnerships", href: "/csr" },
       { label: "Media & TechTalks", href: "/media" },
     ],
   },
@@ -94,8 +94,8 @@ const Footer = () => (
             </a>
           </li>
           <li>
-            <a href="mailto:info@techhubafrica.org" className="hover:text-amber-300 transition-colors">
-              info@techhubafrica.org
+            <a href="mailto:hr@techhubafrica.org" className="hover:text-amber-300 transition-colors">
+              hr@techhubafrica.org
             </a>
           </li>
           <li className="leading-relaxed text-white/70">

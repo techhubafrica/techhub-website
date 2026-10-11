@@ -9,7 +9,7 @@ const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "Services", href: "/services" },
   { label: "Events", href: "/events" },
   { label: "Careers", href: "/careers" },
-  { label: "CSR", href: "/csr" },
+  { label: "Partners", href: "/csr" },
   { label: "Media", href: "/media" },
   { label: "Gallery", href: "/gallery" },
   { label: "Tech4All", href: "https://tech4all.techhubafrica.org/", external: true },

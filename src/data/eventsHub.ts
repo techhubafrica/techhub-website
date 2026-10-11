@@ -296,10 +296,10 @@ const applyRates = (e: HubEvent): HubEvent => ({
     t.name in RATE_OVERRIDE && !t.isFree
       ? { ...t, price: RATE_OVERRIDE[t.name], priceLabel: `GHS ${RATE_OVERRIDE[t.name].toLocaleString()}` }
       : t
-  ),
+  ).sort((a, b) => Number(a.isFree) - Number(b.isFree) || a.price - b.price),
 });
 
-export const hubEvents: HubEvent[] = rawEvents.map(applyRates);
+export const hubEvents: HubEvent[] = rawEvents.filter((e) => e.slug !== "innovation-leadership-seminar-2026").map(applyRates);
 
 export const upcomingEvents = hubEvents.filter((e) => !e.isPast);
 export const pastEvents = hubEvents.filter((e) => e.isPast);
