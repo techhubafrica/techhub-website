@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { advisoryBoard } from "@/data/board";
+import { Button } from "@/components/ui/button";
 import {
   teamDoreen, teamJemima, teamElisha,
 } from "@/assets/photos";
@@ -385,8 +387,8 @@ const MeetTheTeam = () => {
             Meet the <span className="italic font-light text-accent">team.</span>
           </h2>
           <p className="mt-5 text-foreground/55 text-sm md:text-base leading-relaxed max-w-md mx-auto">
-            The builders, mentors and operators powering Tech Hub Africa —
-            across engineering, education and community.
+            The leadership and advisers powering Tech Hub Africa —
+            across enterprise engineering, business and innovation.
           </p>
           <div className="mt-8 flex items-center justify-center gap-3">
             <div className="h-px w-14 bg-gradient-to-r from-transparent to-accent/50" />
@@ -481,6 +483,39 @@ const MeetTheTeam = () => {
           </div>
         </div>
 
+        <div className="relative max-w-5xl mx-auto px-5 sm:px-6 lg:px-10 mt-16 z-10">
+          <div className="border-t border-border pt-10">
+            <h3 className="font-display font-bold text-2xl sm:text-3xl">Directors &amp; leadership</h3>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2">
+              <article className="border-l-2 border-accent pl-5">
+                <h4 className="font-display font-bold text-xl">Charles Hassan</h4>
+                <p className="mt-2 text-sm font-medium text-accent">Director &amp; Head of Events and Sponsorships</p>
+                <p className="mt-3 text-sm text-muted-foreground">A skilled events professional with a talent for bringing people together.</p>
+              </article>
+              <article className="border-l-2 border-primary pl-5">
+                <h4 className="font-display font-bold text-xl">Judith Jackson</h4>
+                <p className="mt-2 text-sm font-medium text-accent">Head of Technology &amp; Career Services</p>
+                <p className="mt-3 text-sm text-muted-foreground">A resolute career coach and tech enthusiast focused on empowering professionals.</p>
+              </article>
+            </div>
+          </div>
+          <div className="mt-14 border-t border-border pt-10">
+            <span className="eyebrow text-accent">Governance &amp; Guidance</span>
+            <h3 className="mt-3 font-display font-bold text-2xl sm:text-3xl">Members of the Advisory Board</h3>
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {advisoryBoard.map((member) => (
+                <article key={member.name} className="art-card rounded-lg overflow-hidden">
+                  <img src={member.photo} alt={member.name} loading="lazy" className="aspect-square w-full object-cover object-top" />
+                  <div className="p-6">
+                    <h4 className="font-display text-xl font-bold">{member.name}</h4>
+                    <p className="mt-2 text-sm font-medium text-accent">{member.role}</p>
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{member.bio}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );

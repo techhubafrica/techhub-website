@@ -53,7 +53,7 @@ const Gallery = () => {
         </section>
       </main>
       <Dialog open={open !== null} onOpenChange={(value) => { if (!value) setOpen(null); }}>
-        <DialogContent className="max-w-5xl p-4 sm:p-6">
+        <DialogContent aria-describedby={undefined} className="max-w-5xl w-[calc(100%-2rem)] p-4 sm:p-6 z-[100]">
           <DialogTitle className="pr-8 font-display">Tech Guru Meetup 2025</DialogTitle>
           {open !== null && <img src={techGuruGallery[open]} alt={`Tech Guru Meetup 2025 — photograph ${open + 1}`} className="w-full max-h-[70vh] object-contain" />}
           <div className="flex items-center justify-between">

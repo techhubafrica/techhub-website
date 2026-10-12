@@ -10,6 +10,7 @@ Rules for agents working in this repository. Keep each rule true even when the v
 - The corporate gallery uses the Tech Guru photograph collection; Tech4ALL photography is reached through a new-tab external link so the corporate page and its home link remain available.
 - Photographs are uploaded to project asset storage and referenced through `src/assets/*/index.ts` pointer modules; never hotlink to external hosts for imagery the site displays.
 - Photo-hero readability is shared through the `photo-hero-*` CSS utilities, with treatments localized to lettering and copy so shared and event heroes do not introduce competing full-image washes.
+- Advisory-board records live in `src/data/board.ts` and preserve the official site's governance titles rather than labelling advisers as statutory directors.
 
 ## Content
 
