@@ -6,7 +6,6 @@ import {
   shotDiaspocare,
   shotRablebakes,
 } from "@/assets/portfolio-shots";
-import { campusTourFlyer } from "@/assets/photos";
 
 export interface ClientWebsite {
   id: string;
@@ -52,17 +51,6 @@ export const clientWebsites: ClientWebsite[] = [
     displayUrl: "rablebakes.co.ke",
     tags: ["E-Commerce", "Food Tech", "Custom Ordering", "Kenya"],
     image: shotRablebakes,
-    featured: true,
-  },
-  {
-    id: "tech4all",
-    name: "Tech4All Digital Hub",
-    category: "EdTech & Impact",
-    description: "Official digital literacy portal powering nationwide campus tours, workshop registrations, and student tech resources.",
-    url: "https://tech4all.techhubafrica.org/",
-    displayUrl: "tech4all.techhubafrica.org",
-    tags: ["EdTech", "Campus Tour", "Digital Literacy", "Student Hub"],
-    image: campusTourFlyer,
     featured: true,
   },
   {
