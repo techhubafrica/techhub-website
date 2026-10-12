@@ -1,194 +1,68 @@
 import { useCallback, useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight, X, Camera, MapPin, CalendarDays } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Camera } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ktuAll } from "@/assets/ktu";
-
-const CHUNK = 24;
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { techGuruGallery } from "@/assets/tech-guru";
 
 const Gallery = () => {
-  const [visible, setVisible] = useState(CHUNK);
   const [open, setOpen] = useState<number | null>(null);
-
-  const close = useCallback(() => setOpen(null), []);
-  const step = useCallback(
-    (d: number) => setOpen((i) => (i === null ? i : (i + d + ktuAll.length) % ktuAll.length)),
-    []
-  );
+  const step = useCallback((direction: number) => {
+    setOpen((index) => index === null ? null : (index + direction + techGuruGallery.length) % techGuruGallery.length);
+  }, []);
 
   useEffect(() => {
     if (open === null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowRight") step(1);
-      if (e.key === "ArrowLeft") step(-1);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") step(-1);
+      if (event.key === "ArrowRight") step(1);
     };
     window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [open, close, step]);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, step]);
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-
-      {/* ---------- Editorial masthead ---------- */}
-      <section className="relative overflow-hidden bg-primary text-primary-foreground pt-36 pb-20 md:pt-44 md:pb-28">
-        {/* Ambient brand glow & subtle pattern */}
-        <div className="absolute -top-24 right-[-10%] h-[420px] w-[420px] rounded-full bg-accent/20 blur-[120px] pointer-events-none" />
-        <div
-          className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]"
-          style={{
-            backgroundImage: "radial-gradient(hsl(var(--primary-foreground)) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-        <div className="relative container mx-auto px-5 sm:px-6 lg:px-10">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.25em] backdrop-blur">
-              <Camera className="h-3.5 w-3.5 text-accent" /> Event Archive
-            </span>
-            <h1 className="mt-7 font-display text-5xl md:text-7xl font-bold leading-[0.95] tracking-tight">
-              Tech Hub @ KTU
-              <span className="block text-accent">Campus Tour 2026</span>
-            </h1>
-            <p className="mt-6 max-w-xl text-lg text-primary-foreground/75 leading-relaxed">
-              A full day inside Koforidua Technical University — tablet labs, VR demos, mentor
-              circles and a few thousand watts of student energy. {ktuAll.length} curated frames.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <a
-                href="https://tech4all.techhubafrica.org/gallery"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-magnetic inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-accent-foreground hover:bg-white hover:text-foreground transition-all duration-300 shadow-lg"
-              >
-                Visit Tech4All Official Gallery <ArrowUpRight className="h-4 w-4" />
-              </a>
-            </div>
-            <div className="mt-8 flex flex-wrap gap-x-10 gap-y-4 text-sm text-primary-foreground/70">
-              <span className="inline-flex items-center gap-2">
-                <CalendarDays className="h-4 w-4 text-accent" /> 25 June 2026
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-accent" /> Koforidua Technical University
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <Camera className="h-4 w-4 text-accent" /> {ktuAll.length} photographs
-              </span>
-            </div>
+      <main className="pt-32 sm:pt-40">
+        <section className="container mx-auto px-5 sm:px-6 lg:px-10 pb-12">
+          <Button asChild variant="link" className="px-0 mb-8">
+            <Link to="/"><ArrowLeft /> Back to main page</Link>
+          </Button>
+          <div className="flex items-center gap-2 text-xs uppercase font-semibold text-accent"><Camera className="h-4 w-4" /> Corporate archive</div>
+          <h1 className="mt-5 font-display text-4xl sm:text-6xl font-bold leading-tight">Tech Guru Meetup <span className="text-accent">2025</span></h1>
+          <p className="mt-5 max-w-xl text-muted-foreground">Business connections, innovation showcases and the people behind Tech Hub Africa.</p>
+          <div className="mt-8 border-y border-border py-6 flex flex-wrap items-center justify-between gap-5">
+            <h2 className="font-display text-lg font-semibold">Tech4ALL student &amp; campus photographs</h2>
+            <Button asChild variant="outline">
+              <a href="https://tech4all.techhubafrica.org/gallery" target="_blank" rel="noopener noreferrer">View Tech4ALL gallery <ArrowUpRight /></a>
+            </Button>
           </div>
-        </div>
-      </section>
-
-      {/* ---------- Masonry archive ---------- */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-28">
-        <div className="container mx-auto px-5 sm:px-6 lg:px-10">
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
-            {ktuAll.slice(0, visible).map((src, i) => (
-              <button
-                key={src}
-                onClick={() => setOpen(i)}
-                className="group relative mb-5 block w-full overflow-hidden rounded-2xl border border-border bg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                <img
-                  src={src}
-                  alt={`Tech Hub Africa campus tour at KTU — frame ${i + 1}`}
-                  loading={i < 6 ? "eager" : "lazy"}
-                  decoding="async"
-                  className="w-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
-                />
-                <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <span className="pointer-events-none absolute bottom-4 left-4 translate-y-3 text-xs font-medium uppercase tracking-[0.2em] text-primary-foreground opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                  KTU · {String(i + 1).padStart(3, "0")}
-                </span>
-              </button>
+        </section>
+        <section aria-label="Tech Guru Meetup photographs" className="container mx-auto px-5 sm:px-6 lg:px-10 pb-20">
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
+            {techGuruGallery.map((src, index) => (
+              <Button key={src} variant="ghost" onClick={() => setOpen(index)} aria-label={`Open Tech Guru Meetup photo ${index + 1}`} className="mb-5 block w-full h-auto p-0 overflow-hidden rounded-lg">
+                <img src={src} alt={`Tech Guru Meetup 2025 — photograph ${index + 1}`} loading={index < 3 ? "eager" : "lazy"} className="w-full h-auto" />
+              </Button>
             ))}
           </div>
-
-          {visible < ktuAll.length && (
-            <div className="mt-14 flex justify-center">
-              <button
-                onClick={() => setVisible((v) => v + CHUNK)}
-                className="group inline-flex items-center gap-3 rounded-full bg-primary px-8 py-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
-              >
-                Load more frames
-                <span className="text-primary-foreground/60 group-hover:text-primary-foreground">
-                  {visible}/{ktuAll.length}
-                </span>
-              </button>
-            </div>
-          )}
-
-          <div className="mt-20 flex flex-wrap items-center justify-center gap-6 text-center">
-            <a
-              href="https://tech4all.techhubafrica.org/gallery"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-accent hover:text-foreground transition-colors"
-            >
-              Explore Full Tech4All Gallery Portal <ArrowUpRight className="h-4 w-4" />
-            </a>
-            <span className="text-foreground/20 hidden sm:inline">•</span>
-            <Link
-              to="/events"
-              className="inline-flex items-center gap-2 text-sm font-medium text-foreground underline-offset-4 hover:text-accent hover:underline"
-            >
-              See upcoming events <ArrowRight className="h-4 w-4" />
-            </Link>
+          <Button asChild variant="link" className="mt-8 px-0"><Link to="/"><ArrowLeft /> Back to main page</Link></Button>
+        </section>
+      </main>
+      <Dialog open={open !== null} onOpenChange={(value) => { if (!value) setOpen(null); }}>
+        <DialogContent className="max-w-5xl p-4 sm:p-6">
+          <DialogTitle className="pr-8 font-display">Tech Guru Meetup 2025</DialogTitle>
+          {open !== null && <img src={techGuruGallery[open]} alt={`Tech Guru Meetup 2025 — photograph ${open + 1}`} className="w-full max-h-[70vh] object-contain" />}
+          <div className="flex items-center justify-between">
+            <Button variant="outline" size="icon" aria-label="Previous photograph" onClick={() => step(-1)}><ArrowLeft /></Button>
+            <span className="text-sm text-muted-foreground">{open === null ? 0 : open + 1} / {techGuruGallery.length}</span>
+            <Button variant="outline" size="icon" aria-label="Next photograph" onClick={() => step(1)}><ArrowRight /></Button>
           </div>
-        </div>
-      </section>
-
-      {/* ---------- Lightbox ---------- */}
-      {open !== null && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-primary/95 backdrop-blur-xl animate-in fade-in"
-          onClick={close}
-          role="dialog"
-          aria-modal="true"
-        >
-          <button
-            onClick={close}
-            aria-label="Close"
-            className="absolute right-5 top-5 rounded-full border border-primary-foreground/20 p-3 text-primary-foreground/80 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
-          >
-            <X className="h-5 w-5" />
-          </button>
-
-          <button
-            onClick={(e) => { e.stopPropagation(); step(-1); }}
-            aria-label="Previous"
-            className="absolute left-3 md:left-8 rounded-full border border-primary-foreground/20 p-3 text-primary-foreground/80 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </button>
-
-          <figure className="max-h-[86vh] max-w-[92vw]" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={ktuAll[open]}
-              alt={`Tech Hub Africa campus tour at KTU — frame ${open + 1}`}
-              className="max-h-[80vh] w-auto rounded-xl shadow-2xl"
-            />
-            <figcaption className="mt-4 text-center text-xs uppercase tracking-[0.3em] text-primary-foreground/60">
-              KTU Campus Tour 2026 · {String(open + 1).padStart(3, "0")} / {ktuAll.length}
-            </figcaption>
-          </figure>
-
-          <button
-            onClick={(e) => { e.stopPropagation(); step(1); }}
-            aria-label="Next"
-            className="absolute right-3 md:right-8 rounded-full border border-primary-foreground/20 p-3 text-primary-foreground/80 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
-          >
-            <ArrowRight className="h-5 w-5" />
-          </button>
-        </div>
-      )}
-
+        </DialogContent>
+      </Dialog>
       <Footer />
     </div>
   );

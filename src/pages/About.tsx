@@ -14,7 +14,6 @@ const values = [
 
 const milestones = [
   { year: "2024", title: "Founded in USA & Ghana", desc: "Tech Hub Africa LLC established in the United States of America and Ghana, West Africa — bridging the continent's innovation gap." },
-  { year: "2025", title: "Tech4All Campus Tour Launched", desc: "We took the classroom to the campus — universities across Ghana, thousands of students trained." },
   { year: "2026", title: "Expanding Ecosystem", desc: "Our community continues to grow across software engineering, cybersecurity, and startup acceleration." },
 ];
 
@@ -22,7 +21,7 @@ const shortTermGoals = [
   "Establish a strong online presence through social media and a website, with a minimum of 10,000 followers and 1,000 website visitors per month.",
   "Host at least 4 successful events, including conferences, workshops, and trade fairs, with a minimum of 200 attendees per event.",
   "Build a network of at least 20 partner organizations and companies in the tech industry.",
-  "Offer career services to at least 50 students and professionals in the tech industry.",
+  "Offer career services to at least 50 professionals in the tech industry.",
   "Secure at least $200,000 in sponsorships and funding for events and programs.",
 ];
 
