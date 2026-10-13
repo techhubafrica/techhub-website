@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { advisoryBoard } from "@/data/board";
 import {
-  teamDoreen, teamJemima, teamElisha,
+  teamDoreen, teamJemima, teamElisha, teamKingsley,
 } from "@/assets/photos";
 
 const team = [
@@ -46,12 +46,24 @@ const team = [
   {
     displayOrder: "03",
     name: "Elisha Kweku Arko",
-    role: "Director of IT",
+    role: "Director of Information Technology",
     tone: "charcoal" as const,
     photo: teamElisha,
     bio: [
       "Elisha Arko, Director of IT at Tech Hub Africa LLC, is a seasoned technology expert with a passion for driving innovation and growth. With over 15 years of experience in IT leadership, Elisha has a proven track record of developing and implementing cutting-edge solutions that enhance business performance.",
       "His expertise spans IT strategy, cloud computing, cybersecurity, and data analytics. At Tech Hub Africa, Elisha leads the IT team in supporting the organization's mission to empower innovators and foster talent in Africa's tech ecosystem."
+    ]
+  },
+  {
+    displayOrder: "04",
+    name: "Kingsley Aduhene",
+    role: "Web Master & Web Technology Specialist",
+    tone: "charcoal" as const,
+    photo: teamKingsley,
+    bio: [
+      "Kingsley Aduhene, Web master at Tech Hub Africa LLC, is a versatile technology professional and software developer responsible for overseeing the organization's web technology ecosystem. With extensive expertise in web development, systems administration, and digital infrastructure, he ensures the seamless operation, security, and continuous improvement of Tech Hub Africa's online platforms.",
+      "His responsibilities encompass full-stack software development, website and application management, server and hosting administration, database systems, cybersecurity, API integrations, and technical support. Kingsley manages over 50 domains and web platforms, develops new digital solutions, implements system enhancements, and ensures the reliability and performance of the organization's digital services.",
+      "At Tech Hub Africa, Kingsley plays a central role in transforming innovative ideas into functional digital solutions, supporting organizational operations, and advancing the company's mission to empower professionals, businesses, and communities through technology."
     ]
   }
 ];
@@ -287,7 +299,7 @@ const TeamModal = ({
             </div>
 
             <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent">
-              {member.displayOrder} / 03
+              {member.displayOrder} / {String(N).padStart(2, "0")}
             </span>
           </div>
 
@@ -396,9 +408,9 @@ const MeetTheTeam = () => {
           </div>
         </div>
 
-        {/* ── Executive Leadership 3-Card Showcase ───────────────── */}
-        <div className="relative max-w-5xl mx-auto px-5 sm:px-6 lg:px-10 mt-12 md:mt-16 z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        {/* ── Leadership Showcase ───────────────── */}
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 mt-12 md:mt-16 z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {team.map((m, i) => {
               const isHovered = hovered === i;
               return (
@@ -447,7 +459,7 @@ const MeetTheTeam = () => {
                   {/* Content Footer */}
                   <div className="p-6 bg-card flex-1 flex flex-col justify-between border-t border-foreground/5">
                     <div>
-                      <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-accent block mb-1">
+                      <span className="text-[10px] font-extrabold uppercase tracking-normal text-accent block mb-1 leading-relaxed">
                         {m.role}
                       </span>
                       <h3 className="font-display font-extrabold text-foreground text-xl sm:text-2xl tracking-tight group-hover:text-accent transition-colors">
