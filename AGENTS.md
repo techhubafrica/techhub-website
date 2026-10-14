@@ -4,7 +4,7 @@ Rules for agents working in this repository. Keep each rule true even when the v
 
 ## Architecture
 
-- Event content is vendored into `src/data/eventsHub.ts` from the events hub feed (`https://events.techhubafrica.org/api/events/list?filter=all`) rather than fetched at runtime, because that feed sends no `Access-Control-Allow-Origin` header and the browser cannot read it from another origin. Refresh the file by hand when events change; never switch the page to an iframe of the events site, which sets `x-frame-options: SAMEORIGIN`.
+- The Events page shows the live events hub (`https://events.techhubafrica.org`) inside a same-origin iframe at `/events-hub/*`, booted by `src/hubFrame.ts` and fed by the `events-proxy` backend function, because the hub forbids framing and cross-origin reads; the shim strips links to the old main website. `src/data/eventsHub.ts` remains only for other pages' event teasers.
 - Ticket prices are normalised in one place (`RATE_OVERRIDE` in `src/data/eventsHub.ts`) so cards, dropdowns and price lines can never disagree.
 - Corporate event selection and ascending paid-ticket ordering are applied in the vendored data module so every event view uses the same scope and order.
 - The corporate gallery uses the Tech Guru photograph collection; Tech4ALL photography is reached through a new-tab external link so the corporate page and its home link remain available.
