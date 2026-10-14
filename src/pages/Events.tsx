@@ -1,34 +1,37 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
+import { ArrowUpRight, Calendar } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-/* The live events hub, shown in-app through our own origin (see src/hubFrame.ts). */
-const Events = () => {
-  const frame = useRef<HTMLIFrameElement>(null);
-  const [height, setHeight] = useState(1600);
+const EVENTS_URL = "https://events.techhubafrica.org";
 
+const Events = () => {
   useEffect(() => {
-    const onMsg = (e: MessageEvent) => {
-      if (e.origin !== location.origin || e.source !== frame.current?.contentWindow) return;
-      if (e.data?.type === "hub-height") setHeight(Math.max(600, e.data.height));
-      if (e.data?.type === "hub-nav") window.scrollTo({ top: 0 });
-    };
-    addEventListener("message", onMsg);
-    return () => removeEventListener("message", onMsg);
+    window.location.replace(EVENTS_URL);
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col justify-between">
       <Header />
-      <main className="pt-24 md:pt-28">
-        <iframe
-          ref={frame}
-          src="/events-hub/"
-          title="Tech Hub Africa Events"
-          className="block w-full border-0"
-          style={{ height }}
-          allow="payment; clipboard-write"
-        />
+      <main className="flex-1 flex flex-col items-center justify-center px-6 py-32 text-center">
+        <div className="max-w-md mx-auto">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+            <Calendar className="w-8 h-8" />
+          </div>
+          <h1 className="text-3xl font-bold font-display text-foreground mb-3">
+            Redirecting to Events
+          </h1>
+          <p className="text-muted-foreground text-sm mb-8 leading-relaxed">
+            Taking you to the official Tech Hub Africa events portal at{" "}
+            <span className="font-semibold text-foreground">events.techhubafrica.org</span>.
+          </p>
+          <a
+            href={EVENTS_URL}
+            className="btn-magnetic inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-accent-foreground font-bold text-xs uppercase tracking-[0.2em] rounded-full hover:brightness-110 transition-all shadow-lg"
+          >
+            Open Events Portal <ArrowUpRight className="w-4 h-4" />
+          </a>
+        </div>
       </main>
       <Footer />
     </div>

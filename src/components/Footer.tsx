@@ -19,7 +19,7 @@ const columns: {
   {
     title: "Quick Links",
     links: [
-      { label: "Events & Meetups", href: "/events" },
+      { label: "Events & Meetups", href: "https://events.techhubafrica.org", external: true },
       { label: "Careers & Internships", href: "/careers" },
       { label: "Mentorship Program", href: "/careers#mentorship" },
       { label: "Corporate Partnerships", href: "/csr" },
@@ -29,9 +29,9 @@ const columns: {
   {
     title: "Ecosystem Programs",
     links: [
-      { label: "Tech Guru Meetup 2026", href: "/events" },
+      { label: "Tech Guru Meetup 2026", href: "https://events.techhubafrica.org", external: true },
       { label: "Tech4All Campus Tour", href: "https://tech4all.techhubafrica.org/", external: true },
-      { label: "Hackathon Challenge", href: "/events" },
+      { label: "Hackathon Challenge", href: "https://events.techhubafrica.org", external: true },
       { label: "Tech Hub Academy", href: "https://academy.techhubafrica.org", external: true },
       { label: "Global Metaverse", href: "/services#metaverse" },
       { label: "Threat Lock Auditing", href: "/services" },

@@ -44,7 +44,7 @@ const heroSlides = [
   {
     tag: "Flagship Gathering", kicker: "Tech Guru Meetup", title: "Where Business Connects",
     body: "Meet founders, industry leaders and investors at Tech Guru Meetup — Africa’s business and technology community, together.",
-    cta: "Explore the Meetup", href: "/events", image: techGuruAudience,
+    cta: "Explore the Meetup", href: "https://events.techhubafrica.org", external: true, image: techGuruAudience,
     stat: { k: "2026", v: "Tech Guru Meetup" },
   },
   {
@@ -275,14 +275,27 @@ const Hero = () => {
           </div>
 
           <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-6 mt-10">
-            <Link
-              to={slide.href}
-              className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground text-[10.5px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-white hover:text-foreground transition-all duration-500"
-              style={{ boxShadow: "0 18px 46px -16px hsl(28 92% 44% / 0.55)" }}
-            >
-              {slide.cta}
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </Link>
+            {slide.external ? (
+              <a
+                href={slide.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground text-[10.5px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-white hover:text-foreground transition-all duration-500"
+                style={{ boxShadow: "0 18px 46px -16px hsl(28 92% 44% / 0.55)" }}
+              >
+                {slide.cta}
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+            ) : (
+              <Link
+                to={slide.href}
+                className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground text-[10.5px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-white hover:text-foreground transition-all duration-500"
+                style={{ boxShadow: "0 18px 46px -16px hsl(28 92% 44% / 0.55)" }}
+              >
+                {slide.cta}
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+            )}
             <Link
               to="/about"
               className="group inline-flex items-center gap-3 text-[10.5px] font-extrabold text-white hover:text-accent transition-colors uppercase tracking-[0.28em]" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.5)" }}
@@ -465,11 +478,12 @@ const Initiatives = () => (
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         {initiatives.map((it, i) => {
-          const isRoute = it.title === "Tech Guru Meetup" || it.title === "Hackathon Challenge";
-          const Tag = (isRoute ? Link : "a") as React.ElementType;
-          const props: Record<string, string> = isRoute ? { to: "/events" } : { href: "#" };
+          const isEvents = it.title === "Tech Guru Meetup" || it.title === "Hackathon Challenge";
+          const props: Record<string, string> = isEvents
+            ? { href: "https://events.techhubafrica.org", target: "_blank", rel: "noopener noreferrer" }
+            : { href: "#" };
           return (
-          <Tag
+          <a
             key={it.title}
             {...props}
             className="card-lift art-card sheen group relative rounded-2xl overflow-hidden"
@@ -508,7 +522,7 @@ const Initiatives = () => (
                 <ArrowUpRight className="w-4 h-4 text-foreground/40 group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
               </div>
             </div>
-          </Tag>
+          </a>
           );
         })}
       </div>
