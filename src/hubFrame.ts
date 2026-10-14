@@ -36,7 +36,7 @@ async function proxy(path: string, init: { method?: string; contentType?: string
   return data;
 }
 
-const hubPath = (u: URL) => u.pathname + u.search + u.hash;
+
 const toLocal = (u: URL) => HUB_PREFIX + u.pathname + u.search + u.hash;
 
 function installShim() {
@@ -66,7 +66,7 @@ function installShim() {
       location.hash = u.hash;
       return;
     }
-    location.href = toLocal(u);
+    location.href = location.origin + toLocal(u);
   };
 
   document.addEventListener("click", (e) => {
@@ -135,4 +135,4 @@ export async function bootHubFrame() {
   }
 }
 
-export { hubPath };
+
