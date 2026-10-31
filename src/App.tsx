@@ -17,6 +17,8 @@ const CSR        = lazy(() => import("./pages/CSR"));
 const Media      = lazy(() => import("./pages/Media"));
 const Gallery    = lazy(() => import("./pages/Gallery"));
 const TheHub     = lazy(() => import("./pages/TheHub"));
+const Metaverse  = lazy(() => import("./pages/Metaverse"));
+const CMS        = lazy(() => import("./pages/CMS"));
 const NotFound   = lazy(() => import("./pages/NotFound"));
 
 /* Minimal page-transition shell while lazy chunk loads */
@@ -46,6 +48,10 @@ const App = () => (
             <Route path="/media"      element={<Media />} />
             <Route path="/gallery"    element={<Gallery />} />
             <Route path="/thehub"     element={<TheHub />} />
+            <Route path="/metaverse" element={<Metaverse />} />
+            <Route path="/cms"        element={<CMS />} />
+            <Route path="/doreen-cms" element={<CMS />} />
+            <Route path="/admin"      element={<CMS />} />
             <Route path="*"           element={<NotFound />} />
           </Routes>
         </Suspense>

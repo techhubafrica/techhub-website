@@ -6,6 +6,15 @@ import { ShieldCheck, Code, Rocket, Building2, Box, ArrowUpRight, CheckCircle2, 
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 import ClientShowcase from "@/components/ClientShowcase";
+import {
+  serviceSoftware,
+  serviceWebDesign,
+  portfolioThreatLock,
+  hackathonFlyer,
+  meetup2026Flyer,
+} from "@/assets/photos";
+import { techGuruShowcase, techGuruPanel } from "@/assets/tech-guru";
+import { Link } from "react-router-dom";
 
 const servicesList = [
   {
@@ -15,6 +24,7 @@ const servicesList = [
     desc: "We design and build production-grade software for African enterprises, startups, and public sector orgs — from custom portals to high-performance mobile apps.",
     features: ["Custom Web & Mobile Apps", "Cloud Infrastructure & DevOps", "API Integrations & Microservices", "UI/UX Design Systems"],
     tag: "Core", accent: "hsl(156 24% 24%)",
+    image: serviceSoftware,
   },
   {
     num: "02", id: "incubation", icon: Rocket,
@@ -23,6 +33,7 @@ const servicesList = [
     desc: "Early-stage incubation with seed support, technical advisory, go-to-market strategy, and direct access to regional investors and corporate partners.",
     features: ["Technical Advisory & CTO Support", "Investor Readiness Coaching", "Co-working Space & Lab Access", "Corporate Partner Network"],
     tag: "Ventures", accent: "hsl(28 92% 44%)",
+    image: hackathonFlyer,
   },
   {
     num: "03", id: "cybersecurity", icon: ShieldCheck,
@@ -31,6 +42,7 @@ const servicesList = [
     desc: "Our Threat Lock platform safeguards websites and digital infrastructure against DDoS, malware, SQL injection, and breaches — with zero latency overhead.",
     features: ["20+ Real-Time Security Layers", "Automated Vulnerability Scanning", "Incident Response & Remediation", "Compliance Audits"],
     tag: "Flagship", accent: "hsl(28 92% 44%)",
+    image: portfolioThreatLock,
   },
   {
     num: "04", id: "enterprise", icon: Building2,
@@ -39,18 +51,47 @@ const servicesList = [
     desc: "Custom enterprise platforms that connect business processes, operational data and existing tools into one dependable working environment.",
     features: ["Business Process Automation", "Enterprise System Integration", "Custom Business Applications", "Operational Reporting"],
     tag: "Enterprise", accent: "hsl(var(--foreground))",
+    image: techGuruShowcase,
   },
   {
     num: "05", id: "metaverse", icon: Box,
-    title: "Global Metaverse & Immersive VR Labs",
-    subtitle: "Immersive experiences for enterprise training and exhibitions.",
-    desc: "Immersive virtual spaces for corporate training, product demonstrations, exhibitions and distributed business teams.",
-    features: ["Corporate Training Environments", "3D Event & Exhibition Halls", "Immersive Product Demonstrations", "Distributed Team Collaboration"],
+    title: "Global Metaverse Virtual Space",
+    subtitle: "Explore our virtual space.",
+    desc: "A virtual space bringing Tech Hub Africa’s services together in one interactive experience.",
+    features: [],
     tag: "Emerging", accent: "hsl(28 92% 44%)",
+    image: "https://img.youtube.com/vi/UC3LwmrrLCs/hqdefault.jpg",
+  },
+  {
+    num: "06", id: "techtalks", icon: MessagesSquare,
+    title: "Tech Talks & Speaking Engagements",
+    subtitle: "Knowledge sharing across Africa's tech community.",
+    desc: "Expert-led Tech Talks, panel discussions, and keynote engagements that educate, inspire, and connect Africa's growing technology community.",
+    features: ["Panel Discussions & Keynotes", "Campus Tech Talks", "Corporate Speaking Engagements", "Media & Podcast Appearances"],
+    tag: "Community", accent: "hsl(156 24% 24%)",
+    image: techGuruPanel,
+  },
+  {
+    num: "07", id: "campus-tours", icon: Rocket,
+    title: "Campus Tours & Startup Competitions",
+    subtitle: "Taking innovation to universities across Africa.",
+    desc: "Tech Hub Africa visits university campuses to run startup competitions, hackathons, and mentorship sessions — discovering the next generation of African tech founders.",
+    features: ["University Campus Visits", "Startup Pitch Competitions", "On-Campus Hackathons", "Mentorship & Career Sessions"],
+    tag: "Education", accent: "hsl(28 92% 44%)",
+    image: meetup2026Flyer,
+  },
+  {
+    num: "08", id: "website-dev", icon: Code,
+    title: "Tech Hub Website Development",
+    subtitle: "Premium websites built and managed for African businesses.",
+    desc: "We build production-grade, SEO-optimised websites and web applications for African businesses — designed to convert, perform, and scale.",
+    features: ["Custom Design & Development", "SEO & Performance Optimisation", "Ongoing Maintenance & Security", "E-Commerce & Web Apps"],
+    tag: "Flagship", accent: "hsl(156 24% 24%)",
+    image: serviceWebDesign,
   },
 ];
 
-/* ── Productivity & Efficiency: the operating layer beneath the software ── */
+/* -- Productivity & Efficiency: the operating layer beneath the software -- */
 const productivityList = [
   {
     num: "01",
@@ -75,7 +116,7 @@ const productivityList = [
     icon: Building2,
     tag: "Workplace",
     title: "Corporate Intranet",
-    subtitle: "A secure home for your organisation’s information",
+    subtitle: "A secure home for your organisation's information",
     desc: "Connect employees with company news, shared knowledge and internal resources through an intranet tailored to your organisation.",
     features: ["Employee Directory", "Company News & Announcements", "Document & Knowledge Hub", "Access-Controlled Team Spaces"],
   },
@@ -88,7 +129,27 @@ const productivityList = [
     desc: "Threat Lock closes the gaps attackers exploit — continuous monitoring, rapid mitigation and hardening across web, cloud and endpoint surfaces, with zero latency overhead for your users.",
     features: ["Real-Time Threat Mitigation", "Attack Surface Hardening", "Incident Response Drills", "Compliance & Audit Reporting"],
   },
+  {
+    num: "05",
+    icon: Workflow,
+    tag: "HR",
+    title: "HR Tools & People Management",
+    subtitle: "Streamlined HR operations for growing organisations",
+    desc: "From onboarding to performance reviews, our HR tools help organisations manage their most important asset — their people — with clarity and efficiency.",
+    features: ["Employee Onboarding Workflows", "Performance Review Systems", "Leave & Attendance Tracking", "HR Analytics Dashboards"],
+  },
+  {
+    num: "06",
+    icon: MessagesSquare,
+    tag: "Content",
+    title: "Vaults & Secure Data Storage",
+    subtitle: "Enterprise-grade encrypted storage for sensitive data",
+    desc: "Encrypted digital vaults for storing, managing, and sharing sensitive organisational data — with granular access controls and full audit trails.",
+    features: ["End-to-End Encryption", "Granular Access Controls", "Full Audit Trails", "Secure File Sharing"],
+  },
 ];
+
+
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const [ref, visible] = useReveal();
@@ -182,11 +243,11 @@ const Services = () => {
       <Marquee text="Engineering Solutions · Enterprise Software · Cybersecurity · Incubating Ventures" />
 
       <main className="page-entry bg-background overflow-hidden">
-        {/* ══ SERVICE LIST ══ */}
-        <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto space-y-6">
+        {/* ══ SERVICE LIST (REDESIGNED MATCHING IMAGE 2) ══ */}
+        <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 lg:py-32 max-w-7xl mx-auto space-y-16 lg:space-y-24">
           <div className="hidden md:block absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
           
-          <Reveal className="mb-12">
+          <Reveal className="mb-14">
             <div className="flex items-baseline gap-6 mb-6">
               <span className="eyebrow text-accent">01 — Service Pillars</span>
               <div className="flex-1 divider-elegant" />
@@ -196,57 +257,77 @@ const Services = () => {
             </h2>
           </Reveal>
 
-          {servicesList.map((s, idx) => (
-            <Reveal key={s.id} delay={idx * 0.08}>
-              <div className="card-lift art-card sheen group relative grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-3xl overflow-hidden hover:border-accent/40 transition-all duration-500">
-                {/* Left number */}
-                <div className="lg:col-span-2 flex items-start justify-between lg:flex-col lg:items-start gap-4 p-8 pb-0 lg:pb-8 border-b lg:border-b-0 lg:border-r border-foreground/10">
-                  <span className="font-display font-black text-5xl md:text-6xl leading-none select-none"
-                    style={{ color: s.accent, opacity: 0.35 }}>
-                    {s.num}
-                  </span>
-                  <span className="text-[9px] font-black uppercase tracking-[0.3em] text-accent bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20 shrink-0">
-                    {s.tag}
-                  </span>
-                </div>
+          <div className="space-y-14 lg:space-y-20">
+            {servicesList.map((s, idx) => {
+              const isEven = idx % 2 === 1;
+              return (
+                <Reveal key={s.id} delay={0.06}>
+                  <div id={s.id} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center rounded-3xl p-7 sm:p-9 lg:p-12 bg-card border border-foreground/10 hover:border-accent/30 transition-all duration-500 shadow-sm hover:shadow-xl scroll-mt-28">
+                    {/* Editorial Column */}
+                    <div className={`lg:col-span-7 flex flex-col justify-between ${isEven ? "lg:order-2" : "lg:order-1"}`}>
+                      <div>
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">
+                            SERVICE {s.num} — {s.tag}
+                          </span>
+                          <span className="h-px w-8 bg-accent/30" />
+                          <span className="text-foreground/50 text-xs font-semibold">{s.subtitle}</span>
+                        </div>
 
-                {/* Centre content */}
-                <div className="lg:col-span-7 p-8 lg:p-10">
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="w-9 h-9 rounded-xl flex items-center justify-center text-accent"
-                      style={{ background: `${s.accent}18`, border: `1px solid ${s.accent}30` }}>
-                      <s.icon className="w-4 h-4" />
-                    </div>
-                    <span className="text-foreground/50 text-xs font-semibold tracking-wider">{s.subtitle}</span>
-                  </div>
-                  <h3 className="font-display font-extrabold text-foreground text-2xl md:text-3xl tracking-tight leading-snug mb-4 group-hover:text-accent transition-colors">{s.title}</h3>
-                  <p className="text-foreground/65 text-sm md:text-base leading-relaxed mb-6">{s.desc}</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6">
-                    {s.features.map((f) => (
-                      <div key={f} className="flex items-center gap-2.5 text-xs font-semibold text-foreground/75">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />{f}
+                        <h3 className="font-display font-extrabold text-foreground text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-snug mb-4">
+                          {s.id === "metaverse" ? (
+                            <Link to="/metaverse" className="hover:text-accent transition-colors">{s.title}</Link>
+                          ) : s.title}
+                        </h3>
+
+                        <p className="text-foreground/75 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl">
+                          {s.desc}
+                        </p>
+
+                        {s.features.length > 0 && (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6 mb-8 pt-4 border-t border-foreground/10">
+                            {s.features.map((f) => (
+                              <div key={f} className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-foreground/80">
+                                <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                                {f}
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
-                    ))}
-                  </div>
-                </div>
 
-                {/* CTA */}
-                <div className="lg:col-span-3 flex items-center justify-center p-8 border-t lg:border-t-0 lg:border-l border-foreground/10">
-                  <button onClick={() => openQuoteModal(s.title)}
-                    className="btn-magnetic group/btn w-full lg:w-auto flex flex-col items-center gap-4 py-6 px-8 rounded-2xl border border-foreground/12 hover:border-accent/50 hover:bg-accent/5 transition-all duration-300">
-                    <div className="w-10 h-10 rounded-full border border-accent/30 flex items-center justify-center text-accent group-hover/btn:bg-accent group-hover/btn:text-accent-foreground group-hover/btn:border-accent transition-all duration-250">
-                      <ArrowUpRight className="w-4 h-4" />
+                      <div className="flex flex-wrap items-center gap-3">
+                        {s.id === "metaverse" && (
+                          <Link to="/metaverse" className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-accent/40 text-accent font-bold text-xs uppercase tracking-widest hover:bg-accent/10 transition-all duration-300">
+                            Explore Virtual Space <ArrowUpRight className="w-4 h-4" />
+                          </Link>
+                        )}
+                        <button
+                          onClick={() => openQuoteModal(s.title)}
+                          className="btn-magnetic inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-accent text-accent-foreground font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-md"
+                        >
+                          Request Service <ArrowUpRight className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-foreground/60 group-hover/btn:text-accent transition-colors duration-250 text-center">
-                      Request<br />Service
-                    </span>
-                  </button>
-                </div>
 
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
-              </div>
-            </Reveal>
-          ))}
+                    {/* Service media */}
+                    <div className={`lg:col-span-5 ${isEven ? "lg:order-1" : "lg:order-2"} flex justify-center`}>
+                      <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-foreground/10 aspect-[4/3] group bg-muted">
+                        <img
+                          src={s.image}
+                          alt={s.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
         </section>
 
         {/* ══ PRODUCTIVITY & EFFICIENCY ══ */}
@@ -282,15 +363,7 @@ const Services = () => {
             <div className="lg:col-span-7 space-y-5">
               {productivityList.map((p, idx) => (
                 <Reveal key={p.title} delay={idx * 0.08}>
-                  <div className="card-lift art-card sheen noise-soft group relative overflow-hidden rounded-3xl p-7 sm:p-9">
-                    <span
-                      className="pointer-events-none absolute -top-8 right-4 font-display font-black leading-none select-none text-[7rem] sm:text-[9rem] opacity-60"
-                      style={{ color: "hsl(var(--primary))" }}
-                      aria-hidden="true"
-                    >
-                      {p.num}
-                    </span>
-
+                  <div className="card-lift art-card sheen noise-soft group relative overflow-hidden rounded-3xl p-7 sm:p-9 border border-foreground/10 hover:border-accent/30 transition-all duration-300">
                     <div className="relative flex items-start gap-5 sm:gap-7">
                       <div
                         className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shrink-0 text-accent"

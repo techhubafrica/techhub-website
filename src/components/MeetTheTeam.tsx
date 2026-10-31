@@ -176,7 +176,7 @@ const TeamModal = ({
           />
 
           {/* Bottom gradient overlay */}
-          <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-primary via-primary/75 to-transparent md:hidden">
+          <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-black/85 via-black/40 to-transparent md:hidden">
             <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-accent mb-0.5">
               {member.role}
             </p>
@@ -427,16 +427,13 @@ const MeetTheTeam = () => {
                   />
 
                   {/* Portrait Container */}
-                  <div className="relative aspect-[3/3.6] w-full overflow-hidden bg-primary/5">
+                  <div className="relative aspect-[3/3.6] w-full overflow-hidden bg-muted">
                     <img
                       src={m.photo}
                       alt={`${m.name}, ${m.role} at Tech Hub Africa`}
                       loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
-
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent" />
 
                     {/* Number Badge */}
                     <div className="absolute top-4 left-4 z-10">

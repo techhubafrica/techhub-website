@@ -6,12 +6,20 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { techGuruGallery } from "@/assets/tech-guru";
+import { readSiteImages } from "@/data/siteContentStore";
+
+interface GalleryItem { src: string; caption: string; }
 
 const Gallery = () => {
+  // Merge CEO-uploaded images (first) with built-in tech guru photos
+  const cmsImages = readSiteImages("gallery").map((i) => ({ src: i.src, caption: i.caption }));
+  const builtIn: GalleryItem[] = techGuruGallery.map((src, i) => ({ src, caption: `Tech Guru Meetup 2025 — photograph ${i + 1}` }));
+  const allImages: GalleryItem[] = [...cmsImages, ...builtIn];
+
   const [open, setOpen] = useState<number | null>(null);
   const step = useCallback((direction: number) => {
-    setOpen((index) => index === null ? null : (index + direction + techGuruGallery.length) % techGuruGallery.length);
-  }, []);
+    setOpen((index) => index === null ? null : (index + direction + allImages.length) % allImages.length);
+  }, [allImages.length]);
 
   useEffect(() => {
     if (open === null) return;
@@ -41,11 +49,11 @@ const Gallery = () => {
             </Button>
           </div>
         </section>
-        <section aria-label="Tech Guru Meetup photographs" className="container mx-auto px-5 sm:px-6 lg:px-10 pb-20">
+        <section aria-label="Gallery photographs" className="container mx-auto px-5 sm:px-6 lg:px-10 pb-20">
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
-            {techGuruGallery.map((src, index) => (
-              <Button key={src} variant="ghost" onClick={() => setOpen(index)} aria-label={`Open Tech Guru Meetup photo ${index + 1}`} className="mb-5 block w-full h-auto p-0 overflow-hidden rounded-lg">
-                <img src={src} alt={`Tech Guru Meetup 2025 — photograph ${index + 1}`} loading={index < 3 ? "eager" : "lazy"} className="w-full h-auto" />
+            {allImages.map((item, index) => (
+              <Button key={`${item.src}-${index}`} variant="ghost" onClick={() => setOpen(index)} aria-label={`Open gallery photo: ${item.caption}`} className="mb-5 block w-full h-auto p-0 overflow-hidden rounded-lg">
+                <img src={item.src} alt={item.caption} loading={index < 3 ? "eager" : "lazy"} className="w-full h-auto" />
               </Button>
             ))}
           </div>
@@ -54,11 +62,11 @@ const Gallery = () => {
       </main>
       <Dialog open={open !== null} onOpenChange={(value) => { if (!value) setOpen(null); }}>
         <DialogContent aria-describedby={undefined} className="max-w-5xl w-[calc(100%-2rem)] p-4 sm:p-6 z-[100]">
-          <DialogTitle className="pr-8 font-display">Tech Guru Meetup 2025</DialogTitle>
-          {open !== null && <img src={techGuruGallery[open]} alt={`Tech Guru Meetup 2025 — photograph ${open + 1}`} className="w-full max-h-[70vh] object-contain" />}
+          <DialogTitle className="pr-8 font-display">{open !== null ? allImages[open].caption : "Gallery"}</DialogTitle>
+          {open !== null && <img src={allImages[open].src} alt={allImages[open].caption} className="w-full max-h-[70vh] object-contain" />}
           <div className="flex items-center justify-between">
             <Button variant="outline" size="icon" aria-label="Previous photograph" onClick={() => step(-1)}><ArrowLeft /></Button>
-            <span className="text-sm text-muted-foreground">{open === null ? 0 : open + 1} / {techGuruGallery.length}</span>
+            <span className="text-sm text-muted-foreground">{open === null ? 0 : open + 1} / {allImages.length}</span>
             <Button variant="outline" size="icon" aria-label="Next photograph" onClick={() => step(1)}><ArrowRight /></Button>
           </div>
         </DialogContent>

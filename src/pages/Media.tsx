@@ -8,6 +8,7 @@ import { heroKeynote, networking } from "@/assets/photos";
 import { techGuruPanel, techGuruAuditorium, techGuruShowcase, techGuruNetworking, techGuruAwards, techGuruTeam } from "@/assets/tech-guru";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
+import { readSiteImages } from "@/data/siteContentStore";
 
 const articles = [
   { id: 1, num: "01", title: "AI Infrastructure Trends Across West Africa", category: "TechNews Tuesday", date: "July 2026", excerpt: "How African cloud providers and developer communities are deploying low-latency LLMs locally — breaking the dependency on foreign infrastructure." },
@@ -97,24 +98,33 @@ const Media = () => {
           <div className="space-y-6">
             {filtered.map((a, i) => (
               <Reveal key={a.id} delay={i * 0.08}>
-                <article className="card-lift art-card sheen group relative rounded-3xl hover:border-accent/40 transition-all duration-500 overflow-hidden grid grid-cols-1 md:grid-cols-12">
-                  <div className="hidden md:col-span-1 md:flex items-center justify-center px-6 lg:px-10 py-10 border-r border-foreground/10">
-                    <span className="font-display font-black text-3xl leading-none text-foreground/20 select-none">{a.num}</span>
-                  </div>
-                  <div className="md:col-span-8 p-6 md:p-8">
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-accent bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20">{a.category}</span>
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-foreground/40">• {a.date}</span>
+                <article className="card-lift art-card sheen group relative rounded-3xl hover:border-accent/40 transition-all duration-500 overflow-hidden p-7 sm:p-9 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-foreground/10">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <span className="text-[9px] font-black uppercase tracking-widest text-accent bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20">
+                        {a.category}
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/40">
+                        {a.date}
+                      </span>
                     </div>
-                    <h3 className="font-display font-extrabold text-foreground text-xl md:text-2xl tracking-tight mb-3 group-hover:text-accent transition-colors">{a.title}</h3>
-                    <p className="text-foreground/65 text-sm leading-relaxed">{a.excerpt}</p>
+                    <h3 className="font-display font-extrabold text-foreground text-xl sm:text-2xl tracking-tight mb-3 group-hover:text-accent transition-colors">
+                      {a.title}
+                    </h3>
+                    <p className="text-foreground/65 text-sm sm:text-base leading-relaxed max-w-3xl">
+                      {a.excerpt}
+                    </p>
                   </div>
-                  <div className="md:col-span-3 flex items-center justify-center p-6 md:p-8 border-t md:border-t-0 md:border-l border-foreground/10">
-                    <a href="#"
-                      className="btn-magnetic w-full py-3.5 px-5 rounded-full border border-foreground/12 text-foreground/70 font-bold text-[10px] uppercase tracking-[0.2em] hover:border-accent hover:text-accent transition-all duration-250 text-center flex items-center justify-center gap-2">
+
+                  <div className="shrink-0 pt-4 md:pt-0 border-t md:border-t-0 border-foreground/10 w-full md:w-auto">
+                    <a
+                      href="#"
+                      className="btn-magnetic inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-accent text-accent-foreground font-bold text-[10.5px] uppercase tracking-[0.2em] hover:bg-primary hover:text-primary-foreground transition-all duration-250 w-full md:w-auto shadow-sm"
+                    >
                       Read Article <ArrowUpRight className="w-3.5 h-3.5" />
                     </a>
                   </div>
+
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-350" />
                 </article>
               </Reveal>
@@ -138,6 +148,11 @@ const Media = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[
+              ...readSiteImages("media").map((img) => ({
+                src: img.src,
+                alt: img.caption || "Tech Hub Africa Media",
+                span: "",
+              })),
               { src: techGuruShowcase, alt: "Enterprise innovation showcase at Tech Guru Meetup", span: "md:col-span-2 md:row-span-2" },
               { src: networking, alt: "Founders networking at the Tech Guru Meetup", span: "" },
               { src: techGuruPanel, alt: "Panel discussion at the Tech Guru Meetup", span: "" },
@@ -147,7 +162,7 @@ const Media = () => {
               { src: techGuruAwards, alt: "Awards at Tech Guru Meetup", span: "" },
               { src: techGuruTeam, alt: "Tech Hub Africa event team", span: "" },
             ].map((img, i) => (
-              <Reveal key={img.alt} delay={i * 0.06} className={img.span}>
+              <Reveal key={`${img.alt}-${i}`} delay={i * 0.06} className={img.span}>
                 <figure className="card-lift sheen group relative overflow-hidden rounded-3xl border border-foreground/10 w-full h-full min-h-[220px]">
                   <img src={img.src} alt={img.alt} loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />

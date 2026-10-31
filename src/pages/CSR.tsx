@@ -2,158 +2,167 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { ArrowUpRight, CheckCircle2, X } from "lucide-react";
-import { useReveal } from "@/hooks/use-reveal";
+import { ArrowUpRight, CheckCircle2, GraduationCap, HandHeart, Users, X } from "lucide-react";
 import Marquee from "@/components/Marquee";
+import { heroCelebration } from "@/assets/photos";
 
-const tiers = [
-  {
-    num: "02", name: "Tech Guru Meetup Partner", tag: "Flagship Tier",
-    desc: "Premium brand presence, keynote opportunities, and VIP access at our 2,500+ attendee flagship conference.",
-    benefits: ["Keynote speaking slot (15 mins)", "Exhibition booth (6×4m)", "VIP networking dinner access", "Full media & press coverage"],
-  },
-  {
-    num: "03", name: "Hackathon Challenge Sponsor", tag: "Innovation Tier",
-    desc: "Fund problem statements, prize pools, and cloud credits for top engineering teams building for African impact.",
-    benefits: ["Your challenge problem statement", "Direct access to winning teams", "Talent pipeline from top finishers", "Co-branded trophy & certificate"],
-  },
+const initiatives = [
+  "Provide scholarships and mentorship opportunities to underrepresented groups in tech.",
+  "Organize events and workshops that promote diversity and inclusion in the tech industry.",
+  "Partner with organizations that support diversity and inclusion in tech.",
 ];
 
-function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
-  const [ref, visible] = useReveal();
-  return (
-    <div ref={ref} className={`reveal ${visible ? "is-visible" : ""} ${className}`} style={{ transitionDelay: `${delay}s` }}>
-      {children}
-    </div>
-  );
-}
+const benefits = [
+  "Enhanced brand reputation through association with a socially responsible organization.",
+  "Opportunities for employee engagement and volunteerism.",
+  "Access to a diverse and inclusive community of tech professionals.",
+  "Recognition on our website and social media channels as a CSR partner.",
+];
+
+const packages = [
+  "Event sponsorship",
+  "Scholarship donations",
+  "Mentorship program participation",
+  "Partnerships with diversity and inclusion organizations",
+];
 
 const CSR = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [tier, setTier] = useState("Corporate Sponsor");
   const [submitted, setSubmitted] = useState(false);
 
-  const open = (t: string) => { setTier(t); setModalOpen(true); setSubmitted(false); };
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); setSubmitted(true);
-    setTimeout(() => { setModalOpen(false); setSubmitted(false); }, 2500);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSubmitted(false);
   };
 
   return (
     <>
       <Header />
       <PageHero
-        tag="Corporate Partnerships"
-        title={<>Connecting business through <span className="italic font-light text-accent">technology partnerships.</span></>}
-        body="Partner with Tech Hub Africa through commercial events, innovation showcases and business networking."
+        tag="Community Impact"
+        title={<>Corporate Social <span className="italic font-light text-accent">Responsibility.</span></>}
+        body="We are committed to giving back to the community and promoting diversity and inclusion in the tech industry."
         ghost="IMPACT"
       />
 
-      <Marquee text="Corporate Partnerships · Innovation Showcases · Business Networking" />
+      <Marquee text="Opportunity · Diversity · Inclusion · A stronger technology community" />
 
       <main className="page-entry bg-background overflow-hidden">
-        {/* ══ SPONSOR TIERS ══ */}
-        <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto">
-          <div className="hidden md:block absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
-
-          <Reveal className="mb-16">
-            <div className="flex items-baseline gap-6 mb-6">
-              <span className="eyebrow text-accent">01 — Partner With Us</span>
-              <div className="flex-1 divider-elegant" />
+        <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div>
+              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-accent">Our Commitment</span>
+              <h2 className="font-display font-extrabold text-foreground text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-[1.08] mt-4 mb-6">
+                Making technology more <span className="italic font-light text-accent">inclusive.</span>
+              </h2>
+              <p className="text-foreground/70 leading-relaxed mb-8">
+                We work to widen access to opportunity in technology through practical support,
+                community programs and partnerships.
+              </p>
+              <ul className="space-y-4">
+                {initiatives.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-foreground/75 leading-relaxed">
+                    <span className="mt-1 w-6 h-6 shrink-0 rounded-full bg-accent/10 text-accent flex items-center justify-center">
+                      <CheckCircle2 className="w-4 h-4" />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <h2 className="font-display font-black text-4xl md:text-5xl tracking-tight leading-[0.92] text-foreground">
-              Sponsorship<br /><span className="italic font-light text-accent">Opportunities.</span>
-            </h2>
-          </Reveal>
+            <div className="relative rounded-3xl overflow-hidden min-h-[320px] lg:min-h-[440px] bg-primary">
+              <img src={heroCelebration} alt="Technology community celebrating together" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/25 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10 text-primary-foreground">
+                <HandHeart className="w-9 h-9 text-accent mb-4" />
+                <h3 className="font-display text-2xl sm:text-3xl font-extrabold mb-3">You can support the mission.</h3>
+                <p className="text-sm text-primary-foreground/80 leading-relaxed max-w-lg mb-6">
+                  Sponsoring our programs helps build a more diverse and inclusive technology community.
+                </p>
+                <button onClick={() => setModalOpen(true)} className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-6 py-3 text-xs font-bold uppercase tracking-widest hover:brightness-110 transition">
+                  Apply to Partner <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
 
-          <div className="space-y-6">
-            {tiers.map((t, idx) => (
-              <Reveal key={t.num} delay={idx * 0.08}>
-                <div className={`card-lift sheen group relative rounded-3xl overflow-hidden transition-all duration-500 border border-foreground/10 ${idx === 1 ? "bg-primary text-primary-foreground" : "bg-background"}`}>
-                  {idx === 1 && (
-                    <>
-                      <div className="noise-bg" />
-                      <div className="hidden md:block absolute -top-20 right-10 w-[400px] h-[300px] rounded-full blur-3xl opacity-20 pointer-events-none"
-                        style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent)" }} />
-                      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
-                    </>
-                  )}
+        <section className="bg-cream px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28">
+          <div className="max-w-7xl mx-auto">
+            <div className="max-w-3xl mb-12">
+              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-accent">Partner with us</span>
+              <h2 className="font-display font-extrabold text-foreground text-3xl sm:text-4xl lg:text-5xl tracking-tight mt-4">CSR Benefits &amp; Package</h2>
+              <p className="text-foreground/65 leading-relaxed mt-4">
+                We offer a range of ways to support our work, from event sponsorship and scholarships to mentorship and community partnerships.
+              </p>
+            </div>
 
-                  <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12">
-                    <div className="lg:col-span-2 flex items-start gap-5 lg:flex-col lg:gap-4 p-8 pb-0 lg:pb-8 border-b lg:border-b-0 border-foreground/10 lg:border-r">
-                      <span className={`font-display font-black text-5xl leading-none select-none ${idx === 1 ? "text-accent/35" : "text-foreground/15"}`}>{t.num}</span>
-                      <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${idx === 1 ? "text-accent bg-accent/10 border-accent/25" : "text-accent bg-accent/10 border-accent/20"}`}>{t.tag}</span>
-                    </div>
-
-                    <div className="lg:col-span-7 p-8 lg:p-10">
-                      <h3 className={`font-display font-extrabold text-2xl md:text-3xl tracking-tight mb-3 ${idx === 1 ? "text-primary-foreground" : "text-foreground"}`}>{t.name}</h3>
-                      <p className={`text-sm leading-relaxed mb-6 ${idx === 1 ? "text-primary-foreground/65" : "text-foreground/65"}`}>{t.desc}</p>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6">
-                        {t.benefits.map((b) => (
-                          <div key={b} className={`flex items-start gap-2.5 text-xs font-semibold ${idx === 1 ? "text-primary-foreground/75" : "text-foreground/75"}`}>
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-1" />
-                            {b}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="lg:col-span-3 flex items-center justify-center p-8 lg:p-10 border-t lg:border-t-0 lg:border-l border-foreground/10">
-                      <button onClick={() => open(t.name)}
-                        className={`btn-magnetic w-full py-4 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 ${
-                          idx === 1
-                            ? "bg-accent text-accent-foreground hover:bg-primary-foreground hover:text-foreground"
-                            : "bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground"
-                        }`}
-                      >
-                        Inquire <ArrowUpRight className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+            <div className="grid md:grid-cols-2 gap-6">
+              <article className="rounded-3xl bg-background border border-foreground/10 p-7 sm:p-9">
+                <div className="w-12 h-12 rounded-2xl bg-accent/10 text-accent flex items-center justify-center mb-6"><Users className="w-6 h-6" /></div>
+                <h3 className="font-display font-extrabold text-2xl text-foreground mb-5">CSR Benefits</h3>
+                <ul className="space-y-4">
+                  {benefits.map((item) => <li key={item} className="flex gap-3 text-sm leading-relaxed text-foreground/70"><CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-0.5" />{item}</li>)}
+                </ul>
+              </article>
+              <article className="rounded-3xl bg-primary text-primary-foreground p-7 sm:p-9">
+                <div className="w-12 h-12 rounded-2xl bg-primary-foreground/10 text-accent flex items-center justify-center mb-6"><GraduationCap className="w-6 h-6" /></div>
+                <h3 className="font-display font-extrabold text-2xl mb-5">CSR Package</h3>
+                <p className="text-sm text-primary-foreground/70 leading-relaxed mb-5">Choose a way to contribute that aligns with your organization’s goals:</p>
+                <ul className="space-y-4">
+                  {packages.map((item) => <li key={item} className="flex gap-3 text-sm leading-relaxed text-primary-foreground/80"><CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-0.5" />{item}</li>)}
+                </ul>
+                <button onClick={() => setModalOpen(true)} className="mt-8 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-accent hover:text-primary-foreground transition-colors">
+                  Fill CSR Form <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </article>
+            </div>
           </div>
         </section>
       </main>
 
-      {/* Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-primary/88" style={{ backdropFilter: "blur(12px)" }} onClick={() => setModalOpen(false)} />
-          <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl" style={{ animation: "scale-in-modal 0.35s cubic-bezier(0.16,1,0.3,1) forwards" }}>
-            <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative text-primary-foreground">
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
-              <button onClick={() => setModalOpen(false)} className="absolute top-5 right-5 w-8 h-8 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground transition-all"><X className="w-3.5 h-3.5" /></button>
-              <p className="text-[9px] font-black uppercase tracking-[0.35em] text-accent mb-2">Sponsorship Inquiry</p>
-              <h3 className="font-display font-extrabold text-primary-foreground text-2xl leading-tight">{tier}</h3>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 overflow-y-auto">
+          <button aria-label="Close CSR form" className="absolute inset-0 bg-primary/88" style={{ backdropFilter: "blur(10px)" }} onClick={closeModal} />
+          <div className="relative z-10 w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl my-auto">
+            <div className="bg-primary px-7 sm:px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative text-primary-foreground">
+              <button onClick={closeModal} aria-label="Close" className="absolute top-5 right-5 w-8 h-8 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/60 hover:text-primary-foreground"><X className="w-4 h-4" /></button>
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-2">Corporate Social Responsibility</p>
+              <h3 className="font-display font-extrabold text-2xl">CSR Partnership Form</h3>
             </div>
-            <div className="bg-background px-8 py-8">
+            <div className="bg-background px-7 sm:px-8 py-7 max-h-[75vh] overflow-y-auto">
               {submitted ? (
                 <div className="text-center py-8">
-                  <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent"><CheckCircle2 className="w-7 h-7" /></div>
-                  <h4 className="font-display font-extrabold text-xl text-foreground">Inquiry Received!</h4>
-                  <p className="mt-2 text-sm text-foreground/55">Our partnerships lead will send you a detailed package within 48 hours.</p>
+                  <CheckCircle2 className="w-12 h-12 text-accent mx-auto mb-4" />
+                  <h4 className="font-display font-extrabold text-xl text-foreground">Thank you for your interest.</h4>
+                  <p className="mt-2 text-sm text-foreground/60">This local form is a preview and does not send applications yet.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {["Company / Foundation Name", "Contact Email", "Brief Message"].map((label) => (
-                    <div key={label}>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
-                      {label === "Brief Message"
-                        ? <textarea required rows={3} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
-                        : <input required type={label.includes("Email") ? "email" : "text"} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
-                      }
-                    </div>
-                  ))}
-                  <button type="submit" className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">Submit Inquiry</button>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <label className="block text-xs font-bold text-foreground/70">Name / Business Name *<input required className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Mission &amp; Vision<textarea rows={3} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Type of Sponsorship *<select required defaultValue="" className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm"><option value="" disabled>Select a sponsorship type</option>{packages.map((item) => <option key={item}>{item}</option>)}</select></label>
+                  <label className="block text-xs font-bold text-foreground/70">Who will benefit? *<textarea required rows={2} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Why should you be considered? *<textarea required rows={2} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">What are the benefits to Tech Hub Africa LLC? *<textarea required rows={2} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">501(c)(3) or nonprofit documents<input type="file" accept=".pdf,.png,.jpg,.jpeg" className="mt-1.5 block w-full text-sm text-foreground/60" /></label>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <label className="block text-xs font-bold text-foreground/70">Email Address *<input required type="email" className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                    <label className="block text-xs font-bold text-foreground/70">Phone *<input required type="tel" className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  </div>
+                  <label className="flex items-start gap-3 text-xs text-foreground/65"><input required type="checkbox" className="mt-0.5 accent-accent" /><span>Yes, I agree with the privacy policy and terms and conditions.</span></label>
+                  <button type="submit" className="w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all">Submit Request</button>
                 </form>
               )}
             </div>
           </div>
         </div>
       )}
-
       <Footer />
     </>
   );

@@ -1,182 +1,142 @@
-import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { Wifi, Coffee, Users, Calendar, Box, MapPin, ArrowUpRight, CheckCircle2, X } from "lucide-react";
-import { useReveal } from "@/hooks/use-reveal";
+import { CheckCircle2, Handshake, Lightbulb, Users } from "lucide-react";
 import Marquee from "@/components/Marquee";
+import { heroCelebration } from "@/assets/photos";
 
-const amenities = [
-  { num: "01", icon: Wifi, title: "Gigabit Fiber", desc: "Redundant high-speed fiber with 99.9% uptime — no throttling, no excuses." },
-  { num: "02", icon: Users, title: "Collaborative Hot Desks", desc: "Ergonomic workstations for founders, developers, and creators of all kinds." },
-  { num: "03", icon: Coffee, title: "Artisanal Coffee Bar", desc: "On-site espresso bar and lounge area for informal deep-work sessions." },
-  { num: "04", icon: Calendar, title: "100-Person Event Hall", desc: "Fully equipped AV, livestreaming rigs, and flexible seating for workshops and meetups." },
-  { num: "05", icon: Box, title: "Global Metaverse VR Hub", desc: "Equipped with VR rigs, 3D development suites, and metaverse access points connecting East Legon to virtual labs worldwide." },
+const vendorHighlights = [
+  {
+    name: "GhanaMall",
+    image: "https://techhubafrica.org/wp-content/uploads/2025/12/5900115068827929871.jpg",
+    description: "A trusted online market in Ghana, offering quality products from top vendors at competitive prices, with fast delivery and secure payments.",
+  },
+  {
+    name: "AfroEventix",
+    image: "https://techhubafrica.org/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-08-at-20.16.21.jpeg",
+    description: "An event discovery, ticketing and management platform connecting African communities, event organizers and cultural experience creators across Africa and the Diaspora.",
+  },
+  {
+    name: "RushPay",
+    image: "https://techhubafrica.org/wp-content/uploads/2025/12/5900115068827929869.jpg",
+    description: "A modern way to send and receive money between family, friends and customers, with custom payment solutions for Ghanaian businesses.",
+  },
+  {
+    name: "OFie Agro Ltd",
+    image: "https://techhubafrica.org/wp-content/uploads/2025/06/Ofie-Agro-Ltd-Products.png",
+    description: "Sustainably produced foods made from cassava, plantain and palm fruits, supporting local farmers and communities while sharing Ghanaian flavors globally.",
+  },
+  {
+    name: "GH-Accommodation",
+    image: "https://techhubafrica.org/wp-content/uploads/2025/12/LOGO-GH-Accommodation.png",
+    description: "An online room and hostel reservation platform connecting people with a suitable place to stay in just a few clicks.",
+  },
+  {
+    name: "Black Love Link",
+    image: "https://techhubafrica.org/wp-content/uploads/2026/10/Final-Black-Love-Link-Logo.jpeg",
+    description: "A curated, membership-based community for vetted Black professionals and like-minded people seeking meaningful connections.",
+  },
+  {
+    name: "Tech4ALL AI",
+    image: "https://techhubafrica.org/wp-content/uploads/2026/10/Logo-for-Tech-For-All.jpeg",
+    description: "Technology without borders. An inclusive AI platform helping students, entrepreneurs and communities learn and build with AI.",
+  },
+  {
+    name: "Threat Lock",
+    image: "https://techhubafrica.org/wp-content/uploads/2025/12/threatlocked.jpeg",
+    description: "Website protection with threat defense, firewall and intrusion prevention, login protection and security tools for WordPress and other platforms.",
+  },
+  {
+    name: "Ladies In Design Network",
+    image: "https://techhubafrica.org/wp-content/uploads/2025/12/5900115068827929872.jpg",
+    description: "A supportive community where women in design can share expertise, learn from one another and grow their careers.",
+  },
+  {
+    name: "Gumption Excell",
+    image: "https://techhubafrica.org/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-09-at-16.00.26.jpeg",
+    description: "An educational consulting hub advancing STEM education, modern learning infrastructure and workforce-relevant partnerships between academia and industry.",
+  },
 ];
 
-function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
-  const [ref, visible] = useReveal();
-  return (
-    <div ref={ref} className={`reveal ${visible ? "is-visible" : ""} ${className}`} style={{ transitionDelay: `${delay}s` }}>
-      {children}
-    </div>
-  );
-}
+const TheHub = () => (
+  <>
+    <Header />
+    <PageHero
+      tag="Community & Innovation"
+      title={<>THE HUB —<br /><span className="italic font-light text-accent">ideas in motion.</span></>}
+      body="THE HUB is a dynamic ecosystem that fuels creativity, fosters collaboration and accelerates growth. It brings innovators, entrepreneurs and tech enthusiasts together to share ideas and innovation."
+      ghost="HUB"
+    />
 
-const TheHub = () => {
-  const [bookingOpen, setBookingOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+    <Marquee text="Showcase · Networking · Collaboration · African Innovation" />
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); setSubmitted(true);
-    setTimeout(() => { setBookingOpen(false); setSubmitted(false); }, 2500);
-  };
-
-  return (
-    <>
-      <Header />
-      <PageHero
-        tag="Innovation Campus"
-        title={<>THE HUB —<br /><span className="italic font-light text-accent">East Legon, Accra.</span></>}
-        body="Our flagship co-working, incubation, and event space at 48 IPS Road, East Legon. Purpose-built to fuel collaboration across Africa's tech community."
-        ghost="HUB"
-        stats={[
-          { val: "5,000", label: "sq ft Campus" },
-          { val: "100+", label: "Event Capacity" },
-          { val: "Mon–Sat", label: "Open Daily" },
-          { val: "Accra", label: "East Legon" },
-        ]}
-      />
-
-      <Marquee text="Co-Working Space · Innovation Hub · East Legon · Accra Campus" />
-
-      <main className="page-entry bg-background overflow-hidden">
-        {/* ══ AMENITIES ══ */}
-        <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 max-w-7xl mx-auto">
-          <div className="hidden md:block absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
-
-          <Reveal className="mb-16">
-            <div className="flex items-baseline gap-6 mb-6">
-              <span className="eyebrow text-accent">01 — Facilities</span>
-              <div className="flex-1 divider-elegant" />
+    <main className="page-entry bg-background overflow-hidden">
+      <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
+          <div className="rounded-3xl bg-primary text-primary-foreground p-8 sm:p-10 flex flex-col justify-between overflow-hidden relative">
+            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_right,hsl(28_92%_55%/0.6),transparent_55%)]" />
+            <div className="relative">
+              <div className="w-12 h-12 rounded-2xl bg-accent/15 border border-accent/30 text-accent flex items-center justify-center mb-6"><Lightbulb className="w-6 h-6" /></div>
+              <p className="eyebrow text-accent mb-3">What We Offer</p>
+              <h2 className="font-display font-extrabold text-3xl sm:text-4xl tracking-tight mb-7">A place to share what you’re building.</h2>
+              <ul className="space-y-5">
+                <li className="flex gap-3 text-sm text-primary-foreground/75 leading-relaxed"><CheckCircle2 className="w-5 h-5 text-accent shrink-0" /><span><strong className="text-primary-foreground">Showcase Opportunities:</strong> Platforms to exhibit innovative work, technology products and services.</span></li>
+                <li className="flex gap-3 text-sm text-primary-foreground/75 leading-relaxed"><CheckCircle2 className="w-5 h-5 text-accent shrink-0" /><span><strong className="text-primary-foreground">Networking &amp; Collaboration:</strong> Connect with like-minded people, partners and investors.</span></li>
+              </ul>
             </div>
-            <h2 className="font-display font-black text-4xl md:text-5xl tracking-tight leading-[0.92] text-foreground">
-              Built for<br /><span className="italic font-light text-accent">deep work.</span>
-            </h2>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {amenities.map((a, idx) => (
-              <Reveal key={a.num} delay={idx * 0.08}>
-                <div className={`card-lift sheen group relative rounded-3xl overflow-hidden p-10 md:p-12 transition-all duration-500 border border-foreground/10 ${idx === 0 || idx === 3 || idx === 4 ? "bg-primary text-primary-foreground" : "bg-background"} ${idx === 4 ? "md:col-span-2" : ""}`}>
-                  {(idx === 0 || idx === 3 || idx === 4) && (
-                    <>
-                      <div className="noise-bg" />
-                      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
-                    </>
-                  )}
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-8">
-                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${idx === 0 || idx === 3 || idx === 4 ? "bg-accent/15 border border-accent/30 text-accent" : "bg-accent/10 border border-accent/20 text-accent"}`}>
-                        <a.icon className="w-5.5 h-5.5" />
-                      </div>
-                      <span className={`font-display font-black text-5xl leading-none select-none ${idx === 0 || idx === 3 || idx === 4 ? "text-accent/25" : "text-foreground/10"}`}>{a.num}</span>
-                    </div>
-                    <h3 className={`font-display font-extrabold text-2xl mb-3 ${idx === 0 || idx === 3 || idx === 4 ? "text-primary-foreground" : "text-foreground"}`}>{a.title}</h3>
-                    <p className={`text-sm leading-relaxed ${idx === 0 || idx === 3 || idx === 4 ? "text-primary-foreground/65" : "text-foreground/65"}`}>{a.desc}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+            <img src={heroCelebration} alt="Innovators sharing ideas at Tech Hub Africa" loading="lazy" className="relative mt-9 w-full h-52 sm:h-64 object-cover rounded-2xl" />
           </div>
-        </section>
 
-        {/* ══ LOCATION + BOOKING ══ */}
-        <section className="relative bg-secondary text-primary-foreground overflow-hidden px-5 sm:px-6 lg:px-10 py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 cv-auto">
-          <div className="noise-bg" />
-          <div className="hidden md:block absolute -top-32 right-10 w-[500px] h-[400px] rounded-full blur-3xl opacity-20 pointer-events-none" style={{ background: "radial-gradient(circle, hsl(28 92% 55% / 0.5), transparent)" }} />
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
-          
-          <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <Reveal>
-              <span className="text-[10px] font-black uppercase tracking-[0.35em] text-accent mb-4 block">02 — Visit Us</span>
-              <h2 className="font-display font-black text-4xl md:text-5xl tracking-tight leading-[0.92] mb-5">
-                48 IPS Road,<br /><span className="italic font-light text-accent">East Legon.</span>
-              </h2>
-              <p className="text-primary-foreground/70 text-sm leading-relaxed mb-6 max-w-md">
-                Head Office Annex: 48 IPS Road, East Legon, Accra, Ghana, West Africa. Open Monday through Saturday, 8:00 AM – 9:00 PM GMT.
-              </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-accent">
-                <MapPin className="w-4 h-4" /> Accra, Ghana, West Africa
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <div className="flex justify-center lg:justify-end">
-                <div className="w-full max-w-sm space-y-4">
-                  <div className="card-lift p-6 rounded-2xl border border-primary-foreground/15 bg-primary/60 backdrop-blur-md">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-accent mb-3">Opening Hours</p>
-                    <div className="space-y-2 text-sm text-primary-foreground/70 font-semibold">
-                      <div className="flex justify-between"><span>Mon – Fri</span><span className="text-primary-foreground/90">8:00 AM – 9:00 PM</span></div>
-                      <div className="flex justify-between"><span>Saturday</span><span className="text-primary-foreground/90">9:00 AM – 6:00 PM</span></div>
-                      <div className="flex justify-between"><span>Sunday</span><span className="text-primary-foreground/40">Closed</span></div>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => { setBookingOpen(true); setSubmitted(false); }}
-                    className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary-foreground hover:text-foreground transition-all duration-300 flex items-center justify-center gap-2"
-                    style={{ boxShadow: "0 14px 40px -12px hsl(28 92% 44% / 0.6)" }}
-                  >
-                    Book a Desk / Tour <ArrowUpRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-      </main>
-
-      {/* Booking Modal */}
-      {bookingOpen && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-primary/88" style={{ backdropFilter: "blur(12px)" }} onClick={() => setBookingOpen(false)} />
-          <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl" style={{ animation: "scale-in-modal 0.35s cubic-bezier(0.16,1,0.3,1) forwards" }}>
-            <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative text-primary-foreground">
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
-              <button onClick={() => setBookingOpen(false)} className="absolute top-5 right-5 w-8 h-8 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:text-primary-foreground transition-all"><X className="w-3.5 h-3.5" /></button>
-              <p className="text-[9px] font-black uppercase tracking-[0.35em] text-accent mb-2">Campus Booking</p>
-              <h3 className="font-display font-extrabold text-primary-foreground text-2xl leading-tight">Book a Desk / Visit Tour</h3>
-            </div>
-            <div className="bg-background px-8 py-8">
-              {submitted ? (
-                <div className="text-center py-8">
-                  <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent"><CheckCircle2 className="w-7 h-7" /></div>
-                  <h4 className="font-display font-extrabold text-xl text-foreground">Booking Confirmed!</h4>
-                  <p className="mt-2 text-sm text-foreground/55">Our campus team will prepare your desk pass and email confirmation details.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {["Full Name", "Email Address"].map((label) => (
-                    <div key={label}>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
-                      <input required type={label.includes("Email") ? "email" : "text"} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
-                    </div>
-                  ))}
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">Preferred Visit Date</label>
-                    <input required type="date" className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
-                  </div>
-                  <button type="submit" className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">Confirm Booking</button>
-                </form>
-              )}
+          <div className="rounded-3xl bg-cream p-8 sm:p-10 flex flex-col justify-center">
+            <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 text-accent flex items-center justify-center mb-6"><Users className="w-6 h-6" /></div>
+            <p className="eyebrow text-accent mb-3">Who Can Participate?</p>
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-foreground mb-7">Bring your ideas to the community.</h2>
+            <ul className="space-y-4">
+              {[
+                "Innovators and tech enthusiasts with a passion for creating impact.",
+                "Entrepreneurs with a vision for growth.",
+                "Anyone driven to turn innovative ideas into reality.",
+              ].map((item) => <li key={item} className="flex gap-3 text-sm text-foreground/70 leading-relaxed"><CheckCircle2 className="w-5 h-5 text-accent shrink-0" />{item}</li>)}
+            </ul>
+            <div className="mt-9 pt-6 border-t border-foreground/10 flex items-start gap-3 text-foreground/60">
+              <Handshake className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+              <p className="text-sm leading-relaxed">The Hub brings community members and emerging ventures together to learn, collaborate and grow.</p>
             </div>
           </div>
         </div>
-      )}
+      </section>
 
-      <Footer />
-    </>
-  );
-};
+      <section className="bg-cream/60 px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-3xl mb-12">
+            <span className="eyebrow text-accent">Our Community</span>
+            <h2 className="font-display font-extrabold text-foreground text-4xl sm:text-5xl tracking-tight mt-4">Vendor Highlights</h2>
+            <p className="text-foreground/65 leading-relaxed mt-4">Meet a selection of the businesses, platforms and communities showcased through THE HUB.</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            {vendorHighlights.map((vendor, index) => (
+              <article key={vendor.name} className="card-lift group rounded-3xl overflow-hidden bg-background border border-foreground/10">
+                <div className="h-52 bg-white flex items-center justify-center overflow-hidden">
+                  <img src={vendor.image} alt={`${vendor.name} logo`} loading="lazy" className="w-full h-full object-contain p-5 transition-transform duration-500 group-hover:scale-[1.04]" />
+                </div>
+                <div className="p-6 sm:p-7">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="font-display font-black text-accent/50 text-xs">{String(index + 1).padStart(2, "0")}</span>
+                    <h3 className="font-display font-extrabold text-foreground text-xl">{vendor.name}</h3>
+                  </div>
+                  <p className="text-sm text-foreground/65 leading-relaxed">{vendor.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <Footer />
+  </>
+);
 
 export default TheHub;

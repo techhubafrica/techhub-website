@@ -19,16 +19,12 @@ const milestones = [
 
 const shortTermGoals = [
   "Establish a strong online presence through social media and a website, with a minimum of 10,000 followers and 1,000 website visitors per month.",
-  "Host at least 4 successful events, including conferences, workshops, and trade fairs, with a minimum of 200 attendees per event.",
-  "Build a network of at least 20 partner organizations and companies in the tech industry.",
-  "Offer career services to at least 50 professionals in the tech industry.",
-  "Secure at least $200,000 in sponsorships and funding for events and programs.",
 ];
 
 const mediumTermGoals = [
-  "Expand our reach to at least 10 African countries, with a minimum of 1 event per country.",
+  "Expand our reach to all African countries, with a minimum of 1 event per country.",
   "Establish a mentorship program with at least 20 experienced mentors and 50 mentees.",
-  "Develop and launch at least 2 online events on tech-related topics, with a minimum of 50 enrollments per webinar.",
+  "Develop and launch online events on tech-related topics, with a minimum of 50 enrollments per webinar.",
   "Build a community of at least 100 innovators, entrepreneurs, and professionals in the tech industry.",
   "Secure at least $500,000 in funding for programs and events.",
 ];
@@ -137,7 +133,7 @@ const About = () => (
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-[9px] font-black uppercase tracking-[0.28em] text-accent bg-accent/15 px-3 py-1 rounded-full border border-accent/30">
-                      1 – 2 Years
+                      Online Presence
                     </span>
                     <Flag className="w-5 h-5 text-accent" />
                   </div>
@@ -162,7 +158,7 @@ const About = () => (
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-[9px] font-black uppercase tracking-[0.28em] text-accent bg-accent/15 px-3 py-1 rounded-full border border-accent/30">
-                      2 – 5 Years
+                      Reach · All Africa
                     </span>
                     <Flag className="w-5 h-5 text-accent" />
                   </div>
@@ -187,7 +183,7 @@ const About = () => (
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-[9px] font-black uppercase tracking-[0.28em] text-accent bg-accent/15 px-3 py-1 rounded-full border border-accent/30">
-                      5+ Years
+                      Long-Term Vision
                     </span>
                     <Flag className="w-5 h-5 text-accent" />
                   </div>

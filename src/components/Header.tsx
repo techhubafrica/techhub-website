@@ -14,6 +14,7 @@ const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "Gallery", href: "/gallery" },
   { label: "Tech4All", href: "https://tech4all.techhubafrica.org/", external: true },
   { label: "Academy", href: "https://academy.techhubafrica.org", external: true },
+  { label: "Contact Us", href: "/#contact" },
 ];
 
 const Header = () => {

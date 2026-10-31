@@ -1,21 +1,23 @@
 import { useEffect, useState, useRef } from "react";
 import {
-  ArrowUpRight, Code2, Smartphone, Layout, Building2, ShoppingBag, Sprout,
+  ArrowUpRight, Code2, Layout, Building2, ShoppingBag, Sprout, Workflow,
   ShieldCheck, Star, Quote, Play, Users, Rocket, Globe2, Sparkles,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Logo from "@/components/Logo";
 import {
-  heroAudience, heroPanel,
-  hackathonFlyer, meetup2026Flyer, awardTop100, awardWhosWho,
+  heroAudience, heroCelebration, heroPanel,
+  hackathonFlyer, campusTourFlyer, meetup2026Flyer, awardTop100, awardWhosWho, careerDigitalMarketing,
   serviceProgramming, serviceSoftware, serviceWebDesign,
   portfolioGh, portfolioGmo, portfolioOfie, portfolioThreatLock,
 } from "@/assets/photos";
-import { techGuruAudience, techGuruShowcase, techGuruNetworking, techGuruPanel } from "@/assets/tech-guru";
+import { techGuruAudience, techGuruShowcase, techGuruNetworking, techGuruPanel, techGuruAuditorium } from "@/assets/tech-guru";
+import { shotGhanamall, shotGhanafeed, shotAfroeventix, shotThreatlock, shotVinisee, shotDiaspocare, shotRablebakes } from "@/assets/portfolio-shots";
 import Marquee from "@/components/Marquee";
 import { Link } from "react-router-dom";
 import ClientShowcase from "@/components/ClientShowcase";
+import { readSiteImages } from "@/data/siteContentStore";
 
 
 
@@ -24,10 +26,10 @@ import ClientShowcase from "@/components/ClientShowcase";
    ============================================================ */
 const heroSlides = [
   {
-    tag: "Enterprise Solutions", kicker: "Tech Hub Africa", title: "Built for Business",
-    body: "Software engineering, enterprise platforms and secure digital systems for organisations building Africa’s future.",
-    cta: "Explore Our Services", href: "/services", image: techGuruShowcase,
-    stat: { k: "01", v: "Enterprise" },
+    tag: "Community-Focused", kicker: "Community-Focused", title: "One Community. Endless Possibilities.",
+    body: "A growing community of innovators, creators and changemakers working together to make a difference.",
+    cta: "Explore Our Community", href: "/about", image: heroCelebration,
+    stat: { k: "01", v: "Community" },
   },
   {
     tag: "Connected Workplace", kicker: "Corporate Intranet", title: "Your Teams, Connected",
@@ -457,18 +459,20 @@ const initiatives = [
   { title: "Marquis Who's Who", meta: "Honored Listee 2025", tone: "charcoal" as const, Icon: Globe2, image: awardWhosWho, fit: "contain" as const },
 ];
 
-const Initiatives = () => (
+const Initiatives = () => {
+  const eventUploads = readSiteImages("events");
+  return (
   <section id="events" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-cream overflow-hidden">
     <div className="hidden md:block absolute top-40 -left-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-30 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)/0.6),transparent_70%)]" />
 
     <div className="relative max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16">
         <div>
-          <span className="eyebrow text-accent">03 — Core Initiatives</span>
+          <span className="eyebrow text-accent">Community Highlights</span>
           <h2 className="font-display font-extrabold text-foreground mt-4 leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
-            Where the <span className="italic font-light text-accent">work</span>
+            Ideas into <span className="italic font-light text-accent">action</span>
             <br />
-            happens.
+            across Africa.
           </h2>
         </div>
         <p className="text-foreground/60 max-w-sm">
@@ -526,9 +530,60 @@ const Initiatives = () => (
           );
         })}
       </div>
+
+      {eventUploads.length > 0 && (
+        <div className="mt-16 pt-12 border-t border-foreground/10">
+          <div className="flex items-baseline justify-between mb-8">
+            <div>
+              <span className="eyebrow text-accent">Latest Event Highlights</span>
+              <h3 className="font-display font-extrabold text-foreground text-2xl sm:text-3xl mt-2 tracking-tight">
+                Recent <span className="italic font-light text-accent">Gatherings &amp; Moments.</span>
+              </h3>
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {eventUploads.map((evt) => (
+              <div key={evt.id} className="card-lift art-card sheen group relative rounded-2xl overflow-hidden bg-background">
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img
+                    src={evt.src}
+                    alt={evt.caption || "Event image"}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {evt.tag && (
+                    <span className="absolute top-4 left-4 z-[4] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-primary/80 text-primary-foreground backdrop-blur-md">
+                      {evt.tag}
+                    </span>
+                  )}
+                </div>
+                <div className="p-5">
+                  {evt.date && (
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-accent mb-1.5">{evt.date}</p>
+                  )}
+                  <h4 className="font-display text-base font-bold text-foreground line-clamp-2 mb-3">
+                    {evt.caption}
+                  </h4>
+                  {evt.externalLink && (
+                    <a
+                      href={evt.externalLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-accent hover:underline"
+                    >
+                      Event Link <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   </section>
-);
+  );
+};
 
 /* ============================================================
    SERVICES
@@ -536,21 +591,87 @@ const Initiatives = () => (
 const services = [
   {
     Icon: Code2,
-    title: "Computer Programming",
-    desc: "Expert programmers craft custom software solutions tailored to your business — from algorithm development to code optimization.",
-    image: serviceProgramming,
-  },
-  {
-    Icon: Smartphone,
     title: "Software & App Development",
-    desc: "Cutting-edge software for mobile, web and desktop. From concept to deployment, we handle every stage.",
-    image: serviceSoftware,
+    desc: "Custom web, mobile and desktop software, built from product design through deployment.",
+    image: shotGhanamall,
   },
   {
     Icon: Layout,
-    title: "Web Design & Management",
-    desc: "Visually stunning, responsive, user-centric websites — plus ongoing management, updates and security.",
-    image: serviceWebDesign,
+    title: "Website Design & Development",
+    desc: "Responsive, SEO-ready websites and web applications, with ongoing management, updates and security.",
+    image: shotGhanafeed,
+  },
+  {
+    Icon: ShieldCheck,
+    title: "Threat Lock Cybersecurity",
+    desc: "Threat monitoring, mitigation, vulnerability auditing and infrastructure hardening for your digital assets.",
+    image: shotThreatlock,
+  },
+  {
+    Icon: Building2,
+    title: "Enterprise Solutions & Integrations",
+    desc: "Connected business applications, process automation, operational reporting and enterprise system integration.",
+    image: shotDiaspocare,
+  },
+  {
+    Icon: Users,
+    title: "Corporate Intranet",
+    desc: "A secure home for company news, employee directories, shared knowledge and team resources.",
+    image: techGuruNetworking,
+  },
+  {
+    Icon: ShoppingBag,
+    title: "CRM & Corporate Communication",
+    desc: "Connect customer records, sales pipelines, campaigns and internal communications in one platform.",
+    image: shotVinisee,
+  },
+  {
+    Icon: Workflow,
+    title: "Smart Work & Workflow Automation",
+    desc: "Productivity tools, automation playbooks and team enablement to make everyday work more effective.",
+    image: techGuruShowcase,
+  },
+  {
+    Icon: Building2,
+    title: "HR & People Management Tools",
+    desc: "Streamline onboarding, performance reviews, leave and attendance tracking, and people analytics.",
+    image: careerDigitalMarketing,
+  },
+  {
+    Icon: ShieldCheck,
+    title: "Vaults & Secure Data Storage",
+    desc: "Encrypted storage and sharing for sensitive organisational data, with access controls and audit trails.",
+    image: shotRablebakes,
+  },
+  {
+    Icon: Globe2,
+    title: "Global Metaverse Virtual Space",
+    desc: "Explore our virtual space, where all Tech Hub Africa services are brought together.",
+    image: techGuruAuditorium,
+  },
+  {
+    Icon: Users,
+    title: "Startup Incubation & Advisory",
+    desc: "Technical guidance, investor readiness, go-to-market support and connections to partners and investors.",
+    image: hackathonFlyer,
+  },
+  {
+    Icon: Rocket,
+    title: "Tech Talks & Speaking Engagements",
+    desc: "Keynotes, panels and expert-led talks for campuses, companies and Africa's technology community.",
+    image: heroPanel,
+  },
+  {
+    Icon: Sprout,
+    title: "Campus Tours & Startup Competitions",
+    desc: "University visits, hackathons, startup pitch competitions, mentorship and career sessions.",
+    image: campusTourFlyer,
+  },
+  {
+    Icon: Code2,
+    title: "Cloud, DevOps & API Integration",
+    desc: "Cloud infrastructure, delivery pipelines, API integrations and microservices that help products scale.",
+    image: shotAfroeventix,
   },
 ];
 
@@ -560,10 +681,9 @@ const Services = () => (
     <div className="relative max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
         <div>
-          <span className="eyebrow text-accent">04 — Digital Engineering & Web Design</span>
+          <span className="eyebrow text-accent">03 — Services</span>
           <h2 className="font-display font-extrabold leading-[0.9] mt-4 text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight max-w-3xl">
-            Stunning web design &amp;<br />
-            <span className="italic font-light text-accent"> precision engineering</span>.
+            Where <span className="italic font-light text-accent">work happens</span>
           </h2>
         </div>
         <Link
@@ -574,7 +694,7 @@ const Services = () => (
         </Link>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
         {services.map((s, i) => (
           <div
             key={s.title}
@@ -585,9 +705,9 @@ const Services = () => (
               alt=""
               aria-hidden
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover opacity-[0.18] group-hover:opacity-30 group-hover:scale-105 transition-all duration-[1200ms]"
+              className="absolute inset-0 w-full h-full object-cover opacity-[0.42] group-hover:opacity-[0.52] group-hover:scale-105 transition-all duration-[1200ms]"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/85 to-background" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-background/65 to-background/85" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_top,hsl(28_92%_55%/0.25),transparent_60%)]" />
             
             <div className="relative">
@@ -609,7 +729,7 @@ const Services = () => (
 
             <div className="relative pt-6 border-t border-foreground/10 flex items-center justify-between">
               <Link
-                to="/services"
+                to={s.title === "Global Metaverse Virtual Space" ? "/metaverse" : "/services"}
                 className="text-xs font-bold uppercase tracking-[0.2em] text-accent group-hover:text-primary-foreground transition-colors flex items-center gap-2"
               >
                 Learn More <ArrowUpRight className="w-4 h-4" />
@@ -863,8 +983,8 @@ const Index = () => (
       <Hero />
       <Marquee text="Connecting Innovators · Fostering Talent · Showcasing Excellence" />
       <VisionMission />
-      <Initiatives />
       <Services />
+      <Initiatives />
       <ClientShowcase
         limit={6}
         title="Live Production Websites Built by Tech Hub Africa"
