@@ -80,7 +80,7 @@ const TheHub = () => (
               <p className="eyebrow text-accent mb-3">What We Offer</p>
               <h2 className="font-display font-extrabold text-3xl sm:text-4xl tracking-tight mb-7">A place to share what you’re building.</h2>
               <ul className="space-y-5">
-                <li className="flex gap-3 text-sm text-primary-foreground/75 leading-relaxed"><CheckCircle2 className="w-5 h-5 text-accent shrink-0" /><span><strong className="text-primary-foreground">Showcase Opportunities:</strong> Platforms to exhibit innovative work, technology products and services.</span></li>
+                <li className="flex gap-3 text-sm text-primary-foreground/75 leading-relaxed"><CheckCircle2 className="w-5 h-5 text-accent shrink-0" /><span><strong className="text-primary-foreground">Showcase Opportunities:</strong> Platforms to exhibit innovative work, technology products and ecosystems.</span></li>
                 <li className="flex gap-3 text-sm text-primary-foreground/75 leading-relaxed"><CheckCircle2 className="w-5 h-5 text-accent shrink-0" /><span><strong className="text-primary-foreground">Networking &amp; Collaboration:</strong> Connect with like-minded people, partners and investors.</span></li>
               </ul>
             </div>

@@ -38,9 +38,9 @@ const heroSlides = [
     stat: { k: "02", v: "Workplace" },
   },
   {
-    tag: "Business Platforms", kicker: "CRM Services", title: "Every Relationship Matters",
+    tag: "Business Platforms", kicker: "Nkabom™ CRM", title: "Every Relationship Matters",
     body: "Connect customer records, sales pipelines and corporate communication in one cohesive business platform.",
-    cta: "Explore CRM Services", href: "/services#productivity", image: techGuruPanel,
+    cta: "Explore Nkabom™", href: "/services#productivity", image: techGuruPanel,
     stat: { k: "03", v: "Customer Success" },
   },
   {
@@ -51,7 +51,7 @@ const heroSlides = [
   },
   {
     tag: "Cybersecurity", kicker: "Threat Lock", title: "Protect What You Build",
-    body: "Cyber security mitigation services that help safeguard your organisation’s websites and digital infrastructure.",
+    body: "The Threat Lock cybersecurity ecosystem helps safeguard your organisation’s websites and digital infrastructure.",
     cta: "Explore Threat Lock", href: "/services#productivity", image: techGuruShowcase,
     stat: { k: "05", v: "Security" },
   },
@@ -230,10 +230,10 @@ const Hero = () => {
       </div>
 
       {/* ══ CONTENT ══ */}
-      <div className="relative z-10 min-h-[100svh] flex flex-col max-w-[1360px] mx-auto w-full px-6 sm:px-8 xl:px-24 pt-32 md:pt-36 pb-8 md:pb-12">
+      <div className="relative z-10 min-h-[100svh] flex flex-col max-w-[1360px] mx-auto w-full px-5 sm:px-8 xl:px-24 pt-24 sm:pt-32 md:pt-36 pb-5 md:pb-12">
 
         {/* Chapter label */}
-        <div className="flex items-center gap-5 mb-auto">
+        <div className="flex items-center gap-5 mb-7 sm:mb-auto">
           <div className="inline-flex items-center gap-3 pl-3 pr-4 py-1.5 rounded-full border border-white/12 bg-white/5 backdrop-blur-sm">
             <span className="relative flex w-1.5 h-1.5">
               <span className="animate-ping absolute h-full w-full rounded-full bg-accent opacity-60" />
@@ -247,10 +247,10 @@ const Hero = () => {
         </div>
 
         {/* Headline block — keyed for per-slide reveal */}
-        <div key={slide.title} className="relative max-w-[860px] mt-12 md:mt-16">
-          <div className="flex items-center gap-4 mb-6 animate-fade-up">
+        <div key={slide.title} className="relative max-w-[860px] mt-0 sm:mt-12 md:mt-16">
+          <div className="flex items-center gap-4 mb-4 sm:mb-6 animate-fade-up">
             <span className="h-px w-10 bg-accent" />
-            <p className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] text-accent">
+            <p className="text-[9px] md:text-[11px] font-black uppercase tracking-[0.32em] sm:tracking-[0.5em] text-accent">
               {slide.kicker}
             </p>
           </div>
@@ -259,7 +259,7 @@ const Hero = () => {
             className="animate-fade-up stagger-1 font-display font-black tracking-[-0.05em] text-white"
             style={{
               lineHeight: 0.88,
-              fontSize: "clamp(2.6rem,7.2vw,6.2rem)",
+              fontSize: "clamp(2.4rem,7.2vw,6.2rem)",
               textShadow: "0 2px 20px hsl(0 0% 0% / 0.7), 0 4px 40px hsl(0 0% 0% / 0.4)",
             }}
           >
@@ -267,7 +267,7 @@ const Hero = () => {
           </h1>
 
           {/* description — editorial column */}
-          <div className="animate-fade-up stagger-2 mt-8 max-w-[540px] border-t border-white/15 pt-6 flex gap-6">
+          <div className="animate-fade-up stagger-2 mt-5 sm:mt-8 max-w-[540px] border-t border-white/15 pt-4 sm:pt-6 flex gap-4 sm:gap-6">
             <span className="font-display font-black text-[11px] leading-none text-accent pt-1.5 tabular-nums">
               {String(active + 1).padStart(2, "0")}
             </span>
@@ -276,13 +276,13 @@ const Hero = () => {
             </p>
           </div>
 
-          <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-6 mt-10">
+          <div className="animate-fade-up stagger-3 flex flex-wrap items-center gap-4 sm:gap-6 mt-6 sm:mt-10">
             {slide.external ? (
               <a
                 href={slide.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground text-[10.5px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-white hover:text-foreground transition-all duration-500"
+                className="btn-magnetic group inline-flex items-center gap-3 px-6 py-3.5 sm:px-9 sm:py-4 bg-accent text-accent-foreground text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.22em] sm:tracking-[0.3em] rounded-full hover:bg-white hover:text-foreground transition-all duration-500"
                 style={{ boxShadow: "0 18px 46px -16px hsl(28 92% 44% / 0.55)" }}
               >
                 {slide.cta}
@@ -291,7 +291,7 @@ const Hero = () => {
             ) : (
               <Link
                 to={slide.href}
-                className="btn-magnetic group inline-flex items-center gap-3 px-9 py-4 bg-accent text-accent-foreground text-[10.5px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-white hover:text-foreground transition-all duration-500"
+                className="btn-magnetic group inline-flex items-center gap-3 px-6 py-3.5 sm:px-9 sm:py-4 bg-accent text-accent-foreground text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.22em] sm:tracking-[0.3em] rounded-full hover:bg-white hover:text-foreground transition-all duration-500"
                 style={{ boxShadow: "0 18px 46px -16px hsl(28 92% 44% / 0.55)" }}
               >
                 {slide.cta}
@@ -300,7 +300,7 @@ const Hero = () => {
             )}
             <Link
               to="/about"
-              className="group inline-flex items-center gap-3 text-[10.5px] font-extrabold text-white hover:text-accent transition-colors uppercase tracking-[0.28em]" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.5)" }}
+              className="group inline-flex items-center gap-3 text-[10px] sm:text-[10.5px] font-extrabold text-white hover:text-accent transition-colors uppercase tracking-[0.2em] sm:tracking-[0.28em]" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.5)" }}
             >
               Learn More
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -309,7 +309,7 @@ const Hero = () => {
         </div>
 
         {/* ══ BOTTOM BAR — trust strip + index ladder + stat ══ */}
-        <div className="mt-auto pt-12 flex flex-col gap-8">
+        <div className="mt-auto pt-6 sm:pt-12 flex flex-col gap-5 sm:gap-8">
 
           {/* Trust metrics */}
           <div className="hero-trust-strip">
@@ -375,7 +375,7 @@ const Hero = () => {
             </div>
 
             {/* Stat plate + scroll cue */}
-            <div className="flex items-end gap-6 shrink-0">
+            <div className="hidden sm:flex items-end gap-6 shrink-0">
               <div className="relative px-7 py-5 border border-white/10 bg-white/5 backdrop-blur-md">
                 <span className="absolute -top-px -left-px w-2.5 h-2.5 border-t border-l border-accent" />
                 <span className="absolute -bottom-px -right-px w-2.5 h-2.5 border-b border-r border-accent" />
@@ -646,7 +646,7 @@ const services = [
   {
     Icon: Globe2,
     title: "Global Metaverse Virtual Space",
-    desc: "Explore our virtual space, where all Tech Hub Africa services are brought together.",
+    desc: "Explore our virtual space, where Tech Hub Africa’s ecosystems come together.",
     image: techGuruAuditorium,
   },
   {
@@ -681,7 +681,7 @@ const Services = () => (
     <div className="relative max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
         <div>
-          <span className="eyebrow text-accent">03 — Services</span>
+          <span className="eyebrow text-accent">03 — Ecosystems</span>
           <h2 className="font-display font-extrabold leading-[0.9] mt-4 text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight max-w-3xl">
             Where <span className="italic font-light text-accent">work happens</span>
           </h2>
@@ -690,7 +690,7 @@ const Services = () => (
           to="/services"
           className="btn-magnetic inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-primary-foreground hover:text-foreground transition-all duration-300 self-start md:self-auto"
         >
-          Explore All Services <ArrowUpRight className="w-4 h-4" />
+          Explore All Ecosystems <ArrowUpRight className="w-4 h-4" />
         </Link>
       </div>
 

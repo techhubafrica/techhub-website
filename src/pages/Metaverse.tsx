@@ -16,7 +16,7 @@ const Metaverse = () => (
     <PageHero
       tag="Global Metaverse"
       title={<>Explore our<br /><span className="italic font-light text-accent">virtual space.</span></>}
-      body="The Global Metaverse is a standalone service: a virtual space where visitors can explore Tech Hub Africa’s wider service offering."
+      body="The Global Metaverse is a standalone ecosystem: a virtual space where visitors can explore Tech Hub Africa’s wider ecosystem of solutions."
       ghost="VIRTUAL"
     />
     <Marquee text="Explore · Connect · Discover Tech Hub Africa in the Metaverse" />
@@ -25,10 +25,10 @@ const Metaverse = () => (
       <section className="px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
-            <span className="eyebrow text-accent">A Standalone Service</span>
+            <span className="eyebrow text-accent">A Standalone Ecosystem</span>
             <h2 className="font-display font-extrabold text-foreground text-3xl sm:text-4xl md:text-5xl tracking-tight mt-4">Step inside the space.</h2>
           </div>
-          <p className="text-sm text-foreground/60 leading-relaxed max-w-md">These walkthroughs show the virtual environment and how visitors can explore Tech Hub Africa’s services within it.</p>
+          <p className="text-sm text-foreground/60 leading-relaxed max-w-md">These walkthroughs show the virtual environment and how visitors can explore Tech Hub Africa’s ecosystems within it.</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6">
@@ -57,11 +57,11 @@ const Metaverse = () => (
       <section className="bg-cream px-5 sm:px-6 lg:px-10 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div>
-            <span className="eyebrow text-accent">Interested in this service?</span>
+            <span className="eyebrow text-accent">Interested in this ecosystem?</span>
             <h2 className="font-display font-extrabold text-foreground text-2xl sm:text-3xl tracking-tight mt-3">Talk with us about the Metaverse.</h2>
           </div>
           <Link to="/services#metaverse" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-7 py-4 text-xs font-bold uppercase tracking-widest hover:brightness-110 transition">
-            Request This Service <ArrowUpRight className="w-4 h-4" />
+            Explore This Ecosystem <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
       </section>
