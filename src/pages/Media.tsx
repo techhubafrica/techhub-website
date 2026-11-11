@@ -9,6 +9,7 @@ import { techGuruPanel, techGuruAuditorium, techGuruShowcase, techGuruNetworking
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 import { readSiteImages } from "@/data/siteContentStore";
+import { submitWebsiteForm, websiteApiError } from "@/lib/techhubApi";
 
 const articles = [
   { id: 1, num: "01", title: "AI Infrastructure Trends Across West Africa", category: "TechNews Tuesday", date: "July 2026", excerpt: "How African cloud providers and developer communities are deploying low-latency LLMs locally — breaking the dependency on foreign infrastructure." },
@@ -27,13 +28,35 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 const Media = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [submissionReference, setSubmissionReference] = useState("");
   const [filter, setFilter] = useState<"all" | "TechNews Tuesday" | "TechTip Thursday">("all");
 
   const filtered = filter === "all" ? articles : articles.filter((a) => a.category === filter);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); setSubmitted(true);
-    setTimeout(() => { setModalOpen(false); setSubmitted(false); }, 2500);
+  const openSpeakerForm = () => {
+    setModalOpen(true); setSubmitted(false); setFormError(""); setSubmissionReference("");
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); setSubmitting(true); setFormError("");
+    const form = e.currentTarget;
+    const payload = new FormData(form);
+    payload.set("consent", "1");
+    payload.set("consent_version", "2026-11");
+    payload.set("website_url", "");
+    const file = payload.get("supporting_file");
+    if (file instanceof File && file.size === 0) payload.delete("supporting_file");
+    if (file instanceof File && file.size > 10 * 1024 * 1024) {
+      setFormError("The supporting file must be 10 MB or smaller."); setSubmitting(false); return;
+    }
+    try {
+      const result = await submitWebsiteForm<{ reference?: string }>("speaker-proposals", payload);
+      setSubmissionReference(result.data?.reference || ""); setSubmitted(true);
+      form.reset();
+    } catch (error) { setFormError(websiteApiError(error)); }
+    finally { setSubmitting(false); }
   };
 
   return (
@@ -61,7 +84,7 @@ const Media = () => {
               </h3>
             </div>
             <button
-              onClick={() => { setModalOpen(true); setSubmitted(false); }}
+              onClick={openSpeakerForm}
               className="btn-magnetic inline-flex items-center gap-3 px-8 py-4 bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] rounded-full hover:bg-primary-foreground hover:text-foreground transition-all duration-250 shrink-0"
               style={{ boxShadow: "0 14px 40px -12px hsl(28 92% 44% / 0.6)" }}>
               Sign Up to Speak <Mic className="w-4 h-4" />
@@ -185,7 +208,7 @@ const Media = () => {
       {modalOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-primary/88" style={{ backdropFilter: "blur(12px)" }} onClick={() => setModalOpen(false)} />
-          <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl"
+          <div className="relative z-10 w-full max-w-2xl max-h-[90vh] rounded-3xl overflow-y-auto shadow-2xl"
             style={{ animation: "scale-in-modal 0.35s cubic-bezier(0.16,1,0.3,1) forwards" }}>
             <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative text-primary-foreground">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
@@ -204,19 +227,64 @@ const Media = () => {
                   </div>
                   <h4 className="font-display font-extrabold text-xl text-foreground">Proposal Submitted!</h4>
                   <p className="mt-2 text-sm text-foreground/55">Our media team will review your topic and follow up with available TechTalk dates.</p>
+                  {submissionReference && <p className="mt-3 text-xs font-semibold text-accent">Reference: {submissionReference}</p>}
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {["Full Name", "Email Address", "Proposed Talk Title"].map((label) => (
-                    <div key={label}>
-                      <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
-                      <input required type={label.includes("Email") ? "email" : "text"}
-                        className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
-                    </div>
-                  ))}
-                  <button type="submit"
-                    className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">
-                    Submit Proposal
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <input type="hidden" name="consent_version" value="2026-11" />
+                  <input type="hidden" name="website_url" value="" />
+                  <input type="hidden" name="captcha_token" value="" />
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Full Name *
+                      <input name="full_name" required maxLength={120} autoComplete="name" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                    </label>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Email Address *
+                      <input name="email" required type="email" maxLength={150} autoComplete="email" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                    </label>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Phone
+                      <input name="phone" type="tel" maxLength={30} autoComplete="tel" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                    </label>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Organization
+                      <input name="organization" maxLength={150} className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                    </label>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Job Title
+                      <input name="job_title" maxLength={120} className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                    </label>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Talk Title *
+                      <input name="talk_title" required maxLength={180} className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                    </label>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Topic Area *
+                      <input name="topic_area" required maxLength={120} placeholder="e.g. AI, cybersecurity, product" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                    </label>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Preferred Format
+                      <select name="format_preference" defaultValue="flexible" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60">
+                        <option value="flexible">Flexible</option><option value="talk">Talk</option><option value="panel">Panel</option><option value="workshop">Workshop</option>
+                      </select>
+                    </label>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">LinkedIn URL
+                      <input name="linkedin_url" type="url" maxLength={255} className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                    </label>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Website
+                      <input name="speaker_website_url" type="url" maxLength={255} className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                    </label>
+                  </div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Talk Abstract *
+                    <textarea name="abstract" required maxLength={3000} rows={4} className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                  </label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Speaker Bio *
+                    <textarea name="speaker_bio" required maxLength={2000} rows={3} className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                  </label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Availability
+                    <textarea name="availability" maxLength={1000} rows={2} placeholder="Dates or periods that work for you" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                  </label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Supporting File (optional, up to 10 MB)
+                    <input name="supporting_file" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx" className="mt-1.5 block w-full text-sm normal-case tracking-normal" />
+                  </label>
+                  <label className="flex items-start gap-3 text-xs leading-relaxed text-foreground/65"><input required name="consent" type="checkbox" className="mt-0.5 accent-accent" /><span>I agree that Tech Hub Africa may use these details to review my proposal, under its privacy terms.</span></label>
+                  {formError && <p role="alert" className="text-sm text-destructive">{formError}</p>}
+                  <button type="submit" disabled={submitting}
+                    className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250 disabled:opacity-60">
+                    {submitting ? "Submitting…" : "Submit Proposal"}
                   </button>
                 </form>
               )}

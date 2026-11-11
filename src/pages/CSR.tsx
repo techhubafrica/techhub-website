@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import { ArrowUpRight, CheckCircle2, GraduationCap, HandHeart, Users, X } from "lucide-react";
 import Marquee from "@/components/Marquee";
 import { heroCelebration } from "@/assets/photos";
+import { submitWebsiteForm, websiteApiError } from "@/lib/techhubApi";
 
 const initiatives = [
   "Provide scholarships and mentorship opportunities to underrepresented groups in tech.",
@@ -29,15 +30,25 @@ const packages = [
 const CSR = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [submissionReference, setSubmissionReference] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitted(true);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); setSubmitting(true); setFormError("");
+    const payload = new FormData(e.currentTarget);
+    payload.set("website_url", ""); payload.set("consent_version", "2026-11");
+    try {
+      const result = await submitWebsiteForm("partnership-inquiries", payload);
+      setSubmissionReference((result.data as { reference?: string })?.reference || ""); setSubmitted(true);
+    } catch (error) { setFormError(websiteApiError(error)); }
+    finally { setSubmitting(false); }
   };
 
   const closeModal = () => {
     setModalOpen(false);
     setSubmitted(false);
+    setFormError(""); setSubmissionReference("");
   };
 
   return (
@@ -140,23 +151,28 @@ const CSR = () => {
                 <div className="text-center py-8">
                   <CheckCircle2 className="w-12 h-12 text-accent mx-auto mb-4" />
                   <h4 className="font-display font-extrabold text-xl text-foreground">Thank you for your interest.</h4>
-                  <p className="mt-2 text-sm text-foreground/60">This local form is a preview and does not send applications yet.</p>
+                  <p className="mt-2 text-sm text-foreground/60">Your inquiry has been sent to our partnerships team.</p>
+                  {submissionReference && <p className="mt-3 text-xs font-semibold text-accent">Reference: {submissionReference}</p>}
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <label className="block text-xs font-bold text-foreground/70">Name / Business Name *<input required className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                  <label className="block text-xs font-bold text-foreground/70">Mission &amp; Vision<textarea rows={3} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                  <label className="block text-xs font-bold text-foreground/70">Type of Sponsorship *<select required defaultValue="" className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm"><option value="" disabled>Select a sponsorship type</option>{packages.map((item) => <option key={item}>{item}</option>)}</select></label>
-                  <label className="block text-xs font-bold text-foreground/70">Who will benefit? *<textarea required rows={2} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                  <label className="block text-xs font-bold text-foreground/70">Why should you be considered? *<textarea required rows={2} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                  <label className="block text-xs font-bold text-foreground/70">What are the benefits to Tech Hub Africa LLC? *<textarea required rows={2} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                  <label className="block text-xs font-bold text-foreground/70">501(c)(3) or nonprofit documents<input type="file" accept=".pdf,.png,.jpg,.jpeg" className="mt-1.5 block w-full text-sm text-foreground/60" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Organization Name *<input name="organization_name" required maxLength={150} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Contact Name *<input name="contact_name" required maxLength={120} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Mission &amp; Vision<textarea name="mission_vision" rows={3} maxLength={3000} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Type of Sponsorship *<select name="sponsorship_type" required defaultValue="" className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm"><option value="" disabled>Select a sponsorship type</option><option value="event">Event sponsorship</option><option value="grant">Scholarship donations</option><option value="other">Mentorship program participation</option><option value="csr">Diversity and inclusion partnership</option><option value="equipment">Equipment</option></select></label>
+                  <label className="block text-xs font-bold text-foreground/70">Who will benefit? *<textarea name="beneficiaries" required rows={2} maxLength={3000} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Why should you be considered? *<textarea name="reason_for_consideration" required rows={2} maxLength={3000} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">What are the benefits to Tech Hub Africa? *<textarea name="benefit_to_techhub" required rows={2} maxLength={3000} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Project proposal (optional)<input name="proposal_document" type="file" accept=".pdf,.doc,.docx" className="mt-1.5 block w-full text-sm text-foreground/60" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">501(c)(3) or nonprofit documents<input name="tax_exempt_document" type="file" accept=".pdf,.doc,.docx" className="mt-1.5 block w-full text-sm text-foreground/60" /></label>
                   <div className="grid sm:grid-cols-2 gap-4">
-                    <label className="block text-xs font-bold text-foreground/70">Email Address *<input required type="email" className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                    <label className="block text-xs font-bold text-foreground/70">Phone *<input required type="tel" className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                    <label className="block text-xs font-bold text-foreground/70">Email Address *<input name="email" required type="email" maxLength={150} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                    <label className="block text-xs font-bold text-foreground/70">Phone *<input name="phone" required type="tel" maxLength={30} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
                   </div>
-                  <label className="flex items-start gap-3 text-xs text-foreground/65"><input required type="checkbox" className="mt-0.5 accent-accent" /><span>Yes, I agree with the privacy policy and terms and conditions.</span></label>
-                  <button type="submit" className="w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all">Submit Request</button>
+                  <label className="flex items-start gap-3 text-xs text-foreground/65"><input name="consent" required type="checkbox" value="1" className="mt-0.5 accent-accent" /><span>Yes, I agree with the privacy policy and terms and conditions.</span></label>
+                  <input type="text" name="website_url" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+                  {formError && <p role="alert" className="text-sm text-destructive">{formError}</p>}
+                  <button disabled={submitting} type="submit" className="w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all disabled:opacity-60">{submitting ? "Submitting…" : "Submit Request"}</button>
                 </form>
               )}
             </div>

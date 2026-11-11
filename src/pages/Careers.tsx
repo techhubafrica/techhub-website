@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {
@@ -18,6 +18,7 @@ import {
   Award,
 } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
+import { getWebsiteOpenings, submitWebsiteForm, websiteApiError, type WebsiteOpening } from "@/lib/techhubApi";
 import Marquee from "@/components/Marquee";
 import {
   internshipsFlyer,
@@ -29,6 +30,8 @@ import {
 
 interface JobRole {
   id: string;
+  openingId: number;
+  apiType: "job" | "internship";
   title: string;
   dept: string;
   category: "Engineering" | "Security" | "Product" | "Marketing" | "Internships";
@@ -39,63 +42,31 @@ interface JobRole {
   image: string;
 }
 
-const jobOpenings: JobRole[] = [
-  {
-    id: "digital-marketing",
-    title: "Digital Marketing Professional",
-    dept: "Marketing & Growth",
-    category: "Marketing",
-    location: "Accra, Ghana / Hybrid",
-    type: "Full-Time",
-    summary: "Drive digital marketing campaigns, social media growth, SEO strategy, and brand acquisition across West Africa.",
-    requirements: ["SEO, SEM & Social Media strategy", "Content marketing & analytics", "Campaign management"],
-    image: careerDigitalMarketing,
-  },
-  {
-    id: "swe-lead",
-    title: "Senior Full-Stack Engineer",
-    dept: "Engineering & Product",
-    category: "Engineering",
-    location: "Accra, Ghana / Hybrid",
-    type: "Full-Time",
-    summary: "Lead the architecture and development of scalable web applications, client portals, and e-commerce infrastructure.",
-    requirements: ["React, Node.js & REST APIs", "Database design & Cloud deployment", "5+ years JS/TS experience"],
-    image: serviceSoftware,
-  },
-  {
-    id: "cyber-analyst",
-    title: "Cybersecurity Threat Lock Analyst",
-    dept: "Threat Lock Security",
-    category: "Security",
-    location: "Accra, Ghana",
-    type: "Full-Time",
-    summary: "Monitor real-time threat telemetry, perform vulnerability assessments, and safeguard web applications.",
-    requirements: ["SOC monitoring & OWASP Top 10", "Vulnerability auditing", "Incident response"],
-    image: portfolioThreatLock,
-  },
-  {
-    id: "product-designer",
-    title: "Lead UI/UX Product Designer",
-    dept: "Product & Design",
-    category: "Product",
-    location: "Accra / Hybrid",
-    type: "Full-Time",
-    summary: "Craft intuitive, accessible design systems and high-converting interfaces for web applications and mobile platforms.",
-    requirements: ["Figma design system mastery", "User research & wireframing", "Responsive web UX"],
-    image: serviceWebDesign,
-  },
-  {
-    id: "intern-swe-2026",
-    title: "Software Engineering Intern — 2026 Cohort",
-    dept: "Engineering Academy",
-    category: "Internships",
-    location: "Accra Campus",
-    type: "Internship",
-    summary: "Intensive 6-month hands-on apprenticeship building real production applications alongside senior architects.",
-    requirements: ["HTML, CSS, JavaScript basics", "Fast learner & problem solver", "Final year student or recent grad"],
-    image: internshipsFlyer,
-  },
-];
+const openingToJob = (opening: WebsiteOpening): JobRole => {
+  const dept = opening.department || (opening.type === "internship" ? "Internships" : "Careers");
+  const lowerDept = dept.toLowerCase();
+  const category: JobRole["category"] = opening.type === "internship" ? "Internships"
+    : lowerDept.includes("security") ? "Security"
+      : lowerDept.includes("product") || lowerDept.includes("design") ? "Product"
+        : lowerDept.includes("market") ? "Marketing" : "Engineering";
+  const image = category === "Internships" ? internshipsFlyer
+    : category === "Security" ? portfolioThreatLock
+      : category === "Product" ? serviceWebDesign
+        : category === "Marketing" ? careerDigitalMarketing : serviceSoftware;
+  return {
+    id: opening.slug,
+    openingId: opening.id,
+    apiType: opening.type,
+    title: opening.title,
+    dept,
+    category,
+    location: opening.location,
+    type: opening.type === "internship" ? "Internship" : opening.employment_type === "Contract" ? "Contract" : "Full-Time",
+    summary: opening.summary || opening.description || "",
+    requirements: opening.requirements || [],
+    image,
+  };
+};
 
 const culturePillars = [
   {
@@ -167,6 +138,9 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 const Careers = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [jobOpenings, setJobOpenings] = useState<JobRole[]>([]);
+  const [openingsLoading, setOpeningsLoading] = useState(true);
+  const [openingsError, setOpeningsError] = useState("");
 
   const [applyModalOpen, setApplyModalOpen] = useState(false);
   const [selectedRole, setSelectedRole] = useState<JobRole | null>(null);
@@ -177,14 +151,43 @@ const Careers = () => {
   const [submitted, setSubmitted] = useState(false);
   const [internSubmitted, setInternSubmitted] = useState(false);
   const [selectedFileName, setSelectedFileName] = useState("");
+  const [formError, setFormError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submissionReference, setSubmissionReference] = useState("");
 
-  const handleInternFormSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    let active = true;
+    getWebsiteOpenings()
+      .then((openings) => { if (active) setJobOpenings(openings.map(openingToJob)); })
+      .catch((error) => { if (active) setOpeningsError(websiteApiError(error)); })
+      .finally(() => { if (active) setOpeningsLoading(false); });
+    return () => { active = false; };
+  }, []);
+
+  const handleInternFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setInternSubmitted(true);
-    setTimeout(() => {
-      setInternSubmitted(false);
+    setSubmitting(true); setFormError("");
+    const form = e.currentTarget;
+    const fields = new FormData(form);
+    const payload = new FormData();
+    payload.set("type", "internship");
+    payload.set("position_title", String(fields.get("position_title") || ""));
+    payload.set("full_name", [fields.get("first_name"), fields.get("middle_name"), fields.get("last_name")].map((part) => String(part || "").trim()).filter(Boolean).join(" "));
+    for (const key of ["email", "phone", "resume", "consent"] as const) {
+      const value = fields.get(key);
+      if (value !== null) payload.set(key, value);
+    }
+    payload.set("website_url", "");
+    payload.set("consent_version", "2026-11");
+    try {
+      const result = await submitWebsiteForm("career-applications", payload);
+      setSubmissionReference((result.data as { reference?: string })?.reference || "");
+      setInternSubmitted(true);
       setSelectedFileName("");
-    }, 4000);
+      form.reset();
+    } catch (error) {
+      setFormError(websiteApiError(error));
+    } finally { setSubmitting(false); }
   };
 
   const filteredJobs = jobOpenings.filter((job) => {
@@ -200,22 +203,48 @@ const Careers = () => {
     setSelectedRole(job);
     setApplyModalOpen(true);
     setSubmitted(false);
+    setFormError(""); setSubmissionReference("");
   };
 
   const handleOpenMentorship = (role: "Mentee" | "Mentor") => {
     setMentorshipRole(role);
     setMentorshipModalOpen(true);
     setSubmitted(false);
+    setFormError(""); setSubmissionReference("");
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleRoleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setApplyModalOpen(false);
-      setMentorshipModalOpen(false);
-      setSubmitted(false);
-    }, 2500);
+    if (!selectedRole) return;
+    setSubmitting(true); setFormError("");
+    const payload = new FormData(e.currentTarget);
+    payload.set("type", selectedRole.apiType);
+    payload.set("opening_id", String(selectedRole.openingId));
+    payload.set("position_title", selectedRole.title);
+    payload.set("website_url", ""); payload.set("consent_version", "2026-11");
+    try {
+      const result = await submitWebsiteForm("career-applications", payload);
+      setSubmissionReference((result.data as { reference?: string })?.reference || "");
+      setSubmitted(true);
+    } catch (error) { setFormError(websiteApiError(error)); }
+    finally { setSubmitting(false); }
+  };
+
+  const handleMentorshipSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); setSubmitting(true); setFormError("");
+    const fields = new FormData(e.currentTarget);
+    const payload = new FormData();
+    payload.set("role", mentorshipRole.toLowerCase());
+    for (const key of ["full_name", "email", "phone", "linkedin_url", "area_of_expertise", "message", "resume", "consent"] as const) {
+      const value = fields.get(key);
+      if (value !== null && value !== "") payload.set(key, value);
+    }
+    payload.set("website_url", ""); payload.set("consent_version", "2026-11");
+    try {
+      const result = await submitWebsiteForm("mentorship-applications", payload);
+      setSubmissionReference((result.data as { reference?: string })?.reference || ""); setSubmitted(true);
+    } catch (error) { setFormError(websiteApiError(error)); }
+    finally { setSubmitting(false); }
   };
 
   return (
@@ -310,7 +339,7 @@ const Careers = () => {
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent mr-2">Filter:</span>
-                {["All", "Engineering", "Security", "Product", "Internships"].map((cat) => (
+                { ["All", "Engineering", "Security", "Product", "Marketing", "Internships"].map((cat) => (
                   <button
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
@@ -327,10 +356,17 @@ const Careers = () => {
             </div>
 
             {/* Roles Card Grid (Matching Old Site Screenshot Layout) */}
-            {filteredJobs.length === 0 ? (
+            {openingsLoading ? (
+              <div className="text-center py-16 rounded-3xl border border-primary-foreground/15 bg-primary/40 p-8 text-primary-foreground/75">Loading current openings…</div>
+            ) : openingsError ? (
+              <div role="alert" className="text-center py-10 rounded-3xl border border-primary-foreground/15 bg-primary/40 p-8">
+                <p className="font-display font-bold text-lg text-primary-foreground mb-2">Open roles are temporarily unavailable</p>
+                <p className="text-sm text-primary-foreground/65">{openingsError}</p>
+              </div>
+            ) : filteredJobs.length === 0 ? (
               <div className="text-center py-16 rounded-3xl border border-primary-foreground/15 bg-primary/40 p-8">
-                <p className="font-display font-bold text-xl text-primary-foreground mb-2">No roles match your search</p>
-                <p className="text-sm text-primary-foreground/60">Try searching for a different keyword or resetting filters.</p>
+                <p className="font-display font-bold text-xl text-primary-foreground mb-2">{jobOpenings.length ? "No roles match your search" : "There are no open roles right now"}</p>
+                <p className="text-sm text-primary-foreground/60">{jobOpenings.length ? "Try searching for a different keyword or resetting filters." : "Please check again soon for new opportunities."}</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -529,6 +565,7 @@ const Careers = () => {
                   <p className="text-sm text-foreground/75 max-w-md mx-auto">
                     Thank you for applying. Our talent team will review your resume and contact you at the provided email address.
                   </p>
+                  {submissionReference && <p className="mt-3 text-xs font-semibold text-accent">Reference: {submissionReference}</p>}
                 </div>
               ) : (
                 <form onSubmit={handleInternFormSubmit} className="space-y-6">
@@ -540,6 +577,7 @@ const Careers = () => {
                       </label>
                       <input
                         required
+                        name="first_name"
                         type="text"
                         placeholder="John"
                         className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
@@ -550,6 +588,7 @@ const Careers = () => {
                         Middle Name
                       </label>
                       <input
+                        name="middle_name"
                         type="text"
                         placeholder="(Optional)"
                         className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
@@ -561,6 +600,7 @@ const Careers = () => {
                       </label>
                       <input
                         required
+                        name="last_name"
                         type="text"
                         placeholder="Doe"
                         className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
@@ -576,6 +616,7 @@ const Careers = () => {
                       </label>
                       <input
                         required
+                        name="email"
                         type="email"
                         placeholder="john@example.com"
                         className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
@@ -587,6 +628,7 @@ const Careers = () => {
                       </label>
                       <input
                         required
+                        name="phone"
                         type="tel"
                         placeholder="+233 xx xxx xxxx"
                         className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
@@ -601,6 +643,7 @@ const Careers = () => {
                     </label>
                     <select
                       required
+                      name="position_title"
                       className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
                     >
                       <option value="">-- Select Position --</option>
@@ -619,6 +662,7 @@ const Careers = () => {
                     <div className="relative border-2 border-dashed border-foreground/20 hover:border-accent/60 rounded-2xl p-6 text-center bg-background/50 transition-colors cursor-pointer group">
                       <input
                         required
+                        name="resume"
                         type="file"
                         accept=".pdf,.doc,.docx"
                         onChange={(e) => setSelectedFileName(e.target.files?.[0]?.name || "")}
@@ -628,7 +672,7 @@ const Careers = () => {
                         <span className="text-xs font-semibold text-foreground/70 group-hover:text-accent mb-1 transition-colors">
                           {selectedFileName ? selectedFileName : "No file chosen"}
                         </span>
-                        <span className="text-xs text-accent font-bold uppercase tracking-wider">
+                      <span className="text-xs text-accent font-bold uppercase tracking-wider">
                           Drag and Drop (or) Choose Files
                         </span>
                         <span className="text-[10px] text-foreground/40 mt-1">PDF, DOC, DOCX up to 10MB</span>
@@ -641,6 +685,7 @@ const Careers = () => {
                     <input
                       required
                       type="checkbox"
+                      name="consent"
                       id="consent"
                       className="mt-1 w-4 h-4 accent-accent rounded border-foreground/20 cursor-pointer"
                     />
@@ -650,12 +695,16 @@ const Careers = () => {
                     </label>
                   </div>
 
+                  <input type="text" name="website_url" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+                  {formError && <p role="alert" className="text-sm text-destructive">{formError}</p>}
+
                   {/* Submit Button */}
                   <button
                     type="submit"
+                    disabled={submitting}
                     className="btn-magnetic w-full py-4 rounded-full bg-primary text-primary-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-accent hover:text-accent-foreground transition-all duration-300 shadow-xl"
                   >
-                    Submit Now
+                    {submitting ? "Submitting…" : "Submit Now"}
                   </button>
                 </form>
               )}
@@ -844,20 +893,27 @@ const Careers = () => {
                   <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent"><CheckCircle2 className="w-7 h-7" /></div>
                   <h4 className="font-display font-extrabold text-xl text-foreground">Application Received!</h4>
                   <p className="mt-2 text-sm text-foreground/55">Thank you for applying. Our talent acquisition team will review your application and respond within 5 business days.</p>
+                  {submissionReference && <p className="mt-3 text-xs font-semibold text-accent">Reference: {submissionReference}</p>}
                 </div>
               ) : (
-                <form onSubmit={handleFormSubmit} className="space-y-5">
-                  {["Full Name", "Email Address", "LinkedIn / Portfolio URL"].map((label) => (
+                <form onSubmit={handleRoleSubmit} className="space-y-5">
+                  {["Full Name", "Email Address", "Phone", "LinkedIn URL", "Portfolio URL"].map((label) => (
                     <div key={label}>
                       <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
-                      <input required type={label.includes("Email") ? "email" : label.includes("URL") ? "url" : "text"} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
+                      <input name={label === "Full Name" ? "full_name" : label === "Email Address" ? "email" : label === "Phone" ? "phone" : label === "LinkedIn URL" ? "linkedin_url" : "portfolio_url"} required={label === "Full Name" || label === "Email Address"} type={label.includes("Email") ? "email" : label.includes("URL") ? "url" : label === "Phone" ? "tel" : "text"} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                     </div>
                   ))}
                   <div>
                     <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">Brief Cover Letter / Introduction</label>
-                    <textarea required rows={3} placeholder="Tell us briefly why you're interested in this role..." className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
+                    <textarea name="cover_letter" required rows={3} placeholder="Tell us briefly why you're interested in this role..." className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
                   </div>
-                  <button type="submit" className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">Submit Application</button>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Resume (PDF or Word, max 10MB)
+                    <input name="resume" required type="file" accept=".pdf,.doc,.docx" className="mt-2 block w-full text-sm" />
+                  </label>
+                  <label className="flex items-start gap-3 text-xs text-foreground/65"><input required name="consent" type="checkbox" value="1" className="mt-0.5 accent-accent" /><span>I agree with the privacy policy and terms and conditions.</span></label>
+                  <input type="text" name="website_url" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+                  {formError && <p role="alert" className="text-sm text-destructive">{formError}</p>}
+                  <button disabled={submitting} type="submit" className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250 disabled:opacity-60">{submitting ? "Submitting…" : "Submit Application"}</button>
                 </form>
               )}
             </div>
@@ -882,16 +938,21 @@ const Careers = () => {
                   <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-4 text-accent"><CheckCircle2 className="w-7 h-7" /></div>
                   <h4 className="font-display font-extrabold text-xl text-foreground">Registration Submitted!</h4>
                   <p className="mt-2 text-sm text-foreground/55">We'll match you with our 2026 mentorship cohort within 2 weeks.</p>
+                  {submissionReference && <p className="mt-3 text-xs font-semibold text-accent">Reference: {submissionReference}</p>}
                 </div>
               ) : (
-                <form onSubmit={handleFormSubmit} className="space-y-5">
-                  {["Full Name", "Email Address", "Area of Expertise / Focus"].map((label) => (
+                <form onSubmit={handleMentorshipSubmit} className="space-y-5">
+                  {["Full Name", "Email Address", "Phone", "LinkedIn URL", "Area of Expertise / Focus"].map((label) => (
                     <div key={label}>
                       <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
-                      <input required type={label.includes("Email") ? "email" : "text"} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
+                      <input name={label === "Full Name" ? "full_name" : label === "Email Address" ? "email" : label === "Phone" ? "phone" : label === "LinkedIn URL" ? "linkedin_url" : "area_of_expertise"} required={label === "Full Name" || label === "Email Address" || label === "Area of Expertise / Focus"} type={label.includes("Email") ? "email" : label.includes("URL") ? "url" : label === "Phone" ? "tel" : "text"} className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
                     </div>
                   ))}
-                  <button type="submit" className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250">Submit Registration</button>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Motivation / goals <textarea name="message" rows={3} className="mt-2 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm" /></label>
+                  <label className="flex items-start gap-3 text-xs text-foreground/65"><input required name="consent" type="checkbox" value="1" className="mt-0.5 accent-accent" /><span>I agree with the privacy policy and terms and conditions.</span></label>
+                  <input type="text" name="website_url" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+                  {formError && <p role="alert" className="text-sm text-destructive">{formError}</p>}
+                  <button disabled={submitting} type="submit" className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-250 disabled:opacity-60">{submitting ? "Submitting…" : "Submit Registration"}</button>
                 </form>
               )}
             </div>

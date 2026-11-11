@@ -15,6 +15,7 @@ import {
 } from "@/assets/photos";
 import { techGuruShowcase, techGuruPanel } from "@/assets/tech-guru";
 import { Link } from "react-router-dom";
+import { submitWebsiteForm, websiteApiError } from "@/lib/techhubApi";
 
 const servicesList = [
   {
@@ -151,14 +152,15 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
   );
 }
 
-const FormModal = ({ open, onClose, title, submitted, onSubmit }: {
-  open: boolean; onClose: () => void; title: string; submitted: boolean; onSubmit: (e: React.FormEvent) => void;
+const FormModal = ({ open, onClose, title, submitted, submitting, error, reference, onSubmit }: {
+  open: boolean; onClose: () => void; title: string; submitted: boolean; submitting: boolean;
+  error: string; reference: string; onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }) => {
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-primary/88" style={{ backdropFilter: "blur(12px)" }} onClick={onClose} />
-      <div className="relative z-10 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl"
+      <div className="relative z-10 w-full max-w-lg max-h-[90vh] rounded-3xl overflow-y-auto shadow-2xl"
         style={{ animation: "scale-in-modal 0.35s cubic-bezier(0.16,1,0.3,1) forwards" }}>
         <div className="bg-primary px-8 pt-8 pb-6 border-b border-primary-foreground/10 relative text-primary-foreground">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
@@ -176,25 +178,45 @@ const FormModal = ({ open, onClose, title, submitted, onSubmit }: {
                 <CheckCircle2 className="w-7 h-7" />
               </div>
               <h4 className="font-display font-extrabold text-xl text-foreground">Inquiry Received!</h4>
-              <p className="mt-2 text-sm text-foreground/55">Our team will respond within 24 hours.</p>
+              <p className="mt-2 text-sm text-foreground/55">Thanks for contacting us. Our team will follow up using the details you provided.</p>
+              {reference && <p className="mt-3 text-xs font-semibold text-accent">Reference: {reference}</p>}
             </div>
           ) : (
-            <form onSubmit={onSubmit} className="space-y-5">
-              {["Your Name", "Email Address"].map((label) => (
-                <div key={label}>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">{label}</label>
-                  <input required type={label.includes("Email") ? "email" : "text"}
-                    className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 transition-colors duration-200" />
-                </div>
-              ))}
+            <form onSubmit={onSubmit} className="space-y-4">
+              <input type="hidden" name="service_name" value={title === "General Inquiry" ? "General Inquiry" : title} />
+              <input type="hidden" name="consent_version" value="2026-11" />
+              <input type="hidden" name="website_url" value="" />
+              <input type="hidden" name="captcha_token" value="" />
+              <div className="grid sm:grid-cols-2 gap-4">
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Full Name *
+                  <input name="full_name" required maxLength={120} autoComplete="name" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                </label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Email Address *
+                  <input name="email" required type="email" maxLength={150} autoComplete="email" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                </label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Phone
+                  <input name="phone" type="tel" maxLength={30} autoComplete="tel" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                </label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Organization
+                  <input name="organization_name" maxLength={150} autoComplete="organization" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                </label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Budget Range
+                  <input name="budget_range" maxLength={80} placeholder="Optional" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                </label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Timeline
+                  <input name="timeline" maxLength={120} placeholder="When would you like to start?" className="mt-1.5 w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm normal-case tracking-normal focus:outline-none focus:border-accent/60" />
+                </label>
+              </div>
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">Project Details</label>
-                <textarea required rows={4}
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">How can we help? *</label>
+                <textarea name="message" required maxLength={5000} rows={4}
                   className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
               </div>
-              <button type="submit"
-                className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-300">
-                Submit Inquiry
+              <label className="flex items-start gap-3 text-xs leading-relaxed text-foreground/65"><input name="consent" required type="checkbox" value="1" className="mt-0.5 accent-accent" /><span>I agree that Tech Hub Africa may use these details to respond to my inquiry, under its privacy terms.</span></label>
+              {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
+              <button type="submit" disabled={submitting}
+                className="btn-magnetic w-full py-4 rounded-full bg-accent text-accent-foreground font-bold text-[11px] uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-60">
+                {submitting ? "Submitting…" : "Submit Inquiry"}
               </button>
             </form>
           )}
@@ -208,11 +230,21 @@ const Services = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [submissionReference, setSubmissionReference] = useState("");
 
-  const openQuoteModal = (t: string) => { setSelectedService(t); setModalOpen(true); setSubmitted(false); };
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); setSubmitted(true);
-    setTimeout(() => { setModalOpen(false); setSubmitted(false); }, 2500);
+  const openQuoteModal = (t: string) => { setSelectedService(t); setModalOpen(true); setSubmitted(false); setFormError(""); setSubmissionReference(""); };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); setSubmitting(true); setFormError("");
+    const fields = new FormData(e.currentTarget);
+    const payload = Object.fromEntries(fields.entries()) as Record<string, string>;
+    payload.consent = fields.get("consent") === "1" ? "true" : "false";
+    try {
+      const result = await submitWebsiteForm<{ reference?: string }>("service-inquiries", payload);
+      setSubmissionReference(result.data?.reference || ""); setSubmitted(true);
+    } catch (error) { setFormError(websiteApiError(error)); }
+    finally { setSubmitting(false); }
   };
 
   return (
@@ -437,7 +469,7 @@ const Services = () => {
         </section>
       </main>
 
-      <FormModal open={modalOpen} onClose={() => setModalOpen(false)} title={selectedService} submitted={submitted} onSubmit={handleSubmit} />
+      <FormModal open={modalOpen} onClose={() => setModalOpen(false)} title={selectedService} submitted={submitted} submitting={submitting} error={formError} reference={submissionReference} onSubmit={handleSubmit} />
       <Footer />
     </>
   );
