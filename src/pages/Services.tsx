@@ -9,7 +9,7 @@ import ClientShowcase from "@/components/ClientShowcase";
 import {
   serviceWebDesign,
   softwareEngineeringProductDelivery,
-  portfolioThreatLock,
+  threatLockCybersecurityService,
   hackathonFlyer,
   meetup2026Flyer,
 } from "@/assets/photos";
@@ -43,7 +43,7 @@ const servicesList = [
     desc: "Our Threat Lock platform safeguards websites and digital infrastructure against DDoS, malware, SQL injection, and breaches — with zero latency overhead.",
     features: ["20+ Real-Time Security Layers", "Automated Vulnerability Scanning", "Incident Response & Remediation", "Compliance Audits"],
     tag: "Flagship", accent: "hsl(28 92% 44%)",
-    image: portfolioThreatLock,
+    image: threatLockCybersecurityService,
   },
   {
     num: "04", id: "enterprise", icon: Building2,
@@ -336,7 +336,7 @@ const Services = () => {
 
                     {/* Ecosystem media */}
                     <div className={`lg:col-span-5 ${isEven ? "lg:order-1" : "lg:order-2"} flex justify-center`}>
-                      <div className={`relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-foreground/10 ${s.id === "software" ? "aspect-video bg-white" : s.id === "incubation" ? "aspect-[4/3] bg-white" : "aspect-[4/3] bg-muted"} group`}>
+                      <div className={`relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-foreground/10 ${s.id === "software" ? "aspect-video bg-white" : s.id === "incubation" ? "aspect-[4/3] bg-white" : s.id === "cybersecurity" ? "aspect-square bg-muted" : "aspect-[4/3] bg-muted"} group`}>
                         <img
                           src={s.image}
                           alt={s.title}
