@@ -298,9 +298,17 @@ const Careers = () => {
           <div className="grid gap-6 md:grid-cols-2">
             {["Intern", "Employee"].map((role) => (
               <figure key={role} className="art-card rounded-lg p-7 sm:p-9">
-                <span className="text-xs font-semibold uppercase text-accent">{role} review · Placeholder</span>
-                <p className="mt-6 text-lg font-display text-muted-foreground">Review coming soon.</p>
-                <figcaption className="mt-8 border-t border-border pt-5 text-sm text-muted-foreground">Name and role to be added</figcaption>
+                <span className="text-xs font-semibold uppercase text-accent">
+                  {role} review{role === "Employee" ? " · Placeholder" : ""}
+                </span>
+                <p className="mt-6 text-lg font-display text-muted-foreground">
+                  {role === "Intern"
+                    ? "My time at Tech Hub Africa has been a meaningful season of growth. I’ve learned so much through hands-on experience, strengthened my skills, and become more confident in taking on new challenges. The mentorship and guidance I’ve received have made a real difference: the team has generously shared its knowledge, offered thoughtful feedback, and encouraged me to keep improving. I’m grateful for the support, trust, and opportunities that have helped me grow both professionally and personally."
+                    : "Review coming soon."}
+                </p>
+                <figcaption className="mt-8 border-t border-border pt-5 text-sm text-muted-foreground">
+                  {role === "Intern" ? "Kennan Bowen · Intern" : "Name and role to be added"}
+                </figcaption>
               </figure>
             ))}
           </div>
