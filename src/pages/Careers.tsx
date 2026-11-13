@@ -91,13 +91,6 @@ const culturePillars = [
   },
 ];
 
-const internshipTracks = [
-  { title: "Software Engineering", desc: "Build full-stack web platforms and cloud microservices alongside senior engineers." },
-  { title: "Cybersecurity & WAF", desc: "Hands-on training in threat monitoring, vulnerability scanning, and security auditing." },
-  { title: "Event & Marketing", desc: "Plan summit logistics, corporate workshops, digital media campaigns, and public relations." },
-  { title: "Research & Operations", desc: "Perform tech sector research, startup incubation support, and partner ecosystem management." },
-];
-
 const mentorshipObjectives = [
   "Provide a platform for knowledge sharing and skills development across software, cloud, and product fields.",
   "Build high-trust 1-on-1 relationships between mentors and mentees across Africa.",
@@ -154,7 +147,8 @@ const Careers = () => {
   const [formError, setFormError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submissionReference, setSubmissionReference] = useState("");
-  const [selectedInternshipPosition, setSelectedInternshipPosition] = useState("");
+  const [selectedInternshipOpeningId, setSelectedInternshipOpeningId] = useState("");
+  const internshipOpenings = jobOpenings.filter((opening) => opening.apiType === "internship");
 
   useEffect(() => {
     let active = true;
@@ -170,9 +164,17 @@ const Careers = () => {
     setSubmitting(true); setFormError("");
     const form = e.currentTarget;
     const fields = new FormData(form);
+    const openingId = String(fields.get("opening_id") || "");
+    const selectedOpening = internshipOpenings.find((opening) => String(opening.openingId) === openingId);
+    if (!selectedOpening) {
+      setFormError("Please choose an available internship position.");
+      setSubmitting(false);
+      return;
+    }
     const payload = new FormData();
     payload.set("type", "internship");
-    payload.set("position_title", String(fields.get("position_title") || ""));
+    payload.set("opening_id", openingId);
+    payload.set("position_title", selectedOpening.title);
     payload.set("full_name", [fields.get("first_name"), fields.get("middle_name"), fields.get("last_name")].map((part) => String(part || "").trim()).filter(Boolean).join(" "));
     for (const key of ["email", "phone", "resume", "consent"] as const) {
       const value = fields.get(key);
@@ -451,53 +453,44 @@ const Careers = () => {
             <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-foreground tracking-tight mb-8">
               Available Internships
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  title: "Event Planning Intern",
-                  desc: "Assist with planning and execution of Tech Hub Africa events, including conferences, workshops, and networking sessions.",
-                },
-                {
-                  title: "Marketing Intern",
-                  desc: "Help develop and implement marketing campaigns to promote Tech Hub Africa's programs and initiatives.",
-                },
-                {
-                  title: "Research Intern",
-                  desc: "Conduct research on diversity and inclusion in the tech industry and assist with data analysis and reporting.",
-                },
-                {
-                  title: "Operations Intern",
-                  desc: "Support the day-to-day operations of Tech Hub Africa, including administrative tasks and project management.",
-                },
-              ].map((intern, idx) => (
-                <Reveal key={intern.title} delay={idx * 0.08}>
-                  <a
-                    href="#internship-application"
-                    aria-label={`Apply for ${intern.title}`}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      setSelectedInternshipPosition(intern.title);
-                      document.getElementById("internship-application")?.scrollIntoView({ behavior: "smooth", block: "start" });
-                    }}
-                    className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full hover:border-accent/40 transition-all duration-500 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                  >
-                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div>
-                      <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">Role 0{idx + 1}</span>
-                      <h4 className="font-display font-extrabold text-xl text-foreground mb-3 group-hover:text-accent transition-colors">
-                        {intern.title}
-                      </h4>
-                      <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed font-medium">
-                        {intern.desc}
-                      </p>
-                    </div>
-                    <span className="mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
-                      Apply for this internship <ArrowUpRight className="w-3.5 h-3.5" />
-                    </span>
-                  </a>
-                </Reveal>
-              ))}
-            </div>
+            {openingsLoading ? (
+              <p className="text-sm text-foreground/65">Loading internship positions…</p>
+            ) : openingsError ? (
+              <p role="alert" className="text-sm text-destructive">Internship positions are temporarily unavailable. Please try again later.</p>
+            ) : internshipOpenings.length === 0 ? (
+              <p className="text-sm text-foreground/65">There are no open internship positions right now. Please check again soon.</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {internshipOpenings.map((intern, idx) => (
+                  <Reveal key={intern.openingId} delay={idx * 0.08}>
+                    <a
+                      href="#internship-application"
+                      aria-label={`Apply for ${intern.title}`}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        setSelectedInternshipOpeningId(String(intern.openingId));
+                        document.getElementById("internship-application")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }}
+                      className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full hover:border-accent/40 transition-all duration-500 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div>
+                        <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">Internship · {intern.dept}</span>
+                        <h4 className="font-display font-extrabold text-xl text-foreground mb-3 group-hover:text-accent transition-colors">
+                          {intern.title}
+                        </h4>
+                        <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed font-medium">
+                          {intern.summary || "Join the Tech Hub Africa team and build practical experience in this role."}
+                        </p>
+                      </div>
+                      <span className="mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                        Apply for this internship <ArrowUpRight className="w-3.5 h-3.5" />
+                      </span>
+                    </a>
+                  </Reveal>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Benefits & Eligibility Grid */}
@@ -664,16 +657,15 @@ const Careers = () => {
                     </label>
                     <select
                       required
-                      value={selectedInternshipPosition}
-                      onChange={(e) => setSelectedInternshipPosition(e.target.value)}
-                      name="position_title"
+                      value={selectedInternshipOpeningId}
+                      onChange={(e) => setSelectedInternshipOpeningId(e.target.value)}
+                      name="opening_id"
                       className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
                     >
                       <option value="">-- Select Position --</option>
-                      <option value="Event Planning Intern">Event Planning Intern</option>
-                      <option value="Marketing Intern">Marketing Intern</option>
-                      <option value="Research Intern">Research Intern</option>
-                      <option value="Operations Intern">Operations Intern</option>
+                      {internshipOpenings.map((opening) => (
+                        <option key={opening.openingId} value={String(opening.openingId)}>{opening.title}</option>
+                      ))}
                     </select>
                   </div>
 
