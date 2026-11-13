@@ -91,6 +91,13 @@ const culturePillars = [
   },
 ];
 
+const generalInternshipTracks = [
+  { title: "Event Planning Intern", dept: "Events", summary: "Assist with planning and delivery of Tech Hub Africa events, workshops, and networking sessions." },
+  { title: "Marketing Intern", dept: "Marketing", summary: "Help plan campaigns and promote Tech Hub Africa’s programs and initiatives." },
+  { title: "Research Intern", dept: "Research", summary: "Support technology-sector research, analysis, and reporting." },
+  { title: "Operations Intern", dept: "Operations", summary: "Support day-to-day operations, administration, and project coordination." },
+];
+
 const mentorshipObjectives = [
   "Provide a platform for knowledge sharing and skills development across software, cloud, and product fields.",
   "Build high-trust 1-on-1 relationships between mentors and mentees across Africa.",
@@ -147,8 +154,9 @@ const Careers = () => {
   const [formError, setFormError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submissionReference, setSubmissionReference] = useState("");
-  const [selectedInternshipOpeningId, setSelectedInternshipOpeningId] = useState("");
+  const [selectedInternshipRoleValue, setSelectedInternshipRoleValue] = useState("");
   const internshipOpenings = jobOpenings.filter((opening) => opening.apiType === "internship");
+  const internshipChoices = internshipOpenings.length ? internshipOpenings : generalInternshipTracks;
 
   useEffect(() => {
     let active = true;
@@ -164,17 +172,19 @@ const Careers = () => {
     setSubmitting(true); setFormError("");
     const form = e.currentTarget;
     const fields = new FormData(form);
-    const openingId = String(fields.get("opening_id") || "");
-    const selectedOpening = internshipOpenings.find((opening) => String(opening.openingId) === openingId);
-    if (!selectedOpening) {
+    const roleValue = String(fields.get("internship_role") || "");
+    const selectedOpening = internshipOpenings.find((opening) => String(opening.openingId) === roleValue);
+    const selectedGeneralTrack = generalInternshipTracks.find((track) => track.title === roleValue);
+    const positionTitle = selectedOpening?.title || selectedGeneralTrack?.title;
+    if (!positionTitle) {
       setFormError("Please choose an available internship position.");
       setSubmitting(false);
       return;
     }
     const payload = new FormData();
     payload.set("type", "internship");
-    payload.set("opening_id", openingId);
-    payload.set("position_title", selectedOpening.title);
+    if (selectedOpening) payload.set("opening_id", String(selectedOpening.openingId));
+    payload.set("position_title", positionTitle);
     payload.set("full_name", [fields.get("first_name"), fields.get("middle_name"), fields.get("last_name")].map((part) => String(part || "").trim()).filter(Boolean).join(" "));
     for (const key of ["email", "phone", "resume", "consent"] as const) {
       const value = fields.get(key);
@@ -451,8 +461,13 @@ const Careers = () => {
           {/* Available Internships Grid */}
           <div className="mb-16">
             <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-foreground tracking-tight mb-8">
-              Available Internships
+              {internshipOpenings.length ? "Available Internships" : "Internship Tracks"}
             </h3>
+            {!openingsLoading && internshipOpenings.length === 0 && (
+              <p className="-mt-5 mb-8 text-sm text-foreground/65">
+                No internship vacancies are currently published. You can still submit a general application for one of these tracks.
+              </p>
+            )}
             {openingsLoading ? (
               <p className="text-sm text-foreground/65">Loading internship positions…</p>
             ) : openingsError ? (
@@ -461,21 +476,21 @@ const Careers = () => {
               <p className="text-sm text-foreground/65">There are no open internship positions right now. Please check again soon.</p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {internshipOpenings.map((intern, idx) => (
-                  <Reveal key={intern.openingId} delay={idx * 0.08}>
+                {internshipChoices.map((intern, idx) => (
+                  <Reveal key={"openingId" in intern ? intern.openingId : intern.title} delay={idx * 0.08}>
                     <a
                       href="#internship-application"
                       aria-label={`Apply for ${intern.title}`}
                       onClick={(event) => {
                         event.preventDefault();
-                        setSelectedInternshipOpeningId(String(intern.openingId));
+                        setSelectedInternshipRoleValue("openingId" in intern ? String(intern.openingId) : intern.title);
                         document.getElementById("internship-application")?.scrollIntoView({ behavior: "smooth", block: "start" });
                       }}
                       className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full hover:border-accent/40 transition-all duration-500 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     >
                       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <div>
-                        <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">Internship · {intern.dept}</span>
+                      <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">Internship · {intern.dept}</span>
                         <h4 className="font-display font-extrabold text-xl text-foreground mb-3 group-hover:text-accent transition-colors">
                           {intern.title}
                         </h4>
@@ -657,14 +672,14 @@ const Careers = () => {
                     </label>
                     <select
                       required
-                      value={selectedInternshipOpeningId}
-                      onChange={(e) => setSelectedInternshipOpeningId(e.target.value)}
-                      name="opening_id"
+                      value={selectedInternshipRoleValue}
+                      onChange={(e) => setSelectedInternshipRoleValue(e.target.value)}
+                      name="internship_role"
                       className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
                     >
                       <option value="">-- Select Position --</option>
-                      {internshipOpenings.map((opening) => (
-                        <option key={opening.openingId} value={String(opening.openingId)}>{opening.title}</option>
+                      {internshipChoices.map((opening) => (
+                        <option key={"openingId" in opening ? opening.openingId : opening.title} value={"openingId" in opening ? String(opening.openingId) : opening.title}>{opening.title}</option>
                       ))}
                     </select>
                   </div>
