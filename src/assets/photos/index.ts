@@ -22,6 +22,7 @@ export { default as careerDigitalMarketing } from "./career-digital-marketing.pn
 export { default as serviceProgramming } from "./service-programming.png";
 export { default as serviceSoftware } from "./service-software.png";
 export { default as serviceWebDesign } from "./service-webdesign.png";
+export { default as softwareEngineeringProductDelivery } from "./software-engineering-product-delivery.png";
 
 export { default as portfolioGh } from "./portfolio-gh.png";
 export { default as portfolioGmo } from "./portfolio-gmo.png";

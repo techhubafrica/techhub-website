@@ -7,8 +7,8 @@ import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 import ClientShowcase from "@/components/ClientShowcase";
 import {
-  serviceSoftware,
   serviceWebDesign,
+  softwareEngineeringProductDelivery,
   portfolioThreatLock,
   hackathonFlyer,
   meetup2026Flyer,
@@ -25,7 +25,7 @@ const servicesList = [
     desc: "We design and build production-grade software for African enterprises, startups, and public sector orgs — from custom portals to high-performance mobile apps.",
     features: ["Custom Web & Mobile Apps", "Cloud Infrastructure & DevOps", "API Integrations & Microservices", "UI/UX Design Systems"],
     tag: "Core", accent: "hsl(156 24% 24%)",
-    image: serviceSoftware,
+    image: softwareEngineeringProductDelivery,
   },
   {
     num: "02", id: "incubation", icon: Rocket,
@@ -336,14 +336,14 @@ const Services = () => {
 
                     {/* Ecosystem media */}
                     <div className={`lg:col-span-5 ${isEven ? "lg:order-1" : "lg:order-2"} flex justify-center`}>
-                      <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-foreground/10 aspect-[4/3] group bg-muted">
+                      <div className={`relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-foreground/10 ${s.id === "software" ? "aspect-video bg-white" : s.id === "incubation" ? "aspect-[4/3] bg-white" : "aspect-[4/3] bg-muted"} group`}>
                         <img
                           src={s.image}
                           alt={s.title}
                           loading="lazy"
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          className={`w-full h-full ${s.id === "software" || s.id === "incubation" ? "object-contain" : "object-cover transition-transform duration-700 group-hover:scale-105"}`}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        {s.id !== "software" && s.id !== "incubation" && <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />}
                       </div>
                     </div>
                   </div>
