@@ -154,6 +154,7 @@ const Careers = () => {
   const [formError, setFormError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submissionReference, setSubmissionReference] = useState("");
+  const [selectedInternshipPosition, setSelectedInternshipPosition] = useState("");
 
   useEffect(() => {
     let active = true;
@@ -470,7 +471,16 @@ const Careers = () => {
                 },
               ].map((intern, idx) => (
                 <Reveal key={intern.title} delay={idx * 0.08}>
-                  <div className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full hover:border-accent/40 transition-all duration-500 overflow-hidden">
+                  <a
+                    href="#internship-application"
+                    aria-label={`Apply for ${intern.title}`}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      setSelectedInternshipPosition(intern.title);
+                      document.getElementById("internship-application")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }}
+                    className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full hover:border-accent/40 transition-all duration-500 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  >
                     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div>
                       <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">Role 0{idx + 1}</span>
@@ -481,7 +491,10 @@ const Careers = () => {
                         {intern.desc}
                       </p>
                     </div>
-                  </div>
+                    <span className="mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                      Apply for this internship <ArrowUpRight className="w-3.5 h-3.5" />
+                    </span>
+                  </a>
                 </Reveal>
               ))}
             </div>
@@ -551,7 +564,7 @@ const Careers = () => {
 
           {/* Application Form */}
           <Reveal className="mb-20">
-            <div className="rounded-3xl border border-foreground/10 bg-card p-8 sm:p-12 shadow-xl max-w-4xl mx-auto relative overflow-hidden">
+            <div id="internship-application" className="scroll-mt-24 rounded-3xl border border-foreground/10 bg-card p-8 sm:p-12 shadow-xl max-w-4xl mx-auto relative overflow-hidden">
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent via-primary to-accent" />
               
               <div className="text-center mb-10">
@@ -651,6 +664,8 @@ const Careers = () => {
                     </label>
                     <select
                       required
+                      value={selectedInternshipPosition}
+                      onChange={(e) => setSelectedInternshipPosition(e.target.value)}
                       name="position_title"
                       className="w-full px-4 py-3.5 rounded-2xl border border-foreground/15 bg-background text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
                     >
