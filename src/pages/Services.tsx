@@ -184,7 +184,6 @@ const FormModal = ({ open, onClose, title, submitted, submitting, error, referen
           ) : (
             <form onSubmit={onSubmit} className="space-y-4">
               <input type="hidden" name="service_name" value={title === "General Inquiry" ? "General Inquiry" : title} />
-              <input type="hidden" name="consent_version" value="2026-11" />
               <input type="hidden" name="website_url" value="" />
               <input type="hidden" name="captcha_token" value="" />
               <div className="grid sm:grid-cols-2 gap-4">

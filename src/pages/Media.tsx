@@ -44,7 +44,6 @@ const Media = () => {
     const form = e.currentTarget;
     const payload = new FormData(form);
     payload.set("consent", "1");
-    payload.set("consent_version", "2026-11");
     payload.set("website_url", "");
     const file = payload.get("supporting_file");
     if (file instanceof File && file.size === 0) payload.delete("supporting_file");
@@ -231,7 +230,6 @@ const Media = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <input type="hidden" name="consent_version" value="2026-11" />
                   <input type="hidden" name="website_url" value="" />
                   <input type="hidden" name="captcha_token" value="" />
                   <div className="grid sm:grid-cols-2 gap-4">

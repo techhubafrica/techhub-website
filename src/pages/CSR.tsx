@@ -37,7 +37,15 @@ const CSR = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); setSubmitting(true); setFormError("");
     const payload = new FormData(e.currentTarget);
-    payload.set("website_url", ""); payload.set("consent_version", "2026-11");
+    const proposal = payload.get("proposal_document");
+    const taxDocument = payload.get("tax_exempt_document");
+    if (proposal instanceof File && proposal.size > 15 * 1024 * 1024) {
+      setFormError("Project proposal must be 15 MB or smaller."); setSubmitting(false); return;
+    }
+    if (taxDocument instanceof File && taxDocument.size > 10 * 1024 * 1024) {
+      setFormError("Nonprofit document must be 10 MB or smaller."); setSubmitting(false); return;
+    }
+    payload.set("website_url", "");
     try {
       const result = await submitWebsiteForm("partnership-inquiries", payload);
       setSubmissionReference((result.data as { reference?: string })?.reference || ""); setSubmitted(true);
@@ -157,17 +165,17 @@ const CSR = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <label className="block text-xs font-bold text-foreground/70">Organization Name *<input name="organization_name" required maxLength={150} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                  <label className="block text-xs font-bold text-foreground/70">Contact Name *<input name="contact_name" required maxLength={120} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Contact Name (optional)<input name="contact_name" maxLength={120} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
                   <label className="block text-xs font-bold text-foreground/70">Mission &amp; Vision<textarea name="mission_vision" rows={3} maxLength={3000} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                  <label className="block text-xs font-bold text-foreground/70">Type of Sponsorship *<select name="sponsorship_type" required defaultValue="" className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm"><option value="" disabled>Select a sponsorship type</option><option value="event">Event sponsorship</option><option value="grant">Scholarship donations</option><option value="other">Mentorship program participation</option><option value="csr">Diversity and inclusion partnership</option><option value="equipment">Equipment</option></select></label>
-                  <label className="block text-xs font-bold text-foreground/70">Who will benefit? *<textarea name="beneficiaries" required rows={2} maxLength={3000} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                  <label className="block text-xs font-bold text-foreground/70">Why should you be considered? *<textarea name="reason_for_consideration" required rows={2} maxLength={3000} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                  <label className="block text-xs font-bold text-foreground/70">What are the benefits to Tech Hub Africa? *<textarea name="benefit_to_techhub" required rows={2} maxLength={3000} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                  <label className="block text-xs font-bold text-foreground/70">Project proposal (optional)<input name="proposal_document" type="file" accept=".pdf,.doc,.docx" className="mt-1.5 block w-full text-sm text-foreground/60" /></label>
-                  <label className="block text-xs font-bold text-foreground/70">501(c)(3) or nonprofit documents<input name="tax_exempt_document" type="file" accept=".pdf,.doc,.docx" className="mt-1.5 block w-full text-sm text-foreground/60" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Type of Sponsorship (optional)<select name="sponsorship_type" defaultValue="" className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm"><option value="">Select a sponsorship type</option><option value="event">Event sponsorship</option><option value="grant">Grant or scholarship</option><option value="other">Other</option><option value="csr">CSR partnership</option><option value="equipment">Equipment</option></select></label>
+                  <label className="block text-xs font-bold text-foreground/70">Who will benefit? (optional)<textarea name="beneficiaries" rows={2} maxLength={3000} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Why should you be considered? (optional)<textarea name="reason_for_consideration" rows={2} maxLength={3000} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Message or benefits to Tech Hub Africa (optional)<textarea name="message" rows={2} maxLength={5000} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">Project proposal (optional, PDF/DOC/DOCX/PPT/PPTX, max 15 MB)<input name="proposal_document" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx" className="mt-1.5 block w-full text-sm text-foreground/60" /></label>
+                  <label className="block text-xs font-bold text-foreground/70">501(c)(3) or nonprofit documents (optional, PDF/DOC/DOCX/JPG/PNG, max 10 MB)<input name="tax_exempt_document" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" className="mt-1.5 block w-full text-sm text-foreground/60" /></label>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <label className="block text-xs font-bold text-foreground/70">Email Address *<input name="email" required type="email" maxLength={150} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
-                    <label className="block text-xs font-bold text-foreground/70">Phone *<input name="phone" required type="tel" maxLength={30} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
+                    <label className="block text-xs font-bold text-foreground/70">Phone (optional)<input name="phone" type="tel" maxLength={40} className="mt-1.5 w-full rounded-xl border border-foreground/15 bg-secondary/40 px-4 py-3 text-sm" /></label>
                   </div>
                   <label className="flex items-start gap-3 text-xs text-foreground/65"><input name="consent" required type="checkbox" value="1" className="mt-0.5 accent-accent" /><span>Yes, I agree with the privacy policy and terms and conditions.</span></label>
                   <input type="text" name="website_url" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />

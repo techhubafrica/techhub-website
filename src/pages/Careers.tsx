@@ -172,6 +172,12 @@ const Careers = () => {
     setSubmitting(true); setFormError("");
     const form = e.currentTarget;
     const fields = new FormData(form);
+    const resume = fields.get("resume");
+    if (resume instanceof File && resume.size > 10 * 1024 * 1024) {
+      setFormError("Resume must be 10 MB or smaller.");
+      setSubmitting(false);
+      return;
+    }
     const roleValue = String(fields.get("internship_role") || "");
     const selectedOpening = internshipOpenings.find((opening) => String(opening.openingId) === roleValue);
     const selectedGeneralTrack = generalInternshipTracks.find((track) => track.title === roleValue);
@@ -191,7 +197,6 @@ const Careers = () => {
       if (value !== null) payload.set(key, value);
     }
     payload.set("website_url", "");
-    payload.set("consent_version", "2026-11");
     try {
       const result = await submitWebsiteForm("career-applications", payload);
       setSubmissionReference((result.data as { reference?: string })?.reference || "");
@@ -231,10 +236,16 @@ const Careers = () => {
     if (!selectedRole) return;
     setSubmitting(true); setFormError("");
     const payload = new FormData(e.currentTarget);
+    const resume = payload.get("resume");
+    if (resume instanceof File && resume.size > 10 * 1024 * 1024) {
+      setFormError("Resume must be 10 MB or smaller.");
+      setSubmitting(false);
+      return;
+    }
     payload.set("type", selectedRole.apiType);
     payload.set("opening_id", String(selectedRole.openingId));
     payload.set("position_title", selectedRole.title);
-    payload.set("website_url", ""); payload.set("consent_version", "2026-11");
+    payload.set("website_url", "");
     try {
       const result = await submitWebsiteForm("career-applications", payload);
       setSubmissionReference((result.data as { reference?: string })?.reference || "");
@@ -248,11 +259,11 @@ const Careers = () => {
     const fields = new FormData(e.currentTarget);
     const payload = new FormData();
     payload.set("role", mentorshipRole.toLowerCase());
-    for (const key of ["full_name", "email", "phone", "linkedin_url", "area_of_expertise", "message", "resume", "consent"] as const) {
+    for (const key of ["full_name", "email", "phone", "linkedin_url", "area_of_expertise", "message", "consent"] as const) {
       const value = fields.get(key);
       if (value !== null && value !== "") payload.set(key, value);
     }
-    payload.set("website_url", ""); payload.set("consent_version", "2026-11");
+    payload.set("website_url", "");
     try {
       const result = await submitWebsiteForm("mentorship-applications", payload);
       setSubmissionReference((result.data as { reference?: string })?.reference || ""); setSubmitted(true);
@@ -687,7 +698,7 @@ const Careers = () => {
                   {/* File Upload Dropzone */}
                   <div>
                     <label className="block text-[10.5px] font-bold uppercase tracking-wider text-foreground/70 mb-2">
-                      Upload Resume and Cover letter *
+                      Upload Resume *
                     </label>
                     <div className="relative border-2 border-dashed border-foreground/20 hover:border-accent/60 rounded-2xl p-6 text-center bg-background/50 transition-colors cursor-pointer group">
                       <input
@@ -934,11 +945,11 @@ const Careers = () => {
                     </div>
                   ))}
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">Brief Cover Letter / Introduction</label>
-                    <textarea name="cover_letter" required rows={3} placeholder="Tell us briefly why you're interested in this role..." className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60 mb-1.5">Brief Cover Letter / Introduction (Optional)</label>
+                    <textarea name="cover_letter" maxLength={5000} rows={3} placeholder="Tell us briefly why you're interested in this role..." className="w-full px-4 py-3 rounded-xl border border-foreground/12 bg-secondary/60 text-sm text-foreground focus:outline-none focus:border-accent/60 resize-none transition-colors duration-200" />
                   </div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Resume (PDF or Word, max 10MB)
-                    <input name="resume" required type="file" accept=".pdf,.doc,.docx" className="mt-2 block w-full text-sm" />
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-foreground/60">Resume {selectedRole.apiType === "internship" ? "(Required" : "(Optional"}, PDF or Word, max 10MB)
+                    <input name="resume" required={selectedRole.apiType === "internship"} type="file" accept=".pdf,.doc,.docx" className="mt-2 block w-full text-sm" />
                   </label>
                   <label className="flex items-start gap-3 text-xs text-foreground/65"><input required name="consent" type="checkbox" value="1" className="mt-0.5 accent-accent" /><span>I agree with the privacy policy and terms and conditions.</span></label>
                   <input type="text" name="website_url" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
