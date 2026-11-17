@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import Logo from "@/components/Logo";
 import {
   heroAudience, heroCelebration, heroPanel,
-  hackathonFlyer, campusTourFlyer, meetup2026Flyer, awardTop100, awardWhosWho, careerDigitalMarketing,
+  hackathonFlyer, campusTourFlyer, meetup2026Flyer, awardTop100, awardWhosWho,
   serviceProgramming, serviceSoftware, serviceWebDesign,
   portfolioGh, portfolioGmo, portfolioOfie, portfolioThreatLock,
 } from "@/assets/photos";
@@ -629,13 +629,13 @@ const services = [
     Icon: Workflow,
     title: "Smart Work & Workflow Automation",
     desc: "Productivity tools, automation playbooks and team enablement to make everyday work more effective.",
-    image: techGuruShowcase,
+    image: undefined,
   },
   {
     Icon: Building2,
     title: "HR & People Management Tools",
     desc: "Streamline onboarding, performance reviews, leave and attendance tracking, and people analytics.",
-    image: careerDigitalMarketing,
+    image: undefined,
   },
   {
     Icon: ShieldCheck,
@@ -700,13 +700,16 @@ const Services = () => (
             key={s.title}
             className="card-lift art-card-mint sheen noise-soft group relative p-10 lg:p-12 rounded-3xl overflow-hidden flex flex-col justify-between"
           >
-            <img
-              src={s.image}
-              alt=""
-              aria-hidden
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover opacity-[0.42] group-hover:opacity-[0.52] group-hover:scale-105 transition-all duration-[1200ms]"
-            />
+            {s.image && (
+              <img
+                src={s.image}
+                alt=""
+                aria-hidden
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover opacity-[0.42] group-hover:opacity-[0.52] group-hover:scale-105 transition-all duration-[1200ms]"
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-background/65 to-background/85" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_top,hsl(28_92%_55%/0.25),transparent_60%)]" />
             
