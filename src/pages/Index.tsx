@@ -174,6 +174,7 @@ const Hero = () => {
                   style={{
                     transform: isActive ? "scale(1.14)" : "scale(1.02)",
                     transition: "transform 9s cubic-bezier(0.22,0.61,0.36,1)",
+                    filter: "brightness(1.1) saturate(1.06)",
                   }}
                   loading={i === 0 ? "eager" : "lazy"}
                   decoding={i === 0 ? "sync" : "async"}
@@ -186,15 +187,15 @@ const Hero = () => {
         })}
       </div>
 
-      {/* Text-readability scrim — light left-bias so photos stay vivid */}
+      {/* Softer left scrim keeps copy clear while letting the photos feel bright. */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(105deg, hsl(0 0% 0% / 0.55) 0%, hsl(0 0% 0% / 0.35) 35%, hsl(0 0% 0% / 0.1) 60%, transparent 80%)",
+            "linear-gradient(105deg, hsl(0 0% 0% / 0.4) 0%, hsl(0 0% 0% / 0.24) 35%, hsl(0 0% 0% / 0.06) 60%, transparent 80%)",
         }}
       />
-      <div className="absolute inset-x-0 bottom-0 h-80 z-[1] pointer-events-none bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-80 z-[1] pointer-events-none bg-gradient-to-t from-black/55 via-black/25 to-transparent" />
 
       {/* amber ambient glow — position driven by CSS vars */}
       <div
