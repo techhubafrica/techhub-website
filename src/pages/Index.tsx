@@ -49,7 +49,7 @@ const heroSlides = [
   {
     tag: "Cybersecurity", kicker: "Threat Lock", title: "Protect What You Build",
     body: "The Threat Lock cybersecurity ecosystem helps safeguard your organisation’s websites and digital infrastructure.",
-    cta: "Explore Threat Lock", href: "/services#productivity", image: techGuruShowcase,
+    cta: "Explore Threat Lock", href: "/services#cybersecurity", image: techGuruShowcase,
     stat: { k: "05", v: "Security" },
   },
 ];
@@ -248,7 +248,7 @@ const Hero = () => {
         <div key={slide.title} className="relative max-w-[860px] mt-0 sm:mt-12 md:mt-16">
           <div className="flex items-center gap-4 mb-4 sm:mb-6 animate-fade-up">
             <span className="h-px w-10 bg-accent" />
-            <p className="text-[9px] md:text-[11px] font-black uppercase tracking-[0.32em] sm:tracking-[0.5em] text-accent">
+            <p className="rounded-full border border-white/20 bg-black/55 px-3 py-1 text-[9px] font-black uppercase tracking-[0.32em] text-amber-300 shadow-lg backdrop-blur-sm sm:tracking-[0.5em] md:text-[11px]" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.85)" }}>
               {slide.kicker}
             </p>
           </div>
@@ -266,7 +266,7 @@ const Hero = () => {
 
           {/* description — editorial column */}
           <div className="animate-fade-up stagger-2 mt-5 sm:mt-8 max-w-[540px] border-t border-white/15 pt-4 sm:pt-6 flex gap-4 sm:gap-6">
-            <span className="font-display font-black text-[11px] leading-none text-accent pt-1.5 tabular-nums">
+            <span className="font-display font-black text-[11px] leading-none text-amber-300 pt-1.5 tabular-nums">
               {String(active + 1).padStart(2, "0")}
             </span>
             <p className="text-white/90 text-[15px] md:text-[17px] leading-[1.75] font-semibold" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.6)" }}>
@@ -296,13 +296,15 @@ const Hero = () => {
                 <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
             )}
-            <Link
-              to="/about"
-              className="group inline-flex items-center gap-3 text-[10px] sm:text-[10.5px] font-extrabold text-white hover:text-accent transition-colors uppercase tracking-[0.2em] sm:tracking-[0.28em]" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.5)" }}
-            >
-              Learn More
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </Link>
+            {slide.external ? (
+              <a href={slide.href} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 text-[10px] sm:text-[10.5px] font-extrabold text-white hover:text-amber-300 transition-colors uppercase tracking-[0.2em] sm:tracking-[0.28em]" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.5)" }}>
+                Learn More <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+            ) : (
+              <Link to={slide.href} className="group inline-flex items-center gap-3 text-[10px] sm:text-[10.5px] font-extrabold text-white hover:text-amber-300 transition-colors uppercase tracking-[0.2em] sm:tracking-[0.28em]" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.5)" }}>
+                Learn More <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+            )}
           </div>
         </div>
 
@@ -312,17 +314,17 @@ const Hero = () => {
           {/* Trust metrics */}
           <div className="hero-trust-strip">
             <div className="trust-item">
-              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>CRM</span>
+              <span className="font-display font-black text-amber-300 text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>CRM</span>
               <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Customer Platforms</span>
             </div>
             <div className="trust-divider" />
             <div className="trust-item">
-              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>Intranet</span>
+              <span className="font-display font-black text-amber-300 text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>Intranet</span>
               <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Connected Teams</span>
             </div>
             <div className="trust-divider" />
             <div className="trust-item">
-              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>10+</span>
+              <span className="font-display font-black text-amber-300 text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>10+</span>
               <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Countries</span>
             </div>
           </div>
@@ -341,7 +343,7 @@ const Hero = () => {
                     / {String(heroSlides.length).padStart(2, "0")}
                   </span>
                 </div>
-                <span className="text-[9.5px] font-black uppercase tracking-[0.32em] text-accent truncate" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>
+                <span className="text-[9.5px] font-black uppercase tracking-[0.32em] text-amber-300 truncate" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>
                   {slide.kicker}
                 </span>
               </div>
@@ -375,7 +377,7 @@ const Hero = () => {
                 <p className="font-display font-black text-4xl leading-none text-white tabular-nums">
                   {slide.stat.k}
                 </p>
-                <p className="text-[8.5px] font-bold uppercase tracking-[0.35em] text-accent mt-2">
+                <p className="text-[8.5px] font-bold uppercase tracking-[0.35em] text-amber-300 mt-2">
                   {slide.stat.v}
                 </p>
               </div>
