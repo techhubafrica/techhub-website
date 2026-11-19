@@ -57,11 +57,11 @@ const Metaverse = () => (
       <section className="bg-cream px-5 sm:px-6 lg:px-10 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div>
-            <span className="eyebrow text-accent">Interested in this ecosystem?</span>
-            <h2 className="font-display font-extrabold text-foreground text-2xl sm:text-3xl tracking-tight mt-3">Talk with us about the Metaverse.</h2>
+            <span className="eyebrow text-accent">Create your virtual space</span>
+            <h2 className="font-display font-extrabold text-foreground text-2xl sm:text-3xl tracking-tight mt-3">Talk to us about creating your space in the metaverse.</h2>
           </div>
-          <Link to="/services#metaverse" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-7 py-4 text-xs font-bold uppercase tracking-widest hover:brightness-110 transition">
-            Explore This Ecosystem <ArrowUpRight className="w-4 h-4" />
+          <Link to="/#contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-accent-foreground px-7 py-4 text-xs font-bold uppercase tracking-widest hover:brightness-110 transition">
+            Contact Us <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
       </section>
