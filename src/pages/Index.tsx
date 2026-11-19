@@ -727,12 +727,23 @@ const Services = () => (
             </div>
 
             <div className="relative pt-6 border-t border-foreground/10 flex items-center justify-between">
-              <Link
-                to={s.title === "Global Metaverse Virtual Space" ? "/metaverse" : "/services"}
-                className="text-xs font-bold uppercase tracking-[0.2em] text-accent group-hover:text-primary-foreground transition-colors flex items-center gap-2"
-              >
-                Learn More <ArrowUpRight className="w-4 h-4" />
-              </Link>
+              {s.title === "Campus Tours & Startup Competitions" ? (
+                <a
+                  href="https://tech4all.techhubafrica.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-bold uppercase tracking-[0.2em] text-accent group-hover:text-primary-foreground transition-colors flex items-center gap-2"
+                >
+                  Explore Tech4ALL <ArrowUpRight className="w-4 h-4" />
+                </a>
+              ) : (
+                <Link
+                  to={s.title === "Global Metaverse Virtual Space" ? "/metaverse" : "/services"}
+                  className="text-xs font-bold uppercase tracking-[0.2em] text-accent group-hover:text-primary-foreground transition-colors flex items-center gap-2"
+                >
+                  Learn More <ArrowUpRight className="w-4 h-4" />
+                </Link>
+              )}
             </div>
           </div>
         ))}
