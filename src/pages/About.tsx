@@ -1,4 +1,4 @@
-import { Compass, Target, ShieldCheck, Heart, ArrowUpRight, Flag } from "lucide-react";
+import { Compass, Target, ShieldCheck, Heart, ArrowUpRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MeetTheTeam from "@/components/MeetTheTeam";
@@ -14,26 +14,6 @@ const values = [
 
 const milestones = [
   { year: "2026", title: "Expanding Ecosystem", desc: "Our community continues to grow across software engineering, cybersecurity, and startup acceleration." },
-];
-
-const shortTermGoals = [
-  "Establish a strong online presence through social media and a website, with a minimum of 10,000 followers and 1,000 website visitors per month.",
-];
-
-const mediumTermGoals = [
-  "Expand our reach to all African countries, with a minimum of 1 event per country.",
-  "Establish a mentorship program with at least 20 experienced mentors and 50 mentees.",
-  "Develop and launch online events on tech-related topics, with a minimum of 50 enrollments per webinar.",
-  "Build a community of at least 100 innovators, entrepreneurs, and professionals in the tech industry.",
-  "Secure at least $500,000 in funding for programs and events.",
-];
-
-const longTermGoals = [
-  "Establish Tech Hub Africa as a leading brand in the African tech industry, with a strong reputation for innovation and excellence.",
-  "Create a sustainable business model that generates at least $1 million in revenue per year.",
-  "Expand our programs to include entrepreneurship support, incubation, and acceleration.",
-  "Build a network of at least 100 partner organizations and companies in the tech industry.",
-  "Contribute to the growth and development of the African tech industry, with a focus on inclusivity, diversity, and impact.",
 ];
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -106,101 +86,6 @@ const About = () => (
               </a>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* ══ OUR GOALS (Short-term, Medium-term, Long-term) ══ */}
-      <section className="relative bg-secondary text-primary-foreground px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 lg:py-32 overflow-hidden">
-        <div className="noise-bg" />
-        <div className="hidden md:block absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.35),transparent_70%)]" />
-
-        <div className="relative max-w-7xl mx-auto">
-          <Reveal className="mb-14">
-            <div className="flex items-baseline gap-6 mb-6">
-              <span className="eyebrow text-accent">02 — Roadmap &amp; Milestones</span>
-              <div className="flex-1 divider-elegant-light" />
-            </div>
-            <h2 className="font-display font-extrabold text-3.5xl sm:text-5xl md:text-6xl tracking-tight leading-[0.92]">
-              Our <span className="italic font-light text-accent">Strategic Goals.</span>
-            </h2>
-          </Reveal>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Short-Term */}
-            <Reveal delay={0.05}>
-              <div className="card-lift sheen rounded-3xl border border-primary-foreground/15 bg-primary/80 backdrop-blur-md p-8 sm:p-9 h-full flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-[9px] font-black uppercase tracking-[0.28em] text-accent bg-accent/15 px-3 py-1 rounded-full border border-accent/30">
-                      Online Presence
-                    </span>
-                    <Flag className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="font-display font-extrabold text-2xl text-primary-foreground mb-6">
-                    Short-Term <span className="italic font-light text-accent">Goals</span>
-                  </h3>
-                  <ul className="space-y-4">
-                    {shortTermGoals.map((g, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-primary-foreground/75 leading-relaxed">
-                        <span className="font-bold text-accent shrink-0">0{idx + 1}.</span>
-                        <span>{g}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Medium-Term */}
-            <Reveal delay={0.12}>
-              <div className="card-lift sheen rounded-3xl border border-primary-foreground/15 bg-primary/80 backdrop-blur-md p-8 sm:p-9 h-full flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-[9px] font-black uppercase tracking-[0.28em] text-accent bg-accent/15 px-3 py-1 rounded-full border border-accent/30">
-                      Reach · All Africa
-                    </span>
-                    <Flag className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="font-display font-extrabold text-2xl text-primary-foreground mb-6">
-                    Medium-Term <span className="italic font-light text-accent">Goals</span>
-                  </h3>
-                  <ul className="space-y-4">
-                    {mediumTermGoals.map((g, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-primary-foreground/75 leading-relaxed">
-                        <span className="font-bold text-accent shrink-0">0{idx + 1}.</span>
-                        <span>{g}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Long-Term */}
-            <Reveal delay={0.18}>
-              <div className="card-lift sheen rounded-3xl border border-primary-foreground/15 bg-primary/80 backdrop-blur-md p-8 sm:p-9 h-full flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-[9px] font-black uppercase tracking-[0.28em] text-accent bg-accent/15 px-3 py-1 rounded-full border border-accent/30">
-                      Long-Term Vision
-                    </span>
-                    <Flag className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="font-display font-extrabold text-2xl text-primary-foreground mb-6">
-                    Long-Term <span className="italic font-light text-accent">Goals</span>
-                  </h3>
-                  <ul className="space-y-4">
-                    {longTermGoals.map((g, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-primary-foreground/75 leading-relaxed">
-                        <span className="font-bold text-accent shrink-0">0{idx + 1}.</span>
-                        <span>{g}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Reveal>
-          </div>
         </div>
       </section>
 
