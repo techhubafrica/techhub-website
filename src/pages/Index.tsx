@@ -853,7 +853,6 @@ const Index = () => (
       <Marquee text="Connecting Innovators · Fostering Talent · Showcasing Excellence" />
       <VisionMission />
       <Services />
-      <StartupIncubation />
       <AwardsRecognition />
       <ClientShowcase
         limit={6}
@@ -861,6 +860,7 @@ const Index = () => (
         subtitle="Don't just take our word for it. Explore live e-commerce portals, news networks, logistics platforms, and security applications engineered by our team."
       />
       <Testimonials />
+      <StartupIncubation />
 
       <HubCTA />
     </main>
