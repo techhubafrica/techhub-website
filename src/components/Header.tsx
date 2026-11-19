@@ -72,7 +72,7 @@ const Header = () => {
             </Link>
 
             <nav
-              className={`hidden xl:flex min-w-0 flex-1 items-center justify-center gap-0 text-[9px] font-bold uppercase tracking-[0.12em] whitespace-nowrap transition-colors duration-500 ${
+              className={`hidden xl:flex min-w-0 flex-1 items-center justify-center gap-0 text-[10px] font-bold uppercase tracking-[0.1em] whitespace-nowrap transition-colors duration-500 ${
                 scrolled ? "text-foreground/70" : "text-foreground/75"
               }`}
             >
@@ -83,7 +83,7 @@ const Header = () => {
                     href={l.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative inline-flex shrink-0 items-center px-1.5 py-2 rounded-full transition-all duration-300 hover:text-accent hover:bg-primary/[0.06]"
+                    className="relative inline-flex shrink-0 items-center px-1 py-2 rounded-full transition-all duration-300 hover:text-accent hover:bg-primary/[0.06]"
                   >
                     {l.label}
                     <ExternalLink className="w-2.5 h-2.5 ml-0.5" />
@@ -92,7 +92,7 @@ const Header = () => {
                   <Link
                     key={l.href}
                     to={l.href}
-                    className="relative shrink-0 px-1.5 py-2 rounded-full transition-all duration-300 hover:text-accent hover:bg-primary/[0.06]"
+                    className="relative shrink-0 px-1 py-2 rounded-full transition-all duration-300 hover:text-accent hover:bg-primary/[0.06]"
                   >
                     {l.label}
                   </Link>
@@ -103,7 +103,7 @@ const Header = () => {
             <div className="flex items-center gap-2">
               <a
                 href="/#contact"
-                className="btn-magnetic hidden sm:inline-flex shrink-0 items-center gap-1.5 px-3.5 py-2.5 bg-accent text-accent-foreground rounded-full text-[9px] font-bold uppercase tracking-[0.14em] hover:brightness-110 transition-all duration-300"
+                className="btn-magnetic hidden sm:inline-flex shrink-0 items-center gap-1.5 px-3 py-2.5 bg-accent text-accent-foreground rounded-full text-[10px] font-bold uppercase tracking-[0.1em] hover:brightness-110 transition-all duration-300"
                 style={{ boxShadow: "0 10px 26px -12px hsl(28 92% 44% / 0.7)" }}
               >
                 Contact Us <ArrowUpRight className="w-3.5 h-3.5" />
