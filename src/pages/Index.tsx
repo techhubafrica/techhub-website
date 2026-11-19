@@ -12,8 +12,7 @@ import {
   serviceProgramming, serviceSoftware, serviceWebDesign,
   portfolioGh, portfolioGmo, portfolioOfie, portfolioThreatLock,
 } from "@/assets/photos";
-import { techGuruAudience, techGuruShowcase, techGuruNetworking, techGuruPanel, techGuruAuditorium } from "@/assets/tech-guru";
-import { shotGhanamall, shotGhanafeed, shotAfroeventix, shotThreatlock, shotVinisee, shotDiaspocare, shotRablebakes } from "@/assets/portfolio-shots";
+import { techGuruAudience, techGuruShowcase, techGuruNetworking, techGuruPanel } from "@/assets/tech-guru";
 import Marquee from "@/components/Marquee";
 import { Link } from "react-router-dom";
 import ClientShowcase from "@/components/ClientShowcase";
@@ -589,85 +588,71 @@ const services = [
     Icon: Code2,
     title: "Software & App Development",
     desc: "Custom web, mobile and desktop software, built from product design through deployment.",
-    image: shotGhanamall,
   },
   {
     Icon: Layout,
     title: "Website Design & Development",
     desc: "Responsive, SEO-ready websites and web applications, with ongoing management, updates and security.",
-    image: shotGhanafeed,
   },
   {
     Icon: ShieldCheck,
     title: "Threat Lock Cybersecurity",
     desc: "Threat monitoring, mitigation, vulnerability auditing and infrastructure hardening for your digital assets.",
-    image: shotThreatlock,
   },
   {
     Icon: Building2,
     title: "Enterprise Solutions & Integrations",
     desc: "Connected business applications, process automation, operational reporting and enterprise system integration.",
-    image: shotDiaspocare,
   },
   {
     Icon: Users,
     title: "Corporate Intranet",
     desc: "A secure home for company news, employee directories, shared knowledge and team resources.",
-    image: techGuruNetworking,
   },
   {
     Icon: ShoppingBag,
     title: "CRM & Corporate Communication",
     desc: "Connect customer records, sales pipelines, campaigns and internal communications in one platform.",
-    image: shotVinisee,
   },
   {
     Icon: Workflow,
     title: "Smart Work & Workflow Automation",
     desc: "Productivity tools, automation playbooks and team enablement to make everyday work more effective.",
-    image: undefined,
   },
   {
     Icon: Building2,
     title: "HR & People Management Tools",
     desc: "Streamline onboarding, performance reviews, leave and attendance tracking, and people analytics.",
-    image: undefined,
   },
   {
     Icon: ShieldCheck,
     title: "Vaults & Secure Data Storage",
     desc: "Encrypted storage and sharing for sensitive organisational data, with access controls and audit trails.",
-    image: shotRablebakes,
   },
   {
     Icon: Globe2,
     title: "Global Metaverse Virtual Space",
     desc: "Explore our virtual space, where Tech Hub Africa’s ecosystems come together.",
-    image: techGuruAuditorium,
   },
   {
     Icon: Users,
     title: "Startup Incubation & Advisory",
     desc: "Technical guidance, investor readiness, go-to-market support and connections to partners and investors.",
-    image: hackathonFlyer,
   },
   {
     Icon: Rocket,
     title: "Tech Talks & Speaking Engagements",
     desc: "Keynotes, panels and expert-led talks for campuses, companies and Africa's technology community.",
-    image: heroPanel,
   },
   {
     Icon: Sprout,
     title: "Campus Tours & Startup Competitions",
     desc: "University visits, hackathons, startup pitch competitions, mentorship and career sessions.",
-    image: campusTourFlyer,
   },
   {
     Icon: Code2,
     title: "Cloud, DevOps & API Integration",
     desc: "Cloud infrastructure, delivery pipelines, API integrations and microservices that help products scale.",
-    image: shotAfroeventix,
   },
 ];
 
@@ -696,16 +681,6 @@ const Services = () => (
             key={s.title}
             className="card-lift art-card-mint sheen noise-soft group relative p-10 lg:p-12 rounded-3xl overflow-hidden flex flex-col justify-between"
           >
-            {s.image && (
-              <img
-                src={s.image}
-                alt=""
-                aria-hidden
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover opacity-[0.42] group-hover:opacity-[0.52] group-hover:scale-105 transition-all duration-[1200ms]"
-              />
-            )}
             <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-background/65 to-background/85" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_top,hsl(28_92%_55%/0.25),transparent_60%)]" />
             
