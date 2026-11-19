@@ -446,56 +446,48 @@ const VisionMission = () => (
 /* ============================================================
    AWARDS & RECOGNITION
    ============================================================ */
-const awards: { title: string; detail: string; category: string; image?: string; href: string }[] = [
+const awards: { title: string; detail: string; category: string; image?: string }[] = [
   {
     title: "Featured in the TOP 100 Innovators & Entrepreneurs",
-    detail: "Doreen Awuku-Agyeman was featured in the Top 100 Innovators & Entrepreneurs magazine.",
+    detail: "Doreen Awuku-Agyeman, Co-Founder and CEO, was featured in the magazine for her work across energy, technology, and telecommunications and her support for Africa’s tech ecosystem.",
     category: "Industry Recognition",
     image: awardTop100,
-    href: "https://techhubafrica.org/fearured-in-the-top-100-innovators-entrepreneurs",
   },
   {
     title: "Marquis Who’s Who 2025",
-    detail: "A professional recognition featured in Tech Hub Africa’s Awards & Recognition collection.",
+    detail: "Tech Hub Africa’s official recognition archive highlights this 2025 Marquis Who’s Who recognition among its professional honors.",
     category: "Professional Recognition",
     image: awardWhosWho,
-    href: "https://techhubafrica.org/recognition-marquis-whos-who-2025",
   },
   {
     title: "Recognition for Jemima Prempeh",
-    detail: "A spotlight celebrating the leadership and contributions of Tech Hub Africa’s Co-Founder and COO.",
+    detail: "The official profile celebrates Co-Founder and COO Jemima Prempeh’s leadership in innovation and marketing communications, drawing on more than two decades of experience.",
     category: "Leadership Recognition",
-    href: "https://techhubafrica.org/celebrating-jemima-prempeh",
   },
   {
     title: "Citation of Appreciation — UPSA",
-    detail: "Kingsley Aduhene was honored for his contribution to the UPSA PR and Communication Conference.",
+    detail: "UPSA honored Kingsley Aduhene for his contribution to its PR and Communication Conference. He presented on technology and communication and shared practical ways to use digital tools.",
     category: "Individual Recognition",
-    href: "https://techhubafrica.org/celebrating-kingsley-aduhene",
   },
   {
     title: "Excellence in Tech Ecosystem Support and Innovation Advocacy",
     detail: "Awarded to Tech Hub Africa at the 2nd Ghana Strategic Customer Relations Conference and Awards 2025.",
     category: "Organizational Award · 2025",
-    href: "https://techhubafrica.org/tech-hub-africa-wins-prestigious-award",
   },
   {
     title: "Cybersecurity Professional Development",
     detail: "Doreen Awuku-Agyeman earned a Certificate of Completion and 7 CPE credits at Cybersecurity Summit: Atlanta.",
     category: "Professional Development · 2026",
-    href: "https://techhubafrica.org/recognition-cybersecurity-professional-development",
   },
   {
     title: "30 Black Stars Recognition",
-    detail: "Doreen Awuku-Agyeman was recognized in the United States by the organizers of 30 Black Stars.",
+    detail: "The official profile notes Doreen Awuku-Agyeman’s recognition in the United States by the organizers of 30 Black Stars.",
     category: "Leadership Recognition",
-    href: "https://techhubafrica.org/fearured-in-the-top-100-innovators-entrepreneurs",
   },
   {
     title: "Business Executive Recognition",
-    detail: "Recognized in Ghana for supporting tech ecosystems and advancing innovation.",
+    detail: "Business Executive in Ghana recognized Doreen Awuku-Agyeman for supporting technology ecosystems and advancing innovation.",
     category: "Industry Recognition",
-    href: "https://techhubafrica.org/fearured-in-the-top-100-innovators-entrepreneurs",
   },
 ];
 
@@ -517,12 +509,9 @@ const AwardsRecognition = () => (
 
       <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-5">
         {awards.map((item, index) => (
-          <a
+          <article
             key={item.title}
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="card-lift sheen group relative flex min-h-[210px] flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-background p-5 transition-all hover:border-accent/40 hover:shadow-xl"
+            className="relative flex min-h-[210px] flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-background p-5"
           >
             <div className="flex items-start justify-between gap-3 mb-5">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
@@ -533,13 +522,10 @@ const AwardsRecognition = () => (
             </div>
             <div className="mt-auto">
               <p className="text-[8px] font-black uppercase tracking-[0.2em] text-accent mb-2">{item.category}</p>
-              <h3 className="font-display font-extrabold text-lg leading-tight text-foreground mb-2 group-hover:text-accent transition-colors">{item.title}</h3>
+              <h3 className="font-display font-extrabold text-lg leading-tight text-foreground mb-2">{item.title}</h3>
               <p className="text-xs leading-relaxed text-foreground/65">{item.detail}</p>
-              <span className="mt-4 inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.18em] text-foreground/50 group-hover:text-accent transition-colors">
-                Read more <ArrowUpRight className="w-3.5 h-3.5" />
-              </span>
             </div>
-          </a>
+          </article>
         ))}
       </div>
     </div>
