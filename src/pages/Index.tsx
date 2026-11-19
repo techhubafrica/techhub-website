@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import {
-  ArrowUpRight, Code2, Layout, Building2, ShoppingBag, Sprout, Workflow,
-  ShieldCheck, Star, Quote, Play, Users, Rocket, Globe2, Sparkles,
+  ArrowUpRight, Award, Code2, Layout, Building2, ShoppingBag, Sprout, Workflow,
+  ShieldCheck, Star, Quote, Play, Users, Rocket, Globe2,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Logo from "@/components/Logo";
 import {
   heroAudience, heroCelebration, heroPanel,
-  hackathonFlyer, campusTourFlyer, meetup2026Flyer, awardTop100, awardWhosWho,
+  awardTop100, awardWhosWho,
   serviceProgramming, serviceSoftware, serviceWebDesign,
   portfolioGh, portfolioGmo, portfolioOfie, portfolioThreatLock,
 } from "@/assets/photos";
@@ -16,7 +16,6 @@ import { techGuruAudience, techGuruShowcase, techGuruNetworking, techGuruPanel }
 import Marquee from "@/components/Marquee";
 import { Link } from "react-router-dom";
 import ClientShowcase from "@/components/ClientShowcase";
-import { readSiteImages } from "@/data/siteContentStore";
 
 
 
@@ -445,140 +444,107 @@ const VisionMission = () => (
 );
 
 /* ============================================================
-   INITIATIVES — premium product-showcase cards
+   AWARDS & RECOGNITION
    ============================================================ */
-const initiatives = [
-  { title: "Tech Guru Meetup", meta: "Dec 18, 2026 · Location TBA", tone: "forest" as const, Icon: Users, image: meetup2026Flyer, fit: "cover" as const },
-  { title: "Hackathon Challenge", meta: "1 Month · Live", tone: "amber" as const, Icon: Rocket, image: hackathonFlyer, fit: "cover" as const },
-  { title: "Top 100 Magazine", meta: "Innovators & Founders", tone: "deep" as const, Icon: Sparkles, image: awardTop100, fit: "contain" as const },
-  { title: "Marquis Who's Who", meta: "Honored Listee 2025", tone: "charcoal" as const, Icon: Globe2, image: awardWhosWho, fit: "contain" as const },
+const awards: { title: string; detail: string; category: string; image?: string; href: string }[] = [
+  {
+    title: "Featured in the TOP 100 Innovators & Entrepreneurs",
+    detail: "Doreen Awuku-Agyeman was featured in the Top 100 Innovators & Entrepreneurs magazine.",
+    category: "Industry Recognition",
+    image: awardTop100,
+    href: "https://techhubafrica.org/fearured-in-the-top-100-innovators-entrepreneurs",
+  },
+  {
+    title: "Marquis Who’s Who 2025",
+    detail: "A professional recognition featured in Tech Hub Africa’s Awards & Recognition collection.",
+    category: "Professional Recognition",
+    image: awardWhosWho,
+    href: "https://techhubafrica.org/recognition-marquis-whos-who-2025",
+  },
+  {
+    title: "Recognition for Jemima Prempeh",
+    detail: "A spotlight celebrating the leadership and contributions of Tech Hub Africa’s Co-Founder and COO.",
+    category: "Leadership Recognition",
+    href: "https://techhubafrica.org/celebrating-jemima-prempeh",
+  },
+  {
+    title: "Citation of Appreciation — UPSA",
+    detail: "Kingsley Aduhene was honored for his contribution to the UPSA PR and Communication Conference.",
+    category: "Individual Recognition",
+    href: "https://techhubafrica.org/celebrating-kingsley-aduhene",
+  },
+  {
+    title: "Excellence in Tech Ecosystem Support and Innovation Advocacy",
+    detail: "Awarded to Tech Hub Africa at the 2nd Ghana Strategic Customer Relations Conference and Awards 2025.",
+    category: "Organizational Award · 2025",
+    href: "https://techhubafrica.org/tech-hub-africa-wins-prestigious-award",
+  },
+  {
+    title: "Cybersecurity Professional Development",
+    detail: "Doreen Awuku-Agyeman earned a Certificate of Completion and 7 CPE credits at Cybersecurity Summit: Atlanta.",
+    category: "Professional Development · 2026",
+    href: "https://techhubafrica.org/recognition-cybersecurity-professional-development",
+  },
+  {
+    title: "30 Black Stars Recognition",
+    detail: "Doreen Awuku-Agyeman was recognized in the United States by the organizers of 30 Black Stars.",
+    category: "Leadership Recognition",
+    href: "https://techhubafrica.org/fearured-in-the-top-100-innovators-entrepreneurs",
+  },
+  {
+    title: "Business Executive Recognition",
+    detail: "Recognized in Ghana for supporting tech ecosystems and advancing innovation.",
+    category: "Industry Recognition",
+    href: "https://techhubafrica.org/fearured-in-the-top-100-innovators-entrepreneurs",
+  },
 ];
 
-const Initiatives = () => {
-  const eventUploads = readSiteImages("events");
-  return (
-  <section id="events" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-cream overflow-hidden">
-    <div className="hidden md:block absolute top-40 -left-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-30 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)/0.6),transparent_70%)]" />
-
+const AwardsRecognition = () => (
+  <section id="awards" className="relative py-16 sm:py-20 md:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-cream overflow-hidden">
+    <div className="hidden md:block absolute top-40 -left-40 w-[500px] h-[500px] rounded-full blur-3xl opacity-25 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)/0.5),transparent_70%)]" />
     <div className="relative max-w-7xl mx-auto">
-      <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16">
+      <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-12 sm:mb-16">
         <div>
-          <span className="eyebrow text-accent">Community Highlights</span>
-          <h2 className="font-display font-extrabold text-foreground mt-4 leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
-            Ideas into <span className="italic font-light text-accent">action</span>
-            <br />
-            across Africa.
+          <span className="eyebrow text-accent">Awards &amp; Recognition</span>
+          <h2 className="font-display font-extrabold text-foreground mt-4 leading-[0.95] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
+            Celebrating <span className="italic font-light text-accent">excellence.</span>
           </h2>
         </div>
-        <p className="text-foreground/60 max-w-sm">
-          Programs, publications, and platforms building tomorrow's African tech leaders.
+        <p className="text-foreground/60 max-w-sm leading-relaxed">
+          Recognitions and achievements honoring our people, work, and contribution to Africa’s technology ecosystem.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {initiatives.map((it, i) => {
-          const isEvents = it.title === "Tech Guru Meetup" || it.title === "Hackathon Challenge";
-          const props: Record<string, string> = isEvents
-            ? { href: "https://events.techhubafrica.org", target: "_blank", rel: "noopener noreferrer" }
-            : { href: "#" };
-          return (
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+        {awards.map((item, index) => (
           <a
-            key={it.title}
-            {...props}
-            className="card-lift art-card sheen group relative rounded-2xl overflow-hidden"
+            key={item.title}
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="card-lift sheen group relative flex min-h-[250px] flex-col overflow-hidden rounded-3xl border border-foreground/10 bg-background p-6 sm:p-7 transition-all hover:border-accent/40 hover:shadow-xl"
           >
-            <div className="relative aspect-[4/5] overflow-hidden">
-              <div className="absolute inset-0 bg-primary" />
-              <img
-                src={it.image}
-                alt={`${it.title} — Tech Hub Africa`}
-                loading="lazy"
-                className={`absolute inset-0 w-full h-full ${it.fit === "contain" ? "object-contain p-8" : "object-cover"} transition-transform duration-[1200ms] group-hover:scale-[1.06]`}
-              />
-              <div className="absolute inset-0 z-[2] bg-gradient-to-t from-primary/85 via-primary/10 to-primary/30" />
-              {/* Icon chip */}
-              <div className="absolute top-4 left-4 z-[4] w-10 h-10 rounded-full bg-primary/70 border border-primary-foreground/20 flex items-center justify-center">
-                <it.Icon className="w-4 h-4 text-accent" strokeWidth={1.6} />
+            <div className="flex items-start justify-between gap-4 mb-7">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-accent/20 bg-accent/10 text-accent">
+                <Award className="h-6 w-6" strokeWidth={1.7} />
               </div>
-              <span className="absolute top-5 right-5 z-[4] text-[10px] font-bold uppercase tracking-[0.3em] text-primary-foreground/70">
-                0{i + 1}
-              </span>
-              {/* Hover glow */}
-              <div className="absolute inset-0 z-[3] opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_50%_100%,hsl(28_92%_55%/0.35),transparent_65%)]" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/35">{String(index + 1).padStart(2, "0")}</span>
+              {item.image && <img src={item.image} alt="" aria-hidden className="h-12 max-w-[100px] object-contain object-right" loading="lazy" />}
             </div>
-
-            <div className="p-6 relative">
-              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent mb-2">
-                {it.meta}
-              </p>
-              <h3 className="font-display text-xl font-extrabold leading-tight text-foreground mb-4">
-                {it.title}
-              </h3>
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-foreground/60 group-hover:text-accent transition-colors">
-                  Learn more
-                </span>
-                <ArrowUpRight className="w-4 h-4 text-foreground/40 group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
-              </div>
+            <div className="mt-auto">
+              <p className="text-[9px] font-black uppercase tracking-[0.24em] text-accent mb-3">{item.category}</p>
+              <h3 className="font-display font-extrabold text-xl leading-tight text-foreground mb-3 group-hover:text-accent transition-colors">{item.title}</h3>
+              <p className="text-sm leading-relaxed text-foreground/65">{item.detail}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/50 group-hover:text-accent transition-colors">
+                Read more <ArrowUpRight className="w-3.5 h-3.5" />
+              </span>
             </div>
           </a>
-          );
-        })}
+        ))}
       </div>
-
-      {eventUploads.length > 0 && (
-        <div className="mt-16 pt-12 border-t border-foreground/10">
-          <div className="flex items-baseline justify-between mb-8">
-            <div>
-              <span className="eyebrow text-accent">Latest Event Highlights</span>
-              <h3 className="font-display font-extrabold text-foreground text-2xl sm:text-3xl mt-2 tracking-tight">
-                Recent <span className="italic font-light text-accent">Gatherings &amp; Moments.</span>
-              </h3>
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {eventUploads.map((evt) => (
-              <div key={evt.id} className="card-lift art-card sheen group relative rounded-2xl overflow-hidden bg-background">
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <img
-                    src={evt.src}
-                    alt={evt.caption || "Event image"}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  {evt.tag && (
-                    <span className="absolute top-4 left-4 z-[4] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-primary/80 text-primary-foreground backdrop-blur-md">
-                      {evt.tag}
-                    </span>
-                  )}
-                </div>
-                <div className="p-5">
-                  {evt.date && (
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-accent mb-1.5">{evt.date}</p>
-                  )}
-                  <h4 className="font-display text-base font-bold text-foreground line-clamp-2 mb-3">
-                    {evt.caption}
-                  </h4>
-                  {evt.externalLink && (
-                    <a
-                      href={evt.externalLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-accent hover:underline"
-                    >
-                      Event Link <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   </section>
-  );
-};
+);
 
 /* ============================================================
    SERVICES
@@ -969,7 +935,7 @@ const Index = () => (
       <Marquee text="Connecting Innovators · Fostering Talent · Showcasing Excellence" />
       <VisionMission />
       <Services />
-      <Initiatives />
+      <AwardsRecognition />
       <ClientShowcase
         limit={6}
         title="Live Production Websites Built by Tech Hub Africa"
