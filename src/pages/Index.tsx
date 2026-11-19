@@ -315,11 +315,6 @@ const Hero = () => {
           {/* Trust metrics */}
           <div className="hero-trust-strip">
             <div className="trust-item">
-              <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>2024</span>
-              <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Founded</span>
-            </div>
-            <div className="trust-divider" />
-            <div className="trust-item">
               <span className="font-display font-black text-accent text-lg" style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.7)" }}>CRM</span>
               <span className="text-[8px] uppercase tracking-[0.3em] text-white/80 font-extrabold" style={{ textShadow: "0 1px 6px hsl(0 0% 0% / 0.7)" }}>Customer Platforms</span>
             </div>

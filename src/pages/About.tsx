@@ -13,7 +13,6 @@ const values = [
 ];
 
 const milestones = [
-  { year: "2024", title: "Founded in USA & Ghana", desc: "Tech Hub Africa LLC established in the United States of America and Ghana, West Africa — bridging the continent's innovation gap." },
   { year: "2026", title: "Expanding Ecosystem", desc: "Our community continues to grow across software engineering, cybersecurity, and startup acceleration." },
 ];
 

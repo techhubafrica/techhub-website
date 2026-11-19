@@ -74,7 +74,6 @@ const Portfolio = () => (
       stats={[
         { val: "4", label: "Portfolio Companies" },
         { val: "$2M+", label: "Value Created" },
-        { val: "2024+", label: "Since Inception" },
         { val: "WA", label: "West Africa Focus" },
       ]}
     />
