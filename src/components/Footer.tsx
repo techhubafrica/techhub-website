@@ -3,33 +3,18 @@ import type { SVGProps } from "react";
 import { Linkedin, Youtube, Facebook } from "lucide-react";
 import Logo from "@/components/Logo";
 
-const InstagramBrandIcon = (props: SVGProps<SVGSVGElement>) => (
+const WhatsAppBrandIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg {...props} viewBox="0 0 24 24" aria-hidden="true" fill="none">
-    <defs>
-      <linearGradient id="instagram-gradient" x1="3" y1="21" x2="21" y2="3" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#FFDC80" />
-        <stop offset="0.5" stopColor="#F77737" />
-        <stop offset="1" stopColor="#C13584" />
-      </linearGradient>
-    </defs>
-    <rect x="3" y="3" width="18" height="18" rx="5" stroke="url(#instagram-gradient)" strokeWidth="2.25" />
-    <circle cx="12" cy="12" r="4.25" stroke="url(#instagram-gradient)" strokeWidth="2.25" />
-    <circle cx="17.5" cy="6.5" r="1.35" fill="url(#instagram-gradient)" />
-  </svg>
-);
-
-const XIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg {...props} viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26L22.75 21.75h-6.38l-5-6.535-5.71 6.535H2.35l7.73-8.835L1.75 2.25h6.54l4.52 5.98 5.434-6.645zm-1.16 17.22h1.833L7.49 4.43H5.52l11.564 15.04z" />
+    <path d="M20.5 11.7a8.45 8.45 0 0 1-12.5 7.4L3 20.3l1.25-4.8a8.45 8.45 0 1 1 16.25-3.8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+    <path d="M8.1 7.7c.2-.45.42-.46.7-.47h.6c.2 0 .4.08.5.38l.75 1.8c.08.22.05.4-.08.57l-.53.65c-.16.18-.15.34-.03.55.5.86 1.22 1.56 2.1 2.03.2.11.37.12.53-.07l.7-.82c.18-.21.37-.26.6-.16l1.7.8c.24.1.38.17.43.3.06.13.06.75-.2 1.4-.25.63-1.43 1.2-1.96 1.22-.53.02-1.04.24-3.5-.78-2.97-1.22-4.83-4.3-4.98-4.5-.15-.2-1.2-1.6-1.15-3.03.04-1.43.8-2.1 1.07-2.39.28-.3.6-.37.8-.37h.57c.18 0 .4-.01.56.4Z" fill="currentColor" transform="translate(1.1 0.6) scale(.88)" />
   </svg>
 );
 
 const socials = [
-  { name: "LinkedIn", Icon: Linkedin, color: "#0A66C2" },
-  { name: "Instagram", Icon: InstagramBrandIcon },
-  { name: "X", Icon: XIcon, color: "#000000" },
-  { name: "Facebook", Icon: Facebook, color: "#1877F2" },
-  { name: "YouTube", Icon: Youtube, color: "#FF0000" },
+  { name: "WhatsApp", Icon: WhatsAppBrandIcon, color: "#25D366", href: "https://www.whatsapp.com/channel/0029Vb5t0vZGpLHSbGtLzU2S" },
+  { name: "Facebook", Icon: Facebook, color: "#1877F2", href: "https://www.facebook.com/people/Tech-Hub-Africa/61558147625486/" },
+  { name: "LinkedIn", Icon: Linkedin, color: "#0A66C2", href: "https://www.linkedin.com/company/tech-hub-africa-llc/" },
+  { name: "YouTube", Icon: Youtube, color: "#FF0000", href: "https://www.youtube.com/@TechHubAfricallc" },
 ];
 
 const columns: {
@@ -140,10 +125,12 @@ const Footer = () => (
           </li>
         </ul>
         <div className="inline-flex items-center gap-3 px-3 py-2 rounded-xl border border-white/70 bg-white/95 backdrop-blur-xl shadow-lg shadow-black/15">
-          {socials.map(({ Icon, name, color }) => (
+          {socials.map(({ Icon, name, color, href }) => (
             <a
               key={name}
-              href="#"
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center rounded-sm hover:bg-black/5 transition-colors"
               aria-label={name}
               title={name}
