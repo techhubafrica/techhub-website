@@ -5,52 +5,77 @@ import { ArrowUpRight } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
 import {
-  portfolioGh,
   portfolioGmo,
-  portfolioOfie,
-  portfolioThreatLock,
 } from "@/assets/photos";
 
-const ventures = [
+const ventures: { num: string; name: string; tag: string; logo?: string; mark: string; desc: string; summary: string; link?: string }[] = [
   {
     num: "01",
-    name: "GH Accommodation",
-    tag: "PropTech & Housing",
-    logo: portfolioGh,
-    desc: "Your Gateway To Affordable, Reliable, And Convenient Housing.",
-    summary: "GH Accommodation uses location-based algorithms and verified landlord listings to connect students, young professionals, and families with transparent housing options across Ghana.",
-    link: "https://techhubafrica.org/gh-accommodation",
-    color: "hsl(156 24% 24%)",
+    name: "Ghana Mall",
+    tag: "E-Commerce · Ghana",
+    logo: portfolioGmo,
+    mark: "GHANA MALL",
+    desc: "A multi-vendor online marketplace connecting customers with trusted vendors across Ghana.",
+    summary: "Shop electronics, fashion, groceries, and home essentials in one secure platform, with local businesses, secure payments, and delivery options at its center.",
+    link: "https://ghanamallonline.com/",
   },
   {
     num: "02",
-    name: "GMO Marketplace",
-    tag: "E-Commerce & Retail",
-    logo: portfolioGmo,
-    desc: "Ghana Mall – Your One-Stop Shop for Everything!",
-    summary: "A unified digital marketplace empowering West African merchants, artisans, and vendors to list, sell, and deliver goods seamlessly across the continent.",
-    link: "https://techhubafrica.org/gmo-marketplace",
-    color: "hsl(28 92% 44%)",
+    name: "GESA UMAT",
+    tag: "Student Community · Engineering",
+    mark: "GESA",
+    desc: "A platform for the Ghana Engineering Students Association at the University of Mines and Technology.",
+    summary: "Supports academic excellence, professional development, collaboration, engineering innovation, networking, and student-led initiatives.",
+    link: "https://gesa-umat.com/",
   },
   {
     num: "03",
-    name: "Ofie Agro Ltd",
-    tag: "AgriTech & Supply Chain",
-    logo: portfolioOfie,
-    desc: "Taste of Tradition, Fresh from Ofie.",
-    summary: "Digitizing agricultural supply chains in Ghana — linking smallholder farmers directly to urban distributors, reducing post-harvest losses and ensuring fair market pricing.",
-    link: "https://techhubafrica.org/ofie-afro-ltd",
-    color: "hsl(156 24% 24%)",
+    name: "UMaT SRC",
+    tag: "Student Leadership",
+    mark: "UMaT SRC",
+    desc: "The official digital platform for the Student Representative Council of the University of Mines and Technology.",
+    summary: "Facilitates communication, governance, and student engagement by providing updates, resources, and support for the student body.",
   },
   {
     num: "04",
-    name: "Threat Lock",
-    tag: "Cybersecurity Platform",
-    logo: portfolioThreatLock,
-    desc: "Protect your website. Setup in 5 minutes and stop attacks before they start.",
-    summary: "AI-driven Web Application Firewall (WAF) providing real-time malware monitoring, DDoS mitigation, and threat intelligence for African businesses at scale.",
-    link: "https://threatlock.techhubafrica.org",
-    color: "hsl(28 92% 44%)",
+    name: "CEANA",
+    tag: "Advocacy · Community Development",
+    mark: "CEANA",
+    desc: "A global advocacy and community development network.",
+    summary: "An international organization platform connecting people and organizations through advocacy, education, capacity building, and community development initiatives.",
+  },
+  {
+    num: "05",
+    name: "DOSTECH",
+    tag: "Digital Skills · Education",
+    mark: "DOSTECH",
+    desc: "A digital skills and technology education platform.",
+    summary: "Delivers practical digital skills training and academic programs to help students and professionals build industry-relevant knowledge and career readiness.",
+  },
+  {
+    num: "06",
+    name: "RushPay",
+    tag: "Fintech · Payments",
+    mark: "RushPay",
+    desc: "Seamless digital payments and financial management for individuals and businesses.",
+    summary: "Supports instant transfers, mobile money withdrawals, payroll processing, and gift card services through regulated payment infrastructure.",
+    link: "https://rushpay.cash/",
+  },
+  {
+    num: "07",
+    name: "Purple Moon Luxe Transport",
+    tag: "Transport · Mobility",
+    mark: "PURPLE MOON",
+    desc: "Premium chauffeur and luxury transport services.",
+    summary: "Provides high-end, reliable, and comfortable travel for corporate clients, events, and personal trips, with convenience, safety, and elegance in focus.",
+  },
+  {
+    num: "08",
+    name: "TechHub Africa Portal",
+    tag: "Community · Digital Access",
+    mark: "TECH HUB AFRICA",
+    desc: "Digital access to Tech Hub Africa programs and community.",
+    summary: "A centralized portal connecting users with programs, resources, training, events, and innovation opportunities across the Tech Hub Africa ecosystem.",
   },
 ];
 
@@ -69,16 +94,15 @@ const Portfolio = () => (
     <PageHero
       tag="Venture Portfolio"
       title={<>Backing Africa's most<br /><span className="italic font-light text-accent">promising ventures.</span></>}
-      body="We invest technical talent, capital, and market access into high-potential companies across PropTech, AgriTech, E-Commerce, and Cybersecurity."
+      body="Explore digital platforms and organizations supported by Tech Hub Africa, spanning commerce, student leadership, learning, fintech, transport, advocacy, and community access."
       ghost="BUILD"
       stats={[
-        { val: "4", label: "Portfolio Companies" },
-        { val: "$2M+", label: "Value Created" },
-        { val: "WA", label: "West Africa Focus" },
+        { val: "8", label: "Portfolio Projects" },
+        { val: "Multi-sector", label: "Digital Portfolio" },
       ]}
     />
 
-    <Marquee text="PropTech · AgriTech · E-Commerce · Cybersecurity · High Impact Ventures" />
+    <Marquee text="Commerce · Student Leadership · Digital Learning · Fintech · Mobility · Community" />
 
     <main className="page-entry bg-background overflow-hidden">
       <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 lg:py-36 max-w-7xl mx-auto">
@@ -90,27 +114,25 @@ const Portfolio = () => (
             <div className="flex-1 divider-elegant" />
           </div>
           <h2 className="font-display font-extrabold text-foreground leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
-            Companies in our <span className="italic font-light text-accent">investment portfolio.</span>
+            Companies and <span className="italic font-light text-accent">platforms.</span>
           </h2>
         </Reveal>
 
-        {/* Modern 4-Card Portfolio Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-6">
           {ventures.map((v, i) => (
             <Reveal key={v.name} delay={i * 0.08}>
-              <div className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full transition-all duration-500 hover:border-accent/40 overflow-hidden">
+              <article className="card-lift art-card sheen group relative rounded-3xl p-5 sm:p-6 flex flex-col justify-between h-full transition-all duration-500 hover:border-accent/40 overflow-hidden">
                 {/* Subtle hover gradient */}
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div>
                   {/* Top Logo Container */}
-                  <div className="relative h-44 sm:h-48 w-full rounded-2xl bg-white border border-foreground/8 flex items-center justify-center p-6 overflow-hidden shadow-sm group-hover:scale-[1.02] transition-transform duration-500">
-                    <img
-                      src={v.logo}
-                      alt={`${v.name} logo`}
-                      loading="lazy"
-                      className="max-h-full max-w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-                    />
+                  <div className="relative h-36 sm:h-40 w-full rounded-2xl bg-white border border-foreground/8 flex items-center justify-center p-5 overflow-hidden shadow-sm group-hover:scale-[1.02] transition-transform duration-500">
+                    {v.logo ? (
+                      <img src={v.logo} alt={`${v.name} logo`} loading="lazy" className="max-h-full max-w-full object-contain p-2" />
+                    ) : (
+                      <span className="font-display text-2xl sm:text-3xl font-black tracking-tight text-primary text-center">{v.mark}</span>
+                    )}
                     <span className="absolute top-3 right-3 text-[9px] font-black uppercase tracking-[0.25em] px-2.5 py-1 rounded-full border border-foreground/10 bg-background/80 text-foreground/60">
                       {v.num}
                     </span>
@@ -121,27 +143,19 @@ const Portfolio = () => (
                     <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">
                       {v.tag}
                     </span>
-                    <h3 className="font-display font-extrabold text-2xl text-foreground leading-tight tracking-tight group-hover:text-accent transition-colors">
+                    <h3 className="font-display font-extrabold text-xl text-foreground leading-tight tracking-tight group-hover:text-accent transition-colors">
                       {v.name}
                     </h3>
                   </div>
 
-                  <p className="text-sm text-foreground/75 leading-relaxed font-semibold mb-6">
+                  <p className="text-sm text-foreground/75 leading-relaxed font-semibold mb-3">
                     {v.desc}
                   </p>
+                  <p className="text-xs text-foreground/65 leading-relaxed mb-6">{v.summary}</p>
                 </div>
 
-                {/* Read More / Visit Venture Button */}
-                <a
-                  href={v.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-magnetic w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-accent text-accent-foreground font-bold text-[10.5px] uppercase tracking-[0.22em] hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-md"
-                  style={{ boxShadow: "0 10px 24px -10px hsl(28 92% 44% / 0.6)" }}
-                >
-                  Read More <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
+                {v.link && <a href={v.link} target="_blank" rel="noopener noreferrer" className="btn-magnetic mt-2 w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-accent text-accent-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-primary hover:text-primary-foreground transition-all duration-300">Visit Website <ArrowUpRight className="w-3.5 h-3.5" /></a>}
+              </article>
             </Reveal>
           ))}
         </div>

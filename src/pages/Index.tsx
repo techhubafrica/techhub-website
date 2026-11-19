@@ -10,7 +10,6 @@ import {
   heroAudience, heroCelebration, heroPanel,
   awardTop100, awardWhosWho,
   serviceProgramming, serviceSoftware, serviceWebDesign,
-  portfolioGh, portfolioGmo, portfolioOfie, portfolioThreatLock,
 } from "@/assets/photos";
 import { techGuruAudience, techGuruShowcase, techGuruNetworking, techGuruPanel } from "@/assets/tech-guru";
 import Marquee from "@/components/Marquee";
@@ -742,84 +741,6 @@ const ProgramsBand = () => (
 );
 
 /* ============================================================
-   PORTFOLIO — glass cards on brand mint
-   ============================================================ */
-const portfolio = [
-  { name: "GH Accommodation", sector: "PropTech & Housing", desc: "Your Gateway To Affordable, Reliable, And Convenient Housing.", logo: portfolioGh, url: "https://techhubafrica.org/gh-accommodation" },
-  { name: "GMO Marketplace", sector: "E-Commerce & Retail", desc: "Ghana Mall – Your One-Stop Shop for Everything!", logo: portfolioGmo, url: "https://techhubafrica.org/gmo-marketplace" },
-  { name: "Ofie Agro Ltd", sector: "AgriTech & Supply Chain", desc: "Taste of Tradition, Fresh from Ofie.", logo: portfolioOfie, url: "https://techhubafrica.org/ofie-afro-ltd" },
-  { name: "Threat Lock", sector: "Cybersecurity Platform", desc: "Protect your website. Setup in 5 minutes and stop attacks before they start.", logo: portfolioThreatLock, url: "https://threatlock.techhubafrica.org" },
-];
-
-const Portfolio = () => (
-  <section id="portfolio" className="relative py-16 sm:py-12 sm:py-16 md:py-20 lg:py-28 lg:py-36 px-5 sm:px-6 lg:px-10 bg-primary text-primary-foreground overflow-hidden">
-    <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(var(--primary)),transparent_70%)]" />
-
-    <div className="relative max-w-7xl mx-auto">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-        <div>
-          <span className="eyebrow text-accent">07 — Investment Portfolio</span>
-          <h2 className="font-display font-extrabold mt-4 leading-[0.9] text-[2.1rem] sm:text-[3rem] md:text-[4.5rem] tracking-tight">
-            Companies in our
-            <br />
-            <span className="italic font-light text-accent">investment portfolio.</span>
-          </h2>
-        </div>
-      </div>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-        {portfolio.map((p) => (
-          <div
-            key={p.name}
-            className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full overflow-hidden transition-all duration-500 hover:border-accent/50"
-          >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_100%_0%,hsl(28_92%_55%/0.25),transparent_60%)]" />
-            
-            <div>
-              {/* Logo box */}
-              <div className="relative h-44 w-full rounded-2xl bg-white p-6 flex items-center justify-center overflow-hidden border border-primary-foreground/10 shadow-sm group-hover:scale-[1.02] transition-transform duration-500">
-                <img
-                  src={p.logo}
-                  alt={`${p.name} logo`}
-                  loading="lazy"
-                  className="max-h-full max-w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-
-              {/* Tag & Title */}
-              <div className="mt-6 mb-3">
-                <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-1">
-                  {p.sector}
-                </span>
-                <h3 className="font-display font-extrabold text-2xl text-foreground leading-tight tracking-tight group-hover:text-accent transition-colors">
-                  {p.name}
-                </h3>
-              </div>
-
-              {/* Tagline */}
-              <p className="text-sm text-foreground/75 leading-relaxed font-semibold mb-6">
-                {p.desc}
-              </p>
-            </div>
-
-            {/* Read More button */}
-            <a
-              href={p.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-magnetic w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-accent text-accent-foreground font-bold text-[10.5px] uppercase tracking-[0.22em] hover:bg-primary-foreground hover:text-foreground transition-all duration-300 shadow-md"
-              style={{ boxShadow: "0 10px 24px -10px hsl(28 92% 44% / 0.6)" }}
-            >
-              Read More <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-/* ============================================================
    TESTIMONIALS
    ============================================================ */
 const testimonials = [
@@ -927,7 +848,6 @@ const Index = () => (
         title="Live Production Websites Built by Tech Hub Africa"
         subtitle="Don't just take our word for it. Explore live e-commerce portals, news networks, logistics platforms, and security applications engineered by our team."
       />
-      <Portfolio />
       <Testimonials />
 
       <HubCTA />

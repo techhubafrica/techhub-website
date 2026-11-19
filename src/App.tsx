@@ -11,6 +11,7 @@ import Loader from "./components/Loader";
 import Index from "./pages/Index"; // keep homepage eager (first paint)
 const About      = lazy(() => import("./pages/About"));
 const Services   = lazy(() => import("./pages/Services"));
+const Portfolio  = lazy(() => import("./pages/Portfolio"));
 const Events     = lazy(() => import("./pages/Events"));
 const Careers    = lazy(() => import("./pages/Careers"));
 const CSR        = lazy(() => import("./pages/CSR"));
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/"           element={<Index />} />
             <Route path="/about"      element={<About />} />
             <Route path="/services"   element={<Services />} />
+            <Route path="/portfolio"  element={<Portfolio />} />
             <Route path="/events"     element={<Events />} />
             <Route path="/careers"    element={<Careers />} />
             <Route path="/c/career"   element={<Careers />} />

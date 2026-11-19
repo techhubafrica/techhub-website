@@ -27,7 +27,7 @@ const columns: {
       { label: "About Us", href: "/about" },
       { label: "Meet The Team", href: "/about#team" },
       { label: "Ecosystems", href: "/services" },
-      { label: "Investment Portfolio", href: "/#portfolio" },
+      { label: "Investment Portfolio", href: "/portfolio" },
       { label: "The Hub Campus", href: "/thehub" },
     ],
   },
