@@ -586,11 +586,6 @@ const services = [
     desc: "Explore our virtual space, where Tech Hub Africa’s ecosystems come together.",
   },
   {
-    Icon: Users,
-    title: "Startup Incubation & Advisory",
-    desc: "Technical guidance, investor readiness, go-to-market support and connections to partners and investors.",
-  },
-  {
     Icon: Rocket,
     title: "Tech Talks & Speaking Engagements",
     desc: "Keynotes, panels and expert-led talks for campuses, companies and Africa's technology community.",
@@ -673,6 +668,33 @@ const Services = () => (
             </div>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+);
+
+const StartupIncubation = () => (
+  <section id="startup-support" className="relative overflow-hidden bg-primary px-5 py-16 text-primary-foreground sm:px-6 sm:py-20 lg:px-10 lg:py-24">
+    <div className="pointer-events-none absolute -right-24 -top-28 h-96 w-96 rounded-full bg-accent/15 blur-3xl" />
+    <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-12 lg:items-center">
+      <div className="lg:col-span-7">
+        <span className="eyebrow text-accent">Founder Support Program</span>
+        <h2 className="mt-5 font-display text-[2.2rem] font-extrabold leading-[0.95] tracking-tight sm:text-5xl md:text-6xl">
+          Startup Incubation <span className="italic font-light text-accent">&amp; Advisory</span>
+        </h2>
+        <p className="mt-6 max-w-2xl text-sm leading-relaxed text-primary-foreground/70 sm:text-base">
+          We help early-stage founders turn promising ideas into resilient ventures through practical guidance, founder mentorship, and access to the people and networks that can help them grow.
+        </p>
+      </div>
+      <div className="lg:col-span-5">
+        <ul className="space-y-3 border-l border-primary-foreground/15 pl-5 text-sm font-semibold text-primary-foreground/85 sm:pl-7">
+          <li>Founder mentorship and technical guidance</li>
+          <li>Go-to-market and investor readiness support</li>
+          <li>Connections to partners and the wider ecosystem</li>
+        </ul>
+        <Link to="/#contact" className="btn-magnetic mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-accent-foreground transition-all hover:bg-primary-foreground hover:text-foreground">
+          Talk to our team <ArrowUpRight className="h-4 w-4" />
+        </Link>
       </div>
     </div>
   </section>
@@ -842,6 +864,7 @@ const Index = () => (
       <Marquee text="Connecting Innovators · Fostering Talent · Showcasing Excellence" />
       <VisionMission />
       <Services />
+      <StartupIncubation />
       <AwardsRecognition />
       <ClientShowcase
         limit={6}

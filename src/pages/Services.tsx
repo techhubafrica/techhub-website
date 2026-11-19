@@ -10,7 +10,6 @@ import {
   softwareEngineeringProductDelivery,
   threatLockCybersecurityService,
   websiteDevelopmentService,
-  hackathonFlyer,
   meetup2026Flyer,
 } from "@/assets/photos";
 import { techGuruShowcase, techGuruPanel } from "@/assets/tech-guru";
@@ -28,16 +27,7 @@ const servicesList = [
     image: softwareEngineeringProductDelivery,
   },
   {
-    num: "02", id: "incubation", icon: Rocket,
-    title: "Startup Incubation & Ecosystem Growth",
-    subtitle: "From idea to funded African venture.",
-    desc: "Early-stage incubation with seed support, technical advisory, go-to-market strategy, and direct access to regional investors and corporate partners.",
-    features: ["Technical Advisory & CTO Support", "Investor Readiness Coaching", "Co-working Space & Lab Access", "Corporate Partner Network"],
-    tag: "Ventures", accent: "hsl(28 92% 44%)",
-    image: hackathonFlyer,
-  },
-  {
-    num: "03", id: "cybersecurity", icon: ShieldCheck,
+    num: "02", id: "cybersecurity", icon: ShieldCheck,
     title: "Threat Lock Cybersecurity",
     subtitle: "24/7 AI-powered threat detection & auditing.",
     desc: "Our Threat Lock platform safeguards websites and digital infrastructure against DDoS, malware, SQL injection, and breaches — with zero latency overhead.",
@@ -46,7 +36,7 @@ const servicesList = [
     image: threatLockCybersecurityService,
   },
   {
-    num: "04", id: "enterprise", icon: Building2,
+    num: "03", id: "enterprise", icon: Building2,
     title: "Enterprise Systems Integration",
     subtitle: "Connected systems built around your business.",
     desc: "Custom enterprise platforms that connect business processes, operational data and existing tools into one dependable working environment.",
@@ -55,7 +45,7 @@ const servicesList = [
     image: techGuruShowcase,
   },
   {
-    num: "05", id: "metaverse", icon: Box,
+    num: "04", id: "metaverse", icon: Box,
     title: "Global Metaverse Virtual Space",
     subtitle: "Explore our virtual space.",
     desc: "A virtual space bringing Tech Hub Africa’s ecosystems together in one interactive experience.",
@@ -64,7 +54,7 @@ const servicesList = [
     image: "https://img.youtube.com/vi/UC3LwmrrLCs/hqdefault.jpg",
   },
   {
-    num: "06", id: "techtalks", icon: MessagesSquare,
+    num: "05", id: "techtalks", icon: MessagesSquare,
     title: "Tech Talks & Speaking Engagements",
     subtitle: "Knowledge sharing across Africa's tech community.",
     desc: "Expert-led Tech Talks, panel discussions, and keynote engagements that educate, inspire, and connect Africa's growing technology community.",
@@ -73,7 +63,7 @@ const servicesList = [
     image: techGuruPanel,
   },
   {
-    num: "07", id: "campus-tours", icon: Rocket,
+    num: "06", id: "campus-tours", icon: Rocket,
     title: "Campus Tours & Startup Competitions",
     subtitle: "Taking innovation to universities across Africa.",
     desc: "Tech Hub Africa visits university campuses to run startup competitions, hackathons, and mentorship sessions — discovering the next generation of African tech founders.",
@@ -82,7 +72,7 @@ const servicesList = [
     image: meetup2026Flyer,
   },
   {
-    num: "08", id: "website-dev", icon: Code,
+    num: "07", id: "website-dev", icon: Code,
     title: "Tech Hub Website Development",
     subtitle: "Premium websites built and managed for African businesses.",
     desc: "We build production-grade, SEO-optimised websites and web applications for African businesses — designed to convert, perform, and scale.",
@@ -252,7 +242,7 @@ const Services = () => {
       <PageHero
         tag="Our Ecosystems"
         title={<>Engineering solutions for<br /><span className="italic font-light text-accent">Africa's digital future.</span></>}
-        body="From enterprise software and cybersecurity to startup incubation and enterprise integration — technical excellence delivered across the continent."
+        body="Explore software engineering, cybersecurity, connected enterprise systems, virtual experiences, and technology programs built across the continent."
         ghost="BUILD"
         stats={[
           { val: "50+", label: "Projects Shipped" },
@@ -262,7 +252,7 @@ const Services = () => {
         ]}
       />
 
-      <Marquee text="Engineering Solutions · Enterprise Software · Cybersecurity · Incubating Ventures" />
+      <Marquee text="Engineering Solutions · Enterprise Software · Cybersecurity · Connected Workplaces" />
 
       <main className="page-entry bg-background overflow-hidden">
         {/* ══ ECOSYSTEM PILLARS ══ */}
@@ -335,14 +325,14 @@ const Services = () => {
 
                     {/* Ecosystem media */}
                     <div className={`lg:col-span-5 ${isEven ? "lg:order-1" : "lg:order-2"} flex justify-center`}>
-                      <div className={`relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-foreground/10 ${s.id === "software" || s.id === "website-dev" ? "aspect-video bg-white" : s.id === "incubation" ? "aspect-[4/3] bg-white" : s.id === "cybersecurity" ? "aspect-square bg-muted" : "aspect-[4/3] bg-muted"} group`}>
+                      <div className={`relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-foreground/10 ${s.id === "software" || s.id === "website-dev" ? "aspect-video bg-white" : s.id === "cybersecurity" ? "aspect-square bg-muted" : "aspect-[4/3] bg-muted"} group`}>
                         <img
                           src={s.image}
                           alt={s.title}
                           loading="lazy"
-                          className={`w-full h-full ${s.id === "software" || s.id === "incubation" || s.id === "website-dev" ? "object-contain" : "object-cover transition-transform duration-700 group-hover:scale-105"}`}
+                          className={`w-full h-full ${s.id === "software" || s.id === "website-dev" ? "object-contain" : "object-cover transition-transform duration-700 group-hover:scale-105"}`}
                         />
-                        {s.id !== "software" && s.id !== "incubation" && s.id !== "website-dev" && <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />}
+                        {s.id !== "software" && s.id !== "website-dev" && <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />}
                       </div>
                     </div>
                   </div>
