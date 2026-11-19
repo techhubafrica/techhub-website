@@ -515,27 +515,27 @@ const AwardsRecognition = () => (
         </p>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+      <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-5">
         {awards.map((item, index) => (
           <a
             key={item.title}
             href={item.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="card-lift sheen group relative flex min-h-[250px] flex-col overflow-hidden rounded-3xl border border-foreground/10 bg-background p-6 sm:p-7 transition-all hover:border-accent/40 hover:shadow-xl"
+            className="card-lift sheen group relative flex min-h-[210px] flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-background p-5 transition-all hover:border-accent/40 hover:shadow-xl"
           >
-            <div className="flex items-start justify-between gap-4 mb-7">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-accent/20 bg-accent/10 text-accent">
-                <Award className="h-6 w-6" strokeWidth={1.7} />
+            <div className="flex items-start justify-between gap-3 mb-5">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
+                <Award className="h-5 w-5" strokeWidth={1.7} />
               </div>
               <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/35">{String(index + 1).padStart(2, "0")}</span>
-              {item.image && <img src={item.image} alt="" aria-hidden className="h-12 max-w-[100px] object-contain object-right" loading="lazy" />}
+              {item.image && <img src={item.image} alt="" aria-hidden className="h-10 max-w-[80px] object-contain object-right" loading="lazy" />}
             </div>
             <div className="mt-auto">
-              <p className="text-[9px] font-black uppercase tracking-[0.24em] text-accent mb-3">{item.category}</p>
-              <h3 className="font-display font-extrabold text-xl leading-tight text-foreground mb-3 group-hover:text-accent transition-colors">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-foreground/65">{item.detail}</p>
-              <span className="mt-5 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/50 group-hover:text-accent transition-colors">
+              <p className="text-[8px] font-black uppercase tracking-[0.2em] text-accent mb-2">{item.category}</p>
+              <h3 className="font-display font-extrabold text-lg leading-tight text-foreground mb-2 group-hover:text-accent transition-colors">{item.title}</h3>
+              <p className="text-xs leading-relaxed text-foreground/65">{item.detail}</p>
+              <span className="mt-4 inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.18em] text-foreground/50 group-hover:text-accent transition-colors">
                 Read more <ArrowUpRight className="w-3.5 h-3.5" />
               </span>
             </div>
