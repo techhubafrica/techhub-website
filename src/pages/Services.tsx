@@ -63,11 +63,11 @@ const servicesList = [
     image: techGuruPanel,
   },
   {
-    num: "06", id: "campus-tours", icon: Rocket,
-    title: "Campus Tours & Startup Competitions",
-    subtitle: "Taking innovation to universities across Africa.",
-    desc: "Tech Hub Africa visits university campuses to run startup competitions, hackathons, and mentorship sessions — discovering the next generation of African tech founders.",
-    features: ["University Campus Visits", "Startup Pitch Competitions", "On-Campus Hackathons", "Mentorship & Career Sessions"],
+    num: "06", id: "startup-competitions", icon: Rocket,
+    title: "Startup Competitions",
+    subtitle: "Helping founders turn bold ideas into ventures.",
+    desc: "Startup pitch competitions and hackathons help founders validate ideas, sharpen their pitches, and connect with mentors, investors, and industry leaders.",
+    features: ["Startup Pitch Competitions", "Hackathons & Challenges", "Mentorship & Career Sessions", "Founder Networking"],
     tag: "Education", accent: "hsl(28 92% 44%)",
     image: meetup2026Flyer,
   },
@@ -444,7 +444,7 @@ const Services = () => {
           <div className="relative max-w-4xl mx-auto text-center">
             <p className="text-[10px] font-black uppercase tracking-[0.4em] text-accent mb-4">Ready to start?</p>
             <h2 className="font-display font-black text-4xl md:text-6xl tracking-tight leading-[0.9] mb-6">
-              Let's build<br /><span className="italic font-light text-accent">something great.</span>
+              Let's build<br /><span className="italic font-light text-accent">something great together</span>
             </h2>
             <p className="text-primary-foreground/65 text-base mb-10 max-w-md mx-auto leading-relaxed">
               Tell us about your project and our engineering team will get back to you within 24 hours.

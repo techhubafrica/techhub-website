@@ -592,8 +592,8 @@ const services = [
   },
   {
     Icon: Sprout,
-    title: "Campus Tours & Startup Competitions",
-    desc: "University visits, hackathons, startup pitch competitions, mentorship and career sessions.",
+    title: "Startup Competitions",
+    desc: "Pitch competitions and hackathons connect founders with mentorship, industry leaders and potential investors.",
   },
   {
     Icon: Code2,
@@ -648,23 +648,12 @@ const Services = () => (
             </div>
 
             <div className="relative pt-6 border-t border-foreground/10 flex items-center justify-between">
-              {s.title === "Campus Tours & Startup Competitions" ? (
-                <a
-                  href="https://tech4all.techhubafrica.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-bold uppercase tracking-[0.2em] text-accent group-hover:text-primary-foreground transition-colors flex items-center gap-2"
-                >
-                  Explore Tech4ALL <ArrowUpRight className="w-4 h-4" />
-                </a>
-              ) : (
-                <Link
-                  to={s.title === "Global Metaverse Virtual Space" ? "/metaverse" : "/services"}
-                  className="text-xs font-bold uppercase tracking-[0.2em] text-accent group-hover:text-primary-foreground transition-colors flex items-center gap-2"
-                >
-                  Learn More <ArrowUpRight className="w-4 h-4" />
-                </Link>
-              )}
+              <Link
+                to={s.title === "Global Metaverse Virtual Space" ? "/metaverse" : "/services"}
+                className="text-xs font-bold uppercase tracking-[0.2em] text-accent group-hover:text-primary-foreground transition-colors flex items-center gap-2"
+              >
+                Learn More <ArrowUpRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         ))}
