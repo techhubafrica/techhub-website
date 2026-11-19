@@ -44,7 +44,7 @@ const ventures = [
   },
   {
     num: "04",
-    name: "Threat Lock Agency",
+    name: "Threat Lock",
     tag: "Cybersecurity Platform",
     logo: portfolioThreatLock,
     desc: "Protect your website. Setup in 5 minutes and stop attacks before they start.",

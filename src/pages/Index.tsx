@@ -810,7 +810,7 @@ const portfolio = [
   { name: "GH Accommodation", sector: "PropTech & Housing", desc: "Your Gateway To Affordable, Reliable, And Convenient Housing.", logo: portfolioGh, url: "https://techhubafrica.org/gh-accommodation" },
   { name: "GMO Marketplace", sector: "E-Commerce & Retail", desc: "Ghana Mall – Your One-Stop Shop for Everything!", logo: portfolioGmo, url: "https://techhubafrica.org/gmo-marketplace" },
   { name: "Ofie Agro Ltd", sector: "AgriTech & Supply Chain", desc: "Taste of Tradition, Fresh from Ofie.", logo: portfolioOfie, url: "https://techhubafrica.org/ofie-afro-ltd" },
-  { name: "Threat Lock Agency", sector: "Cybersecurity Platform", desc: "Protect your website. Setup in 5 minutes and stop attacks before they start.", logo: portfolioThreatLock, url: "https://threatlock.techhubafrica.org" },
+  { name: "Threat Lock", sector: "Cybersecurity Platform", desc: "Protect your website. Setup in 5 minutes and stop attacks before they start.", logo: portfolioThreatLock, url: "https://threatlock.techhubafrica.org" },
 ];
 
 const Portfolio = () => (
