@@ -7,7 +7,6 @@ const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Ecosystems", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
   { label: "Events", href: "https://events.techhubafrica.org", external: true },
   { label: "Careers", href: "/careers" },
   { label: "Partners", href: "/csr" },
@@ -15,6 +14,7 @@ const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "Gallery", href: "/gallery" },
   { label: "Tech4All", href: "https://tech4all.techhubafrica.org/", external: true },
   { label: "Academy", href: "https://academy.techhubafrica.org", external: true },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Contact Us", href: "/#contact" },
 ];
 
