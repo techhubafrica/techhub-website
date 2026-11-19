@@ -1,74 +1,73 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PageHero from "@/components/PageHero";
 import { CheckCircle2, Handshake, Lightbulb, Users } from "lucide-react";
-import Marquee from "@/components/Marquee";
-import { heroCelebration } from "@/assets/photos";
 
 const vendorHighlights = [
   {
     name: "GhanaMall",
-    image: "https://techhubafrica.org/wp-content/uploads/2025/12/5900115068827929871.jpg",
-    description: "A trusted online market in Ghana, offering quality products from top vendors at competitive prices, with fast delivery and secure payments.",
+    image: "/thehub-vendors/ghana-mall.jpg",
+    description: "A trusted online market in Ghana, offering quality products from top vendors at competitive prices, with fast delivery, secure payments and customer satisfaction.",
   },
   {
-    name: "AfroEventix",
-    image: "https://techhubafrica.org/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-08-at-20.16.21.jpeg",
-    description: "An event discovery, ticketing and management platform connecting African communities, event organizers and cultural experience creators across Africa and the Diaspora.",
+    name: "AfroEventTix",
+    image: "/thehub-vendors/afroeventix.jpg",
+    description: "A next-generation event discovery, ticketing and management platform for African communities, event organizers and cultural experience creators across Africa and the Diaspora.",
   },
   {
     name: "RushPay",
-    image: "https://techhubafrica.org/wp-content/uploads/2025/12/5900115068827929869.jpg",
+    image: "/thehub-vendors/rushpay.jpg",
     description: "A modern way to send and receive money between family, friends and customers, with custom payment solutions for Ghanaian businesses.",
   },
   {
     name: "OFie Agro Ltd",
-    image: "https://techhubafrica.org/wp-content/uploads/2025/06/Ofie-Agro-Ltd-Products.png",
-    description: "Sustainably produced foods made from cassava, plantain and palm fruits, supporting local farmers and communities while sharing Ghanaian flavors globally.",
+    image: "/thehub-vendors/ofie-agro.jpg",
+    description: "Sustainably produced cassava, plantain and palm-fruit foods, supporting local farmers and communities while sharing authentic Ghanaian flavors around the world.",
   },
   {
     name: "GH-Accommodation",
-    image: "https://techhubafrica.org/wp-content/uploads/2025/12/LOGO-GH-Accommodation.png",
+    image: "/thehub-vendors/gh-accommodation.jpg",
     description: "An online room and hostel reservation platform connecting people with a suitable place to stay in just a few clicks.",
   },
   {
     name: "Black Love Link",
-    image: "https://techhubafrica.org/wp-content/uploads/2026/10/Final-Black-Love-Link-Logo.jpeg",
-    description: "A curated, membership-based community for vetted Black professionals and like-minded people seeking meaningful connections.",
+    image: "/thehub-vendors/black-love-link.jpg",
+    description: "A curated membership community for vetted Black professionals and like-minded people seeking meaningful connections beyond superficial swipe culture.",
   },
   {
     name: "Tech4ALL AI",
-    image: "https://techhubafrica.org/wp-content/uploads/2026/10/Logo-for-Tech-For-All.jpeg",
-    description: "Technology without borders. An inclusive AI platform helping students, entrepreneurs and communities learn and build with AI.",
+    image: "/thehub-vendors/tech4all-ai.jpg",
+    description: "Technology without borders. An inclusive platform making artificial intelligence accessible and useful for students, entrepreneurs and communities worldwide.",
   },
   {
     name: "Threat Lock",
-    image: "https://techhubafrica.org/wp-content/uploads/2025/12/threatlocked.jpeg",
-    description: "Website protection with threat defense, firewall and intrusion prevention, login protection and security tools for WordPress and other platforms.",
+    image: "/thehub-vendors/threat-lock.jpg",
+    description: "Website security with real-time threat defense, firewall and intrusion prevention, login protection and tools for WordPress or other platforms.",
   },
   {
     name: "Ladies In Design Network",
-    image: "https://techhubafrica.org/wp-content/uploads/2025/12/5900115068827929872.jpg",
+    image: "/thehub-vendors/ladies-in-design.jpg",
     description: "A supportive community where women in design can share expertise, learn from one another and grow their careers.",
   },
   {
     name: "Gumption Excell",
-    image: "https://techhubafrica.org/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-09-at-16.00.26.jpeg",
-    description: "An educational consulting hub advancing STEM education, modern learning infrastructure and workforce-relevant partnerships between academia and industry.",
+    image: "/thehub-vendors/gumption-excell.jpg",
+    description: "An educational consulting hub advancing STEM, modern education infrastructure, software platforms and partnerships that connect academia with industry.",
+  },
+  {
+    name: "Tech Hub — Metaverse",
+    image: "/thehub-vendors/techhub-metaverse.jpg",
+    description: "A practical program in building, hosting and managing immersive virtual environments, events and audience experiences.",
   },
 ];
 
 const TheHub = () => (
   <>
     <Header />
-    <PageHero
-      tag="Community & Innovation"
-      title={<>THE HUB —<br /><span className="italic font-light text-accent">ideas in motion.</span></>}
-      body="THE HUB is a dynamic ecosystem that fuels creativity, fosters collaboration and accelerates growth. It brings innovators, entrepreneurs and tech enthusiasts together to share ideas and innovation."
-      ghost="HUB"
-    />
-
-    <Marquee text="Showcase · Networking · Collaboration · African Innovation" />
+    <section className="px-5 pt-24 sm:px-6 sm:pt-28 lg:px-10">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-foreground/10 bg-cream shadow-xl">
+        <img src="/thehub-vendors/the-hub.jpg" alt="THE HUB — Explore. Discover. Be inspired. Dare to dream, innovate and shape the future of Africa’s tech today." fetchPriority="high" decoding="async" className="aspect-[2/1] w-full object-contain" />
+      </div>
+    </section>
 
     <main className="page-entry bg-background overflow-hidden">
       <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 max-w-7xl mx-auto">
@@ -84,7 +83,7 @@ const TheHub = () => (
                 <li className="flex gap-3 text-sm text-primary-foreground/75 leading-relaxed"><CheckCircle2 className="w-5 h-5 text-accent shrink-0" /><span><strong className="text-primary-foreground">Networking &amp; Collaboration:</strong> Connect with like-minded people, partners and investors.</span></li>
               </ul>
             </div>
-            <img src={heroCelebration} alt="Innovators sharing ideas at Tech Hub Africa" loading="lazy" className="relative mt-9 w-full h-52 sm:h-64 object-cover rounded-2xl" />
+            <p className="relative mt-9 border-l-2 border-accent pl-5 text-sm leading-relaxed text-primary-foreground/70">THE HUB is a dynamic ecosystem that fuels creativity, fosters collaboration, and accelerates growth. It brings innovators, entrepreneurs, and tech enthusiasts together in a supportive environment to showcase ideas and innovation.</p>
           </div>
 
           <div className="rounded-3xl bg-cream p-8 sm:p-10 flex flex-col justify-center">
@@ -111,14 +110,14 @@ const TheHub = () => (
           <div className="max-w-3xl mb-12">
             <span className="eyebrow text-accent">Our Community</span>
             <h2 className="font-display font-extrabold text-foreground text-4xl sm:text-5xl tracking-tight mt-4">Vendor Highlights</h2>
-            <p className="text-foreground/65 leading-relaxed mt-4">Meet a selection of the businesses, platforms and communities showcased through THE HUB.</p>
+            <p className="text-foreground/65 leading-relaxed mt-4">Meet the businesses, platforms and communities showcased through THE HUB.</p>
           </div>
 
           <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
             {vendorHighlights.map((vendor, index) => (
-              <article key={vendor.name} className="card-lift group rounded-3xl overflow-hidden bg-background border border-foreground/10">
-                <div className="h-52 bg-white flex items-center justify-center overflow-hidden">
-                  <img src={vendor.image} alt={`${vendor.name} logo`} loading="lazy" className="w-full h-full object-contain p-5 transition-transform duration-500 group-hover:scale-[1.04]" />
+              <article key={vendor.name} className="card-lift group h-full rounded-3xl overflow-hidden bg-background border border-foreground/10">
+                <div className="h-52 bg-white flex items-center justify-center overflow-hidden border-b border-foreground/5">
+                  <img src={vendor.image} alt={`${vendor.name}`} loading="lazy" decoding="async" className="w-full h-full object-contain p-5 transition-transform duration-500 group-hover:scale-[1.04]" />
                 </div>
                 <div className="p-6 sm:p-7">
                   <div className="flex items-center gap-3 mb-3">

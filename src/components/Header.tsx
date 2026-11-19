@@ -15,7 +15,6 @@ const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "Tech4All", href: "https://tech4all.techhubafrica.org/", external: true },
   { label: "Academy", href: "https://academy.techhubafrica.org", external: true },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Contact Us", href: "/#contact" },
 ];
 
 const Header = () => {
@@ -103,11 +102,11 @@ const Header = () => {
 
             <div className="flex items-center gap-2">
               <Link
-                to="/thehub"
+                to="/#contact"
                 className="btn-magnetic hidden sm:inline-flex shrink-0 items-center gap-1.5 px-3.5 py-2.5 bg-accent text-accent-foreground rounded-full text-[9px] font-bold uppercase tracking-[0.14em] hover:brightness-110 transition-all duration-300"
                 style={{ boxShadow: "0 10px 26px -12px hsl(28 92% 44% / 0.7)" }}
               >
-                Visit The Hub <ArrowUpRight className="w-3.5 h-3.5" />
+                Contact Us <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
               <button
                 className={`xl:hidden w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
@@ -155,11 +154,11 @@ const Header = () => {
               )
             )}
             <Link
-              to="/thehub"
+              to="/#contact"
               onClick={() => setOpen(false)}
               className="mt-2 text-center py-3 rounded-full bg-accent text-accent-foreground font-bold text-xs uppercase tracking-[0.2em]"
             >
-              Visit The Hub
+              Contact Us
             </Link>
           </div>
         )}
