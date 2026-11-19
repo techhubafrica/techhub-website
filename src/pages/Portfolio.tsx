@@ -4,17 +4,13 @@ import PageHero from "@/components/PageHero";
 import { ArrowUpRight } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import Marquee from "@/components/Marquee";
-import {
-  portfolioGmo,
-} from "@/assets/photos";
 
-const ventures: { num: string; name: string; tag: string; logo?: string; mark: string; desc: string; summary: string; link?: string }[] = [
+const ventures: { num: string; name: string; tag: string; logo: string; desc: string; summary: string; link?: string }[] = [
   {
     num: "01",
     name: "Ghana Mall",
     tag: "E-Commerce · Ghana",
-    logo: portfolioGmo,
-    mark: "GHANA MALL",
+    logo: "/portfolio-assets/ghana-mall.jpg",
     desc: "A multi-vendor online marketplace connecting customers with trusted vendors across Ghana.",
     summary: "Shop electronics, fashion, groceries, and home essentials in one secure platform, with local businesses, secure payments, and delivery options at its center.",
     link: "https://ghanamallonline.com/",
@@ -23,7 +19,7 @@ const ventures: { num: string; name: string; tag: string; logo?: string; mark: s
     num: "02",
     name: "GESA UMAT",
     tag: "Student Community · Engineering",
-    mark: "GESA",
+    logo: "/portfolio-assets/gesa-umat.jpg",
     desc: "A platform for the Ghana Engineering Students Association at the University of Mines and Technology.",
     summary: "Supports academic excellence, professional development, collaboration, engineering innovation, networking, and student-led initiatives.",
     link: "https://gesa-umat.com/",
@@ -32,7 +28,7 @@ const ventures: { num: string; name: string; tag: string; logo?: string; mark: s
     num: "03",
     name: "UMaT SRC",
     tag: "Student Leadership",
-    mark: "UMaT SRC",
+    logo: "/portfolio-assets/umat-src.jpg",
     desc: "The official digital platform for the Student Representative Council of the University of Mines and Technology.",
     summary: "Facilitates communication, governance, and student engagement by providing updates, resources, and support for the student body.",
   },
@@ -40,7 +36,7 @@ const ventures: { num: string; name: string; tag: string; logo?: string; mark: s
     num: "04",
     name: "CEANA",
     tag: "Advocacy · Community Development",
-    mark: "CEANA",
+    logo: "/portfolio-assets/ceana.jpg",
     desc: "A global advocacy and community development network.",
     summary: "An international organization platform connecting people and organizations through advocacy, education, capacity building, and community development initiatives.",
   },
@@ -48,7 +44,7 @@ const ventures: { num: string; name: string; tag: string; logo?: string; mark: s
     num: "05",
     name: "DOSTECH",
     tag: "Digital Skills · Education",
-    mark: "DOSTECH",
+    logo: "/portfolio-assets/dostech.jpg",
     desc: "A digital skills and technology education platform.",
     summary: "Delivers practical digital skills training and academic programs to help students and professionals build industry-relevant knowledge and career readiness.",
   },
@@ -56,7 +52,7 @@ const ventures: { num: string; name: string; tag: string; logo?: string; mark: s
     num: "06",
     name: "RushPay",
     tag: "Fintech · Payments",
-    mark: "RushPay",
+    logo: "/portfolio-assets/rushpay.jpg",
     desc: "Seamless digital payments and financial management for individuals and businesses.",
     summary: "Supports instant transfers, mobile money withdrawals, payroll processing, and gift card services through regulated payment infrastructure.",
     link: "https://rushpay.cash/",
@@ -65,7 +61,7 @@ const ventures: { num: string; name: string; tag: string; logo?: string; mark: s
     num: "07",
     name: "Purple Moon Luxe Transport",
     tag: "Transport · Mobility",
-    mark: "PURPLE MOON",
+    logo: "/portfolio-assets/purple-moon.jpg",
     desc: "Premium chauffeur and luxury transport services.",
     summary: "Provides high-end, reliable, and comfortable travel for corporate clients, events, and personal trips, with convenience, safety, and elegance in focus.",
   },
@@ -73,7 +69,7 @@ const ventures: { num: string; name: string; tag: string; logo?: string; mark: s
     num: "08",
     name: "TechHub Africa Portal",
     tag: "Community · Digital Access",
-    mark: "TECH HUB AFRICA",
+    logo: "/portfolio-assets/techhub-portal.jpg",
     desc: "Digital access to Tech Hub Africa programs and community.",
     summary: "A centralized portal connecting users with programs, resources, training, events, and innovation opportunities across the Tech Hub Africa ecosystem.",
   },
@@ -128,11 +124,7 @@ const Portfolio = () => (
                 <div>
                   {/* Top Logo Container */}
                   <div className="relative h-36 sm:h-40 w-full rounded-2xl bg-white border border-foreground/8 flex items-center justify-center p-5 overflow-hidden shadow-sm group-hover:scale-[1.02] transition-transform duration-500">
-                    {v.logo ? (
-                      <img src={v.logo} alt={`${v.name} logo`} loading="lazy" className="max-h-full max-w-full object-contain p-2" />
-                    ) : (
-                      <span className="font-display text-2xl sm:text-3xl font-black tracking-tight text-primary text-center">{v.mark}</span>
-                    )}
+                    <img src={v.logo} alt={`${v.name} logo`} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain p-2" />
                     <span className="absolute top-3 right-3 text-[9px] font-black uppercase tracking-[0.25em] px-2.5 py-1 rounded-full border border-foreground/10 bg-background/80 text-foreground/60">
                       {v.num}
                     </span>
