@@ -68,7 +68,7 @@ const Footer = () => (
       </div>
     </div>
 
-    <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 pb-20">
+    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10 sm:gap-12 pb-20">
       {columns.map((col) => (
         <div key={col.title}>
           <h4 className="font-display font-bold text-amber-300 uppercase text-[11px] tracking-[0.3em] mb-8">
@@ -97,7 +97,7 @@ const Footer = () => (
         </div>
       ))}
 
-      <div id="contact" className="scroll-mt-24">
+      <div id="contact" className="scroll-mt-24 min-w-0 sm:col-span-2 md:col-span-1">
         <h4 className="font-display font-bold text-amber-300 uppercase text-[11px] tracking-[0.3em] mb-8">
           Contact
         </h4>
@@ -123,14 +123,14 @@ const Footer = () => (
             Accra, Ghana
           </li>
         </ul>
-        <div className="inline-flex items-center gap-3 px-3 py-2 rounded-xl border border-white/70 bg-white/95 backdrop-blur-xl shadow-lg shadow-black/15">
+        <div className="inline-flex w-fit max-w-full flex-wrap items-center gap-2 px-3 py-2 rounded-xl border border-white/70 bg-white/95 backdrop-blur-xl shadow-lg shadow-black/15">
           {socials.map(({ Icon, name, color, href }) => (
             <a
               key={name}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-sm hover:bg-black/5 transition-colors"
+              className="w-10 h-10 shrink-0 flex items-center justify-center rounded-sm hover:bg-black/5 transition-colors"
               aria-label={name}
               title={name}
             >
