@@ -174,7 +174,7 @@ const Careers = () => {
   useEffect(() => {
     let active = true;
     getWebsiteOpenings()
-      .then((openings) => { if (active) setJobOpenings(openings.map(openingToJob)); })
+      .then((openings) => { if (active) setJobOpenings(openings.filter((opening) => opening.type === "internship").map(openingToJob)); })
       .catch((error) => { if (active) setOpeningsError(websiteApiError(error)); })
       .finally(() => { if (active) setOpeningsLoading(false); });
     return () => { active = false; };
@@ -288,7 +288,7 @@ const Careers = () => {
     <>
       <Header />
       <div className="pt-24 sm:pt-28" />
-      <Marquee text="Purpose-Driven Work · Full-Time Careers · University Internships · 1-on-1 Mentorship · 2026 Cohort" />
+    <Marquee text="Purpose-Driven Work · University Internships · 1-on-1 Mentorship · 2026 Cohort" />
 
       <main className="page-entry bg-background overflow-hidden">
         {/* ══ 01. CULTURE & LIFE AT TECH HUB (Safaricom Inspired) ══ */}
@@ -351,7 +351,7 @@ const Careers = () => {
           </div>
         </section>
 
-        {/* ══ 02. CAREER & INTERNSHIP OPENINGS (Search & Filter) ══ */}
+        {/* ══ 02. INTERNSHIP OPENINGS (Search & Filter) ══ */}
         <section id="openings" className="relative bg-secondary text-primary-foreground px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 lg:py-36 overflow-hidden">
           <div className="noise-bg" />
           <div className="hidden md:block absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-3xl opacity-15 pointer-events-none bg-[radial-gradient(circle,hsl(28_92%_55%/0.4),transparent_70%)]" />
@@ -359,13 +359,13 @@ const Careers = () => {
           <div className="relative max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-12">
               <div>
-                <span className="eyebrow text-accent">02 — Career &amp; Internship Opportunities</span>
+                <span className="eyebrow text-accent">02 — Internship Opportunities</span>
                 <h2 className="font-display font-extrabold text-3.5xl sm:text-5xl md:text-6xl tracking-tight leading-[0.92] mt-4">
-                  Explore open roles.
+                  Explore internships.
                 </h2>
               </div>
               <p className="text-primary-foreground/70 max-w-md text-sm md:text-base leading-relaxed">
-                Find your place at Tech Hub Africa across full-time engineering, cybersecurity, product design, and 2026 internship cohorts.
+                Find internship opportunities at Tech Hub Africa across engineering, data and AI, cybersecurity, product design, marketing, and more.
               </p>
             </div>
 
@@ -375,7 +375,7 @@ const Careers = () => {
                 <Search className="w-5 h-5 text-accent absolute left-4 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
-                  placeholder="Search open roles by title, skill, or department..."
+                  placeholder="Search internships by title, skill, or department..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-12 pr-4 py-4 rounded-full bg-primary/80 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40 text-sm focus:outline-none focus:border-accent transition-all duration-300"
@@ -384,7 +384,7 @@ const Careers = () => {
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent mr-2">Filter:</span>
-                { ["All", "Engineering", "Security", "Product", "Marketing", "Internships"].map((cat) => (
+                { ["All", "Internships"].map((cat) => (
                   <button
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
@@ -405,12 +405,12 @@ const Careers = () => {
               <div className="text-center py-16 rounded-3xl border border-primary-foreground/15 bg-primary/40 p-8 text-primary-foreground/75">Loading current openings…</div>
             ) : openingsError ? (
               <div role="alert" className="text-center py-10 rounded-3xl border border-primary-foreground/15 bg-primary/40 p-8">
-                <p className="font-display font-bold text-lg text-primary-foreground mb-2">Open roles are temporarily unavailable</p>
+                <p className="font-display font-bold text-lg text-primary-foreground mb-2">Internship positions are temporarily unavailable</p>
                 <p className="text-sm text-primary-foreground/65">{openingsError}</p>
               </div>
             ) : filteredJobs.length === 0 ? (
               <div className="text-center py-16 rounded-3xl border border-primary-foreground/15 bg-primary/40 p-8">
-                <p className="font-display font-bold text-xl text-primary-foreground mb-2">{jobOpenings.length ? "No roles match your search" : "There are no open roles right now"}</p>
+                <p className="font-display font-bold text-xl text-primary-foreground mb-2">{jobOpenings.length ? "No internships match your search" : "There are no open internships right now"}</p>
                 <p className="text-sm text-primary-foreground/60">{jobOpenings.length ? "Try searching for a different keyword or resetting filters." : "Please check again soon for new opportunities."}</p>
               </div>
             ) : (
