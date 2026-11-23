@@ -23,9 +23,13 @@ import Marquee from "@/components/Marquee";
 import {
   internshipsFlyer,
   careerDigitalMarketing,
+  serviceProgramming,
   serviceSoftware,
   serviceWebDesign,
   portfolioThreatLock,
+  meetup2026Flyer,
+  heroPanel,
+  networking,
 } from "@/assets/photos";
 
 interface JobRole {
@@ -49,10 +53,19 @@ const openingToJob = (opening: WebsiteOpening): JobRole => {
     : lowerDept.includes("security") ? "Security"
       : lowerDept.includes("product") || lowerDept.includes("design") ? "Product"
         : lowerDept.includes("market") ? "Marketing" : "Engineering";
-  const image = category === "Internships" ? internshipsFlyer
-    : category === "Security" ? portfolioThreatLock
-      : category === "Product" ? serviceWebDesign
-        : category === "Marketing" ? careerDigitalMarketing : serviceSoftware;
+  const role = `${opening.title} ${dept}`.toLowerCase();
+  const image = role.includes("security") || role.includes("cyber") || role.includes("threat") ? portfolioThreatLock
+    : role.includes("research") ? heroPanel
+      : role.includes("data science") || role.includes("artificial intelligence") || /\bai\b|machine learning|analytics/.test(role) ? serviceProgramming
+      : role.includes("marketing") || role.includes("social media") || role.includes("communications") || role.includes("content") ? careerDigitalMarketing
+        : role.includes("event") || role.includes("campus") ? meetup2026Flyer
+          : role.includes("product design") || role.includes("ux") || role.includes("ui design") ? serviceWebDesign
+            : role.includes("operation") || role.includes("administration") || role.includes("coordination") ? networking
+              : role.includes("software") || role.includes("engineering") || role.includes("developer") || role.includes("web") || role.includes("cloud") || category === "Engineering" ? serviceSoftware
+                : category === "Security" ? portfolioThreatLock
+                  : category === "Product" ? serviceWebDesign
+                    : category === "Marketing" ? careerDigitalMarketing
+                      : category === "Engineering" ? serviceSoftware : internshipsFlyer;
   return {
     id: opening.slug,
     openingId: opening.id,
