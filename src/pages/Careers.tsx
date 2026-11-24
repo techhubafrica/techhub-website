@@ -482,56 +482,6 @@ const Careers = () => {
             </p>
           </Reveal>
 
-          {/* Available Internships Grid */}
-          <div className="mb-16">
-            <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-foreground tracking-tight mb-8">
-              {internshipOpenings.length ? "Available Internships" : "Internship Tracks"}
-            </h3>
-            {!openingsLoading && internshipOpenings.length === 0 && (
-              <p className="-mt-5 mb-8 text-sm text-foreground/65">
-                No internship vacancies are currently published. You can still submit a general application for one of these tracks.
-              </p>
-            )}
-            {openingsLoading ? (
-              <p className="text-sm text-foreground/65">Loading internship positions…</p>
-            ) : openingsError ? (
-              <p role="alert" className="text-sm text-destructive">Internship positions are temporarily unavailable. Please try again later.</p>
-            ) : internshipOpenings.length === 0 ? (
-              <p className="text-sm text-foreground/65">There are no open internship positions right now. Please check again soon.</p>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {internshipChoices.map((intern, idx) => (
-                  <Reveal key={"openingId" in intern ? intern.openingId : intern.title} delay={idx * 0.08}>
-                    <a
-                      href="#internship-application"
-                      aria-label={`Apply for ${intern.title}`}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        setSelectedInternshipRoleValue("openingId" in intern ? String(intern.openingId) : intern.title);
-                        document.getElementById("internship-application")?.scrollIntoView({ behavior: "smooth", block: "start" });
-                      }}
-                      className="card-lift art-card sheen group relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between h-full hover:border-accent/40 transition-all duration-500 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                    >
-                      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <div>
-                      <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">Internship · {intern.dept}</span>
-                        <h4 className="font-display font-extrabold text-xl text-foreground mb-3 group-hover:text-accent transition-colors">
-                          {intern.title}
-                        </h4>
-                        <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed font-medium">
-                          {intern.summary || "Join the Tech Hub Africa team and build practical experience in this role."}
-                        </p>
-                      </div>
-                      <span className="mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
-                        Apply for this internship <ArrowUpRight className="w-3.5 h-3.5" />
-                      </span>
-                    </a>
-                  </Reveal>
-                ))}
-              </div>
-            )}
-          </div>
-
           {/* Benefits & Eligibility Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
             {/* Benefits */}
