@@ -150,7 +150,6 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 
 const Careers = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState<string>("All");
   const [jobOpenings, setJobOpenings] = useState<JobRole[]>([]);
   const [openingsLoading, setOpeningsLoading] = useState(true);
   const [openingsError, setOpeningsError] = useState("");
@@ -222,12 +221,9 @@ const Careers = () => {
   };
 
   const filteredJobs = jobOpenings.filter((job) => {
-    const matchesSearch =
-      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    return job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       job.dept.toLowerCase().includes(searchQuery.toLowerCase()) ||
       job.summary.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = activeCategory === "All" || job.category === activeCategory;
-    return matchesSearch && matchesCategory;
   });
 
   const handleApplyRole = (job: JobRole) => {
@@ -369,8 +365,8 @@ const Careers = () => {
               </p>
             </div>
 
-            {/* Search & Filter Controls */}
-            <div className="space-y-6 mb-12">
+            {/* Search Controls */}
+            <div className="mb-12">
               <div className="relative max-w-2xl">
                 <Search className="w-5 h-5 text-accent absolute left-4 top-1/2 -translate-y-1/2" />
                 <input
@@ -380,23 +376,6 @@ const Careers = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-12 pr-4 py-4 rounded-full bg-primary/80 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40 text-sm focus:outline-none focus:border-accent transition-all duration-300"
                 />
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent mr-2">Filter:</span>
-                { ["All", "Internships"].map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-[0.18em] transition-all duration-300 ${
-                      activeCategory === cat
-                        ? "bg-accent text-accent-foreground shadow-md"
-                        : "bg-primary-foreground/10 text-primary-foreground/60 hover:bg-primary-foreground/20 hover:text-primary-foreground"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
               </div>
             </div>
 
