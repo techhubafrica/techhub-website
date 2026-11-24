@@ -21,6 +21,7 @@ const TheHub     = lazy(() => import("./pages/TheHub"));
 const Metaverse  = lazy(() => import("./pages/Metaverse"));
 const CMS        = lazy(() => import("./pages/CMS"));
 const NotFound   = lazy(() => import("./pages/NotFound"));
+const ServiceUnavailable = lazy(() => import("./pages/ServiceUnavailable"));
 
 /* Minimal page-transition shell while lazy chunk loads */
 /* Cinematic page-transition shell while lazy chunk loads */
@@ -54,6 +55,7 @@ const App = () => (
             <Route path="/cms"        element={<CMS />} />
             <Route path="/doreen-cms" element={<CMS />} />
             <Route path="/admin"      element={<CMS />} />
+            <Route path="/503"        element={<ServiceUnavailable />} />
             <Route path="*"           element={<NotFound />} />
           </Routes>
         </Suspense>

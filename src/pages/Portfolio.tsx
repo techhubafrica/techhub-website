@@ -3,75 +3,26 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { ArrowUpRight } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
-import Marquee from "@/components/Marquee";
 
-const ventures: { num: string; name: string; tag: string; logo: string; desc: string; summary: string; link?: string }[] = [
+const investments = [
   {
-    num: "01",
-    name: "Ghana Mall",
+    name: "GH Accommodation",
+    tag: "Accommodation · Ghana",
+    logo: "/thehub-vendors/gh-accommodation.jpg",
+    desc: "An online room and hostel reservation platform connecting people with suitable places to stay.",
+  },
+  {
+    name: "GhanaMall",
     tag: "E-Commerce · Ghana",
-    logo: "/portfolio-assets/ghana-mall.jpg",
-    desc: "A multi-vendor online marketplace connecting customers with trusted vendors across Ghana.",
-    summary: "Shop electronics, fashion, groceries, and home essentials in one secure platform, with local businesses, secure payments, and delivery options at its center.",
+    logo: "/thehub-vendors/ghana-mall.jpg",
+    desc: "An online marketplace connecting customers with trusted vendors across Ghana.",
     link: "https://ghanamallonline.com/",
   },
   {
-    num: "02",
-    name: "GESA UMAT",
-    tag: "Student Community · Engineering",
-    logo: "/portfolio-assets/gesa-umat.jpg",
-    desc: "A platform for the Ghana Engineering Students Association at the University of Mines and Technology.",
-    summary: "Supports academic excellence, professional development, collaboration, engineering innovation, networking, and student-led initiatives.",
-    link: "https://gesa-umat.com/",
-  },
-  {
-    num: "03",
-    name: "UMaT SRC",
-    tag: "Student Leadership",
-    logo: "/portfolio-assets/umat-src.jpg",
-    desc: "The official digital platform for the Student Representative Council of the University of Mines and Technology.",
-    summary: "Facilitates communication, governance, and student engagement by providing updates, resources, and support for the student body.",
-  },
-  {
-    num: "04",
-    name: "CEANA",
-    tag: "Advocacy · Community Development",
-    logo: "/portfolio-assets/ceana.jpg",
-    desc: "A global advocacy and community development network.",
-    summary: "An international organization platform connecting people and organizations through advocacy, education, capacity building, and community development initiatives.",
-  },
-  {
-    num: "05",
-    name: "DOSTECH",
-    tag: "Digital Skills · Education",
-    logo: "/portfolio-assets/dostech.jpg",
-    desc: "A digital skills and technology education platform.",
-    summary: "Delivers practical digital skills training and academic programs to help students and professionals build industry-relevant knowledge and career readiness.",
-  },
-  {
-    num: "06",
-    name: "RushPay",
-    tag: "Fintech · Payments",
-    logo: "/portfolio-assets/rushpay.jpg",
-    desc: "Seamless digital payments and financial management for individuals and businesses.",
-    summary: "Supports instant transfers, mobile money withdrawals, payroll processing, and gift card services through regulated payment infrastructure.",
-    link: "https://rushpay.cash/",
-  },
-  {
-    num: "07",
-    name: "Purple Moon Luxe Transport",
-    tag: "Transport · Mobility",
-    logo: "/portfolio-assets/purple-moon.jpg",
-    desc: "Premium chauffeur and luxury transport services.",
-    summary: "Provides high-end, reliable, and comfortable travel for corporate clients, events, and personal trips, with convenience, safety, and elegance in focus.",
-  },
-  {
-    num: "08",
-    name: "TechHub Africa Portal",
-    tag: "Community · Digital Access",
-    logo: "/portfolio-assets/techhub-portal.jpg",
-    desc: "Digital access to Tech Hub Africa programs and community.",
-    summary: "A centralized portal connecting users with programs, resources, training, events, and innovation opportunities across the Tech Hub Africa ecosystem.",
+    name: "Ofie Agro",
+    tag: "Agriculture · Ghana",
+    logo: "/thehub-vendors/ofie-agro.jpg",
+    desc: "A Ghanaian agro-food business producing local foods and supporting farmers and communities.",
   },
 ];
 
@@ -88,17 +39,15 @@ const Portfolio = () => (
   <>
     <Header />
     <PageHero
-      tag="Venture Portfolio"
-      title={<>Backing Africa's most<br /><span className="italic font-light text-accent">promising ventures.</span></>}
-      body="Explore digital platforms and organizations supported by Tech Hub Africa, spanning commerce, student leadership, learning, fintech, transport, advocacy, and community access."
+      tag="Investment Portfolio"
+      title={<>Businesses we<br /><span className="italic font-light text-accent">invest in.</span></>}
+      body="Meet the three businesses in Tech Hub Africa's investment portfolio."
       ghost="BUILD"
       stats={[
-        { val: "8", label: "Portfolio Projects" },
-        { val: "Multi-sector", label: "Digital Portfolio" },
+        { val: "3", label: "Portfolio Companies" },
+        { val: "Ghana", label: "Home Market" },
       ]}
     />
-
-    <Marquee text="Commerce · Student Leadership · Digital Learning · Fintech · Mobility · Community" />
 
     <main className="page-entry bg-background overflow-hidden">
       <section className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-20 md:py-28 lg:py-36 max-w-7xl mx-auto">
@@ -114,39 +63,21 @@ const Portfolio = () => (
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-6">
-          {ventures.map((v, i) => (
-            <Reveal key={v.name} delay={i * 0.08}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
+          {investments.map((item, i) => (
+            <Reveal key={item.name} delay={i * 0.08}>
               <article className="card-lift art-card sheen group relative rounded-3xl p-5 sm:p-6 flex flex-col justify-between h-full transition-all duration-500 hover:border-accent/40 overflow-hidden">
-                {/* Subtle hover gradient */}
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
                 <div>
-                  {/* Top Logo Container */}
-                  <div className="relative h-36 sm:h-40 w-full rounded-2xl bg-white border border-foreground/8 flex items-center justify-center p-5 overflow-hidden shadow-sm group-hover:scale-[1.02] transition-transform duration-500">
-                    <img src={v.logo} alt={`${v.name} logo`} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain p-2" />
-                    <span className="absolute top-3 right-3 text-[9px] font-black uppercase tracking-[0.25em] px-2.5 py-1 rounded-full border border-foreground/10 bg-background/80 text-foreground/60">
-                      {v.num}
-                    </span>
+                  <div className="relative h-36 sm:h-40 w-full rounded-2xl bg-white border border-foreground/8 flex items-center justify-center p-5 overflow-hidden shadow-sm">
+                    <img src={item.logo} alt={`${item.name} logo`} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain p-2" />
                   </div>
-
-                  {/* Title & Tagline */}
                   <div className="mt-6 mb-4">
-                    <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">
-                      {v.tag}
-                    </span>
-                    <h3 className="font-display font-extrabold text-xl text-foreground leading-tight tracking-tight group-hover:text-accent transition-colors">
-                      {v.name}
-                    </h3>
+                    <span className="text-[9px] font-black uppercase tracking-[0.25em] text-accent block mb-2">{item.tag}</span>
+                    <h3 className="font-display font-extrabold text-xl text-foreground leading-tight tracking-tight">{item.name}</h3>
                   </div>
-
-                  <p className="text-sm text-foreground/75 leading-relaxed font-semibold mb-3">
-                    {v.desc}
-                  </p>
-                  <p className="text-xs text-foreground/65 leading-relaxed mb-6">{v.summary}</p>
+                  <p className="text-sm text-foreground/75 leading-relaxed font-semibold mb-3">{item.desc}</p>
                 </div>
-
-                {v.link && <a href={v.link} target="_blank" rel="noopener noreferrer" className="btn-magnetic mt-2 w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-accent text-accent-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-primary hover:text-primary-foreground transition-all duration-300">Visit Website <ArrowUpRight className="w-3.5 h-3.5" /></a>}
+                {item.link && <a href={item.link} target="_blank" rel="noopener noreferrer" className="btn-magnetic mt-2 w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-accent text-accent-foreground font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-primary hover:text-primary-foreground transition-all duration-300">Visit Website <ArrowUpRight className="w-3.5 h-3.5" /></a>}
               </article>
             </Reveal>
           ))}
