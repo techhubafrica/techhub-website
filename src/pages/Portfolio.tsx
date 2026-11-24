@@ -10,6 +10,7 @@ const investments = [
     tag: "Accommodation · Ghana",
     logo: "/thehub-vendors/gh-accommodation.jpg",
     desc: "An online room and hostel reservation platform connecting people with suitable places to stay.",
+    link: "https://accom.ltd",
   },
   {
     name: "GhanaMall",
